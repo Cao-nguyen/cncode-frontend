@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
 import logo from '../../assets/logo.png';
 
 const Header = () => {
+    const [isBar, setIsBar] = useState(false);
+
+    const handleBar = () => {
+        setIsBar(prevState => !prevState);
+    };
+
     return (
         <nav className="d-xl-flex">
             <div className="d-flex logo">
@@ -16,11 +22,11 @@ const Header = () => {
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
-                <div className="bagach">
+                <div className="bagach" onClick={() => handleBar()}>
                     <i class="fa-solid fa-bars"></i>
                 </div>
             </div>
-            <div className="nav mt-2">
+            <div className={`nav ${isBar ? 'open' : ''} mt-2`}>
                 <div className="nav-item">
                     <NavLink className="nav-link" to="/" exact activeClassName="active">Trang chủ</NavLink>
                 </div>
