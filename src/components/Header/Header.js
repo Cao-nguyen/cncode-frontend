@@ -6,10 +6,19 @@ import logo from '../../assets/logo.png';
 const Header = () => {
     return (
         <nav className="d-xl-flex">
-            <div className="d-flex logo mx-3">
+            <div className="d-flex logo">
                 <NavLink to="/" exact>
                     <img src={logo} alt="Logo" />
                 </NavLink>
+                <div className="search-phone d-flex">
+                    <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
+                    <button className="btn btn-outline-success" type="submit">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div className="bagach">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
             <div className="nav mt-2">
                 <div className="nav-item">
@@ -47,7 +56,7 @@ const Header = () => {
                         </button>
                     </div>
                 </div>
-                <div className="nav-item">
+                <div className="nav-item login-desktop">
                     <NavLink className="nav-link" to="/dangnhap" activeClassName="active">Đăng nhập</NavLink>
                 </div>
             </div>
