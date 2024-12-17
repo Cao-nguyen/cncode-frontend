@@ -36,6 +36,17 @@ const Header = () => {
                 <div className="nav-item">
                     <NavLink className="nav-link" to="/tintuc" activeClassName="active">Tin tức</NavLink>
                 </div>
+                <div className="search-app">
+                    <div className="icon-search">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div className="search">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
                 <div className="nav-item">
                     <NavLink className="nav-link" to="/dangnhap" activeClassName="active">Đăng nhập</NavLink>
                 </div>

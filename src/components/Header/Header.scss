@@ -10,6 +10,7 @@ nav {
         img {
             width: 60px;
             height: 60px;
+            margin-right: 40px;
         }
     }
 
@@ -28,6 +29,34 @@ nav {
 
         &:hover {
             color: #749cfc;
+        }
+    }
+
+    .search-app {
+        margin-top: 7px;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .icon-search {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .search {
+            background-color: #fff;
+            position: absolute;
+            padding: 7px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 5px;
+            display: none;
+            transform: translateX(-10px);
+        }
+
+        &:hover {
+            .search {
+                display: flex;
+            }
         }
     }
 }
