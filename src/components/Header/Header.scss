@@ -1,0 +1,31 @@
+nav {
+    height: 60px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    .logo {
+        img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .nav-item {
+        .active {
+            color: #5a8afb;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+    }
+
+    .nav-link {
+        font-weight: bold;
+        color: #000;
+        font-size: 18px;
+
+        &:hover {
+            color: #749cfc;
+        }
+    }
+
+}
