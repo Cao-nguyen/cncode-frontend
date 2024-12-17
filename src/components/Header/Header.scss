@@ -1,7 +1,10 @@
 nav {
+    width: 100%;
     height: 60px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: fixed;
+    z-index: 1;
 
     .logo {
         img {
@@ -27,5 +30,4 @@ nav {
             color: #749cfc;
         }
     }
-
 }
