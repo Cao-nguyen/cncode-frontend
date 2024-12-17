@@ -23,7 +23,7 @@ const Header = () => {
                     </button>
                 </div>
                 <div className="bagach" onClick={() => handleBar()}>
-                    <i class="fa-solid fa-bars"></i>
+                    <i className="fa-solid fa-bars"></i>
                 </div>
             </div>
             <div className={`nav ${isBar ? 'open' : ''} mt-2`}>
