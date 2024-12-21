@@ -12,14 +12,17 @@ function Dangky() {
         email,
         username,
         password,
+        code,
         showPassword,
         handleShow,
         handleSelectChange,
         handleSubmit,
+        handlePush,
         setFullname,
         setEmail,
         setUsername,
         setPassword,
+        setCode,
     } = useDangkyMiddleware();
 
     return (
@@ -91,6 +94,21 @@ function Dangky() {
                                 <option value="Teachers">Từ thầy cô</option>
                                 <option value="Others">Khác</option>
                             </select>
+
+                            <div className="row d-flex">
+                                <div className="col-8">
+                                    <input
+                                        type='text'
+                                        className="form-control form-input mt-2 mb-2"
+                                        placeholder="Mã xác thực*"
+                                        value={code}
+                                        onChange={(e) => setCode(e.target.value)}
+                                    />
+                                </div>
+                                <div className="col-4">
+                                    <button className="btn btn-success" onClick={handlePush}>Gửi mã</button>
+                                </div>
+                            </div>
 
                             <button className="btn btn-primary mb-4" onClick={handleSubmit}>
                                 Đăng ký

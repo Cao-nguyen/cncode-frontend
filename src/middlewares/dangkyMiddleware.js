@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { registerUser } from '../services/clientServer';
+import { useDispatch } from 'react-redux'
+import { Login } from '../rudex/Actions/userAction';
+import { codeMail } from '../services/clientServer';
 
 function useDangkyMiddleware() {
     // Khai báo State
@@ -10,10 +13,12 @@ function useDangkyMiddleware() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [code, setCode] = useState('')
     const [showPassword, setShowPassword] = useState(false);
 
     // Chuyển trang
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     // Ẩn - Hiện password
     const handleShow = () => {
@@ -64,19 +69,35 @@ function useDangkyMiddleware() {
         if (check === true) {
             try {
                 let response = await registerUser(email, fullName, username, password);
-                let serverData = response.data;
+                let data = response.data;
 
-                if (+serverData.EC === 0) {
-                    toast.success(serverData.EM);
-                    navigate('/');
+                if (+data.EC === 0) {
+                    dispatch(Login(data));
+                    toast.success(data.EM);
+                    navigate('/xacthuc');
                 } else {
-                    toast.error(serverData.EM);
+                    toast.error(data.EM);
                 }
             } catch (error) {
                 toast.error('Có lỗi xảy ra, vui lòng thử lại.');
             }
         }
     };
+
+    const handlePush = async (e) => {
+        e.preventDefault();
+        try {
+            let response = await codeMail(email);
+            if (response.data.EC === 0) {
+                toast.success(response.data.EM);
+            } else {
+                toast.error(response.data.EM || 'Có lỗi xảy ra');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Không thể gửi mã xác thực, vui lòng thử lại');
+        }
+    }
 
     // Trả về các phương thức và state
     return {
@@ -85,14 +106,17 @@ function useDangkyMiddleware() {
         email,
         username,
         password,
+        code,
         showPassword,
         handleShow,
         handleSelectChange,
         handleSubmit,
+        handlePush,
         setFullname,
         setEmail,
         setUsername,
         setPassword,
+        setCode,
     };
 }
 

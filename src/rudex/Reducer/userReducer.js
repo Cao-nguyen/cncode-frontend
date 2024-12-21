@@ -1,31 +1,27 @@
-import { DANG_KY } from '../Actions/userAction'
+import { DANG_KY } from '../Actions/userAction';
 
 const INITIAL_STATE = {
     account: {
-        fullname: '',
         email: '',
-        username: '',
-        password: '',
-        role: '',
-
+        fullName: '',
     },
-}
+};
 
 const userReducer = (state = INITIAL_STATE, action) => {
-    switch (action.style) {
+    switch (action.type) {
         case DANG_KY:
+            console.log(action)
             return {
-                ...state, account: {
-                    fullname: action?.payload?.DT?.fullname,
+                ...state,
+                account: {
                     email: action?.payload?.DT?.email,
-                    username: action?.payload?.DT?.username,
-                    password: action?.payload?.DT?.password,
-                    role: action?.payload?.DT?.role,
+                    fullName: action?.payload?.DT?.fullName,
                 }
-            }
+            };
 
-        default: return state
+        default:
+            return state;
     }
-}
+};
 
-export default userReducer
+export default userReducer;
