@@ -97,7 +97,7 @@ function Dangky() {
                             </button>
                             <span>
                                 Bạn đã có tài khoản ư?{' '}
-                                <NavLink to="/danhnhap">đăng nhập ngay</NavLink>
+                                <NavLink to="/dangnhap">đăng nhập ngay</NavLink>
                             </span>
                         </div>
                     </div>
