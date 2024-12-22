@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Dangnhap.scss';
 import { Helmet } from 'react-helmet';
-import underline from '../../assets/underline.png'
 import { NavLink } from 'react-router-dom';
+import useDangkyMiddleware from '../../middlewares/dangkyMiddleware';
 
 function Dangnhap(props) {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleShow = () => {
-        setShowPassword(!showPassword);
-    };
+    const {
+        showPassword,
+        username,
+        fullName,
+        password,
+        handleShow,
+        setFullname,
+        setUsername,
+        setPassword,
+        handleLogin
+    } = useDangkyMiddleware()
 
     return (
         <div className="bg-color">
@@ -22,7 +28,6 @@ function Dangnhap(props) {
                         <h1>Nền tảng học lập trình miễn phí dành cho
                             <h1 className="special">mọi đối tượng</h1>
                         </h1>
-                        <img className="underline" src={underline} alt=""></img>
                         <div className="reason">
                             <p>+ Tiết kiệm thời gian di chuyển đến trung tâm</p>
                             <p>+ Học mọi lúc, mọi nơi chỉ cần có internet</p>
@@ -36,18 +41,22 @@ function Dangnhap(props) {
                         <h2 className="margin">Đăng nhập</h2>
                         <div className="form-field">
                             <p className="infor">Chào mừng bạn đến với nền tảng CNcode của chúng tôi!</p>
-                            <input type="text" className="form-control mt-3" placeholder="Họ và tên*"></input>
-                            <input type="text" className="form-control mt-3" placeholder="Tên đăng nhập*"></input>
-
+                            <input type="text" className="form-control mt-3" placeholder="Họ và tên*"
+                                value={fullName} onChange={(e) => setFullname(e.target.value)}
+                            ></input>
+                            <input type="text" className="form-control mt-3" placeholder="Tên đăng nhập*"
+                                value={username} onChange={(e) => setUsername(e.target.value)}
+                            ></input>
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 className="form-control form-input mt-3 mb-2"
                                 id="password"
                                 placeholder="Mật khẩu*"
+                                value={password} onChange={(e) => setPassword(e.target.value)}
                             />
                             <i className={`fa-solid fa-eye${showPassword ? '-slash' : ''}`} onClick={handleShow}></i>
                             <NavLink className="forgot-password" to="/quenmatkhau">Quên mật khẩu</NavLink>
-                            <button className="btn btn-primary mb-4">Đăng nhập</button>
+                            <button className="btn btn-primary mb-4" onClick={handleLogin}>Đăng nhập</button>
                             <span>Bạn chưa có tài khoản ư? <NavLink to="/dangky">đăng ký ngay</NavLink></span>
                         </div>
                     </div>

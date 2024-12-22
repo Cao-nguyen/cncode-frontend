@@ -41,7 +41,7 @@
             h2 {
                 color: #19395e;
                 text-align: center;
-                margin-top: 50px;
+                margin-top: 30px;
                 text-transform: uppercase;
             }
 
@@ -74,6 +74,13 @@
                 .btn-success {
                     transform: translateY(8px);
                 }
+
+                button[disabled] {
+                    cursor: not-allowed;
+                    background-color: #ccc;
+                    color: #666;
+                }
+
             }
         }
     }

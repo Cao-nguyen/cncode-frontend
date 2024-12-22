@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
-import underline from '../../assets/underline.png';
 import useDangkyMiddleware from '../../middlewares/dangkyMiddleware';
 import './Dangky.scss';
 
@@ -14,6 +13,8 @@ function Dangky() {
         password,
         code,
         showPassword,
+        isCountdown,
+        countdown,
         handleShow,
         handleSelectChange,
         handleSubmit,
@@ -34,7 +35,6 @@ function Dangky() {
                 <div className="row dangnhap">
                     <div className="content col-5">
                         <h1>Chào mừng bạn đã đến với website học lập trình miễn phí của chúng tôi</h1>
-                        <img className="underline" src={underline} alt="" />
                         <div className="reason">
                             <p>+ Đăng ký để được học nhiều khoá học bổ ích</p>
                             <p>+ Nhiều tính năng học tập hiện đại đang chờ đón bạn</p>
@@ -106,7 +106,13 @@ function Dangky() {
                                     />
                                 </div>
                                 <div className="col-4">
-                                    <button className="btn btn-success" onClick={handlePush}>Gửi mã</button>
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={handlePush}
+                                        disabled={isCountdown}
+                                    >
+                                        {isCountdown ? `Đợi ${countdown}s` : 'Gửi mã'}
+                                    </button>
                                 </div>
                             </div>
 

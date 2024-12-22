@@ -13,3 +13,17 @@ export const codeMail = (email) => {
         email
     })
 }
+
+// API Lấy lại mật khẩu
+export const forgotPassword = (fullName, email, username, password) => {
+    return axios.post('http://localhost:8080/api/v1/quenmatkhau', {
+        fullName, email, username, password
+    })
+}
+
+// API Đăng nhập
+export const login = (fullName, username, password) => {
+    return axios.post('http://localhost:8080/api/v1/dangnhap', {
+        fullName, username, password
+    })
+}

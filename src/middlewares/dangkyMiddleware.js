@@ -5,6 +5,8 @@ import { registerUser } from '../services/clientServer';
 import { useDispatch } from 'react-redux'
 import { Login } from '../rudex/Actions/userAction';
 import { codeMail } from '../services/clientServer';
+import { forgotPassword } from '../services/clientServer';
+import { login } from '../services/clientServer';
 
 function useDangkyMiddleware() {
     // Khai báo State
@@ -15,6 +17,8 @@ function useDangkyMiddleware() {
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('')
     const [showPassword, setShowPassword] = useState(false);
+    const [isCountdown, setIsCountdown] = useState(false);
+    const [countdown, setCountdown] = useState(120);
 
     // Chuyển trang
     const navigate = useNavigate();
@@ -69,19 +73,18 @@ function useDangkyMiddleware() {
             return false;
         }
 
-        if (!code) {
-            toast.error('Mã xác thực không được bỏ trống');
-            return false;
-        }
-
         return true;
     };
 
     // Xử lý gửi form
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         let check = validate();
+        if (!code) {
+            toast.error('Mã xác thực không được bỏ trống');
+            return false;
+        }
+
         if (check === true) {
             try {
                 let response = await registerUser(email, fullName, username, password, code);
@@ -103,7 +106,9 @@ function useDangkyMiddleware() {
     const handlePush = async (e) => {
         e.preventDefault();
         try {
+            startCountdown();
             let response = await codeMail(email);
+
             if (response.data.EC === 0) {
                 toast.success(response.data.EM);
             } else {
@@ -112,6 +117,59 @@ function useDangkyMiddleware() {
         } catch (error) {
             console.error(error);
             toast.error('Không thể gửi mã xác thực, vui lòng thử lại');
+        }
+    }
+
+    const startCountdown = () => {
+        setIsCountdown(true);
+        setCountdown(30);
+
+        const interval = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    setIsCountdown(false);
+                    return 30;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
+
+    const handleForgotPassword = async () => {
+        let check = validate()
+
+        if (check === true) {
+            let response = await forgotPassword(fullName, username, email, password)
+            let data = response.data;
+
+            if (+data.EC === 0) {
+                toast.success(data.EM);
+                navigate('/dangnhap');
+            } else {
+                toast.error(data.EM);
+            }
+        }
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        if (!fullName && !username && !password) {
+            toast.error('Vui lòng nhập đầy đủ thông tin để đăng nhập');
+        }
+
+        try {
+            let response = await login(fullName, username, password);
+            let data = response.data;
+
+            if (+data.EC === 0) {
+                toast.success(data.EM);
+                navigate('/');
+            } else {
+                toast.error(data.EM);
+            }
+        } catch (error) {
+            toast.error('Có lỗi xảy ra, vui lòng thử lại.');
         }
     }
 
@@ -124,15 +182,21 @@ function useDangkyMiddleware() {
         password,
         code,
         showPassword,
+        isCountdown,
+        countdown,
         handleShow,
         handleSelectChange,
         handleSubmit,
         handlePush,
+        handleForgotPassword,
+        handleLogin,
         setFullname,
         setEmail,
         setUsername,
         setPassword,
         setCode,
+        setIsCountdown,
+        setCountdown
     };
 }
 
