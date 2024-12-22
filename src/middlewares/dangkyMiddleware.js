@@ -53,8 +53,24 @@ function useDangkyMiddleware() {
             return false;
         }
 
+        if (/\s/.test(username)) {
+            toast.error('Tên người dùng không được chứa khoảng trắng');
+            return false;
+        }
+
         if (!password) {
             toast.error('Vui lòng nhập mật khẩu');
+            return false;
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)(?=.*[a-z]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            toast.error('Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt');
+            return false;
+        }
+
+        if (!code) {
+            toast.error('Mã xác thực không được bỏ trống');
             return false;
         }
 
@@ -68,13 +84,13 @@ function useDangkyMiddleware() {
         let check = validate();
         if (check === true) {
             try {
-                let response = await registerUser(email, fullName, username, password);
+                let response = await registerUser(email, fullName, username, password, code);
                 let data = response.data;
 
                 if (+data.EC === 0) {
                     dispatch(Login(data));
                     toast.success(data.EM);
-                    navigate('/xacthuc');
+                    navigate('/');
                 } else {
                     toast.error(data.EM);
                 }
