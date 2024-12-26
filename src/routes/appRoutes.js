@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Trangchu from '../components/Home/Trangchu';
-import Loi from '../components/404/404';
-import Dangnhap from "../components/Dangnhap/Dangnhap";
-import Dangky from "../components/Dangky/Dangky";
-import Quenmatkhau from "../components/Quenmatkhau/Quenmatkhau";
+// import Home from "../components/Home/Home";
+// import Register from "../components/Register/Register"
+// import Login from "../components/Login/Login"
+// import ForgotPassword from "../components/ForgotPassword/ForgotPassword"
+// import Error from "../components/Error/Error"
 
 export const validRoutes = [
     '/', '/gioithieu', '/khoahoc',
@@ -15,11 +15,7 @@ const AppRoutes = (props) => {
 
     return (
         <Routes>
-            <Route path="/" element={<Trangchu />} />
-            <Route path='/dangky' element={<Dangky />} />
-            <Route path='/dangnhap' element={<Dangnhap />} />
-            <Route path='/quenmatkhau' element={<Quenmatkhau />} />
-            <Route path="/*" element={<Loi />} />
+
         </Routes>
     );
 }

@@ -4,8 +4,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import AppRoutes from './routes/appRoutes';
+// import Footer from './components/Footer/Footer';
+// import AppRoutes from './routes/appRoutes';
 import { validRoutes } from './routes/appRoutes';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,9 +22,9 @@ function App() {
           <Header />
         </div>
       )}
-      <div className="app-container">
+      {/* <div className="app-container">
         <AppRoutes />
-      </div>
+      </div> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -36,13 +36,13 @@ function App() {
         draggable
         pauseOnHover
       />
-      {!hideHeader && (
+      {/* {!hideHeader && (
         <div className="footer">
           <Footer />
         </div>
-      )}
+      )} */}
     </div>
-  );
+  )
 }
 
 function AppWithRouter() {

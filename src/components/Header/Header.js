@@ -1,73 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Header.scss';
-import logo from '../../assets/logo.png';
+import Nav from 'react-bootstrap/Nav';
+import logo from '../../assets/logo.png'
+import './Header.scss'
 
-const Header = () => {
-    const [isBar, setIsBar] = useState(false);
-
-    const handleBar = () => {
-        setIsBar(prevState => !prevState);
-    };
-
+function Header(props) {
     return (
-        <nav className="d-xl-flex">
-            <div className="d-flex logo">
-                <NavLink to="/" exact>
-                    <img src={logo} alt="Logo" />
-                </NavLink>
-                <div className="search-phone d-flex">
-                    <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success" type="submit">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                    </button>
+        <div>
+            <Nav className="nav" variant="pills">
+                <div className="nav-logo">
+                    <img className="logo" src={logo} alt="" />
                 </div>
-                <div className="bagach" onClick={() => handleBar()}>
-                    <i className="fa-solid fa-bars"></i>
+                <div className="d-flex nav-item">
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/" eventKey="/">Trang chủ</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/gioithieu" eventKey="/gioithieu">Giới thiệu</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/khoahoc" eventKey="/khoahoc">Khoá học</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/luyentap" eventKey="/luyentap">Luyện tập</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/diendan" eventKey="/diendan">Diễn đàn</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/blog" eventKey="/blog">Blog</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/sukien" eventKey="/sukien">Sự kiện</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links">
+                        <Nav.Link className="nav-link" as={NavLink} to="/tintuc" eventKey="/tintuc">Tin tức</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="nav-links nav-last">
+                        <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
+                    </Nav.Item>
                 </div>
-            </div>
-            <div className={`nav ${isBar ? 'open' : ''} mt-2`}>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/" exact activeClassName="active">Trang chủ</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/gioithieu" activeClassName="active">Giới thiệu</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/khoahoc" activeClassName="active">Khoá học</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/luyentap" activeClassName="active">Luyện tập</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/diendan" activeClassName="active">Diễn đàn</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/blog" activeClassName="active">Blog</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/sukien" activeClassName="active">Sự kiện</NavLink>
-                </div>
-                <div className="nav-item">
-                    <NavLink className="nav-link" to="/tintuc" activeClassName="active">Tin tức</NavLink>
-                </div>
-                <div className="search-app">
-                    <div className="icon-search">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                    <div className="search">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </div>
-                <div className="nav-item login-desktop">
-                    <NavLink className="nav-link" to="/dangnhap" activeClassName="active">Đăng nhập</NavLink>
-                </div>
-            </div>
-        </nav>
+            </Nav>
+        </div>
     );
-};
+}
 
 export default Header;
