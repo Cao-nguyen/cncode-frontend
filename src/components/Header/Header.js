@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+import Dropdown from 'react-bootstrap/Dropdown';
 import logo from '../../assets/logo.png'
 import './Header.scss'
 
@@ -39,6 +40,46 @@ function Header(props) {
                     <Nav.Item className="nav-links nav-last">
                         <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
                     </Nav.Item>
+                    {/* <Dropdown>
+                        <Dropdown.Toggle as="div" className="custom-dropdown-toggle">
+                            <div className="greeting">
+                                Xin chào
+                            </div>
+                            <div className="user-name">
+                                Lý Cao Nguyên
+                            </div>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/profile">Trang cá nhân</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/khoahoc">Khoá học của tôi</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/khuvuon">Khu vườn trên mây</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/post">Viết Blog</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/blog">Blog của tôi</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/loveblog">Blog yêu thích</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/me/settings">Cài đặt</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <NavLink className="dropdown-link-logout" to="/me/logout">Đăng xuất</NavLink>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown> */}
                 </div>
             </Nav>
         </div>
