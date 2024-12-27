@@ -21,7 +21,7 @@
     }
 
     .nav-links {
-        padding: 0px 5px;
+        padding: 0px 0px;
 
         .nav-link {
             font-size: 17px;
@@ -32,6 +32,10 @@
         .active {
             background-color: #f4f4f4;
             color: #5a8afb;
+        }
+
+        i {
+            font-size: 18px;
         }
     }
 
@@ -44,7 +48,7 @@
         cursor: pointer;
         color: #333;
         text-align: left;
-        margin-right: 40px;
+        margin-right: 20px;
         margin-left: 15px;
     }
 
