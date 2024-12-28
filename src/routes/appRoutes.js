@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Register from "../components/Register/Register";
 import Login from "../components/Login/Login";
+import { useSelector } from "react-redux";
 
 export const validRoutes = [
     '/', '/gioithieu', '/khoahoc', '/luyentap', '/diendan', '/blog', '/sukien', '/tintuc', '/timkiem',
@@ -9,7 +10,7 @@ export const validRoutes = [
 
 // Component bảo vệ route
 const ProtectedRoute = ({ children }) => {
-    const tokenUser = localStorage.getItem('tokenUser');
+    const tokenUser = useSelector(state => state.user.account.tokenUser);
 
     if (tokenUser) {
         return <Navigate to="/" replace />;

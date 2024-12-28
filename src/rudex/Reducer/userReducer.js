@@ -2,7 +2,6 @@ import { LOGIN_USER } from '../Actions/userAction';
 
 const INITIAL_STATE = {
     account: {
-        email: '',
         fullName: '',
         tokenUser: ''
     }
@@ -14,7 +13,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 account: {
-                    email: action?.payload?.DT?.email,
                     fullName: action?.payload?.DT?.fullName,
                     tokenUser: action?.payload?.DT?.tokenUser
                 }
