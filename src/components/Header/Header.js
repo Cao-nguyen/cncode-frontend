@@ -37,9 +37,6 @@ function Header({ isDarkMode, toggleTheme }) {
                     <Nav.Item className="nav-links">
                         <Nav.Link className="nav-link" as={NavLink} to="/tintuc" eventKey="/tintuc">Tin tức</Nav.Link>
                     </Nav.Item>
-                    {/* <Nav.Item className="nav-links nav-last">
-                        <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
-                    </Nav.Item> */}
                     <Nav.Item className="nav-links">
                         <Nav.Link>
                             <i className={`fa-solid ${isDarkMode ? 'fa-sun' : 'fa-moon'}`} onClick={toggleTheme}></i>
@@ -51,8 +48,11 @@ function Header({ isDarkMode, toggleTheme }) {
                             <i className="fa-solid fa-bell"></i>
                         </Nav.Link>
                     </Nav.Item>
+                    <Nav.Item className="nav-links nav-last">
+                        <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
+                    </Nav.Item>
 
-                    <Dropdown>
+                    {/* <Dropdown>
                         <Dropdown.Toggle as="div" className="custom-dropdown-toggle">
                             <div className="greeting">
                                 Xin chào
@@ -91,7 +91,7 @@ function Header({ isDarkMode, toggleTheme }) {
                                 <NavLink className="dropdown-link-logout" to="/me/logout">Đăng xuất</NavLink>
                             </Dropdown.Item>
                         </Dropdown.Menu>
-                    </Dropdown>
+                    </Dropdown> */}
                 </div>
             </Nav>
         </div>

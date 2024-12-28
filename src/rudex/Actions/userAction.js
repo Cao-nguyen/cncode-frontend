@@ -1,8 +1,8 @@
-export const DANG_KY = 'DANG_KY'
+export const LOGIN_USER = 'LOGIN_USER'
 
 export const Login = (data) => {
     return {
-        type: DANG_KY,
+        type: LOGIN_USER,
         payload: data
     }
 }

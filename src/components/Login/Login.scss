@@ -1,5 +1,5 @@
 $primary-color: #2E5077;
-$secondary-color: #79D7BE;
+$secondary-color: #0d6efd;
 $background-color: #fff;
 $text-color: #fff;
 $input-background: #264363;
@@ -21,7 +21,7 @@ $input-border-radius: 7px;
         color: $text-color;
 
         h1 {
-            color: $secondary-color;
+            color: $text-color;
             text-align: justify;
             font-size: 28px;
         }

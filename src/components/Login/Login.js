@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom';
 import './Login.scss';
 
 function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="bg">
             <div className="infor">
@@ -35,7 +41,18 @@ function Login() {
                     <InputGroup.Text>
                         <i className="fa-solid fa-lock"></i>
                     </InputGroup.Text>
-                    <Form.Control type="password" placeholder="Mật khẩu*" aria-label="password" />
+                    <Form.Control
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Mật khẩu*"
+                        aria-label="password"
+                    />
+                    <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
+                        {showPassword ? (
+                            <i className="fa-solid fa-eye-slash"></i>
+                        ) : (
+                            <i className="fa-solid fa-eye"></i>
+                        )}
+                    </InputGroup.Text>
                 </InputGroup>
                 <div className="form-links">
                     <Link to="/forgot-password">Quên mật khẩu?</Link>

@@ -1,4 +1,4 @@
-import { DANG_KY } from '../Actions/userAction';
+import { LOGIN_USER } from '../Actions/userAction';
 
 const INITIAL_STATE = {
     account: {
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case DANG_KY:
+        case LOGIN_USER:
             return {
                 ...state,
                 account: {
