@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RegisterValidate } from "../validates/RegisterValidate";
+import { RegisterValidate } from "../validates/RegisterValidate"
 import { toast } from "react-toastify";
 import { checkCode, registerUser } from "../services/clientServer";
 import { Login } from "../rudex/Actions/userAction"
