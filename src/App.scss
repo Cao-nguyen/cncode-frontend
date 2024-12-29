@@ -66,3 +66,65 @@ body {
         color: #c8cdff;
     }
 }
+
+.admin-layout {
+    display: flex;
+    transition: all 0.3s ease;
+
+    .sidebar {
+        width: 0%;
+        height: 100vh;
+        padding-top: 100px;
+        border-right: solid 1px #000;
+        transition: width 0.3s ease;
+    }
+
+    .body {
+        width: 100%;
+        transition: width 0.3s ease;
+
+        .headerAdmin {
+            width: 100%;
+            box-shadow: none;
+            border-bottom: solid 1px #000;
+            transition: width 0.3s ease;
+        }
+
+        .bodyAdmin {
+            background-color: #eee;
+            height: 100%;
+            padding: 70px 20px;
+        }
+    }
+}
+
+.admin-layout-open {
+    display: flex;
+    transition: all 0.3s ease;
+
+    .sidebar {
+        width: 20%;
+        height: 100vh;
+        padding-top: 100px;
+        border-right: solid 1px #000;
+        transition: width 0.3s ease;
+    }
+
+    .body {
+        width: 80%;
+        transition: width 0.3s ease;
+
+        .headerAdmin {
+            width: 80%;
+            box-shadow: none;
+            border-bottom: solid 1px #000;
+            transition: width 0.3s ease;
+        }
+
+        .bodyAdmin {
+            background-color: #eee;
+            height: 100%;
+            padding: 70px 20px;
+        }
+    }
+}

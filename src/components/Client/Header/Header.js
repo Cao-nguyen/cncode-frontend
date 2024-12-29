@@ -12,8 +12,6 @@ function Header({ isDarkMode, toggleTheme }) {
     const fullName = useSelector(state => state.user.account.fullName);
     const role = useSelector(state => state.user.account.role);
 
-    console.log(role)
-
     const {
         Logout,
     } = HandleLogout()
