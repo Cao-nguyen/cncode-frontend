@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "../components/Home/Home";
-import Register from "../components/Register/Register";
-import Login from "../components/Login/Login";
+import Home from "../components/Client/Home/Home";
+import Register from "../components/Client/Register/Register";
+import Login from "../components/Client/Login/Login";
 import { useSelector } from "react-redux";
 
 export const validRoutes = [
@@ -22,6 +22,7 @@ const ProtectedRoute = ({ children }) => {
 const AppRoutes = (props) => {
     return (
         <Routes>
+            {/* App */}
             <Route path="/" Component={Home}></Route>
             <Route path="/dangky" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
             <Route path="/dangnhap" element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>

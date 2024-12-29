@@ -3,12 +3,20 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
-import logo from '../../assets/logo.png'
+import logo from '../../../assets/logo.png'
+import HandleLogout from '../../../middlewares/LogoutMiddleware';
 import './Header.scss'
 
 function Header({ isDarkMode, toggleTheme }) {
     const tokenUser = useSelector(state => state.user.account.tokenUser);
     const fullName = useSelector(state => state.user.account.fullName);
+    const role = useSelector(state => state.user.account.role);
+
+    console.log(role)
+
+    const {
+        Logout,
+    } = HandleLogout()
 
     return (
         <div>
@@ -52,8 +60,8 @@ function Header({ isDarkMode, toggleTheme }) {
                             <i className="fa-solid fa-bell"></i>
                         </Nav.Link>
                     </Nav.Item>
-                    {tokenUser ?
-                        <Nav.Item className="nav-links nav-last">
+                    {tokenUser === "" ?
+                        < Nav.Item className="nav-links nav-last">
                             <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
                         </Nav.Item>
                         :
@@ -71,6 +79,16 @@ function Header({ isDarkMode, toggleTheme }) {
                                 <Dropdown.Item>
                                     <NavLink className="dropdown-link" to="/profile">Trang cá nhân</NavLink>
                                 </Dropdown.Item>
+                                {role === "admin" &&
+                                    < Dropdown.Item >
+                                        <NavLink className="dropdown-link" to="/admin/dashboard">Trang quản trị</NavLink>
+                                    </Dropdown.Item>
+                                }
+                                {role === "teacher" &&
+                                    < Dropdown.Item >
+                                        <NavLink className="dropdown-link" to="/quanly">Trang quản lý</NavLink>
+                                    </Dropdown.Item>
+                                }
                                 <Dropdown.Divider />
                                 <Dropdown.Item>
                                     <NavLink className="dropdown-link" to="/me/khoahoc">Khoá học của tôi</NavLink>
@@ -93,14 +111,14 @@ function Header({ isDarkMode, toggleTheme }) {
                                     <NavLink className="dropdown-link" to="/me/settings">Cài đặt</NavLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                    <NavLink className="dropdown-link-logout" to="/me/logout">Đăng xuất</NavLink>
+                                    <NavLink className="dropdown-link-logout" onClick={Logout}>Đăng xuất</NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     }
                 </div>
-            </Nav>
-        </div>
+            </Nav >
+        </div >
     );
 }
 

@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Link } from 'react-router-dom';
 import './Login.scss';
+import HandleLogin from '../../../middlewares/LoginMiddleware';
 
 function Login() {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const {
+        fullName,
+        username,
+        password,
+        setFullName,
+        setUsername,
+        setPassword,
+        showPassword,
+        togglePasswordVisibility,
+        LoginMiddleware
+    } = HandleLogin()
 
     return (
         <div className="bg">
@@ -29,13 +36,15 @@ function Login() {
                     <InputGroup.Text>
                         <i className="fa-solid fa-user"></i>
                     </InputGroup.Text>
-                    <Form.Control placeholder="Họ và tên*" aria-label="fullName" />
+                    <Form.Control placeholder="Họ và tên*" aria-label="fullName" value={fullName}
+                        onChange={(e) => setFullName(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }} />
                 </InputGroup>
                 <InputGroup className="form-input">
                     <InputGroup.Text>
                         <i className="fa-solid fa-address-book"></i>
                     </InputGroup.Text>
-                    <Form.Control placeholder="Username*" aria-label="username" />
+                    <Form.Control placeholder="Username*" aria-label="username" value={username}
+                        onChange={(e) => setUsername(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }} />
                 </InputGroup>
                 <InputGroup className="form-input">
                     <InputGroup.Text>
@@ -45,6 +54,9 @@ function Login() {
                         type={showPassword ? 'text' : 'password'}
                         placeholder="Mật khẩu*"
                         aria-label="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }}
                     />
                     <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
                         {showPassword ? (
@@ -58,7 +70,7 @@ function Login() {
                     <Link to="/forgot-password">Quên mật khẩu?</Link>
                     <Link to="/dangky">Bạn chưa có tài khoản? Đăng ký</Link>
                 </div>
-                <Button className="form-button" type="submit">
+                <Button className="form-button" type="submit" onClick={LoginMiddleware}>
                     Đăng nhập
                 </Button>
             </div>

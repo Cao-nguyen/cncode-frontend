@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import React, { useState } from 'react';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Header from './components/Client/Header/Header';
+import Footer from './components/Client/Footer/Footer';
 import { validRoutes } from './routes/appRoutes';
+import { adminRoutesValidate } from "./routes/adminRoutes";
 import AppRoutes from "./routes/appRoutes";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +15,7 @@ import './App.scss';
 function App() {
   const location = useLocation();
   const hideHeader = !validRoutes.includes(location.pathname);
+  const isAdmin = !adminRoutesValidate.includes(location.pathname);
 
   const savedTheme = localStorage.getItem('darkMode');
   const [isDarkMode, setIsDarkMode] = useState(savedTheme === 'true');
@@ -27,15 +29,36 @@ function App() {
   };
 
   return (
-    <div className={isDarkMode ? 'app dark-mode' : 'app'}>
-      {!hideHeader && (
-        <div className="header">
-          <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+    <>
+      {isAdmin ?
+        <div className={isDarkMode ? 'app dark-mode' : 'app'}>
+          {!hideHeader && (
+            <div className="header">
+              <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            </div>
+          )}
+          <div className="app-container">
+            <AppRoutes />
+          </div>
+          {!hideHeader && (
+            <div className="footer">
+              <Footer />
+            </div>
+          )}
         </div>
-      )}
-      <div className="app-container">
-        <AppRoutes />
-      </div>
+        :
+        <div className={isDarkMode ? 'app dark-mode' : 'app'}>
+          Hello
+        </div>
+      }
+    </>
+  );
+}
+
+function AppWithRouter() {
+  return (
+    <Router>
+      <App />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -47,19 +70,6 @@ function App() {
         draggable
         pauseOnHover
       />
-      {!hideHeader && (
-        <div className="footer">
-          <Footer />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function AppWithRouter() {
-  return (
-    <Router>
-      <App />
     </Router>
   );
 }
