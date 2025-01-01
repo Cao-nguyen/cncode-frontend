@@ -99,8 +99,11 @@ body {
 
         .bodyAdmin {
             height: 100vh;
-            padding: 70px 25px;
+            width: 97.7%;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #fff;
+            margin: 90px 20px;
+            border-radius: 10px;
         }
     }
 }
@@ -136,7 +139,10 @@ body {
 
         .bodyAdmin {
             height: 100vh;
-            padding: 70px 25px;
+            margin: 90px 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            width: 97.7%;
         }
     }
 }

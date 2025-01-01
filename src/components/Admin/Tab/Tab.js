@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png'
 import './Tab.scss';
-import { Nav } from 'react-bootstrap';
 
 const Tab = () => {
     return (
@@ -28,7 +27,7 @@ const Tab = () => {
                 <div className="tab-link">Giao diện</div>
             </NavLink>
 
-            <NavLink className="tab-item" to='/admin/cao'>
+            <NavLink className="tab-item" to='/admin/settings'>
                 <div className="tab-icon">
                     <i className="fa-solid fa-gear"></i>
                 </div>
