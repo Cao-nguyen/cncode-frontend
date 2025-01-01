@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { NavLink } from 'react-router-dom';
-import logo from '../../../assets/logo.png';
 import HandleLogout from '../../../middlewares/LogoutMiddleware';
 import './HeaderAdmin.scss';
 
@@ -16,11 +15,6 @@ function HeaderAdmin({ isDarkMode, toggleTheme, toggleOpen }) {
         <div>
             <Nav className="headerAdmin" variant="pills">
                 <i className="fa-solid fa-bars" onClick={toggleOpen}></i>
-
-                <div className="nav-logo">
-                    <img className="logo" src={logo} alt="" />
-                </div>
-
                 <div className="d-flex nav-item">
                     <Nav.Item className="nav-links">
                         <Nav.Link>

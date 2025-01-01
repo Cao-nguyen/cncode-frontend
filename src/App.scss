@@ -58,7 +58,8 @@ body {
     h3,
     h4,
     h5,
-    p {
+    p,
+    i {
         color: #fff;
     }
 
@@ -69,62 +70,73 @@ body {
 
 .admin-layout {
     display: flex;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #eee;
 
     .sidebar {
-        width: 0%;
-        height: 100vh;
+        margin: 10px 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 5%;
+        height: 97vh;
         padding-top: 100px;
-        border-right: solid 1px #000;
-        transition: width 0.3s ease;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: fixed;
     }
 
     .body {
-        width: 100%;
-        transition: width 0.3s ease;
+        width: 95%;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-left: 5%;
 
         .headerAdmin {
-            width: 100%;
+            width: 93%;
+            border-radius: 10px;
+            margin: 5px 10px;
             box-shadow: none;
-            border-bottom: solid 1px #000;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .bodyAdmin {
-            background-color: #eee;
-            height: 100%;
-            padding: 70px 20px;
+            height: 100vh;
+            padding: 70px 25px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 }
 
 .admin-layout-open {
     display: flex;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #eee;
 
     .sidebar {
+        margin: 10px 10px;
+        background-color: #fff;
+        border-radius: 10px;
         width: 20%;
-        height: 100vh;
+        height: 97vh;
         padding-top: 100px;
-        border-right: solid 1px #000;
-        transition: width 0.3s ease;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: fixed;
     }
 
     .body {
         width: 80%;
-        transition: width 0.3s ease;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-left: 20%;
 
         .headerAdmin {
-            width: 80%;
+            width: 78%;
+            border-radius: 10px;
+            margin: 5px 10px;
             box-shadow: none;
-            border-bottom: solid 1px #000;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .bodyAdmin {
-            background-color: #eee;
-            height: 100%;
-            padding: 70px 20px;
+            height: 100vh;
+            padding: 70px 25px;
         }
     }
 }
