@@ -60,6 +60,14 @@ function App() {
           {!hideHeader && <Footer />}
         </div>
       )}
+    </div>
+  );
+}
+
+function AppWithRouter() {
+  return (
+    <Router>
+      <App />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -71,14 +79,6 @@ function App() {
         draggable
         pauseOnHover
       />
-    </div>
-  );
-}
-
-function AppWithRouter() {
-  return (
-    <Router>
-      <App />
     </Router>
   );
 }

@@ -1,13 +1,29 @@
-import React from 'react';
-import TinyMCE from '../../Service/TinyMCE';
+import React, { useEffect } from 'react';
+import QuillEditor from '../../Service/QuillEditor';
+import SettingsAdmin from '../../../middlewares/SettingsAdmin';
+import './Settings.scss';
 
 function Settings(props) {
+    const {
+        Infor,
+        setInfor,
+        saveInfor,
+        getInfor,
+    } = SettingsAdmin();
+
+    useEffect(() => {
+        getInfor();
+    }, [getInfor]);
+
     return (
         <div>
             <div className="gioithieu">
-                <h1>Thông tin giới thiệu</h1>
-                <div className="border"></div>
-                <TinyMCE />
+                <h1 className="text-center">Thông tin giới thiệu</h1>
+                <div className="border mb-3"></div>
+                <button className="btn btn-primary mb-2" onClick={saveInfor}>
+                    Lưu thông tin
+                </button>
+                <QuillEditor value={Infor} onChange={setInfor} />
             </div>
         </div>
     );
