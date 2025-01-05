@@ -16,7 +16,7 @@ export const registerUser = async (fullName, email, username, password, code) =>
 
 // API Đăng nhập
 export const LoginUser = async (fullName, username, password) => {
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/v1/dangnhap`, {
+    const response = await axios.post('https://cncode-backend.vercel.app/api/v1/dangnhap', {
         fullName, username, password
     })
     return response.data
