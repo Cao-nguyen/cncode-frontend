@@ -22,6 +22,7 @@ const RegisterMiddleware = () => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [code, setCode] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
 
     // Ẩn hiện mật khẩu
     const togglePasswordVisibility = () => {
@@ -72,6 +73,7 @@ const RegisterMiddleware = () => {
 
     // Xử lí đăng ký
     const handleRegister = async () => {
+        setIsLoading(true)
         let check = RegisterValidate(fullName, email, username, password, confirmPassword, code)
         if (check === true) {
             let data = await registerUser(fullName, email, username, password, code)
@@ -83,6 +85,7 @@ const RegisterMiddleware = () => {
                 toast.error(data.EM);
             }
         }
+        setIsLoading(false)
     }
 
 
@@ -104,7 +107,8 @@ const RegisterMiddleware = () => {
         setConfirmPassword,
         setCode,
         handleRegister,
-        handleSendCode
+        handleSendCode,
+        isLoading
     }
 }
 

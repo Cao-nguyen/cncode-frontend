@@ -23,7 +23,8 @@ function Register() {
         setConfirmPassword,
         setCode,
         handleRegister,
-        handleSendCode
+        handleSendCode,
+        isLoading
     } = RegisterMiddleware()
 
     return (
@@ -105,9 +106,14 @@ function Register() {
                         {countdown > 0 ? `Gửi lại sau ${countdown}s` : "Gửi mã"}
                     </Button>
                 </InputGroup>
-
-                <Button className="form-button" type="submit" onClick={handleRegister}>
-                    Đăng ký
+                <Button className="form-button" type="submit" onClick={handleRegister} disabled={isLoading}>
+                    {isLoading ? (
+                        <span>
+                            <i className="fa-solid fa-spinner fa-spin"></i> Đang xử lý...
+                        </span>
+                    ) : (
+                        "Đăng ký"
+                    )}
                 </Button>
             </div>
         </div>
