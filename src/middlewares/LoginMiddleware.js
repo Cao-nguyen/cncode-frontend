@@ -21,8 +21,10 @@ const HandleLogin = () => {
     const [fullName, setFullName] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
 
     const LoginMiddleware = async () => {
+        setIsLoading(true)
         let check = LoginValidate(fullName, username, password)
 
         if (check === true) {
@@ -35,6 +37,7 @@ const HandleLogin = () => {
                 toast.error(data.EM)
             }
         }
+        setIsLoading(false)
     }
 
     return {
@@ -47,7 +50,8 @@ const HandleLogin = () => {
         showPassword,
         setShowPassword,
         togglePasswordVisibility,
-        LoginMiddleware
+        LoginMiddleware,
+        isLoading,
     }
 }
 

@@ -16,7 +16,8 @@ function Login() {
         setPassword,
         showPassword,
         togglePasswordVisibility,
-        LoginMiddleware
+        LoginMiddleware,
+        isLoading
     } = HandleLogin()
 
     return (
@@ -70,8 +71,14 @@ function Login() {
                     <Link to="/forgot-password">Quên mật khẩu?</Link>
                     <Link to="/dangky">Bạn chưa có tài khoản? Đăng ký</Link>
                 </div>
-                <Button className="form-button" type="submit" onClick={LoginMiddleware}>
-                    Đăng nhập
+                <Button className="form-button" type="submit" onClick={LoginMiddleware} disabled={isLoading}>
+                    {isLoading ? (
+                        <span>
+                            <i className="fa-solid fa-spinner fa-spin"></i> Đang xử lý...
+                        </span>
+                    ) : (
+                        "Đăng nhập"
+                    )}
                 </Button>
             </div>
         </div>
