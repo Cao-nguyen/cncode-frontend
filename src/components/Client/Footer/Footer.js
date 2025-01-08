@@ -43,19 +43,19 @@ function Footer(props) {
                     </div>
                     <div className="d-flex">
                         <a className="mx-2 links" href="https://www.facebook.com/cncode.edu.vn">
-                            <i class="fa-brands fa-facebook"></i>
+                            <i className="fa-brands fa-facebook"></i>
                         </a>
                         <a className="mx-2 links" href="https://www.facebook.com/cncode.edu.vn" target="_blank" rel="noopener noreferrer">Fanpage: CNcode</a>
                     </div>
                     <div className="d-flex">
                         <a className="mx-2 links" href="cao343451@gmail.com">
-                            <i class="fa-solid fa-envelope"></i>
+                            <i className="fa-solid fa-envelope"></i>
                         </a>
                         <a className="mx-2 links" href="cao343451@gmail.com" target="_blank" rel="noopener noreferrer">Email: CNcode</a>
                     </div>
                     <div className="d-flex">
                         <a className="mx-2 links" href="https://www.youtube.com/@cncode-edu">
-                            <i class="fa-brands fa-youtube"></i>
+                            <i className="fa-brands fa-youtube"></i>
                         </a>
                         <a className="mx-2 links" href="https://www.youtube.com/@cncode-edu" target="_blank" rel="noopener noreferrer">Youtube: CNcode</a>
                     </div>
