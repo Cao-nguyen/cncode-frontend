@@ -92,3 +92,29 @@
         }
     }
 }
+
+.dark-mode {
+
+    .admin-layout,
+    .admin-layout-open {
+        .sidebar {
+            background-color: #31314d;
+        }
+
+        .tab {
+            .tab-item {
+                background-color: #31314d;
+                color: #fff;
+            }
+
+            .tab-items {
+                color: #fff;
+            }
+
+            .active {
+                background-color: #454568;
+                color: #fff;
+            }
+        }
+    }
+}
