@@ -1,5 +1,11 @@
 .gioithieu {
     background-color: #fff;
-    border-radius: 7px;
     padding: 20px 40px;
+    height: 100%;
+}
+
+.dark-mode {
+    .gioithieu {
+        background-color: #31314d;
+    }
 }

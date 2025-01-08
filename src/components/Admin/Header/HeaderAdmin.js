@@ -40,6 +40,9 @@ function HeaderAdmin({ isDarkMode, toggleTheme, toggleOpen }) {
 
                         <Dropdown.Menu>
                             <Dropdown.Item>
+                                <NavLink className="dropdown-link" to="/">Trang chủ</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
                                 <NavLink className="dropdown-link-logout" onClick={Logout}>Đăng xuất</NavLink>
                             </Dropdown.Item>
                         </Dropdown.Menu>

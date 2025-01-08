@@ -1,3 +1,4 @@
+html,
 body {
     box-sizing: border-box;
     margin: 0;
@@ -8,8 +9,12 @@ body {
     padding-top: 60px;
 }
 
+.ql-align-center {
+    text-align: center;
+}
+
 .dark-mode {
-    background-color: #1e1e2f;
+    background-color: #31314d;
 
     .nav {
         background-color: #31314d;
@@ -66,63 +71,51 @@ body {
     a {
         color: #c8cdff;
     }
-
-    .admin-layout,
-    .admin-layout-open {
-        background-color: #1e1e2f;
-    }
 }
 
 .admin-layout {
     display: flex;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #eee;
 
     .sidebar {
-        margin: 10px 10px;
         background-color: #fff;
-        border-radius: 10px;
         width: 5%;
-        height: 97vh;
+        height: 100vh;
         padding-top: 100px;
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: fixed;
+        border-right: solid 1px black;
     }
 
     .body {
-        width: 95%;
+        width: 100%;
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         margin-left: 5%;
 
         .headerAdmin {
-            width: 93%;
-            border-radius: 10px;
-            margin: 5px 10px;
+            width: 95%;
             box-shadow: none;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: solid 1px black;
         }
 
         .bodyAdmin {
-            height: 100vh;
-            width: 97.7%;
+            margin: 70px 0px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 90px 20px 0px;
-            border-radius: 10px;
         }
     }
 }
 
 .admin-layout-open {
     display: flex;
+    min-height: 900px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #eee;
 
     .sidebar {
-        margin: 10px 10px;
         background-color: #fff;
-        border-radius: 10px;
         width: 20%;
-        height: 97vh;
+        height: 100vh;
+        border-right: solid 1px #1e1e2f;
         padding-top: 100px;
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: fixed;
@@ -134,18 +127,15 @@ body {
         margin-left: 20%;
 
         .headerAdmin {
-            width: 78%;
-            border-radius: 10px;
-            margin: 5px 10px;
+            width: 80%;
             box-shadow: none;
+            border-bottom: #1e1e2f solid 1px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .bodyAdmin {
-            height: 100vh;
-            margin: 90px 20px 0px;
-            border-radius: 10px;
-            width: 97.7%;
+            margin: 70px 0px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 }

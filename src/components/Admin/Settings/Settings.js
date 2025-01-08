@@ -25,6 +25,33 @@ function Settings(props) {
                 </button>
                 <QuillEditor value={Infor} onChange={setInfor} />
             </div>
+
+            <div className="gioithieu">
+                <h1 className="text-center">Chính sách bảo mật</h1>
+                <div className="border mb-3"></div>
+                <button className="btn btn-primary mb-2">
+                    Lưu thông tin
+                </button>
+                <QuillEditor />
+            </div>
+
+            <div className="gioithieu">
+                <h1 className="text-center">Điều khoản sử dụng</h1>
+                <div className="border mb-3"></div>
+                <button className="btn btn-primary mb-2">
+                    Lưu thông tin
+                </button>
+                <QuillEditor />
+            </div>
+
+            <div className="gioithieu">
+                <h1 className="text-center">Chính sách thành viên</h1>
+                <div className="border mb-3"></div>
+                <button className="btn btn-primary mb-2">
+                    Lưu thông tin
+                </button>
+                <QuillEditor />
+            </div>
         </div>
     );
 }
