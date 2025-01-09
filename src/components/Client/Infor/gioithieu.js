@@ -17,7 +17,7 @@ function Gioithieu(props) {
     return (
         <div className="container pt-5">
             {loading ? (
-                <div className="pt-5">Đang tải...</div>
+                <h2 className="pt-5 text-center text-primary">Đang tải...</h2>
             ) : (
                 <div className="pt-5" dangerouslySetInnerHTML={{ __html: Infor }}></div>
             )}
