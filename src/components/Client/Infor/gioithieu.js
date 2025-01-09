@@ -8,8 +8,8 @@ function Gioithieu(props) {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            await getInfor();
             setLoading(false);
+            await getInfor();
         };
         fetchData();
     }, [getInfor]);
