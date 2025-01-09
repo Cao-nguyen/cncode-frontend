@@ -4,7 +4,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/monokai.css";
 
 function Gioithieu(props) {
-    const { Infor, getInfor } = SettingsAdmin();
+    const { Infor, setInfor, getInfor } = SettingsAdmin();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
