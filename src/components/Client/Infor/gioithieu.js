@@ -9,6 +9,9 @@ function Gioithieu(props) {
         const fetchData = async () => {
             setLoading(true);
             await getInfor();
+            document.querySelectorAll("pre code").forEach((block) => {
+                hljs.highlightElement(block);
+            });
             setLoading(false);
         };
         fetchData();
