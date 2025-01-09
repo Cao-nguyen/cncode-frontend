@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SettingsAdmin from '../../../middlewares/SettingsAdmin'
+import hljs from "highlight.js";
+import "highlight.js/styles/monokai.css";
 
 function Gioithieu(props) {
     const { Infor, getInfor } = SettingsAdmin();
