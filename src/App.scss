@@ -17,10 +17,25 @@ body {
     text-align: justify;
 }
 
-.ql-syntax {
-    background-color: #727272;
+pre.ql-syntax {
+    font-family: 'Courier New', Courier, monospace;
+    /* Phông chữ code */
+    font-size: 12px;
+    /* Kích thước chữ nhỏ */
+    background-color: #f8f8f8;
+    /* Màu nền nhạt */
+    color: #333;
+    /* Màu chữ đen */
     padding: 10px;
-    border-radius: 7px;
+    /* Khoảng cách bên trong */
+    border: 1px solid #ddd;
+    /* Đường viền nhạt */
+    border-radius: 5px;
+    /* Góc bo tròn */
+    white-space: pre-wrap;
+    /* Tự xuống dòng */
+    word-wrap: break-word;
+    /* Ngắt từ dài */
 }
 
 .dark-mode {
