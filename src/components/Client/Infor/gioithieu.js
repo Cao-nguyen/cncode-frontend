@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import SettingsAdmin from '../../../middlewares/SettingsAdmin'
-import hljs from "highlight.js";
-import "highlight.js/styles/monokai.css";
 
 function Gioithieu(props) {
-    const { Infor, setInfor, getInfor } = SettingsAdmin();
+    const { Infor, getInfor } = SettingsAdmin();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            const rawData = await getInfor()
-
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(rawData, "text/html");
-
-            doc.querySelectorAll("pre code").forEach((codeBlock) => {
-                if (!codeBlock.className) {
-                    codeBlock.className = "language-python";
-                }
-            });
-
-            const updatedHTML = doc.body.innerHTML;
+            await getInfor();
             setLoading(false);
-
-            setInfor(updatedHTML);
         };
-
         fetchData();
     }, [getInfor]);
 
