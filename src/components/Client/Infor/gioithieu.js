@@ -10,12 +10,23 @@ function Gioithieu(props) {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            await getInfor();
-            document.querySelectorAll("pre code").forEach((block) => {
-                hljs.highlightElement(block);
+            const rawData = await getInfor()
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(rawData, "text/html");
+
+            doc.querySelectorAll("pre code").forEach((codeBlock) => {
+                if (!codeBlock.className) {
+                    codeBlock.className = "language-python";
+                }
             });
+
+            const updatedHTML = doc.body.innerHTML;
             setLoading(false);
+
+            setInfor(updatedHTML);
         };
+
         fetchData();
     }, [getInfor]);
 
