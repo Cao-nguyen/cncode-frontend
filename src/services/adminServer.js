@@ -2,7 +2,7 @@ import axios from "axios"
 
 // Giới thiệu
 export const InforApi = async (Infor) => {
-    const response = await axios.patch(`${process.env.REACT_APP_BACKEND}/api/v1/infor`, { Infor });
+    const response = await axios.put(`${process.env.REACT_APP_BACKEND}/api/v1/infor`, { Infor });
     return response.data
 };
 

@@ -11,7 +11,7 @@ import './Editor.scss';
 
 function Editor({ value, onChange }) {
     const [markdown, setMarkdown] = useState(value || '');
-    const [isPreview, setIsPreview] = useState(false); // Trạng thái cho preview
+    const [isPreview, setIsPreview] = useState(false);
 
     useEffect(() => {
         setMarkdown(value || '');
@@ -21,13 +21,11 @@ function Editor({ value, onChange }) {
         const textarea = document.querySelector('textarea');
         const startPos = textarea.selectionStart;
         const endPos = textarea.selectionEnd;
-
         const selectedText = markdown.slice(startPos, endPos);
-
         const newText = markdown.slice(0, startPos) + markdownText.replace('{}', selectedText || selection) + markdown.slice(endPos);
 
         setMarkdown(newText);
-        onChange(newText); // Cập nhật dữ liệu trong parent component
+        onChange(newText);
 
         setTimeout(() => {
             textarea.selectionStart = startPos + markdownText.indexOf('{}');
@@ -67,6 +65,12 @@ function Editor({ value, onChange }) {
         }
     };
 
+    const handleInputChange = (event) => {
+        const newMarkdown = event.target.value;
+        setMarkdown(newMarkdown);
+        onChange(newMarkdown);
+    };
+
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
@@ -76,7 +80,6 @@ function Editor({ value, onChange }) {
             formData.append('file', file);
             formData.append('upload_preset', UPLOAD_PRESET);
 
-            // Lấy ngày tháng năm hiện tại
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
             const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -98,18 +101,15 @@ function Editor({ value, onChange }) {
     }, [markdown]);
 
     const togglePreview = () => {
-        setIsPreview((prev) => !prev); // Chuyển chế độ giữa preview và editor
+        setIsPreview((prev) => !prev);
     };
 
     return (
         <div className="editor-text">
             <div className="toolbar">
-                {/* Các biểu tượng điều khiển như trước */}
                 <i className="fa-solid fa-bold" title="Ctrl+B" onClick={() => insertMarkdown('**{}**')} />
                 <i className="fa-solid fa-italic" title="Ctrl+I" onClick={() => insertMarkdown('*{}*')} />
                 <i className="fa-solid fa-underline" title="Ctrl+U" onClick={() => insertMarkdown('<u>{}</u>')} />
-                <i className="fa-solid fa-superscript" title="Ctrl+Shift+Up" onClick={() => insertMarkdown('<sup>{}</sup>')} />
-                <i className="fa-solid fa-subscript" title="Ctrl+Shift+Down" onClick={() => insertMarkdown('<sub>{}</sub>')} />
                 <i className="fa-solid fa-quote-left" title="Ctrl+Q" onClick={() => insertMarkdown('> {}')} />
                 <i className="fa-solid fa-link" title="Ctrl+K" onClick={() => insertMarkdown('[{}](Link)')} />
                 <i className="fa-solid fa-table" title="Ctrl+T" onClick={() => insertMarkdown('| {} | Header 2 |\n| -------- | -------- |\n| Row 1    | Row 2    |')} />
@@ -124,17 +124,13 @@ function Editor({ value, onChange }) {
                     className="image-upload-input"
                 />
                 <i className="fa-solid fa-code" title="Ctrl+Shift+C" onClick={() => insertMarkdown('```\n{}\n```')} />
-                <i className="fa-solid fa-align-left" title="Center Align" onClick={() => insertMarkdown('<div class="al-left">{}</div>')} />
-                <i className="fa-solid fa-align-center" title="Center Align" onClick={() => insertMarkdown('<div class="al-center">{}</div>')} />
-                <i className="fa-solid fa-align-right" title="Center Align" onClick={() => insertMarkdown('<div class="al-right">{}</div>')} />
-                <i className="fa-solid fa-align-justify" title="Center Align" onClick={() => insertMarkdown('<div class="al-justify">{}</div>')} />
-                <i className="fa-solid fa-eye" title="Bản xem trước" onClick={togglePreview} />
+                <i className="fa-solid fa-eye" title="Preview" onClick={togglePreview} />
             </div>
 
             <div className="editor-container" style={{ display: isPreview ? 'none' : 'block' }}>
                 <textarea
                     value={markdown}
-                    onChange={(e) => setMarkdown(e.target.value)}
+                    onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
             </div>

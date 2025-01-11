@@ -6,6 +6,10 @@ const SettingsAdmin = () => {
     const [Infor, setInfor] = useState("");
 
     const saveInfor = async () => {
+        if (!Infor) {
+            toast.error("Thông tin không được để trống.");
+            return;
+        }
         try {
             let data = await InforApi(Infor);
             if (data.EC === 0) {
