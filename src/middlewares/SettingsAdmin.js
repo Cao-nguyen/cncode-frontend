@@ -27,6 +27,7 @@ const SettingsAdmin = () => {
                 setInfor(data.DT);
             } else {
                 toast.error("Không thể tải dữ liệu");
+                console.log(error)
             }
         } catch (error) {
             console.error(error);
