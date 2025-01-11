@@ -123,8 +123,12 @@ function Editor({ value, onChange }) {
                     onChange={handleImageUpload}
                     className="image-upload-input"
                 />
-                <i className="fa-solid fa-code" title="Ctrl+Shift+C" onClick={() => insertMarkdown('```\n{}\n```')} />
-                <i className="fa-solid fa-eye" title="Preview" onClick={togglePreview} />
+                <i className="fa-solid fa-code" title="Ctrl+Shift+C" onClick={() => insertMarkdown('```language\n{}\n```')} />
+                <i className="fa-solid fa-align-left" title="Center Align" onClick={() => insertMarkdown('<div class="al-left">{}</div>')} />
+                <i className="fa-solid fa-align-center" title="Center Align" onClick={() => insertMarkdown('<div class="al-center">{}</div>')} />
+                <i className="fa-solid fa-align-right" title="Center Align" onClick={() => insertMarkdown('<div class="al-right">{}</div>')} />
+                <i className="fa-solid fa-align-justify" title="Center Align" onClick={() => insertMarkdown('<div class="al-justify">{}</div>')} />
+                <i className="fa-solid fa-eye" title="Bản xem trước" onClick={togglePreview} />
             </div>
 
             <div className="editor-container" style={{ display: isPreview ? 'none' : 'block' }}>
