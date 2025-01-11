@@ -9,25 +9,6 @@ body {
     padding-top: 60px;
 }
 
-.ql-align-center {
-    text-align: center;
-}
-
-.ql-align-justify {
-    text-align: justify;
-}
-
-pre.ql-syntax {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    background-color: #f8f8f8;
-    padding: 10px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-
-}
-
 .dark-mode {
     background-color: #31314d;
 
@@ -86,6 +67,123 @@ pre.ql-syntax {
     a {
         color: #c8cdff;
     }
+
+    .preview {
+        width: 100%;
+
+        p,
+        div {
+            color: #fff;
+        }
+
+        .al-left {
+            text-align: left;
+        }
+
+        .al-center {
+            text-align: center;
+        }
+
+        .al-right {
+            text-align: right;
+        }
+
+        .al-justify {
+            text-align: justify;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            padding-left: 10px;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #fff;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+    }
+}
+
+.preview {
+    width: 100%;
+
+    p,
+    div {
+        font-size: 18px;
+        color: #000;
+    }
+
+    .al-left {
+        text-align: left;
+    }
+
+    .al-center {
+        text-align: center;
+    }
+
+    .al-right {
+        text-align: right;
+    }
+
+    .al-justify {
+        text-align: justify;
+    }
+
+    blockquote {
+        border-left: 4px solid #474747;
+        padding-left: 10px;
+        font-style: italic;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        color: #474747;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #fff;
+    }
+
+    th,
+    td {
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+        text-align: center;
+    }
 }
 
 .admin-layout {
@@ -115,6 +213,7 @@ pre.ql-syntax {
         }
 
         .bodyAdmin {
+            height: 100vh;
             margin: 70px 0px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -149,6 +248,7 @@ pre.ql-syntax {
         }
 
         .bodyAdmin {
+            height: 100vh;
             margin: 70px 0px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }

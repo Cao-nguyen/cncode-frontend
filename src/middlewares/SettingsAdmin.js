@@ -6,13 +6,19 @@ const SettingsAdmin = () => {
     const [Infor, setInfor] = useState("");
 
     const saveInfor = async () => {
-        let data = await InforApi(Infor);
-        if (data.EC === 0) {
-            toast.success(data.EM);
-        } else {
-            toast.error(data.EM);
+        try {
+            let data = await InforApi(Infor);
+            if (data.EC === 0) {
+                toast.success(data.EM);
+            } else {
+                toast.error(data.EM || "Không thể lưu thông tin");
+            }
+        } catch (error) {
+            console.error("Error while saving information: ", error);
+            toast.error("Có lỗi xảy ra khi lưu thông tin.");
         }
     };
+
 
     const getInfor = useCallback(async () => {
         try {
