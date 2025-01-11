@@ -1,0 +1,24 @@
+.gioithieu {
+    background-color: #fff;
+    padding: 20px 40px;
+    height: 200%;
+
+    .btn {
+        margin-right: 10px;
+    }
+}
+
+.dark-mode {
+    .gioithieu {
+        background-color: #31314d;
+    }
+
+    .btn-dark {
+        background-color: #7474a1;
+        border: none;
+
+        &:hover {
+            background-color: #65658d;
+        }
+    }
+}

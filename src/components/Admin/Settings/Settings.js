@@ -1,29 +1,38 @@
-import React, { useEffect } from 'react';
-import SettingsAdmin from '../../../middlewares/SettingsAdmin';
-import Editor from '../../Service/Editor';
-import './Settings.scss';
+import React from 'react';
+import './Settings.scss'
+import { NavLink } from 'react-router-dom';
 
 function Settings(props) {
-    const {
-        Infor,
-        setInfor,
-        saveInfor,
-        getInfor,
-    } = SettingsAdmin();
-
-    useEffect(() => {
-        getInfor();
-    }, [getInfor]);
-
     return (
-        <div>
-            <div className="gioithieu">
-                <h1 className="text-center">Thông tin giới thiệu</h1>
-                <div className="border mb-3"></div>
-                <button className="btn btn-primary mb-2" onClick={saveInfor}>
-                    Lưu thông tin
-                </button>
-                <Editor value={Infor} onChange={setInfor} />
+        <div className="admin-container">
+            <div className="tabs">
+                <div className="tab">
+                    <h3>Thông tin giới thiệu</h3>
+                    <NavLink to="/admin/settings/infor">
+                        <i className="fa-solid fa-list-check"></i>
+                    </NavLink>
+                </div>
+
+                <div className="tab">
+                    <h3>Chính sách bảo mật</h3>
+                    <NavLink to="/admin/settings/ssl">
+                        <i className="fa-solid fa-list-check"></i>
+                    </NavLink>
+                </div>
+
+                <div className="tab">
+                    <h3>Điều khoản sử dụng</h3>
+                    <NavLink to="/admin/settings/use">
+                        <i className="fa-solid fa-list-check"></i>
+                    </NavLink>
+                </div>
+
+                <div className="tab">
+                    <h3>Chính sách thành viên</h3>
+                    <NavLink to="/admin/settings/members">
+                        <i className="fa-solid fa-list-check"></i>
+                    </NavLink>
+                </div>
             </div>
         </div>
     );
