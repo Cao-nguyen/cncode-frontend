@@ -4,10 +4,8 @@
     "private": true,
     "dependencies": {
         "@reduxjs/toolkit": "^2.5.0",
-        "@sahircansurmeli/react-mde": "^11.7.1",
         "axios": "^1.7.9",
         "bootstrap": "^5.3.3",
-        "cra-template": "1.2.0",
         "dotenv": "^16.4.7",
         "highlight.js": "^11.11.1",
         "js-cookie": "^3.0.5",
