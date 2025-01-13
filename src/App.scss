@@ -68,6 +68,19 @@ body {
         color: #c8cdff;
     }
 
+    .admin-layout,
+    .admin-layout-open {
+        min-height: 900px;
+
+        .body {
+            height: 100vh;
+
+            .bodyAdmin {
+                height: 100vh;
+            }
+        }
+    }
+
     .preview {
         width: 100%;
 
@@ -253,4 +266,75 @@ body {
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
+}
+
+.client-layout {
+    img {
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .tet {
+
+        img.tet1 {
+            width: 200px;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            position: fixed;
+        }
+
+        img.tet2 {
+            width: 200px;
+            top: 60px;
+            left: -10px;
+            z-index: 1;
+            position: fixed;
+        }
+
+        img.tet3 {
+            width: 200px;
+            z-index: 1;
+            top: 80px;
+            right: -10px;
+            position: fixed;
+        }
+    }
+
+    .noel {
+        img.noel1 {
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            bottom: 10px;
+            left: -20px;
+        }
+    }
+
+    .trungthu {
+        img.trungthu1 {
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+        }
+
+        img.trungthu2 {
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            bottom: 0;
+            right: 0;
+        }
+
+        img.trungthu3 {
+            width: 200px;
+            position: fixed;
+            z-index: 100;
+            top: -20px;
+            left: 100px;
+        }
+    }
+
 }

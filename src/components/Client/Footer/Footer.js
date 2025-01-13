@@ -21,16 +21,16 @@ function Footer(props) {
                 <div className="about col-2">
                     <h4>Sản phẩm</h4>
                     <div className="border mb-3"></div>
-                    <Link className="links" to="/chinhphucnguvanedu.vercel.app">Chinh phục ngữ văn</Link>
+                    <Link className="links" to="https://chinhphucnguvanedu.vercel.app">Chinh phục ngữ văn</Link>
                 </div>
 
                 {/* Cột 3 */}
                 <div className="about col-2">
                     <h4>Liên kết</h4>
                     <div className="border mb-3"></div>
-                    <Link className="links" to="/chinhphucnguvanedu.vercel.app">Bảo mật</Link>
-                    <Link className="links" to="/chinhphucnguvanedu.vercel.app">Điều khoản</Link>
-                    <Link className="links" to="/chinhphucnguvanedu.vercel.app">Thành viên</Link>
+                    <Link className="links" to="/ssl">Bảo mật</Link>
+                    <Link className="links" to="/use">Điều khoản</Link>
+                    <Link className="links" to="/member">Thành viên</Link>
                 </div>
 
                 {/* Cột 4 */}

@@ -1,0 +1,52 @@
+.admin-themes {
+    height: 100vh;
+    margin: 0px 20px;
+
+    .tabs {
+        display: grid;
+        grid-template-columns: 49% 49%;
+        justify-content: space-between;
+
+        .tab {
+            margin: 15px 0px;
+            padding: 10px;
+            background-color: #dadada;
+            border-radius: 5px;
+
+            i {
+                font-size: 18px;
+                background-color: #747474;
+                padding: 10px;
+                border-radius: 50px;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.dark-mode {
+    .admin-themes {
+        margin: 0px 20px;
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 49% 49%;
+            justify-content: space-between;
+
+            .tab {
+                padding: 10px;
+                background-color: #454568;
+                border-radius: 5px;
+
+                i {
+                    font-size: 18px;
+                    background-color: #606083;
+                    padding: 10px;
+                    border-radius: 50px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

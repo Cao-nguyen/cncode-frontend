@@ -11,6 +11,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import lixi from './assets/lixi.png'
+import hoamai from './assets/hoamai.png'
+import maivang from './assets/maivang.png'
+import nguoituyet from './assets/nguoituyet.png'
+import banhtrungthu from './assets/banhtrungthu.png'
+import thongoc from './assets/thongoc.png'
+import trang from './assets/trang.png'
 import './App.scss';
 
 function App() {
@@ -54,13 +61,27 @@ function App() {
       ) : (
         <div className="client-layout">
           {!hideHeader && <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
+          <div className="tet" style={{ display: "block" }}>
+            <img className="tet1" src={lixi} alt=""></img>
+            <img className="tet2" src={hoamai} alt=""></img>
+            <img className="tet3" src={maivang} alt=""></img>
+          </div>
+          <div className="noel" style={{ display: "none" }}>
+            <img className="noel1" src={nguoituyet} alt=""></img>
+          </div>
+          <div className="trungthu" style={{ display: "none" }}>
+            <img className="trungthu1" src={banhtrungthu} alt=""></img>
+            <img className="trungthu2" src={thongoc} alt=""></img>
+            <img className="trungthu3" src={trang} alt=""></img>
+          </div>
           <div className="app-container">
             <AppRoutes />
           </div>
           {!hideHeader && <Footer />}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 

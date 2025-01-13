@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Settings.scss'
 import { NavLink } from 'react-router-dom';
 
 function Settings(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="admin-container">
             <div className="tabs">
