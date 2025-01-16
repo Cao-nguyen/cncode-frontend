@@ -3,6 +3,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 .container {
@@ -269,6 +270,8 @@ body {
 }
 
 .client-layout {
+    height: 100%;
+
     img {
         user-select: none;
         pointer-events: none;

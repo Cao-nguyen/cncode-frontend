@@ -4,6 +4,7 @@ import Register from "../components/Client/Register/Register";
 import Login from "../components/Client/Login/Login";
 import { useSelector } from "react-redux";
 import Gioithieu from "../components/Client/Infor/gioithieu";
+import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 
 export const validRoutes = [
     '/', '/gioithieu', '/khoahoc', '/luyentap', '/diendan', '/blog', '/sukien', '/tintuc', '/timkiem',
@@ -26,6 +27,7 @@ const AppRoutes = (props) => {
             {/* App */}
             <Route path="/" Component={Home}></Route>
             <Route path="/gioithieu" Component={Gioithieu}></Route>
+            <Route path="/me/khuvuon" Component={Khuvuon}></Route>
             <Route path="/dangky" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
             <Route path="/dangnhap" element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
         </Routes>
