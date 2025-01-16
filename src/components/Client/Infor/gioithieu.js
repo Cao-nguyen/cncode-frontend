@@ -7,6 +7,7 @@ import 'prismjs/components/prism-javascript.min.js';
 import 'prismjs/components/prism-cshtml.min.js';
 import 'prismjs/components/prism-css.min.js';
 import SettingsAdmin from '../../../middlewares/SettingsAdmin'
+import './gioithieu.scss'
 
 function Gioithieu(props) {
     const { Infor, getInfor } = SettingsAdmin();

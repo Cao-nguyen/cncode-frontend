@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     account: {
         fullName: '',
         tokenUser: '',
-        role: ''
+        role: '',
+        id: ''
     }
 };
 
@@ -16,7 +17,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 account: {
                     fullName: action?.payload?.DT?.fullName,
                     tokenUser: action?.payload?.DT?.tokenUser,
-                    role: action?.payload?.DT?.role
+                    role: action?.payload?.DT?.role,
+                    id: action?.payload?.DT?.id
                 }
             };
 
