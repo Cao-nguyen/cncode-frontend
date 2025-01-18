@@ -59,6 +59,7 @@ function Footer(props) {
                         </a>
                         <a className="mx-2 links" href="https://www.youtube.com/@cncode-edu" target="_blank" rel="noopener noreferrer">Youtube: CNcode</a>
                     </div>
+                    <a href="https://www.dmca.com/compliance/cncode.vercel.app" title="DMCA Compliance information for cncode.vercel.app"><img src="https://www.dmca.com/img/dmca-compliant-grayscale.png" alt="DMCA compliant image" /></a>
                 </div>
             </div>
         </footer >
