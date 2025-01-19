@@ -7,6 +7,7 @@ import Tab from "./components/Admin/Tab/Tab";
 import HeaderAdmin from "./components/Admin/Header/HeaderAdmin";
 import AdminRoutes, { adminRoutesValidate } from "./routes/adminRoutes";
 import { ToastContainer } from "react-toastify";
+import Login from "./components/Client/Login/Login";
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -24,6 +25,11 @@ function App() {
   const location = useLocation();
   const hideHeader = !validRoutes.includes(location.pathname);
   const isAdmin = adminRoutesValidate.includes(location.pathname);
+
+  const [register, setRegister] = useState(false)
+  const toggleRegister = () => {
+    setRegister(!register)
+  }
 
   const savedTheme = localStorage.getItem('darkMode');
   const [isDarkMode, setIsDarkMode] = useState(savedTheme === 'true');
@@ -75,7 +81,7 @@ function App() {
         </div>
       ) : (
         <div className="client-layout">
-          {!hideHeader && <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
+          {!hideHeader && <Header toggleRegister={toggleRegister} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
 
           <div className="tet" style={{ display: "none" }}>
             {tetImages.map((img, index) => (
@@ -95,6 +101,15 @@ function App() {
             ))}
           </div>
 
+          {register &&
+            <div className="bg-fixed">
+              <div className="fixed">
+                <i className="fa-solid fa-x" onClick={toggleRegister} />
+                <Login toggleRegister={toggleRegister} />
+              </div>
+            </div>
+          }
+
           {/* App content */}
           <div className="app-container">
             <AppRoutes />
@@ -102,8 +117,9 @@ function App() {
 
           {!hideHeader && <Footer />}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 

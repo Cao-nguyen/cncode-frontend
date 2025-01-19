@@ -7,7 +7,7 @@ import logo from '../../../assets/logo.png'
 import HandleLogout from '../../../middlewares/LogoutMiddleware';
 import './Header.scss'
 
-function Header({ isDarkMode, toggleTheme }) {
+function Header({ toggleRegister, isDarkMode, toggleTheme }) {
     const tokenUser = useSelector(state => state.user.account.tokenUser);
     const fullName = useSelector(state => state.user.account.fullName);
     const role = useSelector(state => state.user.account.role);
@@ -60,7 +60,7 @@ function Header({ isDarkMode, toggleTheme }) {
                     </Nav.Item>
                     {tokenUser === "" ?
                         < Nav.Item className="nav-links nav-last">
-                            <Nav.Link className="nav-link" as={NavLink} to="/dangnhap" eventKey="/dangnhap">Đăng nhập</Nav.Link>
+                            <Nav.Link className="nav-link" as={NavLink} onClick={toggleRegister}>Đăng nhập</Nav.Link>
                         </Nav.Item>
                         :
                         <Dropdown>

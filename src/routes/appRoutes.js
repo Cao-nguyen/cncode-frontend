@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../components/Client/Home/Home";
 import Register from "../components/Client/Register/Register";
-import Login from "../components/Client/Login/Login";
 import { useSelector } from "react-redux";
 import Gioithieu from "../components/Client/Infor/gioithieu";
 import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
@@ -14,7 +13,7 @@ export const validRoutes = [
 const ProtectedRoute = ({ children }) => {
     const tokenUser = useSelector(state => state.user.account.tokenUser);
 
-    if (tokenUser) {
+    if (!tokenUser) {
         return <Navigate to="/" replace />;
     }
 
@@ -29,7 +28,6 @@ const AppRoutes = (props) => {
             <Route path="/gioithieu" Component={Gioithieu}></Route>
             <Route path="/me/khuvuon" Component={Khuvuon}></Route>
             <Route path="/dangky" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
-            <Route path="/dangnhap" element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
         </Routes>
     );
 };

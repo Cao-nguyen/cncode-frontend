@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Login } from '../rudex/Actions/userAction'
 
-const HandleLogin = () => {
+const HandleLogin = (toggleRegister) => {
     // Thư viện
     const nagivate = useNavigate()
     const dispatch = useDispatch()
@@ -33,6 +33,7 @@ const HandleLogin = () => {
                 dispatch(Login(data))
                 nagivate('/')
                 toast.success(data.EM)
+                toggleRegister()
             } else {
                 toast.error(data.EM)
             }
