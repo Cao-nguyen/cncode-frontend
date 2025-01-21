@@ -26,8 +26,7 @@ const AppRoutes = (props) => {
             {/* App */}
             <Route path="/" Component={Home}></Route>
             <Route path="/gioithieu" Component={Gioithieu}></Route>
-            <Route path="/me/khuvuon" Component={Khuvuon}></Route>
-            <Route path="/dangky" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
+            <Route path="/me/khuvuon" element={<ProtectedRoute><Khuvuon /></ProtectedRoute>}></Route>
         </Routes>
     );
 };

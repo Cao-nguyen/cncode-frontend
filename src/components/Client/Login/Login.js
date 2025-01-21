@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import HandleLogin from '../../../middlewares/LoginMiddleware';
 import './Login.scss';
 
-function Login({ toggleRegister }) {
+function Login({ toggleLogin, toggleRegister }) {
     const {
         fullName,
         username,
@@ -18,7 +18,7 @@ function Login({ toggleRegister }) {
         togglePasswordVisibility,
         LoginMiddleware,
         isLoading
-    } = HandleLogin(toggleRegister)
+    } = HandleLogin(toggleLogin)
 
     return (
         <div className="form">
@@ -51,7 +51,7 @@ function Login({ toggleRegister }) {
                 </InputGroup>
                 <div className="form-links">
                     <Link to="/forgot-password">Quên mật khẩu?</Link>
-                    <Link to="/dangky">Bạn chưa có tài khoản? Đăng ký</Link>
+                    <Link onClick={toggleRegister}>Bạn chưa có tài khoản? Đăng ký</Link>
                 </div>
                 <Button className="form-button" type="submit" onClick={LoginMiddleware} disabled={isLoading}>
                     {isLoading ? (

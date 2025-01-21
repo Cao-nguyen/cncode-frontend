@@ -33,3 +33,16 @@ footer {
         }
     }
 }
+
+@media screen and (max-width: 1190px) {
+    footer {
+        .row {
+            display: inline;
+
+            .col {
+                margin-top: 20px;
+                width: 100%;
+            }
+        }
+    }
+}

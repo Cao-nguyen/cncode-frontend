@@ -13,40 +13,42 @@ body {
 .dark-mode {
     background-color: #31314d;
 
-    .nav {
-        background-color: #31314d;
+    .laptop {
+        .nav {
+            background-color: #31314d;
 
-        .nav-link {
-            color: #eee;
-        }
-
-        .custom-dropdown-toggle {
-            color: #fff;
-        }
-
-        .dropdown-menu {
-            background-color: #1e1e2f;
-
-            .dropdown-link {
-                color: #eee;
+            .nav-link {
+                color: #fff;
             }
 
-            .dropdown-link-logout {
-                color: rgb(255, 86, 86);
-                text-decoration: none;
+            .custom-dropdown-toggle {
+                color: #fff;
             }
 
-            .dropdown-item.active,
-            .dropdown-item:active {
+            .dropdown-menu {
                 background-color: #1e1e2f;
-            }
 
-            .dropdown-item:hover {
-                background-color: #1e1e2f;
-            }
+                .dropdown-link {
+                    color: #eee;
+                }
 
-            .dropdown-divider {
-                background-color: #eee;
+                .dropdown-link-logout {
+                    color: rgb(255, 86, 86);
+                    text-decoration: none;
+                }
+
+                .dropdown-item.active,
+                .dropdown-item:active {
+                    background-color: #1e1e2f;
+                }
+
+                .dropdown-item:hover {
+                    background-color: #1e1e2f;
+                }
+
+                .dropdown-divider {
+                    background-color: #eee;
+                }
             }
         }
     }
@@ -309,6 +311,43 @@ body {
         }
     }
 
+    .bg-fix {
+        width: 100%;
+        height: 100%;
+
+        &::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            z-index: 999;
+        }
+
+        .fixed {
+            opacity: 1;
+            width: 50%;
+            height: 100%;
+            position: fixed;
+            z-index: 1000;
+            top: 8%;
+            right: 25%;
+            left: 25%;
+
+            .fa-x {
+                font-size: 25px;
+                display: flex;
+                justify-content: right;
+                color: #000;
+                transform: translate(-20px, 40px);
+                cursor: pointer;
+            }
+        }
+    }
+
     img {
         user-select: none;
         pointer-events: none;
@@ -377,4 +416,10 @@ body {
         }
     }
 
+}
+
+@media screen and (max-width: 1190px) {
+    .container {
+        padding-top: 20px;
+    }
 }

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { checkCode, registerUser } from "../services/clientServer";
 import { Login } from "../rudex/Actions/userAction"
 
-const RegisterMiddleware = () => {
+const RegisterMiddleware = (toggleRegister) => {
     // Thư viện
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -80,6 +80,7 @@ const RegisterMiddleware = () => {
             if (data.EC === 0) {
                 dispatch(Login(data))
                 toast.success(data.EM);
+                toggleRegister()
                 navigate("/")
             } else {
                 toast.error(data.EM);

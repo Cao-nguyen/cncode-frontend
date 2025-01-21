@@ -8,7 +8,7 @@ function Footer(props) {
         <footer className="mt-5">
             <div className="row">
                 {/* Cột 1 */}
-                <div className="about col-5">
+                <div className="about col col-lg-5">
                     <h4>Về CNcode</h4>
                     <div className="border mb-3"></div>
                     <div className="d-flex">
@@ -18,14 +18,14 @@ function Footer(props) {
                 </div>
 
                 {/* Cột 2 */}
-                <div className="about col-2">
+                <div className="about col col-lg-2">
                     <h4>Sản phẩm</h4>
                     <div className="border mb-3"></div>
                     <Link className="links" to="https://chinhphucnguvanedu.vercel.app">Chinh phục ngữ văn</Link>
                 </div>
 
                 {/* Cột 3 */}
-                <div className="about col-2">
+                <div className="about col col-lg-2">
                     <h4>Liên kết</h4>
                     <div className="border mb-3"></div>
                     <Link className="links" to="/ssl">Bảo mật</Link>
@@ -34,7 +34,7 @@ function Footer(props) {
                 </div>
 
                 {/* Cột 4 */}
-                <div className="about col-3">
+                <div className="about col col-lg-3">
                     <h4>Mạng xã hội</h4>
                     <div className="border mb-3"></div>
                     <div className="d-flex">
