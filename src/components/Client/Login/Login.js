@@ -51,7 +51,7 @@ function Login({ toggleLogin, toggleRegister }) {
                 </InputGroup>
                 <div className="form-links">
                     <Link to="/forgot-password">Quên mật khẩu?</Link>
-                    <Link onClick={toggleRegister}>Bạn chưa có tài khoản? Đăng ký</Link>
+                    <Link onClick={toggleRegister}>Đăng ký</Link>
                 </div>
                 <Button className="form-button" type="submit" onClick={LoginMiddleware} disabled={isLoading}>
                     {isLoading ? (
