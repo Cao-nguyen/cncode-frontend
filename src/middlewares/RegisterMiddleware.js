@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { checkCode, registerUser, forgotCheck } from "../services/clientServer";
 import { Login } from "../rudex/Actions/userAction"
 
-const RegisterMiddleware = (toggleRegister, toggleForgot) => {
+const RegisterMiddleware = ({ toggleRegister }) => {
     // Thư viện
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -98,7 +98,6 @@ const RegisterMiddleware = (toggleRegister, toggleForgot) => {
             let data = await forgotCheck(email, code, password)
             if (data.EC === 0) {
                 toast.success(data.EM);
-                toggleForgot()
             } else {
                 toast.error(data.EM);
             }

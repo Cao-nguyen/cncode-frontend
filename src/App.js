@@ -126,7 +126,7 @@ function App() {
             <div className="bg-fixed">
               <div className="fixed">
                 <i className="fa-solid fa-x" onClick={toggleForgot} />
-                <Forgot toggleForgot={toggleForgot} />
+                <Forgot />
               </div>
             </div>
           }

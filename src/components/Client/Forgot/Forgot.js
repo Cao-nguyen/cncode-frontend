@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import RegisterMiddleware from '../../../middlewares/RegisterMiddleware';
 import './Forgot.scss';
 
-function Forgot({ toggleForgot }) {
+function Forgot() {
     const {
         showPassword,
         countdown,
@@ -21,7 +21,7 @@ function Forgot({ toggleForgot }) {
         handleForgot,
         handleSendCode,
         isLoading
-    } = RegisterMiddleware(toggleForgot)
+    } = RegisterMiddleware()
 
     return (
         <div className="register-bg">
