@@ -184,6 +184,33 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
                         }
                     </div>
                 </div>
+
+                <div className="nav-mb-bot">
+                    <NavLink className="bot-item" to="/">
+                        <i className="fa-solid fa-home"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/gioithieu">
+                        <i className="fa-solid fa-circle-info"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/khoahoc">
+                        <i className="fa-solid fa-book"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/luyentap">
+                        <i className="fa-solid fa-code"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/diendan">
+                        <i className="fa-solid fa-user-group"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/blog">
+                        <i className="fa-solid fa-blog"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/sukien">
+                        <i className="fa-solid fa-calendar-days"></i>
+                    </NavLink>
+                    <NavLink className="bot-item" to="/tintuc">
+                        <i className="fa-solid fa-newspaper"></i>
+                    </NavLink>
+                </div>
             </div>
         </>
     );

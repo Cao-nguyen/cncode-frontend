@@ -27,7 +27,7 @@ function Gioithieu(props) {
     }, [Infor]);
 
     return (
-        <div className="container pt-5">
+        <div className="container pt-lg-5">
             {loading ? (
                 <h2 className="pt-5 text-center text-primary">Đang tải dữ liệu...</h2>
             ) : (
