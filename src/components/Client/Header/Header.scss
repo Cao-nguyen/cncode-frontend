@@ -223,4 +223,49 @@
             }
         }
     }
+
+    .dark-mode {
+        .mobile {
+            .nav-mb {
+                background-color: #31314d;
+                border-bottom: #222233 solid 1px;
+
+                .nav-item {
+                    .custom-dropdown-toggle {
+                        color: #fff;
+                    }
+
+                    .dropdown-menu {
+                        background-color: #1e1e2f;
+                    }
+
+                    .dropdown-divider {
+                        background-color: #fff;
+                    }
+
+                    .dropdown-link {
+                        color: #fff
+                    }
+
+                    .dropdown-link-logout {
+                        color: rgb(255, 112, 112);
+                    }
+
+                    .dropdown-item.active,
+                    .dropdown-item:active {
+                        background-color: #1e1e2f;
+                    }
+
+                    .dropdown-item:hover {
+                        background-color: #1e1e2f;
+                    }
+                }
+            }
+
+            .nav-mb-bot {
+                background-color: #31314d;
+                border-top: #222233 solid 1px;
+            }
+        }
+    }
 }
