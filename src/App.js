@@ -9,6 +9,7 @@ import AdminRoutes, { adminRoutesValidate } from "./routes/adminRoutes";
 import { ToastContainer } from "react-toastify";
 import Login from "./components/Client/Login/Login";
 import Register from "./components/Client/Register/Register";
+import Forgot from "./components/Client/Forgot/Forgot"
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -30,6 +31,11 @@ function App() {
   const [login, setLogin] = useState(false)
   const toggleLogin = () => {
     setLogin(!login)
+  }
+
+  const [forgotPassword, setForgotPassword] = useState(false)
+  const toggleForgot = () => {
+    setForgotPassword(!forgotPassword)
   }
 
   const [register, setRegister] = useState(false)
@@ -111,7 +117,16 @@ function App() {
             <div className="bg-fixed">
               <div className="fixed">
                 <i className="fa-solid fa-x" onClick={toggleLogin} />
-                <Login toggleLogin={toggleLogin} toggleRegister={toggleRegister} />
+                <Login toggleForgot={toggleForgot} toggleLogin={toggleLogin} toggleRegister={toggleRegister} />
+              </div>
+            </div>
+          }
+
+          {forgotPassword &&
+            <div className="bg-fixed">
+              <div className="fixed">
+                <i className="fa-solid fa-x" onClick={toggleForgot} />
+                <Forgot toggleForgot={toggleForgot} />
               </div>
             </div>
           }
