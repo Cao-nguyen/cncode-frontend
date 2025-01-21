@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { checkCode, registerUser, forgotCheck } from "../services/clientServer";
 import { Login } from "../rudex/Actions/userAction"
 
-const RegisterMiddleware = ({ toggleRegister }) => {
+const RegisterMiddleware = (toggleRegister) => {
     // Thư viện
     const dispatch = useDispatch()
     const navigate = useNavigate()
