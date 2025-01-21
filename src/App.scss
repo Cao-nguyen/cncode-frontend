@@ -422,4 +422,26 @@ body {
     .container {
         padding-top: 20px;
     }
+
+    .client-layout {
+        height: 100%;
+
+        .bg-fixed {
+
+            .fixed {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+        }
+
+        .bg-fix {
+            .fixed {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+        }
+
+    }
 }
