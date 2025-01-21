@@ -117,7 +117,7 @@ function App() {
             <div className="bg-fixed">
               <div className="fixed">
                 <i className="fa-solid fa-x" onClick={toggleLogin} />
-                <Login toggleLogin={toggleLogin} toggleRegister={toggleRegister} />
+                <Login toggleForgot={toggleForgot} toggleLogin={toggleLogin} toggleRegister={toggleRegister} />
               </div>
             </div>
           }

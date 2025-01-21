@@ -97,10 +97,7 @@ const RegisterMiddleware = (toggleRegister, toggleForgot) => {
         if (check === true) {
             let data = await forgotCheck(email, code, password)
             if (data.EC === 0) {
-                dispatch(Login(data))
                 toast.success(data.EM);
-                toggleRegister()
-                navigate("/")
                 toggleForgot()
             } else {
                 toast.error(data.EM);
