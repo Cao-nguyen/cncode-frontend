@@ -205,11 +205,11 @@
             height: 50px;
             border-top: #eee solid 1px;
             position: fixed;
+            z-index: 2;
             bottom: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-bottom: env(safe-area-inset-bottom);
 
             .bot-item {
                 color: #000;
