@@ -8,7 +8,7 @@ function Settings(props) {
     }, []);
 
     return (
-        <div className="admin-container">
+        <div className="admin">
             <div className="tabs">
                 <div className="tab">
                     <h3>Thông tin giới thiệu</h3>

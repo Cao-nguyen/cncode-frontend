@@ -12,6 +12,10 @@ body {
     padding-top: 60px;
 }
 
+.admin {
+    margin: 80px 20px;
+}
+
 // Hiển thị markdown
 .preview {
     width: 100%;
@@ -75,30 +79,34 @@ body {
 // Giao diện admin đóng
 .admin-layout {
     display: flex;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s ease-in-out;
 
     .sidebar {
         background-color: #fff;
         width: 5%;
         height: 100vh;
         padding-top: 100px;
-        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: width 0.5s ease-in-out;
         position: fixed;
         border-right: solid 1px black;
     }
 
     .body {
         width: 100%;
-        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
         margin-left: 5%;
 
         .headerAdmin {
-            width: 100%;
+            background-color: #fff;
+            position: fixed;
+            z-index: 100;
+            width: 95%;
+            transition: width 0.5s ease-in-out;
         }
 
         .bodyAdmin {
             height: 100vh;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s ease-in-out;
         }
     }
 }
@@ -107,7 +115,7 @@ body {
 .admin-layout-open {
     display: flex;
     min-height: 900px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s ease-in-out;
 
     .sidebar {
         background-color: #fff;
@@ -115,25 +123,30 @@ body {
         height: 100vh;
         border-right: solid 1px #1e1e2f;
         padding-top: 100px;
-        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: width 0.5s ease-in-out;
         position: fixed;
     }
 
     .body {
         width: 80%;
-        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
         margin-left: 20%;
 
         .headerAdmin {
-            width: 100%;
+            background-color: #fff;
+            position: fixed;
+            z-index: 100;
+            width: 80%;
+            transition: width 0.5s ease-in-out;
         }
 
         .bodyAdmin {
             height: 100vh;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s ease-in-out;
         }
     }
 }
+
 
 // Giao diện cho client
 .client-layout {
@@ -351,6 +364,10 @@ body {
 
         .body {
             height: 100vh;
+
+            .headerAdmin {
+                background-color: #31314d;
+            }
 
             .bodyAdmin {
                 height: 100vh;

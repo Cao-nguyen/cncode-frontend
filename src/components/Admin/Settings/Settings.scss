@@ -1,6 +1,4 @@
-.admin-container {
-    margin: 0px 20px;
-
+.admin {
     .tabs {
         display: grid;
         grid-template-columns: 30% 30% 30%;
@@ -24,8 +22,7 @@
 }
 
 .dark-mode {
-    .admin-container {
-        margin: 0px 20px;
+    .admin {
 
         .tabs {
             display: grid;

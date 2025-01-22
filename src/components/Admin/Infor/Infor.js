@@ -24,14 +24,16 @@ function Infor(props) {
 
     return (
         <div>
-            <div className="gioithieu">
+            <div className="admin">
                 <h1 className="text-center">Thông tin giới thiệu</h1>
                 <div className="border mb-3"></div>
                 <button className="btn btn-dark mb-2" onClick={back}>
+                    <i className="fa-solid fa-arrow-left"></i>
                     Trở về
                 </button>
                 <button className="btn btn-primary mb-2" onClick={saveInfor}>
-                    Lưu thông tin
+                    <i className="fa-solid fa-floppy-disk"></i>
+                    Cập nhật
                 </button>
                 <Editor value={Infor} onChange={setInfor} />
             </div>
