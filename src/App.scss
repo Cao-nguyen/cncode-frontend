@@ -1,3 +1,4 @@
+// Thẻ chung
 html,
 body {
     box-sizing: border-box;
@@ -6,143 +7,12 @@ body {
     overflow-x: hidden;
 }
 
+// Cấu hình cho client
 .container {
     padding-top: 60px;
 }
 
-.dark-mode {
-    background-color: #31314d;
-
-    .laptop {
-        .nav {
-            background-color: #31314d;
-
-            .nav-link {
-                color: #fff;
-            }
-
-            .custom-dropdown-toggle {
-                color: #fff;
-            }
-
-            .dropdown-menu {
-                background-color: #1e1e2f;
-
-                .dropdown-link {
-                    color: #eee;
-                }
-
-                .dropdown-link-logout {
-                    color: rgb(255, 86, 86);
-                    text-decoration: none;
-                }
-
-                .dropdown-item.active,
-                .dropdown-item:active {
-                    background-color: #1e1e2f;
-                }
-
-                .dropdown-item:hover {
-                    background-color: #1e1e2f;
-                }
-
-                .dropdown-divider {
-                    background-color: #eee;
-                }
-            }
-        }
-    }
-
-    footer {
-        background-color: #27293d;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    p,
-    i {
-        color: #fff;
-    }
-
-    a {
-        color: #c8cdff;
-    }
-
-    .admin-layout,
-    .admin-layout-open {
-        min-height: 900px;
-
-        .body {
-            height: 100vh;
-
-            .bodyAdmin {
-                height: 100vh;
-            }
-        }
-    }
-
-    .preview {
-        width: 100%;
-
-        p,
-        div {
-            color: #fff;
-        }
-
-        .al-left {
-            text-align: left;
-        }
-
-        .al-center {
-            text-align: center;
-        }
-
-        .al-right {
-            text-align: right;
-        }
-
-        .al-justify {
-            text-align: justify;
-        }
-
-        blockquote {
-            border-left: 4px solid #ccc;
-            padding-left: 10px;
-            font-style: italic;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #fff;
-        }
-
-        th,
-        td {
-            padding: 8px 12px;
-            text-align: left;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-            text-align: center;
-        }
-    }
-}
-
+// Hiển thị markdown
 .preview {
     width: 100%;
 
@@ -202,6 +72,7 @@ body {
     }
 }
 
+// Giao diện admin đóng
 .admin-layout {
     display: flex;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -222,20 +93,17 @@ body {
         margin-left: 5%;
 
         .headerAdmin {
-            width: 95%;
-            box-shadow: none;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: solid 1px black;
+            width: 100%;
         }
 
         .bodyAdmin {
             height: 100vh;
-            margin: 70px 0px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 }
 
+// Giao diện admin mở
 .admin-layout-open {
     display: flex;
     min-height: 900px;
@@ -257,20 +125,17 @@ body {
         margin-left: 20%;
 
         .headerAdmin {
-            width: 80%;
-            box-shadow: none;
-            border-bottom: #1e1e2f solid 1px;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
         }
 
         .bodyAdmin {
             height: 100vh;
-            margin: 70px 0px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 }
 
+// Giao diện cho client
 .client-layout {
     height: 100%;
 
@@ -418,6 +283,141 @@ body {
 
 }
 
+// Giao diện tối
+.dark-mode {
+    background-color: #31314d;
+
+    .laptop {
+        .nav {
+            background-color: #31314d;
+
+            .nav-link {
+                color: #fff;
+            }
+
+            .custom-dropdown-toggle {
+                color: #fff;
+            }
+
+            .dropdown-menu {
+                background-color: #1e1e2f;
+
+                .dropdown-link {
+                    color: #eee;
+                }
+
+                .dropdown-link-logout {
+                    color: rgb(255, 86, 86);
+                    text-decoration: none;
+                }
+
+                .dropdown-item.active,
+                .dropdown-item:active {
+                    background-color: #1e1e2f;
+                }
+
+                .dropdown-item:hover {
+                    background-color: #1e1e2f;
+                }
+
+                .dropdown-divider {
+                    background-color: #eee;
+                }
+            }
+        }
+    }
+
+    footer {
+        background-color: #27293d;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    i {
+        color: #fff;
+    }
+
+    a {
+        color: #c8cdff;
+    }
+
+    .admin-layout,
+    .admin-layout-open {
+        min-height: 900px;
+
+        .body {
+            height: 100vh;
+
+            .bodyAdmin {
+                height: 100vh;
+            }
+        }
+    }
+
+    .preview {
+        width: 100%;
+
+        p,
+        div {
+            color: #fff;
+        }
+
+        .al-left {
+            text-align: left;
+        }
+
+        .al-center {
+            text-align: center;
+        }
+
+        .al-right {
+            text-align: right;
+        }
+
+        .al-justify {
+            text-align: justify;
+        }
+
+        blockquote {
+            border-left: 4px solid #ccc;
+            padding-left: 10px;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #fff;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+    }
+}
+
+// Giao diện mobile
 @media screen and (max-width: 1190px) {
     .container {
         padding-top: 20px;

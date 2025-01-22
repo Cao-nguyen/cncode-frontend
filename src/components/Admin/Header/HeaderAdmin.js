@@ -13,7 +13,7 @@ function HeaderAdmin({ isDarkMode, toggleTheme, toggleOpen }) {
 
     return (
         <div>
-            <Nav className="headerAdmin" variant="pills">
+            <Nav className="d-flex headerAdmin" variant="pills">
                 <i className="fa-solid fa-bars" onClick={toggleOpen}></i>
                 <div className="d-flex nav-item">
                     <Nav.Item className="nav-links">

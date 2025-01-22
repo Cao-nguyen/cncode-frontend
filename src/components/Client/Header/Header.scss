@@ -209,6 +209,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding-bottom: env(safe-area-inset-bottom);
 
             .bot-item {
                 color: #000;
