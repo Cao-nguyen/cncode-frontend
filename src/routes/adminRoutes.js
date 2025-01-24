@@ -6,9 +6,10 @@ import Infor from "../components/Admin/Infor/Infor";
 import Ssl from "../components/Admin/Ssl/Ssl";
 import Themes from "../components/Admin/Themes/Themes"
 import News from "../components/Admin/News/News"
+import CreateNews from "../components/Admin/News/Create";
 
 export const adminRoutesValidate = [
-    '/admin/dashboard', '/admin/course', '/admin/try', '/admin/forum', '/admin/blog', '/admin/events', '/admin/news', '/admin/themes', '/admin/settings', '/admin/settings/infor', '/admin/settings/ssl'
+    '/admin/dashboard', '/admin/course', '/admin/try', '/admin/forum', '/admin/blog', '/admin/events', '/admin/news', '/admin/news/create', '/admin/themes', '/admin/settings', '/admin/settings/infor', '/admin/settings/ssl'
 ];
 
 // Component bảo vệ route
@@ -28,6 +29,7 @@ const AdminRoutes = (props) => {
             <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}></Route>
 
             <Route path="/admin/news" element={<ProtectedRoute><News /></ProtectedRoute>}></Route>
+            <Route path="/admin/news/create" element={<ProtectedRoute><CreateNews /></ProtectedRoute>}></Route>
 
             <Route path="/admin/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>}></Route>
             <Route path="/admin/settings/infor" element={<ProtectedRoute><Infor /></ProtectedRoute>}></Route>
