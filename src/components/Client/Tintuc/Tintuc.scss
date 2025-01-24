@@ -1,0 +1,57 @@
+.news {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    justify-content: space-between;
+
+    .news-item {
+        background-color: #eee;
+        border-radius: 10px;
+        text-align: justify;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        h3 {
+            padding: 10px 20px 5px 20px;
+            font-size: 20px;
+            color: #000;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4;
+            -webkit-line-clamp: 2;
+        }
+
+        p {
+            padding: 0px 20px;
+            font-size: 18px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4;
+            -webkit-line-clamp: 3;
+            color: #000;
+        }
+
+        .news-text {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                font-size: 15px;
+                font-weight: bold;
+                color: blue;
+            }
+        }
+
+        .btn {
+            margin: 0px 0px 20px 17px;
+        }
+    }
+}

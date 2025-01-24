@@ -5,7 +5,7 @@ import Footer from './components/Client/Footer/Footer';
 import AppRoutes, { validRoutes } from "./routes/appRoutes";
 import Tab from "./components/Admin/Tab/Tab";
 import HeaderAdmin from "./components/Admin/Header/HeaderAdmin";
-import AdminRoutes, { adminRoutesValidate } from "./routes/adminRoutes";
+import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
 import { ToastContainer } from "react-toastify";
 import Login from "./components/Client/Login/Login";
 import Register from "./components/Client/Register/Register";
@@ -25,8 +25,8 @@ import './App.scss';
 
 function App() {
   const location = useLocation();
+  const isAdmin = isAdminRoute(location.pathname);
   const hideHeader = !validRoutes.includes(location.pathname);
-  const isAdmin = adminRoutesValidate.includes(location.pathname);
 
   const [login, setLogin] = useState(false)
   const toggleLogin = () => {

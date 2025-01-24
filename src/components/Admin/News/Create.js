@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditorNews from '../../Service/EditorNew'
 import './News.scss'
 import { NewsCreateValidate } from '../../../validates/NewsCreateValidate';
 import { CreateNew } from '../../../services/adminServer';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import Editor from '../../Service/Editor'
 
 function Create(props) {
     const navigate = useNavigate()
@@ -14,10 +14,7 @@ function Create(props) {
         navigate(-1)
     }
 
-
-    const [id, setId] = useState()
     const [title, setTitle] = useState()
-    const [slug, setSlug] = useState()
     const [isChecked, setIsChecked] = useState(false)
     const [show, setShow] = useState()
     const [description, setDescription] = useState()
@@ -27,11 +24,6 @@ function Create(props) {
 
     const handleActives = () => {
         setIsChecked(!isChecked)
-    }
-
-    const [editor, setEditor] = useState(false)
-    const handleEditor = () => {
-        setEditor(!editor)
     }
 
     const handleSubmitNews = async () => {
@@ -56,11 +48,11 @@ function Create(props) {
                 <i className="fa-solid fa-arrow-left" onClick={handleBack}></i>
             </div>
             <div className="form-group grid">
-                <input className="form-control" placeholder="Id bài viết*" disabled value={id} onChange={(e) => { setId(e.target.value) }}></input>
+                <input className="form-control" placeholder="Id bài viết*" disabled></input>
                 <input className="form-control" placeholder="Tiêu đề bài viết*" value={title} onChange={(e) => setTitle(e.target.value)}></input>
             </div>
             <div className="form-group grid-two">
-                <input className="form-control" placeholder="Slug*" disabled value={slug} onChange={(e) => setSlug(e.target.value)}></input>
+                <input className="form-control" placeholder="Mô tả ngắn*" value={description} onChange={(e) => setDescription(e.target.value)}></input>
                 <div className="form-control">
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value={isChecked} checked={isChecked} onChange={handleActives} />
@@ -68,21 +60,13 @@ function Create(props) {
                     </div>
                 </div>
                 <select value={show} onChange={(e) => setShow(e.target.value)} class="form-control form-select" aria-label="Default select example">
-                    <option selected>Hiển thị</option>
-                    <option value={true}>Công khai</option>
-                    <option value={false}>Riêng tư</option>
+                    <option value="" disabled>Chọn hiển thị</option>
+                    <option value="true">Công khai</option>
+                    <option value="false">Riêng tư</option>
                 </select>
             </div>
-            <div className="form-group">
-                <textarea className="form-control" placeholder="Mô tả ngắn*" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            </div>
-            <div className="form-group form-content" onClick={handleEditor}>
-                <div onClick={handleEditor} className="form-control">
-                    <p>Nội dung*</p>
-                </div>
-                <div className="edit" onClick={handleEditor}>
-                    <i className="fa-solid fa-pen-to-square"></i>
-                </div>
+            <div className="form-content" >
+                <Editor value={content} onChange={setContent} />
             </div>
             <div className="btn-control btn btn-primary" onClick={handleSubmitNews}>
                 {isLoading ? (
@@ -93,12 +77,6 @@ function Create(props) {
                     "Đăng bài"
                 )}
             </div>
-
-            {editor &&
-                <div className="over-play">
-                    <EditorNews value={content} onChange={setContent} handleEditor={handleEditor} />
-                </div>
-            }
         </div>
     );
 }

@@ -1,4 +1,5 @@
 .admin {
+
     .admin-news {
         margin: 20px 0px;
 
@@ -38,13 +39,14 @@
             }
 
             .id {
-                width: 10%;
+                width: 15%;
                 text-align: center;
                 text-transform: uppercase;
+                padding-left: 10px;
             }
 
             .title {
-                width: 50%;
+                width: 45%;
             }
 
             .right {
@@ -74,6 +76,7 @@
                 .dropdown {
                     background-color: #dcdcdc;
                     position: absolute;
+                    z-index: 100;
                     margin-left: -120px;
                     margin-top: 5px;
                     width: 150px;
@@ -91,6 +94,16 @@
                         }
                     }
                 }
+            }
+
+            .id,
+            .title,
+            .right,
+            .actives,
+            .show {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
     }
@@ -132,47 +145,7 @@
     }
 
     .form-content {
-        position: relative;
-
-        .form-control {
-            height: 100px;
-
-            p {
-                color: #696969;
-            }
-        }
-
-        &:hover {
-            .form-control {
-                cursor: pointer;
-                height: 100px;
-
-                p {
-                    color: #696969;
-                }
-            }
-
-            .edit {
-                display: block;
-            }
-        }
-
-        .edit {
-            font-size: 18px;
-            cursor: pointer;
-            transform: translate(500px, -65px);
-            position: absolute;
-            display: none;
-        }
-    }
-
-    .over-play {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        z-index: 1000;
+        margin-top: 20px;
     }
 }
 
@@ -182,7 +155,11 @@
         .admin-content {
             .admin-content-item {
                 background-color: #454568;
-                border-bottom: #454568 solid 1px;
+                border-bottom: #5e5e7c solid 1px;
+
+                &:last-child {
+                    border: none;
+                }
 
                 .action {
                     .dropdown {

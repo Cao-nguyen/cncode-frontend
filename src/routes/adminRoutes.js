@@ -7,10 +7,20 @@ import Ssl from "../components/Admin/Ssl/Ssl";
 import Themes from "../components/Admin/Themes/Themes"
 import News from "../components/Admin/News/News"
 import CreateNews from "../components/Admin/News/Create";
+import EditNews from "../components/Admin/News/Edit";
 
 export const adminRoutesValidate = [
-    '/admin/dashboard', '/admin/course', '/admin/try', '/admin/forum', '/admin/blog', '/admin/events', '/admin/news', '/admin/news/create', '/admin/themes', '/admin/settings', '/admin/settings/infor', '/admin/settings/ssl'
+    '/admin/*',
 ];
+
+export const isAdminRoute = (pathname) => {
+    return adminRoutesValidate.some(route => {
+        if (route.includes('*')) {
+            return pathname.startsWith('/admin');
+        }
+        return pathname === route;
+    });
+};
 
 // Component bảo vệ route
 const ProtectedRoute = ({ children }) => {
@@ -30,6 +40,7 @@ const AdminRoutes = (props) => {
 
             <Route path="/admin/news" element={<ProtectedRoute><News /></ProtectedRoute>}></Route>
             <Route path="/admin/news/create" element={<ProtectedRoute><CreateNews /></ProtectedRoute>}></Route>
+            <Route path="/admin/news/edit/:id" element={<ProtectedRoute><EditNews /></ProtectedRoute>}></Route>
 
             <Route path="/admin/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>}></Route>
             <Route path="/admin/settings/infor" element={<ProtectedRoute><Infor /></ProtectedRoute>}></Route>
