@@ -42,6 +42,7 @@ function Create(props) {
             let data = await CreateNew(title, isChecked, show, description, content, fullName)
             if (data && data.EC === 0) {
                 toast.success(data.EM)
+                navigate("/admin/news")
             } else {
                 toast.error(data.EM)
             }
