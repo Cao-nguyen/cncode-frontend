@@ -1,10 +1,11 @@
 .news {
-    margin-top: 40px;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: 32% 32% 32%;
     justify-content: space-between;
 
     .news-item {
+        margin-top: 30px;
         background-color: #eee;
         border-radius: 10px;
         text-align: justify;

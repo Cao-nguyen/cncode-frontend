@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
 import React, { useState } from 'react';
 import Header from './components/Client/Header/Header';
 import Footer from './components/Client/Footer/Footer';
@@ -79,6 +79,10 @@ function App() {
     <div className={isDarkMode ? 'dark-mode' : ''}>
       {isAdmin ? (
         <div className={open ? 'admin-layout-open' : 'admin-layout'}>
+          <div className="phoneAdmin">
+            <h1>Trang Admin không thể sử dụng trên điện thoại. Vui lòng chuyển sang thiết bị khác.</h1>
+            <Link className="btn btn-primary" to="/">Trở về</Link>
+          </div>
           <div className="sidebar">
             <Tab />
           </div>

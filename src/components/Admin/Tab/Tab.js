@@ -69,6 +69,13 @@ const Tab = () => {
                 <div className="tab-link">Giao diện</div>
             </NavLink>
 
+            <NavLink className="tab-item" to='/admin/bins'>
+                <div className="tab-icon">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <div className="tab-link">Thùng rác</div>
+            </NavLink>
+
             <NavLink className="tab-item" to='/admin/settings'>
                 <div className="tab-icon">
                     <i className="fa-solid fa-gear"></i>

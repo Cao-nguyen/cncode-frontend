@@ -10,7 +10,7 @@ function Dashboard() {
 
     return (
         <>
-            <div className="text-center">
+            <div className="admin text-center">
                 <h1>Trang quản trị</h1>
                 <p>Chào mừng {fullName} đã quay trở lại với trang quản trị.</p>
             </div>
