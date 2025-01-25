@@ -107,7 +107,7 @@ function Edit(props) {
                 </select>
             </div>
             <div className="form-content">
-                <Editor value={currentNews.content} onChange={(e) => { setCurrentNews({ ...currentNews, content: e.target.value }); setIsEdited(true) }} />
+                <Editor value={currentNews.content} onChange={(newContent) => { setCurrentNews({ ...currentNews, content: newContent }); setIsEdited(true) }} />
             </div>
             <div className="btn-control btn btn-primary" onClick={handleEdit}>
                 {isLoading ? (
