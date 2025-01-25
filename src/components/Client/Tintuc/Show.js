@@ -40,7 +40,7 @@ function Show(props) {
                                 <p>Người đăng: {currentNews.fullName}</p>
                                 <p>
                                     <i className="fa-solid fa-calendar-days"></i>
-                                    Ngày đăng: {moment(currentNews.createdAt).format("DD/MM/YYYY - hh:mm:ss")}
+                                    Ngày đăng: {moment(currentNews.createdAt).format("DD/MM/YYYY - HH:mm:ss")}
                                 </p>
                             </div>
                         </div>
