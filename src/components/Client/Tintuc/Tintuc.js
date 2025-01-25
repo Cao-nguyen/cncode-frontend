@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { ShowNew } from '../../../services/adminServer';
+import { ShowNewClient } from '../../../services/clientServer';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './Tintuc.scss'
 
 function Tintuc(props) {
+
     const [news, setNews] = useState([])
 
     useEffect(() => {
         const newsData = async () => {
-            const data = await ShowNew()
+            const data = await ShowNewClient()
             setNews(data.DT)
         }
 
@@ -27,7 +29,9 @@ function Tintuc(props) {
                                 <p>{item.fullName}</p>
                                 <p>{moment(item.createdAt).format('DD/MM/YYYY')}</p>
                             </div>
-                            <div className="btn btn-primary">Xem thêm</div>
+                            <div className="btn btn-primary">
+                                <Link to={`/tintuc/${item.slug}`}>Xem thêm</Link>
+                            </div>
                         </div>
                     ))}
                 </div>

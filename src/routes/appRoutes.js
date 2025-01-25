@@ -7,11 +7,12 @@ import Diendan from "../components/Client/Diendan/Diendan"
 import Blog from "../components/Client/Blog/Blog"
 import Sukien from "../components/Client/Sukien/Sukien"
 import Tintuc from "../components/Client/Tintuc/Tintuc"
+import tintucShow from "../components/Client/Tintuc/Show"
 import { useSelector } from "react-redux";
 import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 
 export const validRoutes = [
-    '/', '/gioithieu', '/khoahoc', '/luyentap', '/diendan', '/blog', '/sukien', '/tintuc', '/timkiem',
+
 ];
 
 // Component bảo vệ route
@@ -37,6 +38,7 @@ const AppRoutes = (props) => {
             <Route path="/blog" Component={Blog}></Route>
             <Route path="/sukien" Component={Sukien}></Route>
             <Route path="/tintuc" Component={Tintuc}></Route>
+            <Route path="/tintuc/:slug" Component={tintucShow}></Route>
             <Route path="/me/khuvuon" element={<ProtectedRoute><Khuvuon /></ProtectedRoute>}></Route>
         </Routes>
     );

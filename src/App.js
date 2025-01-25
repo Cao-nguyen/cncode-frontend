@@ -26,7 +26,7 @@ import './App.scss';
 function App() {
   const location = useLocation();
   const isAdmin = isAdminRoute(location.pathname);
-  const hideHeader = !validRoutes.includes(location.pathname);
+  const hideHeader = validRoutes.includes(location.pathname);
 
   const [login, setLogin] = useState(false)
   const toggleLogin = () => {

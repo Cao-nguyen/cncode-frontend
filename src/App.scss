@@ -5,6 +5,29 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 2px;
+        cursor: auto;
+
+        &:hover {
+            background: #555;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+        background: #333;
+    }
 }
 
 // Cấu hình cho client
@@ -12,13 +35,16 @@ body {
     padding-top: 60px;
 }
 
-.admin {
-    margin: 80px 20px;
-}
-
 // Hiển thị markdown
 .preview {
     width: 100%;
+
+    ul {
+        li {
+            font-size: 18px;
+            color: #000;
+        }
+    }
 
     p,
     div {
@@ -76,77 +102,93 @@ body {
     }
 }
 
-// Giao diện admin đóng
 .admin-layout {
     display: flex;
-    transition: all 0.5s ease-in-out;
+    min-height: 100vh;
+    overflow: hidden;
 
     .sidebar {
-        background-color: #fff;
+        padding-top: 100px;
         width: 5%;
         height: 100vh;
-        padding-top: 100px;
-        transition: width 0.5s ease-in-out;
         position: fixed;
-        border-right: solid 1px black;
+        top: 0;
+        left: 0;
+        transition: width 0.4s ease-in-out;
+        overflow: hidden;
+        border-right: #000 solid 1px;
     }
 
     .body {
-        width: 100%;
-        transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+        flex: 1;
         margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+        transition: margin-left 0.4s ease-in-out;
 
         .headerAdmin {
+            border-bottom: #000 solid 1px;
+            width: calc(100% - 5%);
             background-color: #fff;
             position: fixed;
-            z-index: 100;
-            width: 95%;
-            transition: width 0.5s ease-in-out;
+            height: 60px;
+            padding: 0px 10px;
+            z-index: 1;
+            transition: width 0.4s ease-in-out; // Đảm bảo header cũng điều chỉnh mượt
         }
 
         .bodyAdmin {
-            height: 100vh;
-            transition: all 0.5s ease-in-out;
+            flex: 1;
+            padding: 10px 20px;
+            overflow-y: auto;
+            margin-top: 60px;
         }
     }
 }
 
-// Giao diện admin mở
 .admin-layout-open {
     display: flex;
-    min-height: 900px;
-    transition: all 0.5s ease-in-out;
+    min-height: 100vh;
+    overflow: hidden;
 
     .sidebar {
-        background-color: #fff;
+        padding-top: 100px;
         width: 20%;
         height: 100vh;
-        border-right: solid 1px #1e1e2f;
-        padding-top: 100px;
-        transition: width 0.5s ease-in-out;
         position: fixed;
+        top: 0;
+        left: 0;
+        transition: width 0.4s ease-in-out;
+        overflow: hidden;
+        border-right: #000 solid 1px;
     }
 
     .body {
-        width: 80%;
-        transition: width 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+        flex: 1;
         margin-left: 20%;
+        display: flex;
+        flex-direction: column;
+        transition: margin-left 0.4s ease-in-out;
 
         .headerAdmin {
+            border-bottom: #000 solid 1px;
+            width: calc(100% - 20%);
             background-color: #fff;
             position: fixed;
-            z-index: 100;
-            width: 80%;
-            transition: width 0.5s ease-in-out;
+            height: 60px;
+            padding: 0px 10px;
+            z-index: 1;
+            transition: width 0.4s ease-in-out;
         }
 
         .bodyAdmin {
-            height: 100vh;
-            transition: all 0.5s ease-in-out;
+            flex: 1;
+            padding: 10px 20px;
+            overflow-y: auto;
+            margin-top: 60px;
         }
     }
 }
-
 
 // Giao diện cho client
 .client-layout {
@@ -358,25 +400,52 @@ body {
         color: #c8cdff;
     }
 
-    .admin-layout,
-    .admin-layout-open {
-        min-height: 900px;
+    .admin-layout {
+        .sidebar {
+            border-right: #424266 solid 1px;
+            transition: width 0.4s ease-in-out;
+        }
 
         .body {
-            height: 100vh;
+            transition: margin-left 0.4s ease-in-out;
+
+            .headerAdmin {
+                border-bottom: #424266 solid 1px;
+                width: calc(100% - 5%);
+                background-color: #31314d;
+                transition: width 0.4s ease-in-out;
+            }
+        }
+    }
+
+    .admin-layout-open {
+
+        .sidebar {
+            transition: width 0.4s ease-in-out;
+            border-right: #424266 solid 1px;
+        }
+
+        .body {
+            transition: margin-left 0.4s ease-in-out;
 
             .headerAdmin {
                 background-color: #31314d;
-            }
-
-            .bodyAdmin {
-                height: 100vh;
+                border-bottom: #424266 solid 1px;
+                width: calc(100% - 20%);
+                transition: width 0.4s ease-in-out;
             }
         }
     }
 
     .preview {
         width: 100%;
+
+        ul {
+            li {
+                font-size: 18px;
+                color: #fff;
+            }
+        }
 
         p,
         div {

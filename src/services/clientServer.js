@@ -1,5 +1,11 @@
 import axios from "axios"
 
+// API Tin tức
+export const ShowNewClient = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/api/v1/news/client/show`);
+    return response.data
+}
+
 // API xác thực
 export const checkCode = async (email) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/v1/xacthuc`, { email });

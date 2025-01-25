@@ -8,10 +8,10 @@ import './News.scss'
 
 function Edit(props) {
     const navigate = useNavigate()
-
     const { id } = useParams()
     const [news, setNews] = useState([])
     const [currentNews, setCurrentNews] = useState({})
+    const [isEdited, setIsEdited] = useState(false)
 
     useEffect(() => {
         const newsData = async () => {
@@ -23,6 +23,12 @@ function Edit(props) {
     }, [])
 
     const handleBack = () => {
+        if (isEdited) {
+            const confirmExit = window.confirm("Bạn có thay đổi chưa lưu. Bạn muốn rời khỏi mà không lưu không?");
+            if (!confirmExit) {
+                return;
+            }
+        }
         navigate(-1)
     }
 
@@ -60,6 +66,7 @@ function Edit(props) {
             toast.error(data.EM);
         }
         setIsLoading(false);
+        setIsEdited(false);
     };
 
     return (
@@ -69,14 +76,14 @@ function Edit(props) {
             </div>
             <div className="form-group grid">
                 <input className="form-control" placeholder="Id bài viết*" disabled value={currentNews._id}></input>
-                <input className="form-control" placeholder="Tiêu đề bài viết*" value={currentNews.title || ''} onChange={(e) => setCurrentNews({ ...currentNews, title: e.target.value })}></input>
+                <input className="form-control" placeholder="Tiêu đề bài viết*" value={currentNews.title || ''} onChange={(e) => { setCurrentNews({ ...currentNews, title: e.target.value }); setIsEdited(true) }}></input>
             </div>
             <div className="form-group grid">
-                <input className="form-control" placeholder="tác giả*" disabled value={currentNews.fullName}></input>
-                <input className="form-control" placeholder="slug*" value={currentNews.slug || ''} onChange={(e) => setCurrentNews({ ...currentNews, slug: e.target.value })}></input>
+                <input className="form-control" placeholder="Tác giả*" disabled value={currentNews.fullName}></input>
+                <input className="form-control" placeholder="Slug*" value={currentNews.slug || ''} onChange={(e) => { setCurrentNews({ ...currentNews, slug: e.target.value }); setIsEdited(true) }}></input>
             </div>
             <div className="form-group grid-two">
-                <input className="form-control" placeholder="Mô tả ngắn*" value={currentNews.description} onChange={(e) => setCurrentNews({ ...currentNews, description: e.target.value })}></input>
+                <input className="form-control" placeholder="Mô tả ngắn*" value={currentNews.description} onChange={(e) => { setCurrentNews({ ...currentNews, description: e.target.value }); setIsEdited(true) }}></input>
                 <div className="form-control">
                     <div className="form-check form-switch">
                         <input
@@ -84,14 +91,14 @@ function Edit(props) {
                             type="checkbox"
                             id="flexSwitchCheckDefault"
                             checked={currentNews.isChecked}
-                            onChange={(e) => setCurrentNews({ ...currentNews, isChecked: e.target.checked })}
+                            onChange={(e) => { setCurrentNews({ ...currentNews, isChecked: e.target.checked }); setIsEdited(true) }}
                         />
                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{currentNews.isChecked ? "Phát hành" : "Bản nháp"}</label>
                     </div>
                 </div>
                 <select
                     value={currentNews.show ?? ''}
-                    onChange={(e) => setCurrentNews({ ...currentNews, show: e.target.value === 'true' })}
+                    onChange={(e) => { setCurrentNews({ ...currentNews, show: e.target.value === 'true' }); setIsEdited(true) }}
                     className="form-control form-select"
                 >
                     <option value="" disabled>Chọn hiển thị</option>
@@ -99,8 +106,8 @@ function Edit(props) {
                     <option value="false">Riêng tư</option>
                 </select>
             </div>
-            <div className="form-content" >
-                <Editor value={currentNews.content} onChange={(e) => setCurrentNews({ ...currentNews, content: e.target.value })} />
+            <div className="form-content">
+                <Editor value={currentNews.content} onChange={(e) => { setCurrentNews({ ...currentNews, content: e.target.value }); setIsEdited(true) }} />
             </div>
             <div className="btn-control btn btn-primary" onClick={handleEdit}>
                 {isLoading ? (

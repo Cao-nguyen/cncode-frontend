@@ -8,6 +8,7 @@ import Themes from "../components/Admin/Themes/Themes"
 import News from "../components/Admin/News/News"
 import CreateNews from "../components/Admin/News/Create";
 import EditNews from "../components/Admin/News/Edit";
+import ShowNews from '../components/Admin/News/Show'
 
 export const adminRoutesValidate = [
     '/admin/*',
@@ -41,6 +42,7 @@ const AdminRoutes = (props) => {
             <Route path="/admin/news" element={<ProtectedRoute><News /></ProtectedRoute>}></Route>
             <Route path="/admin/news/create" element={<ProtectedRoute><CreateNews /></ProtectedRoute>}></Route>
             <Route path="/admin/news/edit/:id" element={<ProtectedRoute><EditNews /></ProtectedRoute>}></Route>
+            <Route path="/admin/news/show/:id" element={<ProtectedRoute><ShowNews /></ProtectedRoute>}></Route>
 
             <Route path="/admin/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>}></Route>
             <Route path="/admin/settings/infor" element={<ProtectedRoute><Infor /></ProtectedRoute>}></Route>

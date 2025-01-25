@@ -16,6 +16,14 @@ export const EditNew = async (id, title, description, isChecked, show, content) 
     return response.data
 };
 
+// [PACTH] EditNew
+export const DeleteNew = async (id) => {
+    const response = await axios.patch(`${process.env.REACT_APP_BACKEND}/api/v1/news/delete/${id}`, {
+        id
+    });
+    return response.data
+};
+
 // [GET] ShowNew
 export const ShowNew = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BACKEND}/api/v1/news/show`);

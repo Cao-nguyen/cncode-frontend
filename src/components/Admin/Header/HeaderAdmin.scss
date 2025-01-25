@@ -1,8 +1,7 @@
-.headerAdmin {
-    align-items: center;
-    border-bottom: solid 1px;
-    height: 60px;
+.navAdmin {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .fa-solid {
         color: #000;
@@ -11,7 +10,14 @@
     }
 
     .fa-bars {
+        margin-top: 8px;
         margin-left: 20px;
+    }
+
+    .fa-bell,
+    .fa-sun,
+    .fa-moon {
+        margin-top: 10px;
     }
 
     .custom-dropdown-toggle {
@@ -19,6 +25,7 @@
         cursor: pointer;
         color: #000;
         text-align: left;
+        margin-top: 8px;
         margin-right: 20px;
         margin-left: 15px;
     }
