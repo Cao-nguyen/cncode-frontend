@@ -52,23 +52,25 @@ function Show(props) {
                             <h3>{currentNews.title}</h3>
                             <p className="description">{currentNews.description}</p>
                             <div className="tintuc_grid">
-                                {currentNews.emotion.some(emotion => emotion.name === fullName)
-                                    ? (
-                                        <p onClick={handleUnlove}>
-                                            <i className="fa-solid fa-heart"></i>
-                                            {currentNews.emotion.length}
-                                        </p>
-                                    ) : (
-                                        <p onClick={handleLove}>
-                                            <i className="fa-regular fa-heart"></i>
-                                            {currentNews.emotion.length}
-                                        </p>
-                                    )
-                                }
-                                <p>
-                                    <i className="fa-regular fa-comment"></i>
-                                    0
-                                </p>
+                                <div className="tintuc_grid_2">
+                                    {currentNews.emotion.some(emotion => emotion.name === fullName)
+                                        ? (
+                                            <p onClick={handleUnlove}>
+                                                <i className="fa-solid fa-heart"></i>
+                                                {currentNews.emotion.length}
+                                            </p>
+                                        ) : (
+                                            <p onClick={handleLove}>
+                                                <i className="fa-regular fa-heart"></i>
+                                                {currentNews.emotion.length}
+                                            </p>
+                                        )
+                                    }
+                                    <p>
+                                        <i className="fa-regular fa-comment"></i>
+                                        0
+                                    </p>
+                                </div>
                                 <p>Người đăng: {currentNews.fullName}</p>
                                 <p>
                                     <i className="fa-solid fa-calendar-days"></i>
