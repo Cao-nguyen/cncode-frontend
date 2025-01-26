@@ -11,6 +11,10 @@ import { getInforApi } from '../../../services/adminServer';
 import './gioithieu.scss';
 
 function Gioithieu() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     const { data: Infor } = useQuery({
         queryKey: ['Infor'],
         queryFn: getInforApi,

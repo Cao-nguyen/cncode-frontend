@@ -6,6 +6,10 @@ import './Tintuc.scss'
 import { useQuery } from '@tanstack/react-query';
 
 function Tintuc(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     const [isVisible, setIsVisible] = useState(false);
 
     const { data: news } = useQuery({
