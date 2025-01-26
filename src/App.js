@@ -24,6 +24,7 @@ import trang from './assets/Trungthu/trang.png'
 import './App.scss';
 import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "./services/adminServer";
+import { ShowNewClient } from "./services/clientServer";
 
 function App() {
   const location = useLocation();
@@ -77,10 +78,9 @@ function App() {
     { src: trang, alt: "", className: "trungthu3" },
   ]
 
-  const { data: Infor, isLoading, error } = useQuery({
-    queryKey: ['Infor'],
-    queryFn: getInforApi,
-  });
+  const useApi = (queryKey, queryFn) => useQuery({ queryKey, queryFn });
+  useApi(['Infor'], getInforApi);
+  useApi(['news'], ShowNewClient);
 
   return (
     <div className={isDarkMode ? 'dark-mode' : ''}>
