@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { marked } from 'marked';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-twilight.css';
@@ -6,36 +6,25 @@ import 'prismjs/components/prism-python.min.js';
 import 'prismjs/components/prism-javascript.min.js';
 import 'prismjs/components/prism-cshtml.min.js';
 import 'prismjs/components/prism-css.min.js';
-import { useQuery } from '@tanstack/react-query'; // Đảm bảo đã cài version v5
+import { useQuery } from '@tanstack/react-query'; // React Query
 import { getInforApi } from '../../../services/adminServer';
 import './gioithieu.scss';
 
+// Component để render dữ liệu
 function Gioithieu() {
-    const { data: Infor, isLoading, error } = useQuery({
-        queryKey: ['Infor'], // Thay thế 'queryKey' cho đúng với React Query v5
-        queryFn: getInforApi, // Hàm gọi API
+    // Sử dụng Suspense để tối ưu việc hiển thị khi dữ liệu đang tải
+    const { data: Infor } = useQuery({
+        queryKey: ['Infor'],
+        queryFn: getInforApi,
+        suspense: true, // Bật Suspense cho query này
     });
 
-    console.log(Infor)
-
-    // Highlight code với Prism.js khi dữ liệu được tải thành công
-    React.useEffect(() => {
+    // Highlight code khi dữ liệu đã tải
+    useEffect(() => {
         if (Infor) {
             Prism.highlightAll();
         }
     }, [Infor]);
-
-    if (isLoading) {
-        return (
-            <h2 className="pt-5 text-center text-primary">Đang tải dữ liệu...</h2>
-        );
-    }
-
-    if (error) {
-        return (
-            <h2 className="pt-5 text-center text-danger">Lỗi khi tải dữ liệu</h2>
-        );
-    }
 
     return (
         <div className="container pt-lg-5">
@@ -51,4 +40,13 @@ function Gioithieu() {
     );
 }
 
-export default Gioithieu;
+// Component chính với Suspense wrapper
+function GioithieuWrapper() {
+    return (
+        <Suspense fallback={<h2 className="pt-5 text-center text-primary">Đang tải dữ liệu...</h2>}>
+            <Gioithieu />
+        </Suspense>
+    );
+}
+
+export default GioithieuWrapper;
