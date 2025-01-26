@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ShowNewClient } from '../../../services/clientServer';
+import { ShowNewClient, NewsLike } from '../../../services/clientServer';
 import { useParams } from 'react-router-dom';
 import { marked } from 'marked';
 import moment from 'moment';
 import './Tintuc.scss'
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function Show(props) {
     const { slug } = useParams()
@@ -28,6 +30,24 @@ function Show(props) {
         }
     }, [slug, news])
 
+    const fullName = useSelector(state => state.user.account.fullName);
+
+    const handleLove = async () => {
+        const data = await NewsLike(fullName, slug);
+
+        if (data && data.EC === 0) {
+            toast.success(data.EM);
+            setCurrentNews({
+                ...currentNews,
+                like: currentNews.like + 1
+            });
+        } else {
+            toast.error(data.EM || "Đã xảy ra lỗi!");
+        }
+    };
+
+    console.log(currentNews)
+
     return (
         <div>
             <div className="container">
@@ -37,6 +57,23 @@ function Show(props) {
                             <h3>{currentNews.title}</h3>
                             <p className="description">{currentNews.description}</p>
                             <div className="tintuc_grid">
+                                {currentNews.emotion.some(emotion => emotion.name === fullName)
+                                    ? (
+                                        <p>
+                                            <i className="fa-solid fa-heart"></i>
+                                            {currentNews.like}
+                                        </p>
+                                    ) : (
+                                        <p onClick={handleLove}>
+                                            <i className="fa-regular fa-heart"></i>
+                                            {currentNews.like}
+                                        </p>
+                                    )
+                                }
+                                <p>
+                                    <i className="fa-regular fa-comment"></i>
+                                    {currentNews.like}
+                                </p>
                                 <p>Người đăng: {currentNews.fullName}</p>
                                 <p>
                                     <i className="fa-solid fa-calendar-days"></i>
