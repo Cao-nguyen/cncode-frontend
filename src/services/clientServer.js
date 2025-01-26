@@ -1,5 +1,13 @@
 import axios from "axios"
 
+// API Tin tức unlike
+export const NewsUnlike = async (fullName, slug) => {
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/v1/news/client/unlike`, {
+        fullName, slug
+    });
+    return response.data
+}
+
 // API Tin tức like
 export const NewsLike = async (fullName, slug) => {
     const response = await axios.patch(`${process.env.REACT_APP_BACKEND}/api/v1/news/client/like`, {

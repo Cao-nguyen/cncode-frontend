@@ -22,7 +22,7 @@ function Tintuc(props) {
     return (
         <div className="container">
             <div className={`news fade-in ${isVisible ? 'visible' : ''}`}>
-                {news.DT.map(item => (
+                {news?.DT?.map(item => (
                     <div className="news-item" key={item._id}>
                         <h3>{item.title}</h3>
                         <p>{item.description}</p>
