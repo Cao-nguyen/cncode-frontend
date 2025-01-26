@@ -22,6 +22,8 @@ import banhtrungthu from './assets/Trungthu/banhtrungthu.png'
 import thongoc from './assets/Trungthu/thongoc.png'
 import trang from './assets/Trungthu/trang.png'
 import './App.scss';
+import { useQuery } from "@tanstack/react-query";
+import { getInforApi } from "./services/adminServer";
 
 function App() {
   const location = useLocation();
@@ -74,6 +76,11 @@ function App() {
     { src: thongoc, alt: "", className: "trungthu2" },
     { src: trang, alt: "", className: "trungthu3" },
   ]
+
+  const { data: Infor, isLoading, error } = useQuery({
+    queryKey: ['Infor'],
+    queryFn: getInforApi,
+  });
 
   return (
     <div className={isDarkMode ? 'dark-mode' : ''}>
