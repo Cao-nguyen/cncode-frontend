@@ -11,7 +11,7 @@ import { getInforApi } from '../../../services/adminServer';
 import './gioithieu.scss';
 
 function Gioithieu() {
-    const { data: Infor, isLoading, error } = useQuery({
+    const { data: Infor } = useQuery({
         queryKey: ['Infor'],
         queryFn: getInforApi,
     });
@@ -25,27 +25,13 @@ function Gioithieu() {
         }
     }, [Infor]);
 
-    if (isLoading) {
-        return (
-            <div className="pt-5">
-                <h2 className="pt-5 text-center text-primary">Đang tải dữ liệu...</h2>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <h2 className="pt-5 text-center text-danger">Lỗi khi tải dữ liệu</h2>
-        );
-    }
-
     return (
         <div className="container pt-lg-5">
             <div className="pt-5">
                 <div
                     className={`preview fade-in ${isVisible ? 'visible' : ''}`}
                     dangerouslySetInnerHTML={{
-                        __html: marked(Infor.DT.replace(/\n/g, '  \n')),
+                        __html: marked(Infor?.DT?.replace(/\n/g, '  \n') || ''),
                     }}
                 ></div>
             </div>

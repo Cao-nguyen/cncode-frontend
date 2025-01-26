@@ -3,26 +3,26 @@ import { ShowNewClient } from '../../../services/clientServer';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './Tintuc.scss'
+import { useQuery } from '@tanstack/react-query';
 
 function Tintuc(props) {
     const [isVisible, setIsVisible] = useState(false);
 
-    const [news, setNews] = useState([])
+    const { data: news } = useQuery({
+        queryKey: ['news'],
+        queryFn: ShowNewClient,
+    });
 
     useEffect(() => {
-        const newsData = async () => {
-            const data = await ShowNewClient()
-            setNews(data.DT)
-            setIsVisible(true);
+        if (news) {
+            setIsVisible(true)
         }
-
-        newsData()
     }, [])
 
     return (
         <div className="container">
             <div className={`news fade-in ${isVisible ? 'visible' : ''}`}>
-                {news.map(item => (
+                {news.DT.map(item => (
                     <div className="news-item" key={item._id}>
                         <h3>{item.title}</h3>
                         <p>{item.description}</p>
