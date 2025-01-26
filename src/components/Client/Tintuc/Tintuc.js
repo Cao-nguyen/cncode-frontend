@@ -15,9 +15,9 @@ function Tintuc(props) {
 
     useEffect(() => {
         if (news) {
-            setIsVisible(true)
+            setIsVisible(true);
         }
-    }, [])
+    }, [news]);
 
     return (
         <div className="container">

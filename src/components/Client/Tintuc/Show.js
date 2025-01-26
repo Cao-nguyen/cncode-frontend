@@ -2,57 +2,52 @@ import React, { useEffect, useState } from 'react';
 import { ShowNewClient, NewsLike } from '../../../services/clientServer';
 import { useParams } from 'react-router-dom';
 import { marked } from 'marked';
+import { useQuery } from '@tanstack/react-query'
 import moment from 'moment';
-import './Tintuc.scss'
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import './Tintuc.scss';
 
 function Show(props) {
-    const { slug } = useParams()
+    const { slug } = useParams();
+    const [currentNews, setCurrentNews] = useState();
+    const [isVisible, setIsVisible] = useState(false);
 
-    const [news, setNews] = useState([])
+    const { data: news, refetch } = useQuery({
+        queryKey: ['news'],
+        queryFn: ShowNewClient,
+    });
 
     useEffect(() => {
-        const newsData = async () => {
-            const data = await ShowNewClient()
-            setNews(data.DT)
+        if (news) {
+            setIsVisible(true);
         }
 
-        newsData()
-    }, [])
-
-    const [currentNews, setCurrentNews] = useState()
-
-    useEffect(() => {
-        if (news.length > 0) {
-            const selectedNews = news.find(item => item.slug === slug);
+        if (news.DT.length > 0) {
+            const selectedNews = news.DT.find(item => item.slug === slug);
             setCurrentNews(selectedNews || null);
         }
-    }, [slug, news])
+    }, [slug, news]);
 
     const fullName = useSelector(state => state.user.account.fullName);
 
     const handleLove = async () => {
+        if (fullName === "") {
+            window.alert("Vui lòng đăng nhập để thả tim cho tin tức")
+            return
+        }
+
         const data = await NewsLike(fullName, slug);
 
         if (data && data.EC === 0) {
-            toast.success(data.EM);
-            setCurrentNews({
-                ...currentNews,
-                like: currentNews.like + 1
-            });
-        } else {
-            toast.error(data.EM || "Đã xảy ra lỗi!");
+            refetch()
         }
     };
-
-    console.log(currentNews)
 
     return (
         <div>
             <div className="container">
                 {currentNews &&
-                    <div className="show_tintuc">
+                    <div className={`show_tintuc fade-in ${isVisible ? 'visible' : ''}`}>
                         <div className="show_tintuc_item">
                             <h3>{currentNews.title}</h3>
                             <p className="description">{currentNews.description}</p>
@@ -61,18 +56,18 @@ function Show(props) {
                                     ? (
                                         <p>
                                             <i className="fa-solid fa-heart"></i>
-                                            {currentNews.like}
+                                            {currentNews.emotion.length}
                                         </p>
                                     ) : (
                                         <p onClick={handleLove}>
                                             <i className="fa-regular fa-heart"></i>
-                                            {currentNews.like}
+                                            {currentNews.emotion.length}
                                         </p>
                                     )
                                 }
                                 <p>
                                     <i className="fa-regular fa-comment"></i>
-                                    {currentNews.like}
+                                    0
                                 </p>
                                 <p>Người đăng: {currentNews.fullName}</p>
                                 <p>
