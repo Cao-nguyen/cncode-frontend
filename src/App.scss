@@ -30,6 +30,16 @@ body {
     }
 }
 
+/* Định nghĩa hiệu ứng fade-in */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
 // Cấu hình cho client
 .container {
     padding-top: 60px;
