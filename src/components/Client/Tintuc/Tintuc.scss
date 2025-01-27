@@ -121,6 +121,12 @@
 
 }
 
+.offcanvas-body {
+    .form-group {
+        margin-bottom: 20px;
+    }
+}
+
 .dark-mode {
     .news {
 
@@ -287,7 +293,7 @@
             justify-content: center;
 
             .show_content_item {
-                transform: translateY(200px);
+                transform: translateY(-100px);
                 background-color: #fff;
                 width: 95%;
                 padding: 20px;

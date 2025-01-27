@@ -7,6 +7,8 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import EditorComments from '../../Service/EditorComments'
+import Comments from '../../Service/Comments'
 import './Tintuc.scss';
 
 function Show(props) {
@@ -56,6 +58,8 @@ function Show(props) {
             refetch();
         }
     };
+
+    const [content, setContent] = useState()
 
     return (
         <div className="container">
@@ -115,7 +119,10 @@ function Show(props) {
                     ></button>
                 </div>
                 <div className="offcanvas-body">
-                    <p>Chức năng bình luận đang được phát triển...</p>
+                    <div className="form-group">
+                        <EditorComments value={content} onChange={setContent} />
+                    </div>
+                    <Comments />
                 </div>
             </div>
         </div>
