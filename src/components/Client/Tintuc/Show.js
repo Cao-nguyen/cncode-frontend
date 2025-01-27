@@ -5,6 +5,8 @@ import { marked } from 'marked';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './Tintuc.scss';
 
 function Show(props) {
@@ -76,8 +78,8 @@ function Show(props) {
                                             {currentNews.emotion.length}
                                         </p>
                                     )}
-                                <p>
-                                    <i className="fa-regular fa-comment"></i>
+                                <p data-bs-toggle="offcanvas" data-bs-target="#commentOffcanvas">
+                                    <i className="fa-regular fa-comment comments"></i>
                                     0
                                 </p>
                             </div>
@@ -95,6 +97,27 @@ function Show(props) {
                     </div>
                 </div>
             )}
+
+            <div
+                className="offcanvas offcanvas-end"
+                id="commentOffcanvas"
+                tabIndex="-1"
+                aria-labelledby="offcanvasRightLabel"
+                style={{ width: "500px" }}
+            >
+                <div className="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">Bình luận</h5>
+                    <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div className="offcanvas-body">
+                    <p>Chức năng bình luận đang được phát triển...</p>
+                </div>
+            </div>
         </div>
     );
 }
