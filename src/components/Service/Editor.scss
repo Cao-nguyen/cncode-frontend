@@ -126,16 +126,16 @@
 .dark-mode {
   .editor-text {
     .toolbar {
-      background-color: #fff;
+      background-color: #1e1e2f;
       border-radius: 7px 7px 0px 0px;
 
       i {
         padding: 15px 15px;
-        color: #000;
+        color: #eee;
         cursor: pointer;
 
         &:hover {
-          background-color: #eee;
+          background-color: #292936;
           border-radius: 5px;
         }
       }
@@ -152,6 +152,8 @@
         height: 450px;
         padding: 10px;
         border-radius: 0px 0px 7px 7px;
+        background-color: #292936;
+        color: #fff;
 
         &:focus {
           outline: none;

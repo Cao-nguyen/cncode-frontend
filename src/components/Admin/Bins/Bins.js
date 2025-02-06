@@ -50,8 +50,8 @@ function Bins(props) {
     <div className="admin">
       {news.length > 0 && <h2>Tin tức đã bị xoá</h2>}
       {news.map((item) => (
-        <div className="bins_news">
-          <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
+        <div className="bins_news" key={item._id}>
+          <p>{moment(item.updatedAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
           <div className="bins_news_item">
             <h4>{item.title}</h4>
             <div

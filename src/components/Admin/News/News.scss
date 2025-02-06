@@ -1,176 +1,183 @@
 .admin {
+  .admin-news {
+    margin: 20px 0px;
 
-    .admin-news {
-        margin: 20px 0px;
+    .btn {
+      margin-right: 20px;
+
+      .fa-solid {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .admin-content {
+    .admin-content-item {
+      display: grid;
+      grid-template-columns: 10% 40% 20% 10% 10% 5%;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #eee;
+      border-bottom: #dcdcdc solid 1px;
+      width: 100%;
+
+      &:first-child {
+        border-radius: 10px 10px 0px 0px;
+
+        p {
+          font-weight: bold;
+        }
+      }
+
+      &:last-child {
+        border-radius: 0px 0px 10px 10px;
+        border: none;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      .id {
+        text-align: center;
+        text-transform: uppercase;
+        padding-left: 10px;
+      }
+
+      .action {
+        position: relative;
 
         .btn {
-            margin-right: 20px;
+          border-radius: 50%;
+
+          &:first-child {
+            align-items: right;
+          }
+        }
+
+        .dropdown {
+          background-color: #dcdcdc;
+          position: absolute;
+          z-index: 100;
+          margin-left: -120px;
+          margin-top: 5px;
+          width: 150px;
+          border-radius: 5px;
+
+          .dropdown-links {
+            padding: 5px 10px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
 
             .fa-solid {
-                margin-right: 10px;
+              margin-right: 10px;
             }
+          }
         }
+      }
+
+      .id,
+      .title,
+      .right,
+      .actives,
+      .show {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
+  }
 
-    .admin-content {
-        .admin-content-item {
-            display: grid;
-            grid-template-columns: 10% 40% 20% 10% 10% 5%;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #eee;
-            border-bottom: #dcdcdc solid 1px;
-            width: 100%;
-
-            &:first-child {
-                border-radius: 10px 10px 0px 0px;
-
-                p {
-                    font-weight: bold;
-                }
-            }
-
-            &:last-child {
-                border-radius: 0px 0px 10px 10px;
-                border: none;
-            }
-
-            p {
-                margin-top: 10px;
-                font-size: 18px;
-            }
-
-            .id {
-                text-align: center;
-                text-transform: uppercase;
-                padding-left: 10px;
-            }
-
-            .action {
-                position: relative;
-
-                .btn {
-                    border-radius: 50%;
-
-                    &:first-child {
-                        align-items: right;
-                    }
-                }
-
-                .dropdown {
-                    background-color: #dcdcdc;
-                    position: absolute;
-                    z-index: 100;
-                    margin-left: -120px;
-                    margin-top: 5px;
-                    width: 150px;
-                    border-radius: 5px;
-
-                    .dropdown-links {
-                        padding: 5px 10px;
-                        font-weight: 500;
-                        display: flex;
-                        align-items: center;
-                        cursor: pointer;
-
-                        .fa-solid {
-                            margin-right: 10px;
-                        }
-                    }
-                }
-            }
-
-            .id,
-            .title,
-            .right,
-            .actives,
-            .show {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-        }
+  .header-create {
+    .fa-solid {
+      font-size: 25px;
+      cursor: pointer;
     }
+  }
 
-    .header-create {
-        .fa-solid {
-            font-size: 25px;
-            cursor: pointer;
-        }
-    }
+  .grid {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 28% 70%;
+  }
 
-    .grid {
-        display: grid;
-        justify-content: space-between;
-        grid-template-columns: 28% 70%;
-    }
+  .grid-two {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 55% 18% 25%;
 
-    .grid-two {
-        display: grid;
-        justify-content: space-between;
-        grid-template-columns: 58% 15% 25%;
-    }
+    .form-check {
+      transform: translateX(-20px);
 
-    .form-control {
-        margin-top: 20px;
+      .form-check-input {
+        margin-right: 10px;
+      }
     }
+  }
 
-    .btn-control {
-        margin-top: 20px;
-    }
+  .form-control {
+    margin-top: 20px;
+  }
 
-    .form-check-input {
-        margin-left: 20px;
-    }
+  .btn-control {
+    margin-top: 20px;
+  }
 
-    textarea {
-        height: 100px;
-        resize: none;
-    }
+  .form-check-input {
+    margin-left: 20px;
+  }
 
-    .form-content {
-        margin-top: 20px;
-    }
+  textarea {
+    height: 100px;
+    resize: none;
+  }
 
-    .gird-text {
-        display: flex;
-        justify-content: space-between;
-    }
+  .form-content {
+    margin-top: 20px;
+  }
+
+  .gird-text {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 p {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 // Giao diện tối
 .dark-mode {
-    .admin {
-        .admin-content {
-            .admin-content-item {
-                background-color: #454568;
-                border-bottom: #5e5e7c solid 1px;
+  .admin {
+    .admin-content {
+      .admin-content-item {
+        background-color: #454568;
+        border-bottom: #5e5e7c solid 1px;
 
-                &:last-child {
-                    border: none;
-                }
-
-                .action {
-                    .dropdown {
-                        background-color: #525279;
-                    }
-                }
-            }
+        &:last-child {
+          border: none;
         }
 
-        .form-control {
-            background-color: #1E1E2F;
-            color: #fff;
-            border: none;
-
-            p,
-            &::placeholder {
-                color: #a0a0a0;
-            }
+        .action {
+          .dropdown {
+            background-color: #525279;
+          }
         }
+      }
     }
+
+    .form-control {
+      background-color: #1e1e2f;
+      color: #fff;
+      border: none;
+
+      p,
+      &::placeholder {
+        color: #a0a0a0;
+      }
+    }
+  }
 }
