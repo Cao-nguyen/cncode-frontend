@@ -6,7 +6,7 @@ function Home(props) {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>CNcode | Trang chủ </title>
+          <title>Phúc Lộc Thọ | Trang chủ</title>
           <meta
             name="description"
             content="Nền tảng học công nghệ thông tin onlineonline"
