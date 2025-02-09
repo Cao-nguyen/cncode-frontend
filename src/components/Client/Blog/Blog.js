@@ -1,12 +1,7 @@
-import React from 'react';
-import Cert from '../../Client/cert'
+import React from "react";
 
 function Blog(props) {
-    return (
-        <div className="container">
-            <Cert />
-        </div>
-    );
+  return <div className="container"></div>;
 }
 
 export default Blog;

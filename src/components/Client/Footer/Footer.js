@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.scss";
-import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 function Footer(props) {
@@ -12,7 +11,6 @@ function Footer(props) {
           <h4>Về CNcode</h4>
           <div className="border mb-3"></div>
           <div className="d-flex">
-            <img src={logo} alt=""></img>
             <p>
               CNcode là một website chuyên cung cấp các bài giảng về lập trình
               với đa ngôn ngữ. Với những bài tập và sự kiện hấp dẫn trên website
