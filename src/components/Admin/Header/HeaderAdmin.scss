@@ -1,114 +1,114 @@
 .navAdmin {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    .fa-solid {
-        color: #000;
-        font-size: 20px;
-        cursor: pointer;
-    }
+  .fa-solid {
+    color: var(--mau-den);
+    font-size: 20px;
+    cursor: pointer;
+  }
 
-    .fa-bars {
-        margin-top: 8px;
-        margin-left: 20px;
-    }
+  .fa-bars {
+    margin-top: 8px;
+    margin-left: 20px;
+  }
 
-    .fa-bell,
-    .fa-sun,
-    .fa-moon {
-        margin-top: 10px;
-    }
+  .fa-bell,
+  .fa-sun,
+  .fa-moon {
+    margin-top: 10px;
+  }
 
-    .custom-dropdown-toggle {
-        display: inline-block;
-        cursor: pointer;
-        color: #000;
-        text-align: left;
-        margin-top: 8px;
-        margin-right: 20px;
-        margin-left: 15px;
-    }
+  .custom-dropdown-toggle {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--mau-den);
+    text-align: left;
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-left: 15px;
+  }
 
-    .greeting {
-        font-size: 14px;
-        font-weight: 400;
-        margin: 0;
-        line-height: 1.2;
-    }
+  .greeting {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.2;
+  }
 
-    .user-name {
-        font-size: 16px;
-        font-weight: 600;
-        margin: 0;
-        line-height: 1.2;
-    }
+  .user-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+  }
 
-    .custom-dropdown-toggle::after {
-        display: none;
-    }
+  .custom-dropdown-toggle::after {
+    display: none;
+  }
 
-    .dropdown-toggle {
-        background: none !important;
-        border: none !important;
-        padding: 0;
-        box-shadow: none !important;
-    }
+  .dropdown-toggle {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    box-shadow: none !important;
+  }
 
-    .dropdown-link {
-        color: #000;
-        text-decoration: none;
-    }
+  .dropdown-link {
+    color: var(--mau-den);
+    text-decoration: none;
+  }
 
-    .dropdown-link-logout {
-        color: red;
-        text-decoration: none;
-    }
+  .dropdown-link-logout {
+    color: var(--mau-do);
+    text-decoration: none;
+  }
 
-    .dropdown-item.active,
-    .dropdown-item:active {
-        background-color: #fff;
-    }
+  .dropdown-item.active,
+  .dropdown-item:active {
+    background-color: var(--mau-trang);
+  }
 
-    .dropdown-item:hover {
-        background-color: #fff;
-    }
+  .dropdown-item:hover {
+    background-color: var(--mau-trang);
+  }
 }
 
 .dark-mode {
-    .headerAdmin {
-        .fa-solid {
-            color: #fff;
-        }
-
-        .custom-dropdown-toggle {
-            color: #fff;
-        }
-
-        .dropdown-menu {
-            background-color: #1e1e2f;
-
-            .dropdown-link {
-                color: #eee;
-            }
-
-            .dropdown-link-logout {
-                color: rgb(255, 86, 86);
-                text-decoration: none;
-            }
-
-            .dropdown-item.active,
-            .dropdown-item:active {
-                background-color: #1e1e2f;
-            }
-
-            .dropdown-item:hover {
-                background-color: #1e1e2f;
-            }
-
-            .dropdown-divider {
-                background-color: #eee;
-            }
-        }
+  .headerAdmin {
+    .fa-solid {
+      color: var(--mau-trang);
     }
+
+    .custom-dropdown-toggle {
+      color: var(--mau-trang);
+    }
+
+    .dropdown-menu {
+      background-color: var(--dark-mode-bay);
+
+      .dropdown-link {
+        color: var(--xam-nhat-nhat);
+      }
+
+      .dropdown-link-logout {
+        color: var(--do-thu-nhat);
+        text-decoration: none;
+      }
+
+      .dropdown-item.active,
+      .dropdown-item:active {
+        background-color: var(--dark-mode-bay);
+      }
+
+      .dropdown-item:hover {
+        background-color: var(--dark-mode-bay);
+      }
+
+      .dropdown-divider {
+        background-color: var(--xam-nhat-nhat);
+      }
+    }
+  }
 }

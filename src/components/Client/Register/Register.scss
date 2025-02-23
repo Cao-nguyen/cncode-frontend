@@ -1,50 +1,50 @@
 .register-form {
-    width: 100%;
-    height: 70%;
-    background-color: #fff;
-    border-radius: 10px;
+  width: 100%;
+  height: 70%;
+  background-color: var(--mau-trang);
+  border-radius: 10px;
 
-    .text {
-        text-align: center;
-        color: #0d6efd;
-        padding: 20px 0px 0px 0px;
+  .text {
+    text-align: center;
+    color: var(--xanh-login);
+    padding: 20px 0px 0px 0px;
+  }
+
+  .form-content {
+    padding: 0px 40px;
+
+    .form-control {
+      margin: 10px 0px;
+      height: 40px;
     }
 
-    .form-content {
-        padding: 0px 40px;
-
-        .form-control {
-            margin: 10px 0px;
-            height: 40px;
-        }
-
-        .send-code-button,
-        .input-group-text {
-            background-color: #0d6efd;
-            margin: 10px 0px;
-        }
-
-        .input-group-text {
-            color: #fff;
-        }
-
-        .form-button {
-            margin: 10px 0px 30px 0px;
-            width: 100%;
-        }
-
-        .form-links {
-            display: flex;
-            justify-content: space-between;
-
-            a {
-                color: #0d6efd;
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
+    .send-code-button,
+    .input-group-text {
+      background-color: var(--xanh-login);
+      margin: 10px 0px;
     }
+
+    .input-group-text {
+      color: var(--mau-trang);
+    }
+
+    .form-button {
+      margin: 10px 0px 30px 0px;
+      width: 100%;
+    }
+
+    .form-links {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        color: var(--xanh-login);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }
