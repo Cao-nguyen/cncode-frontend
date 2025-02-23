@@ -1,0 +1,34 @@
+.theme-tabs {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: space-between;
+
+  .theme-tab {
+    margin: 15px 0px;
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 10px 15px;
+
+    i.fa-list-ul {
+      background-color: var(--xam-nhat-nhat);
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+.dark-mode {
+  .theme-tabs {
+    .theme-tab {
+      background-color: var(--dark-mode-ba);
+      box-shadow: var(--box-shadow-dark);
+
+      i.fa-list-ul {
+        background-color: var(--dark-mode-tam);
+      }
+    }
+  }
+}

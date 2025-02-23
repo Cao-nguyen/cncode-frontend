@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ShowNewClient } from "../../../services/clientServer";
+import { ShowNewClient } from "../../../services/NewsClientServer";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "./Tintuc.scss";

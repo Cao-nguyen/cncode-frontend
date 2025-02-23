@@ -24,7 +24,7 @@ import trang from "./assets/Trungthu/trang.png";
 import "./App.scss";
 import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "./services/InforAdminServer";
-import { ShowNewClient } from "./services/clientServer";
+import { ShowNewClient } from "./services/NewsClientServer";
 
 function App() {
   const location = useLocation();
