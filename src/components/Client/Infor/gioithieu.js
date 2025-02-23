@@ -7,7 +7,7 @@ import "prismjs/components/prism-javascript.min.js";
 import "prismjs/components/prism-cshtml.min.js";
 import "prismjs/components/prism-css.min.js";
 import { useQuery } from "@tanstack/react-query";
-import { getInforApi } from "../../../services/adminServer";
+import { getInforApi } from "../../../services/InforAdminServer";
 
 function Gioithieu() {
   useEffect(() => {

@@ -23,7 +23,7 @@ import thongoc from "./assets/Trungthu/thongoc.png";
 import trang from "./assets/Trungthu/trang.png";
 import "./App.scss";
 import { useQuery } from "@tanstack/react-query";
-import { getInforApi } from "./services/adminServer";
+import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/clientServer";
 
 function App() {
