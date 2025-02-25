@@ -25,15 +25,23 @@ function Themes(props) {
     ThemeRead();
   }, []);
 
-  const handleTheme = async (id) => {
+  const handleTheme = async (id, currentActive) => {
     const check = window.confirm(
-      "Bạn có chắc chắn muốn áp dụng giao diện này!"
+      "Bạn có chắc chắn muốn thay đổi giao diện này?"
     );
 
     if (check) {
       const data = await ThemeAdminEdit(id);
       if (data && data.EC === 0) {
         toast.success(data.EM);
+
+        setTheme((prevTheme) =>
+          prevTheme.map((item) =>
+            item._id === id
+              ? { ...item, active: !currentActive }
+              : { ...item, active: false }
+          )
+        );
       } else {
         toast.error(data.EM);
       }
@@ -45,12 +53,17 @@ function Themes(props) {
       <div className="theme-tabs">
         {theme &&
           theme.map((item, index) => (
-            <div className="theme-tab" key={index}>
+            <div
+              className={
+                item.active === true ? "theme-tab-active" : "theme-tab"
+              }
+              key={index}
+            >
               <h3>{item.name}</h3>
               <p>Thời gian: {item.date}</p>
               <i
                 class="fa-solid fa-list-ul"
-                onClick={() => handleTheme(item._id)}
+                onClick={() => handleTheme(item._id, item.active)}
               ></i>
             </div>
           ))}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// [PATCH] Giao diện
+// [GET] Giao diện
 export const ThemeAdminRead = async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_BACKEND}/api/v1/admin/theme/read`

@@ -15,7 +15,7 @@
   --dark-mode-tam: #7474a1;
   --dark-mode-chin: #65658d;
   --dark-mode-muoi: #525279;
-  --xam-nhat-nhat: #eee;
+  --xam-nhat-nhat: #f9f9f9;
   --xam-nhat-mot: #f1f1f1;
   --xam-nhat-hai: #474747;
   --xam-nhat-ba: #ccc;
@@ -340,22 +340,6 @@ body {
       bottom: 0;
       right: 0;
       z-index: 1;
-      position: fixed;
-    }
-
-    img.tet2 {
-      width: 200px;
-      top: 60px;
-      left: -10px;
-      z-index: 1;
-      position: fixed;
-    }
-
-    img.tet3 {
-      width: 200px;
-      z-index: 1;
-      top: 80px;
-      right: -10px;
       position: fixed;
     }
   }

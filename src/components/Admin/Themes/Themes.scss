@@ -18,12 +18,37 @@
       cursor: pointer;
     }
   }
+
+  .theme-tab-active {
+    margin: 15px 0px;
+    background-color: var(--xam-nhat-ba);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 10px 15px;
+
+    i.fa-list-ul {
+      background-color: var(--xam-nhat-nhat);
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  }
 }
 
 .dark-mode {
   .theme-tabs {
     .theme-tab {
       background-color: var(--dark-mode-ba);
+      box-shadow: var(--box-shadow-dark);
+
+      i.fa-list-ul {
+        background-color: var(--dark-mode-tam);
+      }
+    }
+
+    .theme-tab-active {
+      background-color: var(--dark-mode-bon);
       box-shadow: var(--box-shadow-dark);
 
       i.fa-list-ul {
