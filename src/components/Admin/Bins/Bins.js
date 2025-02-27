@@ -52,7 +52,7 @@ function Bins(props) {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>CNcode | Tổng quan </title>
+          <title>CNcode | Thùng rác </title>
           <meta
             name="description"
             content="Nền tảng học công nghệ thông tin online"

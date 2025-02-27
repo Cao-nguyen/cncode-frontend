@@ -4,6 +4,8 @@ import Editor from "../../Service/Editor";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./News.scss";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import logo from "../../../assets/logo.png";
 
 function Edit(props) {
   const navigate = useNavigate();
@@ -72,6 +74,17 @@ function Edit(props) {
 
   return (
     <div className="admin">
+      <HelmetProvider>
+        <Helmet>
+          <title>CNcode | {`${currentNews.title}`}</title>
+          <meta
+            name="description"
+            content="Nền tảng học công nghệ thông tin online"
+          />
+          <link rel="canonical" href={logo} />
+          <link rel="icon" href={logo} />
+        </Helmet>
+      </HelmetProvider>
       <div className="header-create">
         <i className="fa-solid fa-arrow-left" onClick={handleBack}></i>
       </div>

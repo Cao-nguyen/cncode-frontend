@@ -5,6 +5,8 @@ import {
   ThemeAdminRead,
 } from "../../../services/ThemeAdminServer";
 import { toast } from "react-toastify";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import logo from "../../../assets/logo.png";
 
 function Themes(props) {
   const [theme, setTheme] = useState();
@@ -50,6 +52,17 @@ function Themes(props) {
 
   return (
     <div className="admin">
+      <HelmetProvider>
+        <Helmet>
+          <title>CNcode | Giao diện</title>
+          <meta
+            name="description"
+            content="Nền tảng học công nghệ thông tin online"
+          />
+          <link rel="canonical" href="https://cncode.vercel.app" />
+          <link rel="icon" href={logo} />
+        </Helmet>
+      </HelmetProvider>
       <div className="theme-tabs">
         {theme &&
           theme.map((item, index) => (

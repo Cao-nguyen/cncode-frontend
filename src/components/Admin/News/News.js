@@ -4,6 +4,8 @@ import { DeleteNew, ShowNew } from "../../../services/NewsAdminServer";
 import { toast } from "react-toastify";
 import "./News.scss";
 import BootstrapPagination from "../../Service/Pagination";
+import logo from "../../../assets/logo.png";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function News(props) {
   const navigate = useNavigate();
@@ -85,6 +87,17 @@ function News(props) {
 
   return (
     <div className="admin">
+      <HelmetProvider>
+        <Helmet>
+          <title>CNcode | Tin tức</title>
+          <meta
+            name="description"
+            content="Nền tảng học công nghệ thông tin online"
+          />
+          <link rel="canonical" href={logo} />
+          <link rel="icon" href="uploads/img/18-01-2025/g354ky1ob557wmdz6sca" />
+        </Helmet>
+      </HelmetProvider>
       <div className="admin-news">
         <div className="btn btn-primary" onClick={handleBack}>
           <i className="fa-solid fa-arrow-left"></i>
