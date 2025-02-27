@@ -14,8 +14,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import EditorComments from "../../Service/EditorComments";
 import Comments from "../../Service/Comments";
 import "./Tintuc.scss";
-import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Show(props) {
   const { slug } = useParams();

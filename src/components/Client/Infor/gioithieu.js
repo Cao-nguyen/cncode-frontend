@@ -8,8 +8,7 @@ import "prismjs/components/prism-cshtml.min.js";
 import "prismjs/components/prism-css.min.js";
 import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "../../../services/InforAdminServer";
-import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Gioithieu() {
   useEffect(() => {

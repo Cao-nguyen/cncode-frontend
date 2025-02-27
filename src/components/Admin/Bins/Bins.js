@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../../../assets/logo.png";
 import {
   BinsNews,
   DeleteBinsNews,
@@ -7,6 +8,7 @@ import {
 import moment from "moment/moment";
 import "./Bins.scss";
 import { toast } from "react-toastify";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Bins(props) {
   const [news, setNews] = useState([]);
@@ -47,32 +49,45 @@ function Bins(props) {
   };
 
   return (
-    <div className="admin">
-      {news.length === 0 && (
-        <p className="text-center">Không có mục nào bị xoá</p>
-      )}
-      {news.length > 0 && <h2>Tin tức đã bị xoá</h2>}
-      {news.map((item) => (
-        <div className="bins_news">
-          <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
-          <div className="bins_news_item">
-            <h4>{item.title}</h4>
-            <div
-              className="btn btn-primary"
-              onClick={() => handlePatch(item._id)}
-            >
-              Khôi phục
-            </div>
-            <div
-              className="btn btn-danger"
-              onClick={() => handleDelete(item._id)}
-            >
-              Xoá vĩnh viễn
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>CNcode | Tổng quan </title>
+          <meta
+            name="description"
+            content="Nền tảng học công nghệ thông tin online"
+          />
+          <link rel="canonical" href="https://cncode.vercel.app" />
+          <link rel="icon" href={logo} />
+        </Helmet>
+      </HelmetProvider>
+      <div className="admin">
+        {news.length === 0 && (
+          <p className="text-center">Không có mục nào bị xoá</p>
+        )}
+        {news.length > 0 && <h2>Tin tức đã bị xoá</h2>}
+        {news.map((item) => (
+          <div className="bins_news">
+            <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
+            <div className="bins_news_item">
+              <h4>{item.title}</h4>
+              <div
+                className="btn btn-primary"
+                onClick={() => handlePatch(item._id)}
+              >
+                Khôi phục
+              </div>
+              <div
+                className="btn btn-danger"
+                onClick={() => handleDelete(item._id)}
+              >
+                Xoá vĩnh viễn
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
 

@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import "./Tintuc.scss";
 import { useQuery } from "@tanstack/react-query";
-import { HelmetProvider } from "react-helmet-async";
-import { Helmet } from "react-helmet";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Tintuc(props) {
   useEffect(() => {
