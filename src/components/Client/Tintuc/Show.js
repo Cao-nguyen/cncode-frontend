@@ -14,6 +14,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import EditorComments from "../../Service/EditorComments";
 import Comments from "../../Service/Comments";
 import "./Tintuc.scss";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 function Show(props) {
   const { slug } = useParams();
@@ -68,51 +70,65 @@ function Show(props) {
   return (
     <div className="container">
       {currentNews && (
-        <div className={`show_tintuc fade-on ${isVisible ? "visible" : ""}`}>
-          <div className="show_tintuc_item">
-            <h3>{currentNews.title}</h3>
-            <p className="description">{currentNews.description}</p>
-            <div className="tintuc_grid">
-              <div className="tintuc_grid_2">
-                {currentNews.emotion.some(
-                  (emotion) => emotion.name === fullName
-                ) ? (
-                  <p onClick={handleUnlove}>
-                    <i className="fa-solid fa-heart"></i>
-                    {currentNews.emotion.length}
+        <>
+          <HelmetProvider>
+            <Helmet>
+              <title>{currentNews.title} </title>
+              <meta
+                name="description"
+                content="Nền tảng học công nghệ thông tin online"
+              />
+              <link rel="canonical" href="https://cncode.vercel.app" />
+            </Helmet>
+          </HelmetProvider>
+          <div className={`show_tintuc fade-on ${isVisible ? "visible" : ""}`}>
+            <div className="show_tintuc_item">
+              <h3>{currentNews.title}</h3>
+              <p className="description">{currentNews.description}</p>
+              <div className="tintuc_grid">
+                <div className="tintuc_grid_2">
+                  {currentNews.emotion.some(
+                    (emotion) => emotion.name === fullName
+                  ) ? (
+                    <p onClick={handleUnlove}>
+                      <i className="fa-solid fa-heart"></i>
+                      {currentNews.emotion.length}
+                    </p>
+                  ) : (
+                    <p onClick={handleLove}>
+                      <i className="fa-regular fa-heart"></i>
+                      {currentNews.emotion.length}
+                    </p>
+                  )}
+                  <p
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#commentOffcanvas"
+                  >
+                    <i className="fa-regular fa-comment comments"></i>0
                   </p>
-                ) : (
-                  <p onClick={handleLove}>
-                    <i className="fa-regular fa-heart"></i>
-                    {currentNews.emotion.length}
-                  </p>
-                )}
-                <p
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#commentOffcanvas"
-                >
-                  <i className="fa-regular fa-comment comments"></i>0
+                </div>
+                <p>Người đăng: {currentNews.fullName}</p>
+                <p>
+                  <i className="fa-solid fa-calendar-days"></i>
+                  Ngày đăng:{" "}
+                  {moment(currentNews.createdAt).format(
+                    "DD/MM/YYYY - HH:mm:ss"
+                  )}
                 </p>
               </div>
-              <p>Người đăng: {currentNews.fullName}</p>
-              <p>
-                <i className="fa-solid fa-calendar-days"></i>
-                Ngày đăng:{" "}
-                {moment(currentNews.createdAt).format("DD/MM/YYYY - HH:mm:ss")}
-              </p>
+            </div>
+            <div className="show_content">
+              <div
+                className="preview show_content_item mt-2"
+                dangerouslySetInnerHTML={{
+                  __html: marked(
+                    (currentNews.content || "").replace(/\n/g, "  \n")
+                  ),
+                }}
+              ></div>
             </div>
           </div>
-          <div className="show_content">
-            <div
-              className="preview show_content_item mt-2"
-              dangerouslySetInnerHTML={{
-                __html: marked(
-                  (currentNews.content || "").replace(/\n/g, "  \n")
-                ),
-              }}
-            ></div>
-          </div>
-        </div>
+        </>
       )}
 
       <div

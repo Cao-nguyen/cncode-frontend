@@ -48,7 +48,10 @@ function Bins(props) {
 
   return (
     <div className="admin">
-      <h2>Tin tức đã bị xoá</h2>
+      {news.length === 0 && (
+        <p className="text-center">Không có mục nào bị xoá</p>
+      )}
+      {news.length > 0 && <h2>Tin tức đã bị xoá</h2>}
       {news.map((item) => (
         <div className="bins_news">
           <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>

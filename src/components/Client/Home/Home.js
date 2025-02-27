@@ -9,7 +9,7 @@ function Home(props) {
           <title>CNcode | Trang chủ </title>
           <meta
             name="description"
-            content="Nền tảng học công nghệ thông tin onlineonline"
+            content="Nền tảng học công nghệ thông tin online"
           />
           <link rel="canonical" href="https://cncode.vercel.app" />
         </Helmet>

@@ -8,6 +8,8 @@ import "prismjs/components/prism-cshtml.min.js";
 import "prismjs/components/prism-css.min.js";
 import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "../../../services/InforAdminServer";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 function Gioithieu() {
   useEffect(() => {
@@ -29,16 +31,28 @@ function Gioithieu() {
   }, [Infor]);
 
   return (
-    <div className="container pt-lg-5">
-      <div className="pt-5">
-        <div
-          className={`preview fade-in ${isVisible ? "visible" : ""}`}
-          dangerouslySetInnerHTML={{
-            __html: marked(Infor?.DT?.replace(/\n/g, "  \n") || ""),
-          }}
-        ></div>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>CNcode | Giới thiệu </title>
+          <meta
+            name="description"
+            content="Nền tảng học công nghệ thông tin online"
+          />
+          <link rel="canonical" href="https://cncode.vercel.app" />
+        </Helmet>
+      </HelmetProvider>
+      <div className="container pt-lg-5">
+        <div className="pt-5">
+          <div
+            className={`preview fade-in ${isVisible ? "visible" : ""}`}
+            dangerouslySetInnerHTML={{
+              __html: marked(Infor?.DT?.replace(/\n/g, "  \n") || ""),
+            }}
+          ></div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
