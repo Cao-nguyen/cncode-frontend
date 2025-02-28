@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SettingsAdmin from "../../../middlewares/SettingsAdmin";
 import Editor from "../../Service/Editor";
 import { useNavigate } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 import "./Infor.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
@@ -28,12 +29,11 @@ function Infor(props) {
             content="Nền tảng học công nghệ thông tin online"
           />
           <link rel="canonical" href="https://cncode.vercel.app" />
-          <link rel="icon" href="uploads/img/18-01-2025/g354ky1ob557wmdz6sca" />
+          <link rel="icon" href={logo} />
         </Helmet>
       </HelmetProvider>
       <div className="admin">
         <h1 className="text-center">Thông tin giới thiệu</h1>
-        <div className="border mb-3"></div>
         <button className="btn btn-dark mb-2" onClick={back}>
           <i className="fa-solid fa-arrow-left"></i>
           Trở về
