@@ -15,7 +15,9 @@ function Diendan(props) {
           <link rel="canonical" href="https://cncode.vercel.app" />
         </Helmet>
       </HelmetProvider>
-      <div className="container"></div>
+      <div className="container">
+        <h1>Diễn đàn</h1>
+      </div>
     </>
   );
 }
