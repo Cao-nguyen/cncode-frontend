@@ -19,7 +19,10 @@ const ProtectedRoute = ({ children }) => {
   const tokenUser = useSelector((state) => state.user.account.tokenUser);
 
   if (!tokenUser) {
-    return <Navigate to="/" replace />;
+    return (
+      <Navigate to="/" replace /> &&
+      window.alert("Bạn cần đăng nhập để xem thông tin này!")
+    );
   }
 
   return children;
