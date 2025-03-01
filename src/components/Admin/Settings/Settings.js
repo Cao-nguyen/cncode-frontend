@@ -51,6 +51,13 @@ function Settings(props) {
             <i className="fa-solid fa-list-check"></i>
           </NavLink>
         </div>
+
+        <div className="tab">
+          <h3>Cài đặt website</h3>
+          <NavLink to="/admin/settings/website">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
       </div>
     </div>
   );

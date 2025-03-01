@@ -16,7 +16,7 @@ import Comments from "../../Service/Comments";
 import "./Tintuc.scss";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
-function Show(props) {
+function TintucRead(props) {
   const { slug } = useParams();
   const [currentNews, setCurrentNews] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -157,4 +157,4 @@ function Show(props) {
   );
 }
 
-export default Show;
+export default TintucRead;

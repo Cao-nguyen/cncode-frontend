@@ -9,8 +9,9 @@ import Sukien from "../components/Client/Sukien/Sukien";
 import Tintuc from "../components/Client/Tintuc/Tintuc";
 import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 import Ssl from "../components/Client/Ssl/Ssl";
+import Use from "../components/Client/Use/Use";
 // eslint-disable-next-line
-import tintucShow from "../components/Client/Tintuc/Show";
+import tintucRead from "../components/Client/Tintuc/Show";
 
 export const validRoutes = [];
 
@@ -25,9 +26,10 @@ const AppRoutes = (props) => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/sukien" element={<Sukien />} />
       <Route path="/tintuc" element={<Tintuc />} />
-      <Route path="/tintuc/:slug" element={<tintucShow />} />
+      <Route path="/tintuc/:slug" Component={tintucRead} />
       <Route path="/me/khuvuon" element={<Khuvuon />} />
       <Route path="/ssl" element={<Ssl />} />
+      <Route path="/use" element={<Use />} />
     </Routes>
   );
 };
