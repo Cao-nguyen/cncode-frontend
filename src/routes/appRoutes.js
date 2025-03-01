@@ -10,6 +10,8 @@ import Tintuc from "../components/Client/Tintuc/Tintuc";
 import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 import Ssl from "../components/Client/Ssl/Ssl";
 import Use from "../components/Client/Use/Use";
+import Member from "../components/Client/Member/Member";
+
 // eslint-disable-next-line
 import tintucRead from "../components/Client/Tintuc/Show";
 
@@ -30,6 +32,7 @@ const AppRoutes = (props) => {
       <Route path="/me/khuvuon" element={<Khuvuon />} />
       <Route path="/ssl" element={<Ssl />} />
       <Route path="/use" element={<Use />} />
+      <Route path="/member" element={<Member />} />
     </Routes>
   );
 };
