@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ThemeAppMiddleware from "./ThemeAppMiddleware";
 // Giao diện
 import lixi from "../assets/Themes/Tet/lixi.png";
@@ -28,6 +28,18 @@ function ThemeClientApp(props) {
     noel,
     ht,
   } = ThemeAppMiddleware();
+
+  const [sinhnhatCNcode, setSinhnhatCNcode] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSinhnhatCNcode(false), 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handlePopup = () => {
+    setSinhnhatCNcode(false);
+  };
 
   return (
     <>
@@ -79,6 +91,16 @@ function ThemeClientApp(props) {
         alt=""
         style={{ display: ht ? "block" : "none" }}
       />
+
+      {/* POPUP */}
+      {sinhnhatCNcode && sn && (
+        <>
+          <div className="over-play">
+            <i className="fa-solid fa-x" onClick={handlePopup}></i>
+            <h3>Chúc mừng sinh nhật CNcode</h3>
+          </div>
+        </>
+      )}
     </>
   );
 }
