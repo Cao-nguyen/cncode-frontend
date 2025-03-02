@@ -12,7 +12,7 @@ export const DeleteBinsNews = async (id) => {
 // [PATCH] PatchBinNews
 export const PatchBinsNews = async (id) => {
   const response = await axios.patch(
-    `${process.env.REACT_APP_BACKEND}/api/v1/bins/news/patch`,
+    `${process.env.REACT_APP_BACKEND}/api/v1/bins/news/edit`,
     { id }
   );
   return response.data;
