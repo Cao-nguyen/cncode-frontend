@@ -13,13 +13,6 @@ import Forgot from "./components/Client/Forgot/Forgot";
 import Register from "./components/Client/Register/Register";
 import AppRoutes, { validRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
-import ThemeAppMiddleware from "./middlewares/ThemeAppMiddleware";
-// Giao diện
-import lixi from "./assets/Themes/Tet/lixi.png";
-import nguoituyet from "./assets/Themes/Noel/nguoituyet.png";
-import banhtrungthu from "./assets/Themes/Trungthu/banhtrungthu.png";
-import thongoc from "./assets/Themes/Trungthu/thongoc.png";
-import trang from "./assets/Themes/Trungthu/trang.png";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -29,6 +22,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.scss";
+import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 
 function App() {
   // Xử lí route bên admin và client
@@ -69,22 +63,10 @@ function App() {
     setOpen(!open);
   };
 
-  // Cấu hình hình ảnh
-  const NoelImages = [{ src: nguoituyet, alt: "", className: "noel1" }];
-
-  const TrungthuImages = [
-    { src: banhtrungthu, alt: "", className: "trungthu1" },
-    { src: thongoc, alt: "", className: "trungthu2" },
-    { src: trang, alt: "", className: "trungthu3" },
-  ];
-
   // Gọi các API cần sử dụng khi mở Home
   const useApi = (queryKey, queryFn) => useQuery({ queryKey, queryFn });
   useApi(["Infor"], getInforApi);
   useApi(["news"], ShowNewClient);
-
-  // Xử lí giao diện
-  const { tet } = ThemeAppMiddleware();
 
   return (
     <div className={isDarkMode ? "dark-mode" : ""}>
@@ -125,31 +107,20 @@ function App() {
             />
           )}
 
-          <div className="tet" style={{ display: tet ? "block" : "none" }}>
-            <img className="tet1" src={lixi} alt="" />
+          <div className="icon-link">
+            {location.pathname !== "/hoidap" && (
+              <Link to="/hoidap">
+                <i class="fa-solid fa-comment"></i>
+              </Link>
+            )}
+            {location.pathname !== "/shop" && (
+              <Link to="/shop">
+                <i class="fa-solid fa-store"></i>
+              </Link>
+            )}
           </div>
 
-          <div className="noel" style={{ display: "none" }}>
-            {NoelImages.map((img, index) => (
-              <img
-                key={index}
-                className={img.className}
-                src={img.src}
-                alt={img.alt}
-              />
-            ))}
-          </div>
-
-          <div className="trungthu" style={{ display: "none" }}>
-            {TrungthuImages.map((img, index) => (
-              <img
-                key={index}
-                className={img.className}
-                src={img.src}
-                alt={img.alt}
-              />
-            ))}
-          </div>
+          <ThemeClientApp />
 
           {login && (
             <div className="bg-fixed">

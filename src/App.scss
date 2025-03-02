@@ -255,6 +255,31 @@ body {
 .client-layout {
   height: 100%;
 
+  .icon-link {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    i {
+      border-radius: 50px;
+      padding: 10px;
+      background-color: var(--mau-trang);
+      box-shadow: var(--box-shadow);
+      font-size: 25px;
+      margin-top: 10px;
+      color: var(--mau-den);
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+
   .bg-fixed {
     width: 100%;
     height: 100%;
@@ -334,50 +359,12 @@ body {
     pointer-events: none;
   }
 
-  .tet {
-    img.tet1 {
-      width: 200px;
-      bottom: 0;
-      right: 0;
-      z-index: 1;
-      position: fixed;
-    }
-  }
-
-  .noel {
-    img.noel1 {
-      width: 250px;
-      position: fixed;
-      z-index: 1;
-      bottom: 10px;
-      left: -20px;
-    }
-  }
-
-  .trungthu {
-    img.trungthu1 {
-      width: 200px;
-      position: fixed;
-      z-index: 1;
-      bottom: 0;
-      left: 0;
-    }
-
-    img.trungthu2 {
-      width: 200px;
-      position: fixed;
-      z-index: 1;
-      bottom: 0;
-      right: 0;
-    }
-
-    img.trungthu3 {
-      width: 200px;
-      position: fixed;
-      z-index: 100;
-      top: -20px;
-      left: 100px;
-    }
+  .img-bg {
+    width: 200px;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    position: fixed;
   }
 }
 
@@ -568,6 +555,12 @@ body {
         right: 5%;
         left: 5%;
       }
+    }
+
+    .img-bg {
+      width: 100px;
+      bottom: 50px;
+      left: 0;
     }
   }
 
