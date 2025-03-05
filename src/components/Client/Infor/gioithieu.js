@@ -11,6 +11,8 @@ import { getInforApi } from "../../../services/InforAdminServer";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Gioithieu() {
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -19,8 +21,6 @@ function Gioithieu() {
     queryKey: ["Infor"],
     queryFn: getInforApi,
   });
-
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (Infor) {
@@ -33,7 +33,7 @@ function Gioithieu() {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>CNcode | Giới thiệu </title>
+          <title>CNcode | Giới thiệu</title>
           <meta
             name="description"
             content="Nền tảng học công nghệ thông tin online"
