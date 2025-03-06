@@ -11,10 +11,9 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import EditorComments from "../../Service/EditorComments";
-import Comments from "../../Service/Comments";
 import "./Tintuc.scss";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import logo from "../../../assets/logo.png";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -64,7 +63,7 @@ function TintucRead(props) {
     }
   };
 
-  const [content, setContent] = useState();
+  const [chat, setChat] = useState();
 
   return (
     <div className="container">
@@ -78,6 +77,7 @@ function TintucRead(props) {
                 content="Nền tảng học công nghệ thông tin online"
               />
               <link rel="canonical" href="https://cncode.vercel.app" />
+              <link rel="icon" href={logo} />
             </Helmet>
           </HelmetProvider>
           <div className={`show_tintuc fade-on ${isVisible ? "visible" : ""}`}>
@@ -147,10 +147,37 @@ function TintucRead(props) {
           ></button>
         </div>
         <div className="offcanvas-body">
-          <div className="form-group">
-            <EditorComments value={content} onChange={setContent} />
+          <div className="commentMain">
+            <div className="chat-main">
+              <img src={logo} alt=""></img>
+              <div className="comment-info">
+                <div className="info">
+                  <p>Lý Cao Nguyên</p>
+                  <i className="fa-solid fa-ellipsis"></i>
+                </div>
+                <p className="info-chat">Hay ạ!</p>
+                <div className="action">
+                  <p className="time">6 - 3 - 2025</p>
+                  <div className="action-likes">
+                    <i className="fa-regular fa-heart"></i>
+                    <p>0</p>
+                  </div>
+                  <p className="reply">Trả lời</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <Comments />
+          <div className="commentBot">
+            <div className="grid2 form-group">
+              <input
+                className="form-control"
+                placeholder="Thêm bình luận..."
+                value={chat}
+                onChange={(e) => setChat(e.target.value)}
+              ></input>
+              <h6 className={chat ? "active" : ""}>Đăng</h6>
+            </div>
+          </div>
         </div>
       </div>
     </div>

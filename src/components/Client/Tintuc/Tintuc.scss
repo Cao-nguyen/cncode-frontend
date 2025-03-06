@@ -121,8 +121,88 @@
 }
 
 .offcanvas-body {
-  .form-group {
-    margin-bottom: 20px;
+  .commentMain {
+    margin-bottom: 45px;
+
+    .chat-main {
+      display: flex;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .comment-info {
+        margin-left: 10px;
+
+        .info {
+          display: grid;
+          grid-template-columns: 370px 10px;
+
+          p {
+            font-weight: bold;
+          }
+
+          i {
+            margin-top: 5px;
+          }
+        }
+
+        .info-chat {
+          margin-top: -15px;
+          font-size: 18px;
+          text-align: justify;
+        }
+
+        .action {
+          display: grid;
+          grid-template-columns: 40% 20% 20%;
+          margin-top: -15px;
+          p.time {
+            font-size: 16px;
+          }
+
+          .action-likes {
+            display: flex;
+            i {
+              margin-top: 5px;
+              margin-right: 5px;
+              cursor: pointer;
+            }
+          }
+
+          p.reply {
+            font-weight: bold;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .commentBot {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--mau-trang);
+    padding: 10px 0px 30px 0px;
+    width: 30%;
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 88% 10%;
+      justify-content: space-between;
+      text-align: center;
+      align-items: center;
+
+      h6 {
+        color: var(--xam-nhat-ba);
+      }
+
+      h6.active {
+        color: var(--xanh-login);
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -171,6 +251,27 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: rgba(141, 141, 141, 0.35) 0px 5px 15px;
+      }
+    }
+  }
+
+  .offcanvas {
+    background-color: var(--dark-mode-nen);
+
+    .offcanvas-body {
+      .commentBot {
+        background-color: var(--dark-mode-nen);
+        .grid2 {
+          input {
+            background-color: var(--dark-mode-hai);
+            color: var(--mau-trang);
+            border: none;
+
+            &::placeholder {
+              color: #a0a0a0;
+            }
+          }
+        }
       }
     }
   }
@@ -294,6 +395,33 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+    }
+  }
+
+  .offcanvas-body {
+    .commentBot {
+      position: fixed;
+      bottom: 0;
+      background-color: var(--mau-trang);
+      padding: 10px 0px 30px 0px;
+      width: 400px;
+
+      .grid2 {
+        display: grid;
+        grid-template-columns: 88% 10%;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+
+        h6 {
+          color: var(--xam-nhat-ba);
+        }
+
+        h6.active {
+          color: var(--xanh-login);
+          cursor: pointer;
+        }
       }
     }
   }
