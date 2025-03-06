@@ -1,19 +1,8 @@
-.setting-ad {
-  background-color: var(--xam-nhat-nhat);
-  padding: 20px;
-  border-radius: 5px;
-
-  textarea {
-    height: 150px;
-    resize: vertical;
-  }
-
-  h4 {
-    margin-top: 10px;
-    margin-bottom: -10px;
-  }
-
-  .btn-danger {
-    margin-top: 16px;
+.form-group {
+  .grid-2 {
+    display: grid;
+    margin-top: -10px;
+    justify-content: space-between;
+    grid-template-columns: 29% 70%;
   }
 }

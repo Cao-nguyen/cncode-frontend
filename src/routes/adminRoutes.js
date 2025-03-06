@@ -12,6 +12,7 @@ import ShowNews from "../components/Admin/News/Show";
 import Bins from "../components/Admin/Bins/Bins";
 import Use from "../components/Admin/Use/Use";
 import Member from "../components/Admin/Member/Member";
+import Web from "../components/Admin/Web/Web";
 
 export const adminRoutesValidate = ["/admin/*"];
 
@@ -117,6 +118,14 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <Member />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/settings/website"
+        element={
+          <ProtectedRoute>
+            <Web />
           </ProtectedRoute>
         }
       ></Route>

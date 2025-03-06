@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Footer.scss";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { WebAdminRead } from "../../../services/WebAdminServer";
 
 function Footer(props) {
+  const [products, setProducts] = useState([{ name: "", link: "" }]);
+  const [quickLinks, setQuickLinks] = useState([{ name: "", link: "" }]);
+  const [info, setInfo] = useState({
+    general: "",
+    admin: "",
+    email: "",
+    facebook: "",
+    zalo: "",
+    youtube: "",
+  });
+
+  const getDataFooter = async () => {
+    const data = await WebAdminRead();
+
+    if (data && data.EC === 0) {
+      setProducts(data.DT.products);
+      setQuickLinks(data.DT.quickLinks);
+      setInfo(data.DT.info);
+    }
+  };
+
+  useEffect(() => {
+    getDataFooter();
+  }, []);
+
   return (
     <footer className="mt-5">
       <div className="row">
@@ -13,12 +39,7 @@ function Footer(props) {
           <div className="border mb-3"></div>
           <div className="d-flex">
             <img src={logo} alt=""></img>
-            <p>
-              CNcode là một website chuyên cung cấp các bài giảng về lập trình
-              với đa ngôn ngữ. Với những bài tập và sự kiện hấp dẫn trên website
-              sẽ giúp học sinh có thể rèn luyện khả năng lập trình của bản thân.
-              Học qua video nhưng có độ tương tác cao.
-            </p>
+            <p>{info.general}</p>
           </div>
         </div>
 
