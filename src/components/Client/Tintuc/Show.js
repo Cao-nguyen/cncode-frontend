@@ -14,8 +14,11 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Tintuc.scss";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
-import { CommentsClientCreate } from "../../../services/CommentClientServer";
-import { toast } from "react-toastify";
+import {
+  CommentsClientCreate,
+  CommentsClientRead,
+} from "../../../services/CommentClientServer";
+import socket from "../../Service/socket";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -67,18 +70,36 @@ function TintucRead(props) {
 
   const [chat, setChat] = useState();
   const [report, setReport] = useState(false);
+  const [comment, setComment] = useState();
 
   const handleToggle = () => {
     setReport(!report);
   };
 
   const handlePushComment = async () => {
-    const data = await CommentsClientCreate(fullName, chat);
-
-    if (data && data.EC === 0) {
-      toast.success("Thành công!");
-    }
+    await CommentsClientCreate(fullName, chat, slug);
+    setChat("");
   };
+
+  useEffect(() => {
+    const getdata = async () => {
+      const data = await CommentsClientRead(slug);
+
+      if (data && data.EC === 0) {
+        setComment(data.DT);
+      }
+    };
+
+    getdata();
+
+    socket.on("pushComment", () => {
+      getdata();
+    });
+
+    return () => {
+      socket.off("pushComment");
+    };
+  }, [slug]);
 
   return (
     <div className="container">
@@ -163,39 +184,44 @@ function TintucRead(props) {
         </div>
         <div className="offcanvas-body">
           <div className="commentMain">
-            <div className="chat-main">
-              <img src={logo} alt=""></img>
-              <div className="comment-info">
-                <div className="info">
-                  <p>Lý Cao Nguyên</p>
-                  <i
-                    className="fa-solid fa-ellipsis"
-                    onClick={handleToggle}
-                  ></i>
-                  {report && (
-                    <div className="report">
-                      <div className="report-item">
-                        <i className="fa-solid fa-flag"></i>
-                        <p>Báo cáo</p>
-                      </div>
-                      <div className="report-item">
-                        <i className="fa-solid fa-trash"></i>
-                        <p className="delete">Xoá bình luận</p>
-                      </div>
+            {comment &&
+              comment.map((item, index) => (
+                <div className="chat-main">
+                  <img src={logo} alt=""></img>
+                  <div className="comment-info">
+                    <div className="info">
+                      <p>{item.comments.name}</p>
+                      <i
+                        className="fa-solid fa-ellipsis"
+                        onClick={handleToggle}
+                      ></i>
+                      {report && (
+                        <div className="report">
+                          <div className="report-item">
+                            <i className="fa-solid fa-flag"></i>
+                            <p>Báo cáo</p>
+                          </div>
+                          <div className="report-item">
+                            <i className="fa-solid fa-trash"></i>
+                            <p className="delete">Xoá bình luận</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <p className="info-chat">Hay ạ!</p>
-                <div className="action">
-                  <p className="time">6 - 3 - 2025</p>
-                  <div className="action-likes">
-                    <i className="fa-regular fa-heart"></i>
-                    <p>0</p>
+                    <p className="info-chat">{item.comments.comment}</p>
+                    <div className="action">
+                      <p className="time">
+                        {moment(item.comments.time).format("DD - MM - YYYY")}
+                      </p>
+                      <div className="action-likes">
+                        <i className="fa-regular fa-heart"></i>
+                        <p>0</p>
+                      </div>
+                      <p className="reply">Trả lời</p>
+                    </div>
                   </div>
-                  <p className="reply">Trả lời</p>
                 </div>
-              </div>
-            </div>
+              ))}
           </div>
           <div className="commentBot">
             <div className="grid2 form-group">
@@ -204,6 +230,11 @@ function TintucRead(props) {
                 placeholder="Thêm bình luận..."
                 value={chat}
                 onChange={(e) => setChat(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handlePushComment();
+                  }
+                }}
               ></input>
               {chat ? (
                 <h6 className="active" onClick={handlePushComment}>
