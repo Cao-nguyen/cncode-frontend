@@ -14,6 +14,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Tintuc.scss";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
+import { CommentsClientCreate } from "../../../services/CommentClientServer";
+import { toast } from "react-toastify";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -64,6 +66,19 @@ function TintucRead(props) {
   };
 
   const [chat, setChat] = useState();
+  const [report, setReport] = useState(false);
+
+  const handleToggle = () => {
+    setReport(!report);
+  };
+
+  const handlePushComment = async () => {
+    const data = await CommentsClientCreate(fullName, chat);
+
+    if (data && data.EC === 0) {
+      toast.success("Thành công!");
+    }
+  };
 
   return (
     <div className="container">
@@ -153,7 +168,22 @@ function TintucRead(props) {
               <div className="comment-info">
                 <div className="info">
                   <p>Lý Cao Nguyên</p>
-                  <i className="fa-solid fa-ellipsis"></i>
+                  <i
+                    className="fa-solid fa-ellipsis"
+                    onClick={handleToggle}
+                  ></i>
+                  {report && (
+                    <div className="report">
+                      <div className="report-item">
+                        <i className="fa-solid fa-flag"></i>
+                        <p>Báo cáo</p>
+                      </div>
+                      <div className="report-item">
+                        <i className="fa-solid fa-trash"></i>
+                        <p className="delete">Xoá bình luận</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <p className="info-chat">Hay ạ!</p>
                 <div className="action">
@@ -175,7 +205,13 @@ function TintucRead(props) {
                 value={chat}
                 onChange={(e) => setChat(e.target.value)}
               ></input>
-              <h6 className={chat ? "active" : ""}>Đăng</h6>
+              {chat ? (
+                <h6 className="active" onClick={handlePushComment}>
+                  Đăng
+                </h6>
+              ) : (
+                <h6 className="">Đăng</h6>
+              )}
             </div>
           </div>
         </div>

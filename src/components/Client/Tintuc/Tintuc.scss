@@ -144,7 +144,32 @@
           }
 
           i {
+            cursor: pointer;
             margin-top: 5px;
+          }
+
+          .report {
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            background-color: var(--xam-nhat-nhat);
+            right: 40px;
+            margin-top: 25px;
+
+            .report-item {
+              display: flex;
+              cursor: pointer;
+
+              i {
+                font-size: 18px;
+                margin-right: 10px;
+              }
+
+              i.fa-trash,
+              p.delete {
+                color: var(--mau-do);
+              }
+            }
           }
         }
 
@@ -259,6 +284,25 @@
     background-color: var(--dark-mode-nen);
 
     .offcanvas-body {
+      .commentMain {
+        .chat-main {
+          .comment-info {
+            .info {
+              .report {
+                background-color: var(--dark-mode-ba);
+
+                .report-item {
+                  i.fa-trash,
+                  p.delete {
+                    color: var(--mau-do);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
       .commentBot {
         background-color: var(--dark-mode-nen);
         .grid2 {
