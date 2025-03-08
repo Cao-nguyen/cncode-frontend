@@ -445,7 +445,7 @@
 
   .offcanvas-body {
     .commentBot {
-      position: fixed;
+      position: sticky;
       bottom: 0;
       background-color: var(--mau-trang);
       padding: 10px 0px 30px 0px;
