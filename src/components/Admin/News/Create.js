@@ -14,7 +14,7 @@ function Create(props) {
 
   const [title, setTitle] = useState();
   const [isChecked, setIsChecked] = useState(false);
-  const [show, setShow] = useState();
+  const [show, setShow] = useState("");
   const [description, setDescription] = useState();
   const [content, setContent] = useState();
   const fullName = useSelector((state) => state.user.account.fullName);
@@ -126,6 +126,7 @@ function Create(props) {
             </div>
           </div>
           <select
+            disabled={!isChecked}
             value={show}
             onChange={(e) => {
               setShow(e.target.value);

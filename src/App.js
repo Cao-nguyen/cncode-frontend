@@ -11,7 +11,7 @@ import Footer from "./components/Client/Footer/Footer";
 import Login from "./components/Client/Login/Login";
 import Forgot from "./components/Client/Forgot/Forgot";
 import Register from "./components/Client/Register/Register";
-import AppRoutes, { validRoutes } from "./routes/appRoutes";
+import AppRoutes, { getValidRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
@@ -23,12 +23,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.scss";
 import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
+import { useSelector } from "react-redux";
 
 function App() {
   // Xử lí route bên admin và client
   const location = useLocation();
-  const isAdmin = isAdminRoute(location.pathname);
+  const validRoutes = useSelector((state) => getValidRoutes(state));
   const hideHeader = validRoutes.includes(location.pathname);
+  const isAdmin = isAdminRoute(location.pathname);
 
   // Hiện thị đăng nhập - đăng ký - quên mật khẩu khi click
   const [login, setLogin] = useState(false);

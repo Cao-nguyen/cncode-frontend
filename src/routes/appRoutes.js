@@ -11,13 +11,13 @@ import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 import Ssl from "../components/Client/Ssl/Ssl";
 import Use from "../components/Client/Use/Use";
 import Member from "../components/Client/Member/Member";
-
-// eslint-disable-next-line
 import tintucRead from "../components/Client/Tintuc/Show";
+import Profile from "../components/Client/Profile/Profile";
+import { useSelector } from "react-redux";
 
-export const validRoutes = [];
+const AppRoutes = () => {
+  const username = useSelector((state) => state.user.account.username);
 
-const AppRoutes = (props) => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -33,8 +33,14 @@ const AppRoutes = (props) => {
       <Route path="/ssl" element={<Ssl />} />
       <Route path="/use" element={<Use />} />
       <Route path="/member" element={<Member />} />
+      <Route path={`/@${username}`} element={<Profile />} />
     </Routes>
   );
+};
+
+export const getValidRoutes = (state) => {
+  const username = state.user.account.username;
+  return username ? [`/@${username}`] : [];
 };
 
 export default AppRoutes;
