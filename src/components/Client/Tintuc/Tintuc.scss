@@ -447,7 +447,16 @@
   .offcanvas-body {
     .commentMain {
       margin-bottom: 70px;
-      width: 100px;
+      width: 310px;
+
+      .chat-main {
+        .comment-info {
+          .info {
+            display: grid;
+            grid-template-columns: 300px 10px;
+          }
+        }
+      }
     }
 
     .commentBot {
