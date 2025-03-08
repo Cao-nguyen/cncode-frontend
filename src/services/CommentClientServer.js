@@ -9,13 +9,21 @@ export const CommentsClientRead = async (slug) => {
 };
 
 // [POST] Comments
-export const CommentsClientCreate = async (fullName, chat, slug) => {
+export const CommentsClientCreate = async (
+  fullName,
+  chat,
+  slug,
+  tagName,
+  idChat
+) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/admin/comment/create`,
     {
       fullName,
       chat,
       slug,
+      tagName,
+      idChat,
     }
   );
   return response.data;

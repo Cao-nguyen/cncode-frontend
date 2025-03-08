@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ShowNewClient,
   NewsLike,
@@ -70,14 +70,26 @@ function TintucRead(props) {
 
   const [chat, setChat] = useState();
   const [report, setReport] = useState(false);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState([]);
+  const [tagName, setTagName] = useState(null);
+  const [idChat, setIdChat] = useState();
+  const inputRef = useRef(null);
 
-  const handleToggle = () => {
-    setReport(!report);
+  const handleToggle = (id) => {
+    setReport((prev) => (prev === id ? null : id));
+  };
+
+  const handleTagName = (name, id) => {
+    setTagName(name);
+    setChat(`@${name}: `);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    setIdChat(id);
   };
 
   const handlePushComment = async () => {
-    await CommentsClientCreate(fullName, chat, slug);
+    await CommentsClientCreate(fullName, chat, slug, tagName, idChat);
     setChat("");
   };
 
@@ -96,8 +108,21 @@ function TintucRead(props) {
       setComment((prev) => [...prev, newComment]);
     });
 
+    socket.on("pushCommentReply", () => {
+      const getdata = async () => {
+        const data = await CommentsClientRead(slug);
+
+        if (data && data.EC === 0) {
+          setComment(data.DT);
+        }
+      };
+
+      getdata();
+    });
+
     return () => {
       socket.off("pushComment");
+      socket.off("pushCommentReply");
     };
   }, [slug]);
 
@@ -139,7 +164,9 @@ function TintucRead(props) {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#commentOffcanvas"
                   >
-                    <i className="fa-regular fa-comment comments"></i>0
+                    <i className="fa-regular fa-comment comments"></i>
+                    {(comment?.length || 0) +
+                      (comment[0]?.comments?.reply?.length || 0)}
                   </p>
                 </div>
                 <p>Người đăng: {currentNews.fullName}</p>
@@ -186,46 +213,111 @@ function TintucRead(props) {
           <div className="commentMain">
             {comment &&
               comment.map((item, index) => (
-                <div className="chat-main">
-                  <img src={logo} alt=""></img>
-                  <div className="comment-info">
-                    <div className="info">
-                      <p>{item.comments.name}</p>
-                      <i
-                        className="fa-solid fa-ellipsis"
-                        onClick={handleToggle}
-                      ></i>
-                      {report && (
-                        <div className="report">
-                          <div className="report-item">
-                            <i className="fa-solid fa-flag"></i>
-                            <p>Báo cáo</p>
+                <>
+                  <div className="chat-main" key={index}>
+                    <img src={logo} alt=""></img>
+                    <div className="comment-info">
+                      <div className="info">
+                        <p>{item.comments.name}</p>
+                        <i
+                          className="fa-solid fa-ellipsis"
+                          onClick={() => handleToggle(item._id)}
+                        ></i>
+                        {report === item._id && (
+                          <div className="report">
+                            <div className="report-item">
+                              <i className="fa-solid fa-flag"></i>
+                              <p>Báo cáo</p>
+                            </div>
+                            {(currentNews.fullName === fullName ||
+                              item.comments?.name === fullName) && (
+                              <div className="report-item">
+                                <i className="fa-solid fa-trash"></i>
+                                <p className="delete">Xoá bình luận</p>
+                              </div>
+                            )}
                           </div>
-                          <div className="report-item">
-                            <i className="fa-solid fa-trash"></i>
-                            <p className="delete">Xoá bình luận</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <p className="info-chat">{item.comments.comment}</p>
-                    <div className="action">
-                      <p className="time">
-                        {moment(item.comments.time).format("DD - MM - YYYY")}
-                      </p>
-                      <div className="action-likes">
-                        <i className="fa-regular fa-heart"></i>
-                        <p>0</p>
+                        )}
                       </div>
-                      <p className="reply">Trả lời</p>
+                      <p className="info-chat">{item.comments.comment}</p>
+                      <div className="action">
+                        <p className="time">
+                          {moment(item.comments.time).format("DD - MM - YYYY")}
+                        </p>
+                        <div className="action-likes">
+                          <i className="fa-regular fa-heart"></i>
+                          <p>0</p>
+                        </div>
+                        <p
+                          className="reply"
+                          onClick={() =>
+                            handleTagName(item.comments.name, item._id)
+                          }
+                        >
+                          Trả lời
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <div className="commentMainReply">
+                    {item.comments.reply &&
+                      item.comments.reply.map((item_child, index_child) => (
+                        <div className="chat-main" key={index_child}>
+                          <img src={logo} alt=""></img>
+                          <div className="comment-info">
+                            <div className="info">
+                              <p>{item_child.name}</p>
+                              <i
+                                className="fa-solid fa-ellipsis"
+                                onClick={() => handleToggle(item_child._id)}
+                              ></i>
+                              {report === item_child._id && (
+                                <div className="report">
+                                  <div className="report-item">
+                                    <i className="fa-solid fa-flag"></i>
+                                    <p>Báo cáo</p>
+                                  </div>
+                                  {(currentNews.fullName === fullName ||
+                                    item_child.name === fullName) && (
+                                    <div className="report-item">
+                                      <i className="fa-solid fa-trash"></i>
+                                      <p className="delete">Xoá bình luận</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            <p className="info-chat">{item_child.comment}</p>
+                            <div className="action">
+                              <p className="time">
+                                {moment(item_child.time).format(
+                                  "DD - MM - YYYY"
+                                )}
+                              </p>
+                              <div className="action-likes">
+                                <i className="fa-regular fa-heart"></i>
+                                <p>0</p>
+                              </div>
+                              <p
+                                className="reply"
+                                onClick={() =>
+                                  handleTagName(item_child.name, item._id)
+                                }
+                              >
+                                Trả lời
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </>
               ))}
           </div>
           <div className="commentBot">
             <div className="grid2 form-group">
               <input
+                ref={inputRef}
                 className="form-control"
                 placeholder="Thêm bình luận..."
                 value={chat}

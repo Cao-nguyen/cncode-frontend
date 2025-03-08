@@ -204,30 +204,42 @@
         }
       }
     }
+
+    .commentMainReply {
+      padding-left: 50px;
+      width: 350px;
+
+      .chat-main {
+        .info {
+          display: grid;
+          grid-template-columns: 320px 10px;
+        }
+      }
+    }
   }
+}
 
-  .commentBot {
-    position: fixed;
-    bottom: 0;
-    background-color: var(--mau-trang);
-    padding: 10px 0px 30px 0px;
-    width: 30%;
+.commentBot {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--mau-trang);
+  padding: 10px 0px 30px 0px;
+  width: 30%;
 
-    .grid2 {
-      display: grid;
-      grid-template-columns: 88% 10%;
-      justify-content: space-between;
-      text-align: center;
-      align-items: center;
+  .grid2 {
+    display: grid;
+    grid-template-columns: 88% 10%;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
 
-      h6 {
-        color: var(--xam-nhat-ba);
-      }
+    h6 {
+      color: var(--xam-nhat-ba);
+    }
 
-      h6.active {
-        color: var(--xanh-login);
-        cursor: pointer;
-      }
+    h6.active {
+      color: var(--xanh-login);
+      cursor: pointer;
     }
   }
 }
@@ -454,6 +466,18 @@
           .info {
             display: grid;
             grid-template-columns: 300px 10px;
+          }
+        }
+      }
+
+      .commentMainReply {
+        padding-left: 20px;
+        width: 350px;
+
+        .chat-main {
+          .info {
+            display: grid;
+            grid-template-columns: 280px 10px;
           }
         }
       }
