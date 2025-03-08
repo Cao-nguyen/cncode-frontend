@@ -16,9 +16,14 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
 import {
   CommentsClientCreate,
+  CommentsClientDelete,
+  CommentsClientDeleteReply,
+  CommentsClientLove,
   CommentsClientRead,
+  CommentsClientUnlove,
 } from "../../../services/CommentClientServer";
 import socket from "../../Service/socket";
+import { toast } from "react-toastify";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -93,6 +98,15 @@ function TintucRead(props) {
     setChat("");
   };
 
+  const handleUnLogin = async () => {
+    window.alert("Bạn cần đăng nhập để bình luận");
+    setChat("");
+  };
+
+  const handleUnLoginLove = async () => {
+    window.alert("Bạn cần đăng nhập để thả tim bình luận");
+  };
+
   useEffect(() => {
     const getdata = async () => {
       const data = await CommentsClientRead(slug);
@@ -109,20 +123,32 @@ function TintucRead(props) {
     });
 
     socket.on("pushCommentReply", () => {
-      const getdata = async () => {
-        const data = await CommentsClientRead(slug);
+      getdata();
+    });
 
-        if (data && data.EC === 0) {
-          setComment(data.DT);
-        }
-      };
+    socket.on("chatDelete", () => {
+      getdata();
+    });
 
+    socket.on("chatDeleteReply", () => {
+      getdata();
+    });
+
+    socket.on("like", () => {
+      getdata();
+    });
+
+    socket.on("unlike", () => {
       getdata();
     });
 
     return () => {
       socket.off("pushComment");
       socket.off("pushCommentReply");
+      socket.off("chatDelete");
+      socket.off("chatDeleteReply");
+      socket.off("like");
+      socket.off("unlike");
     };
   }, [slug]);
 
@@ -131,6 +157,34 @@ function TintucRead(props) {
     document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [report]);
+
+  const handleDelete = async (id) => {
+    const data = await CommentsClientDelete(id);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handleDeleteReply = async (idMain, id) => {
+    const data = await CommentsClientDeleteReply(idMain, id);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handleLoveComment = async (idMain, id) => {
+    await CommentsClientLove(idMain, id, fullName);
+  };
+
+  const handleUnloveComment = async (idMain, id) => {
+    await CommentsClientUnlove(idMain, id, fullName);
+  };
 
   return (
     <div className="container">
@@ -234,13 +288,12 @@ function TintucRead(props) {
                         ></i>
                         {report === item._id && (
                           <div className="report">
-                            <div className="report-item">
-                              <i className="fa-solid fa-flag"></i>
-                              <p>Báo cáo</p>
-                            </div>
                             {(currentNews.fullName === fullName ||
                               item.comments?.name === fullName) && (
-                              <div className="report-item">
+                              <div
+                                className="report-item"
+                                onClick={() => handleDelete(item._id)}
+                              >
                                 <i className="fa-solid fa-trash"></i>
                                 <p className="delete">Xoá bình luận</p>
                               </div>
@@ -254,8 +307,24 @@ function TintucRead(props) {
                           {moment(item.comments.time).format("DD - MM - YYYY")}
                         </p>
                         <div className="action-likes">
-                          <i className="fa-regular fa-heart"></i>
-                          <p>0</p>
+                          {item.comments.like.some(
+                            (like) => like.nameLike === fullName
+                          ) ? (
+                            <i
+                              className="fa-solid fa-heart"
+                              onClick={() => handleUnloveComment(item._id)}
+                            ></i>
+                          ) : (
+                            <i
+                              className="fa-regular fa-heart"
+                              onClick={
+                                !fullName
+                                  ? handleUnLoginLove
+                                  : () => handleLoveComment(item._id)
+                              }
+                            ></i>
+                          )}
+                          <p>{item.comments.like.length}</p>
                         </div>
                         <p
                           className="reply"
@@ -285,13 +354,17 @@ function TintucRead(props) {
                               ></i>
                               {report === item_child._id && (
                                 <div className="report">
-                                  <div className="report-item">
-                                    <i className="fa-solid fa-flag"></i>
-                                    <p>Báo cáo</p>
-                                  </div>
                                   {(currentNews.fullName === fullName ||
                                     item_child.name === fullName) && (
-                                    <div className="report-item">
+                                    <div
+                                      className="report-item"
+                                      onClick={() =>
+                                        handleDeleteReply(
+                                          item._id,
+                                          item_child._id
+                                        )
+                                      }
+                                    >
                                       <i className="fa-solid fa-trash"></i>
                                       <p className="delete">Xoá bình luận</p>
                                     </div>
@@ -307,8 +380,33 @@ function TintucRead(props) {
                                 )}
                               </p>
                               <div className="action-likes">
-                                <i className="fa-regular fa-heart"></i>
-                                <p>0</p>
+                                {item_child.like.some(
+                                  (like) => like.nameLike === fullName
+                                ) ? (
+                                  <i
+                                    className="fa-solid fa-heart"
+                                    onClick={() =>
+                                      handleUnloveComment(
+                                        item._id,
+                                        item_child._id
+                                      )
+                                    }
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="fa-regular fa-heart"
+                                    onClick={
+                                      !fullName
+                                        ? handleUnLoginLove
+                                        : () =>
+                                            handleLoveComment(
+                                              item._id,
+                                              item_child._id
+                                            )
+                                    }
+                                  ></i>
+                                )}
+                                <p>{item_child.like.length}</p>
                               </div>
                               <p
                                 className="reply"
@@ -341,7 +439,10 @@ function TintucRead(props) {
                 }}
               ></input>
               {chat ? (
-                <h6 className="active" onClick={handlePushComment}>
+                <h6
+                  className="active"
+                  onClick={!fullName ? handleUnLogin : handlePushComment}
+                >
                   Đăng
                 </h6>
               ) : (
