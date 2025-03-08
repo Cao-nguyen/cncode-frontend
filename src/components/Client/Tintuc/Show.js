@@ -126,6 +126,12 @@ function TintucRead(props) {
     };
   }, [slug]);
 
+  useEffect(() => {
+    const closeMenu = () => setReport(!report);
+    document.addEventListener("click", closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [report]);
+
   return (
     <div className="container">
       {currentNews && (
@@ -221,7 +227,10 @@ function TintucRead(props) {
                         <p>{item.comments.name}</p>
                         <i
                           className="fa-solid fa-ellipsis"
-                          onClick={() => handleToggle(item._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggle(item._id);
+                          }}
                         ></i>
                         {report === item._id && (
                           <div className="report">
@@ -269,7 +278,10 @@ function TintucRead(props) {
                               <p>{item_child.name}</p>
                               <i
                                 className="fa-solid fa-ellipsis"
-                                onClick={() => handleToggle(item_child._id)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleToggle(item_child._id);
+                                }}
                               ></i>
                               {report === item_child._id && (
                                 <div className="report">
