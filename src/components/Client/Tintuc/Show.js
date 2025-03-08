@@ -92,8 +92,8 @@ function TintucRead(props) {
 
     getdata();
 
-    socket.on("pushComment", () => {
-      getdata();
+    socket.on("pushComment", (newComment) => {
+      setComment((prev) => [...prev, newComment]);
     });
 
     return () => {

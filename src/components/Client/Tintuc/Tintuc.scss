@@ -122,7 +122,7 @@
 
 .offcanvas-body {
   .commentMain {
-    margin-bottom: 45px;
+    margin-bottom: 70px;
 
     .chat-main {
       display: flex;
@@ -445,7 +445,7 @@
 
   .offcanvas-body {
     .commentBot {
-      position: sticky;
+      position: fixed;
       bottom: 0;
       background-color: var(--mau-trang);
       padding: 10px 0px 30px 0px;
