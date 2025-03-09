@@ -30,6 +30,7 @@ function TintucRead(props) {
   const [currentNews, setCurrentNews] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const fullName = useSelector((state) => state.user.account.fullName);
+  const userId = useSelector((state) => state.user.account.id);
 
   const { data: news, refetch } = useQuery({
     queryKey: ["news"],
@@ -94,7 +95,7 @@ function TintucRead(props) {
   };
 
   const handlePushComment = async () => {
-    await CommentsClientCreate(fullName, chat, slug, tagName, idChat);
+    await CommentsClientCreate(userId, chat, slug, tagName, idChat);
     setChat("");
   };
 
@@ -118,8 +119,8 @@ function TintucRead(props) {
 
     getdata();
 
-    socket.on("pushComment", (newComment) => {
-      setComment((prev) => [...prev, newComment]);
+    socket.on("pushComment", () => {
+      getdata();
     });
 
     socket.on("pushCommentReply", () => {
@@ -226,10 +227,10 @@ function TintucRead(props) {
                   >
                     <i className="fa-regular fa-comment comments"></i>
                     {(comment?.length || 0) +
-                      (comment[0]?.comments?.reply?.length || 0)}
+                      (comment[0]?.replies?.length || 0)}
                   </p>
                 </div>
-                <p>Người đăng: {currentNews.fullName}</p>
+                <p>Người đăng: {currentNews.authorId.fullName}</p>
                 <p>
                   <i className="fa-solid fa-calendar-days"></i>
                   Ngày đăng:{" "}
@@ -278,7 +279,7 @@ function TintucRead(props) {
                     <img src={logo} alt=""></img>
                     <div className="comment-info">
                       <div className="info">
-                        <p>{item.comments.name}</p>
+                        <p>{item.userId.fullName}</p>
                         <i
                           className="fa-solid fa-ellipsis"
                           onClick={(e) => {
@@ -288,8 +289,8 @@ function TintucRead(props) {
                         ></i>
                         {report === item._id && (
                           <div className="report">
-                            {(currentNews.fullName === fullName ||
-                              item.comments?.name === fullName) && (
+                            {(currentNews.authorId.fullName === fullName ||
+                              item.userId?.fullName === fullName) && (
                               <div
                                 className="report-item"
                                 onClick={() => handleDelete(item._id)}
@@ -301,14 +302,14 @@ function TintucRead(props) {
                           </div>
                         )}
                       </div>
-                      <p className="info-chat">{item.comments.comment}</p>
+                      <p className="info-chat">{item.comment}</p>
                       <div className="action">
                         <p className="time">
-                          {moment(item.comments.time).format("DD - MM - YYYY")}
+                          {moment(item.createdAt).format("DD - MM - YYYY")}
                         </p>
                         <div className="action-likes">
-                          {item.comments.like.some(
-                            (like) => like.nameLike === fullName
+                          {item.likes.some(
+                            (like) => like.userId.fullName === fullName
                           ) ? (
                             <i
                               className="fa-solid fa-heart"
@@ -324,12 +325,12 @@ function TintucRead(props) {
                               }
                             ></i>
                           )}
-                          <p>{item.comments.like.length}</p>
+                          <p>{item.likes.length}</p>
                         </div>
                         <p
                           className="reply"
                           onClick={() =>
-                            handleTagName(item.comments.name, item._id)
+                            handleTagName(item.userId.fullName, item._id)
                           }
                         >
                           Trả lời
@@ -338,13 +339,13 @@ function TintucRead(props) {
                     </div>
                   </div>
                   <div className="commentMainReply">
-                    {item.comments.reply &&
-                      item.comments.reply.map((item_child, index_child) => (
+                    {item.replies &&
+                      item.replies.map((item_child, index_child) => (
                         <div className="chat-main" key={index_child}>
                           <img src={logo} alt=""></img>
                           <div className="comment-info">
                             <div className="info">
-                              <p>{item_child.name}</p>
+                              <p>{item_child.userId.fullName}</p>
                               <i
                                 className="fa-solid fa-ellipsis"
                                 onClick={(e) => {
@@ -354,8 +355,10 @@ function TintucRead(props) {
                               ></i>
                               {report === item_child._id && (
                                 <div className="report">
-                                  {(currentNews.fullName === fullName ||
-                                    item_child.name === fullName) && (
+                                  {(currentNews.authorId.fullName ===
+                                    fullName ||
+                                    item_child.userId.fullName ===
+                                      fullName) && (
                                     <div
                                       className="report-item"
                                       onClick={() =>
@@ -375,13 +378,13 @@ function TintucRead(props) {
                             <p className="info-chat">{item_child.comment}</p>
                             <div className="action">
                               <p className="time">
-                                {moment(item_child.time).format(
+                                {moment(item_child.createdAt).format(
                                   "DD - MM - YYYY"
                                 )}
                               </p>
                               <div className="action-likes">
-                                {item_child.like.some(
-                                  (like) => like.nameLike === fullName
+                                {item_child.likes.some(
+                                  (like) => like.userId.fullName === fullName
                                 ) ? (
                                   <i
                                     className="fa-solid fa-heart"
@@ -406,12 +409,15 @@ function TintucRead(props) {
                                     }
                                   ></i>
                                 )}
-                                <p>{item_child.like.length}</p>
+                                <p>{item_child.likes.length}</p>
                               </div>
                               <p
                                 className="reply"
                                 onClick={() =>
-                                  handleTagName(item_child.name, item._id)
+                                  handleTagName(
+                                    item_child.userId.fullName,
+                                    item._id
+                                  )
                                 }
                               >
                                 Trả lời

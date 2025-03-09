@@ -24,6 +24,8 @@ function Tintuc(props) {
     }
   }, [news]);
 
+  console.log(news);
+
   return (
     <>
       <HelmetProvider>
@@ -43,7 +45,7 @@ function Tintuc(props) {
               <h3>{item.title}</h3>
               <p>{item.description}</p>
               <div className="news-text">
-                <p>{item.fullName}</p>
+                <p>{item.authorId.fullName}</p>
                 <p>{moment(item.createdAt).format("DD/MM/YYYY")}</p>
               </div>
               <div className="btn btn-primary">

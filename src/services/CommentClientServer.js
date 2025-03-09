@@ -46,7 +46,7 @@ export const CommentsClientDelete = async (id) => {
 
 // [POST] Comments
 export const CommentsClientCreate = async (
-  fullName,
+  userId,
   chat,
   slug,
   tagName,
@@ -55,7 +55,7 @@ export const CommentsClientCreate = async (
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/comment/create`,
     {
-      fullName,
+      userId,
       chat,
       slug,
       tagName,
