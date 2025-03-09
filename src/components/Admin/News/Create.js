@@ -17,8 +17,7 @@ function Create(props) {
   const [show, setShow] = useState("");
   const [description, setDescription] = useState();
   const [content, setContent] = useState();
-  const fullName = useSelector((state) => state.user.account.fullName);
-  const username = useSelector((state) => state.user.account.username);
+  const authorId = useSelector((state) => state.user.account.id);
   const [isLoading, setIsLoading] = useState();
   const [isModified, setIsModified] = useState(false);
 
@@ -51,8 +50,7 @@ function Create(props) {
         show,
         description,
         content,
-        fullName,
-        username
+        authorId
       );
       if (data && data.EC === 0) {
         toast.success(data.EM);
