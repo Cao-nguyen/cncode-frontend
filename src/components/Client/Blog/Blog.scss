@@ -100,6 +100,90 @@
   }
 }
 
+.MeBlog-Container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 100%;
+  justify-content: space-between;
+
+  .MeBlog {
+    display: grid;
+    grid-template-columns: 30% 69%;
+    justify-content: space-between;
+    background-color: var(--xam-nhat-nhat);
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: var(--box-shadow);
+      transform: translateY(-10px);
+    }
+
+    .MeBlog-Left {
+      margin-right: 5px;
+
+      a {
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .MeBlog-Right {
+      a {
+        text-decoration: none;
+        h3 {
+          color: var(--mau-den);
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+
+      p {
+        color: var(--mau-den);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-align: justify;
+      }
+
+      .activeFalse {
+        width: 100px;
+        background-color: var(--mau-do);
+        text-align: center;
+        padding: 5px;
+        color: var(--mau-trang);
+        border-radius: 5px;
+      }
+
+      .activeTrue {
+        width: 100px;
+        background-color: var(--xanh-login);
+        text-align: center;
+        padding: 5px;
+        color: var(--mau-trang);
+        border-radius: 5px;
+      }
+
+      .action {
+        a.edit {
+          background-color: var(--xanh-login);
+          color: var(--mau-trang);
+          padding: 5px 10px;
+          border-radius: 5px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
 .dark-mode {
   .postBlog {
     .headerPostBlog {

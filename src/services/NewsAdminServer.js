@@ -7,7 +7,8 @@ export const CreateNew = async (
   show,
   description,
   content,
-  fullName
+  fullName,
+  username
 ) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/admin/news/create`,
@@ -18,6 +19,7 @@ export const CreateNew = async (
       description,
       content,
       fullName,
+      username,
     }
   );
   return response.data;

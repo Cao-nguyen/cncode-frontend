@@ -13,6 +13,8 @@ function PostBlog() {
   const navigate = useNavigate();
 
   const fullName = useSelector((state) => state.user.account.fullName);
+  const username = useSelector((state) => state.user.account.username);
+
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [description, setDescription] = useState();
@@ -61,7 +63,13 @@ function PostBlog() {
   };
 
   const postCreate = async () => {
-    const check = BlogCreateValidate(title, content, description, img);
+    const check = BlogCreateValidate(
+      title,
+      content,
+      description,
+      img,
+      username
+    );
 
     if (check === true) {
       const data = await BlogClientCreate(
@@ -71,7 +79,8 @@ function PostBlog() {
         description,
         show,
         isChecked,
-        img
+        img,
+        username
       );
 
       if (data && data.EC === 0) {

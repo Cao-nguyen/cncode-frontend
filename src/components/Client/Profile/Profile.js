@@ -50,7 +50,7 @@ function Profile() {
 
   useEffect(() => {
     const getPost = async () => {
-      const data = await PostClientRead(user?.fullName);
+      const data = await PostClientRead(user?.username);
 
       if (data && data.EC === 0) {
         setNews(data.DT);
