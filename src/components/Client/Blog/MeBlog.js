@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 function MeBlog(props) {
   const fullName = useSelector((state) => state.user.account.fullName);
+  const username = useSelector((state) => state.user.account.username);
 
   return (
     <>
