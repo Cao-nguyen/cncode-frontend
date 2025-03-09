@@ -7,11 +7,10 @@ import "prismjs/components/prism-javascript.min.js";
 import "prismjs/components/prism-cshtml.min.js";
 import "prismjs/components/prism-css.min.js";
 import axios from "axios";
-import "./Editor.scss";
+import "./PostEditor.scss";
 
-function Editor({ value, onChange }) {
+function PostEditor({ value, onChange }) {
   const [markdown, setMarkdown] = useState(value || "");
-  const [isPreview, setIsPreview] = useState(false);
 
   useEffect(() => {
     setMarkdown(value || "");
@@ -121,113 +120,102 @@ function Editor({ value, onChange }) {
     Prism.highlightAll();
   }, [markdown]);
 
-  const togglePreview = () => {
-    setIsPreview((prev) => !prev);
-  };
-
   return (
-    <div className="editor-text">
-      <div className="toolbar">
-        <i
-          className="fa-solid fa-bold"
-          title="Ctrl+B"
-          onClick={() => insertMarkdown("**{}**")}
-        />
-        <i
-          className="fa-solid fa-italic"
-          title="Ctrl+I"
-          onClick={() => insertMarkdown("*{}*")}
-        />
-        <i
-          className="fa-solid fa-underline"
-          title="Ctrl+U"
-          onClick={() => insertMarkdown("<u>{}</u>")}
-        />
-        <i
-          className="fa-solid fa-superscript"
-          title="Ctrl+^"
-          onClick={() => insertMarkdown("<sup>{}</sup>")}
-        />
-        <i
-          className="fa-solid fa-subscript"
-          title="Ctrl+_"
-          onClick={() => insertMarkdown("<sub>{}</sub>")}
-        />
-        <i
-          className="fa-solid fa-quote-left"
-          title="Ctrl+Q"
-          onClick={() => insertMarkdown("> {}")}
-        />
-        <i
-          className="fa-solid fa-link"
-          title="Ctrl+K"
-          onClick={() => insertMarkdown("[{}](Link)")}
-        />
-        <i
-          className="fa-solid fa-table"
-          title="Ctrl+T"
-          onClick={() =>
-            insertMarkdown(
-              "| {} | Header 2 |\n| -------- | -------- |\n| Row 1    | Row 2    |"
-            )
-          }
-        />
-        <label htmlFor="image-upload" className="image-upload-label">
-          <i className="fa-solid fa-image" title="Upload Image" />
-        </label>
-        <input
-          id="image-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="image-upload-input"
-        />
-        <i
-          className="fa-solid fa-code"
-          title="Ctrl+Shift+C"
-          onClick={() => insertMarkdown("```language\n{}\n```")}
-        />
-        <i
-          className="fa-solid fa-align-left"
-          title="Center Align"
-          onClick={() => insertMarkdown('<div class="al-left">{}</div>')}
-        />
-        <i
-          className="fa-solid fa-align-center"
-          title="Center Align"
-          onClick={() => insertMarkdown('<div class="al-center">{}</div>')}
-        />
-        <i
-          className="fa-solid fa-align-right"
-          title="Center Align"
-          onClick={() => insertMarkdown('<div class="al-right">{}</div>')}
-        />
-        <i
-          className="fa-solid fa-align-justify"
-          title="Center Align"
-          onClick={() => insertMarkdown('<div class="al-justify">{}</div>')}
-        />
-        <i
-          className="fa-solid fa-eye"
-          title="Bản xem trước"
-          onClick={togglePreview}
-        />
-      </div>
+    <div className="editorPost-text">
+      <div className="editor-text-display">
+        <div className="toolbar">
+          <i
+            className="fa-solid fa-bold"
+            title="Ctrl+B"
+            onClick={() => insertMarkdown("**{}**")}
+          />
+          <i
+            className="fa-solid fa-italic"
+            title="Ctrl+I"
+            onClick={() => insertMarkdown("*{}*")}
+          />
+          <i
+            className="fa-solid fa-underline"
+            title="Ctrl+U"
+            onClick={() => insertMarkdown("<u>{}</u>")}
+          />
+          <i
+            className="fa-solid fa-superscript"
+            title="Ctrl+^"
+            onClick={() => insertMarkdown("<sup>{}</sup>")}
+          />
+          <i
+            className="fa-solid fa-subscript"
+            title="Ctrl+_"
+            onClick={() => insertMarkdown("<sub>{}</sub>")}
+          />
+          <i
+            className="fa-solid fa-quote-left"
+            title="Ctrl+Q"
+            onClick={() => insertMarkdown("> {}")}
+          />
+          <i
+            className="fa-solid fa-link"
+            title="Ctrl+K"
+            onClick={() => insertMarkdown("[{}](Link)")}
+          />
+          <i
+            className="fa-solid fa-table"
+            title="Ctrl+T"
+            onClick={() =>
+              insertMarkdown(
+                "| {} | Header 2 |\n| -------- | -------- |\n| Row 1    | Row 2    |"
+              )
+            }
+          />
+          <label htmlFor="image-upload" className="image-upload-label">
+            <i className="fa-solid fa-image" title="Upload Image" />
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="image-upload-input"
+          />
+          <i
+            className="fa-solid fa-code"
+            title="Ctrl+Shift+C"
+            onClick={() => insertMarkdown("```language\n{}\n```")}
+          />
+          <i
+            className="fa-solid fa-align-left"
+            title="Center Align"
+            onClick={() => insertMarkdown('<div class="al-left">{}</div>')}
+          />
+          <i
+            className="fa-solid fa-align-center"
+            title="Center Align"
+            onClick={() => insertMarkdown('<div class="al-center">{}</div>')}
+          />
+          <i
+            className="fa-solid fa-align-right"
+            title="Center Align"
+            onClick={() => insertMarkdown('<div class="al-right">{}</div>')}
+          />
+          <i
+            className="fa-solid fa-align-justify"
+            title="Center Align"
+            onClick={() => insertMarkdown('<div class="al-justify">{}</div>')}
+          />
+        </div>
 
-      <div
-        className="editor-container"
-        style={{ display: isPreview ? "none" : "block" }}
-      >
-        <textarea
-          value={markdown}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-        />
+        <div className="editor-container">
+          <textarea
+            value={markdown}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
       </div>
 
       <div
         className="preview"
-        style={{ display: isPreview ? "block" : "none" }}
         dangerouslySetInnerHTML={{
           __html: marked(markdown.replace(/\n/g, "  \n")),
         }}
@@ -236,4 +224,4 @@ function Editor({ value, onChange }) {
   );
 }
 
-export default Editor;
+export default PostEditor;

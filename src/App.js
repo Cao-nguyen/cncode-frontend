@@ -11,8 +11,9 @@ import Footer from "./components/Client/Footer/Footer";
 import Login from "./components/Client/Login/Login";
 import Forgot from "./components/Client/Forgot/Forgot";
 import Register from "./components/Client/Register/Register";
-import AppRoutes, { validateRoutes } from "./routes/appRoutes";
+import AppRoutes, { validateRoutes, clientRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
+import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -22,26 +23,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.scss";
-import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 
 function App() {
   // Xử lí route bên admin và client
   const location = useLocation();
-  const hideHeader =
+  const isClientRoutes =
     /^\/[^/]+$/.test(location.pathname) &&
-    ![
-      "/gioithieu",
-      "/khoahoc",
-      "/luyentap",
-      "/diendan",
-      "/blog",
-      "/sukien",
-      "/tintuc",
-      "/tintuc/:slug",
-      "/ssl",
-      "/member",
-      "/use",
-    ].includes(location.pathname);
+    !clientRoutes.includes(location.pathname);
+  const hideHeader =
+    validateRoutes.includes(location.pathname) || isClientRoutes;
   const isAdmin = isAdminRoute(location.pathname);
 
   // Hiện thị đăng nhập - đăng ký - quên mật khẩu khi click

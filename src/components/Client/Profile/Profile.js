@@ -21,9 +21,13 @@ function Profile() {
     navigate(-1);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [user, setUser] = useState();
   const [course, setCourse] = useState();
-  const [follow, setFollow] = useState();
+  const [follow, setFollow] = useState([]);
   const [huyhieu, setHuyhieu] = useState();
   const [item, setItem] = useState();
   const [news, setNews] = useState([]);
@@ -35,7 +39,7 @@ function Profile() {
       if (data && data.EC === 0) {
         setUser(data.DT.user);
         setCourse(data.DT.courses);
-        setFollow(data.DT.follows);
+        setFollow(data.DT.follows.follow);
         setHuyhieu(data.DT.huyhieu);
         setItem(data.DT.items);
       }
@@ -56,8 +60,6 @@ function Profile() {
     getPost();
   }, [user]);
 
-  console.log(news);
-
   return (
     <>
       <HelmetProvider>
@@ -70,103 +72,136 @@ function Profile() {
           <link rel="canonical" href="https://cncode.vercel.app" />
         </Helmet>
       </HelmetProvider>
-      <div className="html-profile">
-        <div className="background-profile">
-          <p onClick={handleBack}>
-            <i class="fa-solid fa-arrow-left"></i>
-            Trở về
-          </p>
-          <img src={bg} alt=""></img>
-        </div>
-        <div className="profile">
-          <div className="profile-main">
-            <div className="infor-profile">
-              <img src={user?.avatar} alt=""></img>
-              <div className="infor-item">
-                <h4>
-                  {user?.fullName} ({`@${user?.username}`})
-                </h4>
-                <div className="infor-item-action">
-                  <p>{follow ? follow.length : "0"} người theo dõi</p>
-                  <div className="btn btn-primary">
+      {user ? (
+        <div className="html-profile">
+          <div className="background-profile">
+            <p onClick={handleBack}>
+              <i class="fa-solid fa-arrow-left"></i>
+              Trở về
+            </p>
+            <img src={bg} alt=""></img>
+          </div>
+          <div className="profile">
+            <div className="profile-main">
+              <div className="infor-profile">
+                <img src={user?.avatar} alt=""></img>
+                <div className="infor-item">
+                  <h4>
+                    {user?.fullName} ({`@${user?.username}`})
+                  </h4>
+                  <div className="infor-item-action">
                     <p>
-                      <i className="fa-solid fa-plus"></i>
-                      Theo dõi trang cá nhân
+                      {Array.isArray(follow) && follow.length > 0
+                        ? `${follow.length} người theo dõi`
+                        : "Chưa có người theo dõi"}
                     </p>
+                    <div className="btn btn-primary">
+                      <p>
+                        <i className="fa-solid fa-plus"></i>
+                        Theo dõi trang cá nhân
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="body-profile">
-          <div className="body-profile-right">
-            <h4>Giới thiệu</h4>
-            <p className="mota">Học tập làm cốt</p>
+          <div className="body-profile">
+            <div className="body-profile-right">
+              <h4>Giới thiệu</h4>
+              <p className="mota">Học tập làm cốt</p>
 
-            <h4>Mạng xã hội</h4>
-            <p className="mota">Học tập làm cốt</p>
+              <h4>Mạng xã hội</h4>
+              <p className="mota">Học tập làm cốt</p>
 
-            <h4>Chuỗi học tập</h4>
-            <p>
-              Bạn đã giữ được: 100
-              <img src={chuoi} alt="" />
-            </p>
+              <h4>Chuỗi học tập</h4>
+              <p>
+                Bạn đã giữ được: 100
+                <img src={chuoi} alt="" />
+              </p>
 
-            <h4>Điểm thành viên</h4>
-            <p>Bạn hiện có: 100 điểm - Cấp: 1</p>
+              <h4>Điểm thành viên</h4>
+              <p>Bạn hiện có: 100 điểm - Cấp: 1</p>
 
-            <h4>Ngân sách cá nhân</h4>
-            <p>
-              Bạn hiện có: {user?.coins}
-              <img src={xu} alt="" />
-            </p>
+              <h4>Ngân sách cá nhân</h4>
+              <p>
+                Bạn hiện có: {user?.coins}
+                <img src={xu} alt="" />
+              </p>
 
-            <h4>Kho vật phẩm</h4>
-            <p>
-              Bạn hiện có: 100
-              <img src={xu} alt="" />
-            </p>
+              <h4>Kho vật phẩm</h4>
+              <p>
+                Bạn hiện có: 100
+                <img src={xu} alt="" />
+              </p>
 
-            <h4>Các khoá học đã tham gia</h4>
-            <p>
-              Bạn hiện có: 100
-              <img src={xu} alt="" />
-            </p>
-          </div>
-          <div className="body-profile-left">
-            <div className="body-profile-left-top">
-              <h4>Ngân hà thành tựu</h4>
-              <div className="post">
-                {Array.isArray(huyhieu) && huyhieu.length > 0 ? (
-                  huyhieu.map((item, index) => (
-                    <div key={index} className="post-item">
-                      <img src={logo} alt="" />
+              <h4>Các khoá học đã tham gia</h4>
+              <p>
+                Bạn hiện có: 100
+                <img src={xu} alt="" />
+              </p>
+            </div>
+            <div className="body-profile-left">
+              <div className="body-profile-left-top">
+                <h4>Ngân hà thành tựu</h4>
+                <div className="post">
+                  {Array.isArray(huyhieu) && huyhieu.length > 0 ? (
+                    huyhieu.map((item, index) => (
+                      <div key={index} className="post-item">
+                        <img src={logo} alt="" />
+                      </div>
+                    ))
+                  ) : (
+                    <p>Không có huy hiệu nào</p>
+                  )}
+                </div>
+              </div>
+              <div className="body-profile-left-bot">
+                <h4>Bài viết</h4>
+                {news &&
+                  news.map((item, index) => (
+                    <div className="newspost" key={index}>
+                      <p className="time">
+                        {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
+                      </p>
+                      <Link to={`/tintuc/${item.slug}`}>
+                        <h5>{item.title}</h5>
+                        <p>{item.description}</p>
+                      </Link>
                     </div>
-                  ))
-                ) : (
-                  <p>Không có huy hiệu nào</p>
-                )}
+                  ))}
               </div>
             </div>
-            <div className="body-profile-left-bot">
-              <h4>Bài viết</h4>
-              {news &&
-                news.map((item, index) => (
-                  <div className="newspost" key={index}>
-                    <p className="time">
-                      {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
-                    </p>
-                    <Link to={`/tintuc/${item.slug}`}>
-                      <h5>{item.title}</h5>
-                      <p>{item.description}</p>
-                    </Link>
-                  </div>
-                ))}
+          </div>
+        </div>
+      ) : (
+        <div className="html-profile">
+          <div className="background-profile">
+            <p onClick={handleBack}>
+              <i class="fa-solid fa-arrow-left"></i>
+              Trở về
+            </p>
+            <img src={bg} alt=""></img>
+          </div>
+          <div className="profile">
+            <div className="profile-main">
+              <div className="infor-profile">
+                <img src={user?.avatar} alt=""></img>
+                <div className="infor-item">
+                  <h4>Đang tải dữ liệu...</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="body-profile">
+            <div className="body-profile-right"></div>
+            <div className="body-profile-left">
+              <div className="body-profile-left-top"></div>
+              <div className="body-profile-left-bot"></div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
