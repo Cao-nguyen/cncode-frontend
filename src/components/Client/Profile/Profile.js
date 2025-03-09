@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { useSelector } from "react-redux";
 import bg from "../../../assets/bg.png";
 import logo from "../../../assets/logo.png";
 import xu from "../../../assets/Khac/xu.png";
 import chuoi from "../../../assets/Khac/streak.png";
 import "./Profile.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   PostClientRead,
   ProfileClientRead,
@@ -14,7 +13,7 @@ import {
 import moment from "moment/moment";
 
 function Profile() {
-  const username = useSelector((state) => state.user.account.username);
+  const { username } = useParams();
 
   const navigate = useNavigate();
 

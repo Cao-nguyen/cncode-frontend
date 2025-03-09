@@ -132,7 +132,7 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
 
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <NavLink className="dropdown-link" to={`/@${username}`}>
+                    <NavLink className="dropdown-link" to={`/${username}`}>
                       Trang cá nhân
                     </NavLink>
                   </Dropdown.Item>
@@ -219,7 +219,7 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
 
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <NavLink className="dropdown-link" to="/profile">
+                    <NavLink className="dropdown-link" to={`/${username}`}>
                       Trang cá nhân
                     </NavLink>
                   </Dropdown.Item>
