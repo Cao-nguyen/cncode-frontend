@@ -17,7 +17,7 @@ function Home(props) {
       </HelmetProvider>
 
       <div className="container">
-        <GoogleAd adClient="ca-pub-5575086789438757" adSlot="1234567890" />
+        <GoogleAd adClient="ca-pub-5575086789438757" adSlot="8838378159" />
         <h1 className="text-center mt-5 text-primary">
           CNcode - Nền tảng học lập trình miễn phí
         </h1>
