@@ -55,7 +55,7 @@ function Show(props) {
           <>
             <h3 className="text-center text-primary">{currentNews.title}</h3>
             <div className="gird-text mt-2">
-              <p>Tác giả: {currentNews.authorId.fullName}</p>
+              <p>Tác giả: {currentNews?.authorId?.fullName}</p>
               <p>
                 Hiển thị: {currentNews.show ? "Công khai" : "Không công khai"}
               </p>

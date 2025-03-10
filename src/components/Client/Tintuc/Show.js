@@ -187,6 +187,17 @@ function TintucRead(props) {
     await CommentsClientUnlove(idMain, id, fullName);
   };
 
+  const countTotalComments = () => {
+    let totalComments = comment.length;
+
+    // Đếm tổng số trả lời trong mỗi bình luận
+    comment.forEach((comment) => {
+      totalComments += comment.replies ? comment.replies.length : 0;
+    });
+
+    return totalComments;
+  };
+
   return (
     <div className="container">
       {currentNews && (
@@ -226,8 +237,7 @@ function TintucRead(props) {
                     data-bs-target="#commentOffcanvas"
                   >
                     <i className="fa-regular fa-comment comments"></i>
-                    {(comment?.length || 0) +
-                      (comment[0]?.replies?.length || 0)}
+                    {countTotalComments()}
                   </p>
                 </div>
                 <p>Người đăng: {currentNews.authorId.fullName}</p>

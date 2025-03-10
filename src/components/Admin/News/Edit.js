@@ -110,7 +110,7 @@ function Edit(props) {
           className="form-control"
           placeholder="Tác giả*"
           disabled
-          value={currentNews.authorId.fullName}
+          value={currentNews?.authorId?.fullName}
         ></input>
         <input
           className="form-control"
