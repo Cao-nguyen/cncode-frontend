@@ -3,6 +3,7 @@ import { ShowNewClient } from "../../../services/NewsClientServer";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "./Tintuc.scss";
+import GoogleAd from "../GoogleAds/GoogleAds"
 import { useQuery } from "@tanstack/react-query";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
