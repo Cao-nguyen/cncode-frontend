@@ -1,6 +1,5 @@
 import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import GoogleAd from "../GoogleAds/GoogleAds";
 
 function Home(props) {
   return (
@@ -45,7 +44,6 @@ function Home(props) {
           CNcode - Nền tảng học lập trình miễn phí
         </h1>
         <h3 className="text-center">Dự án được phát triển bởi Lý Cao Nguyên</h3>
-        <GoogleAd adClient="ca-pub-5575086789438757" adSlot="8838378159" />
       </div>
     </>
   );
