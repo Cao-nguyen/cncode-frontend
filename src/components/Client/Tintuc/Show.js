@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   ShowNewClient,
   NewsLike,
@@ -29,6 +29,7 @@ function TintucRead(props) {
   const { slug } = useParams();
   const [currentNews, setCurrentNews] = useState();
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const fullName = useSelector((state) => state.user.account.fullName);
   const userId = useSelector((state) => state.user.account.id);
 
@@ -44,6 +45,33 @@ function TintucRead(props) {
       setIsVisible(true);
     }
   }, [slug, news]);
+
+  const inforHtml = useMemo(() => {
+    if (!currentNews?.content) return "";
+
+    let imgIndex = 0;
+    const renderer = new marked.Renderer();
+
+    renderer.image = (href, title, text) => {
+      imgIndex++;
+
+      let imageUrl = typeof href === "string" ? href : href?.href || "";
+
+      console.log(imageUrl);
+
+      return `<div class="img-wrapper" onClick="window.openImage('${imageUrl}')">
+          <img src="${imageUrl}" alt="${text}" class="img${imgIndex}" />
+        </div>`;
+    };
+
+    const html = marked(currentNews?.content, { renderer });
+
+    return html;
+  }, [currentNews]);
+
+  useEffect(() => {
+    window.openImage = (src) => setSelectedImage(src);
+  }, []);
 
   const handleLove = async () => {
     if (fullName === "") {
@@ -251,15 +279,24 @@ function TintucRead(props) {
               </div>
             </div>
             <div className="show_content">
-              <div
-                className="preview show_content_item mt-2"
-                dangerouslySetInnerHTML={{
-                  __html: marked(
-                    (currentNews.content || "").replace(/\n/g, "  \n")
-                  ),
-                }}
-              ></div>
+              <div className="preview show_content_item mt-2">
+                <div
+                  className={`preview fade-in ${isVisible ? "visible" : ""}`}
+                  dangerouslySetInnerHTML={{ __html: inforHtml }}
+                ></div>
+              </div>
             </div>
+
+            {selectedImage && (
+              <div
+                className="image-viewer"
+                onClick={() => setSelectedImage(null)}
+              >
+                <div className="image-content">
+                  <img src={selectedImage} alt="Preview" />
+                </div>
+              </div>
+            )}
           </div>
         </>
       )}

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { marked } from "marked";
 import Prism from "prismjs";
 import "prismjs/themes/prism-twilight.css";
 import "prismjs/components/prism-python.min.js";
 import "prismjs/components/prism-javascript.min.js";
-import "prismjs/components/prism-cshtml.min.js";
 import "prismjs/components/prism-css.min.js";
 import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "../../../services/InforAdminServer";
@@ -12,6 +11,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Gioithieu() {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,12 +22,39 @@ function Gioithieu() {
     queryFn: getInforApi,
   });
 
+  const inforHtml = useMemo(() => {
+    if (!Infor?.DT) return "";
+
+    let imgIndex = 0;
+    const renderer = new marked.Renderer();
+
+    renderer.image = (href, title, text) => {
+      imgIndex++;
+
+      let imageUrl = typeof href === "string" ? href : href?.href || "";
+
+      console.log(imageUrl);
+
+      return `<div class="img-wrapper" onClick="window.openImage('${imageUrl}')">
+        <img src="${imageUrl}" alt="${text}" class="img${imgIndex}" />
+      </div>`;
+    };
+
+    const html = marked(Infor.DT, { renderer });
+
+    return html;
+  }, [Infor]);
+
   useEffect(() => {
-    if (Infor) {
+    if (inforHtml) {
       Prism.highlightAll();
       setIsVisible(true);
     }
-  }, [Infor]);
+  }, [inforHtml]);
+
+  useEffect(() => {
+    window.openImage = (src) => setSelectedImage(src);
+  }, []);
 
   return (
     <>
@@ -45,12 +72,19 @@ function Gioithieu() {
         <div className="pt-5">
           <div
             className={`preview fade-in ${isVisible ? "visible" : ""}`}
-            dangerouslySetInnerHTML={{
-              __html: marked(Infor?.DT?.replace(/\n/g, "  \n") || ""),
-            }}
+            dangerouslySetInnerHTML={{ __html: inforHtml }}
           ></div>
         </div>
       </div>
+
+      {/* View ảnh khi click */}
+      {selectedImage && (
+        <div className="image-viewer" onClick={() => setSelectedImage(null)}>
+          <div className="image-content">
+            <img src={selectedImage} alt="Preview" />
+          </div>
+        </div>
+      )}
     </>
   );
 }
