@@ -268,7 +268,7 @@ function TintucRead(props) {
                     {countTotalComments()}
                   </p>
                 </div>
-                <p>Người đăng: {currentNews.authorId.fullName}</p>
+                <p>Người đăng: {currentNews?.authorId?.fullName}</p>
                 <p>
                   <i className="fa-solid fa-calendar-days"></i>
                   Ngày đăng:{" "}
