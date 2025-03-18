@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export const BlogCreateValidate = (title, content, description, img) => {
+export const BlogCreateValidate = (title, content, description, img, id) => {
   if (!title) {
     toast.error("Vui lòng nhập tiêu đề");
     return false;
@@ -18,6 +18,11 @@ export const BlogCreateValidate = (title, content, description, img) => {
 
   if (!img) {
     toast.error("Bạn cần upload 1 ảnh để làm ảnh bìa");
+    return false;
+  }
+
+  if (!id) {
+    toast.error("Bạn cần đăng nhập để có thể đăng blog");
     return false;
   }
 

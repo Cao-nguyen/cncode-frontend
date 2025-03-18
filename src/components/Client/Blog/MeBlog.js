@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 
 function MeBlog(props) {
   const fullName = useSelector((state) => state.user.account.fullName);
-  const username = useSelector((state) => state.user.account.username);
+  const id = useSelector((state) => state.user.account.id);
 
   const [blog, setBlog] = useState([]);
 
   useEffect(() => {
     const getBlog = async () => {
-      const data = await BlogClientRead(username);
+      const data = await BlogClientRead(id);
 
       if (data && data.EC === 0) {
         setBlog(data.DT);
@@ -21,7 +21,7 @@ function MeBlog(props) {
     };
 
     getBlog();
-  }, [username]);
+  }, [id]);
 
   const handleEdit = () => {};
   const handleDelete = () => {};

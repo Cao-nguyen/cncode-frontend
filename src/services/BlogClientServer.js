@@ -1,27 +1,26 @@
 import axios from "axios";
 
 // [GET] Blog
-export const BlogClientRead = async (username) => {
+export const BlogClientRead = async (id) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_BACKEND}/api/v1/client/blog/read/${username}`
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/blog/read/${id}`
   );
   return response.data;
 };
 
 // [POST] Blog
 export const BlogClientCreate = async (
-  fullName,
   title,
   content,
   description,
   show,
   isChecked,
   img,
-  username
+  id
 ) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/blog/create`,
-    { fullName, title, content, description, show, isChecked, img, username }
+    { title, content, description, show, isChecked, img, id }
   );
   return response.data;
 };

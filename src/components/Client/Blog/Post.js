@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
 function PostBlog() {
   const navigate = useNavigate();
 
-  const fullName = useSelector((state) => state.user.account.fullName);
-  const username = useSelector((state) => state.user.account.username);
+  const id = useSelector((state) => state.user.account.id);
 
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
@@ -63,24 +62,17 @@ function PostBlog() {
   };
 
   const postCreate = async () => {
-    const check = BlogCreateValidate(
-      title,
-      content,
-      description,
-      img,
-      username
-    );
+    const check = BlogCreateValidate(title, content, description, img, id);
 
     if (check === true) {
       const data = await BlogClientCreate(
-        fullName,
         title,
         content,
         description,
         show,
         isChecked,
         img,
-        username
+        id
       );
 
       if (data && data.EC === 0) {
