@@ -326,7 +326,7 @@ function TintucRead(props) {
                     <img src={logo} alt=""></img>
                     <div className="comment-info">
                       <div className="info">
-                        <p>{item.userId.fullName}</p>
+                        <p>{item?.userId?.fullName}</p>
                         <i
                           className="fa-solid fa-ellipsis"
                           onClick={(e) => {
@@ -336,8 +336,8 @@ function TintucRead(props) {
                         ></i>
                         {report === item._id && (
                           <div className="report">
-                            {(currentNews.authorId.fullName === fullName ||
-                              item.userId?.fullName === fullName) && (
+                            {(currentNews?.authorId?.fullName === fullName ||
+                              item?.userId?.fullName === fullName) && (
                               <div
                                 className="report-item"
                                 onClick={() => handleDelete(item._id)}
@@ -356,7 +356,7 @@ function TintucRead(props) {
                         </p>
                         <div className="action-likes">
                           {item.likes.some(
-                            (like) => like.userId.fullName === fullName
+                            (like) => like?.userId?.fullName === fullName
                           ) ? (
                             <i
                               className="fa-solid fa-heart"
@@ -377,7 +377,7 @@ function TintucRead(props) {
                         <p
                           className="reply"
                           onClick={() =>
-                            handleTagName(item.userId.fullName, item._id)
+                            handleTagName(item?.userId?.fullName, item._id)
                           }
                         >
                           Trả lời
@@ -392,7 +392,7 @@ function TintucRead(props) {
                           <img src={logo} alt=""></img>
                           <div className="comment-info">
                             <div className="info">
-                              <p>{item_child.userId.fullName}</p>
+                              <p>{item_child?.userId?.fullName}</p>
                               <i
                                 className="fa-solid fa-ellipsis"
                                 onClick={(e) => {
@@ -402,9 +402,9 @@ function TintucRead(props) {
                               ></i>
                               {report === item_child._id && (
                                 <div className="report">
-                                  {(currentNews.authorId.fullName ===
+                                  {(currentNews?.authorId?.fullName ===
                                     fullName ||
-                                    item_child.userId.fullName ===
+                                    item_child?.userId?.fullName ===
                                       fullName) && (
                                     <div
                                       className="report-item"
@@ -431,7 +431,7 @@ function TintucRead(props) {
                               </p>
                               <div className="action-likes">
                                 {item_child.likes.some(
-                                  (like) => like.userId.fullName === fullName
+                                  (like) => like?.userId?.fullName === fullName
                                 ) ? (
                                   <i
                                     className="fa-solid fa-heart"

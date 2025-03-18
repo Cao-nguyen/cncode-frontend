@@ -127,7 +127,7 @@ function News(props) {
             <div className="admin-content-item" key={item._id}>
               <p className="id">{item._id}</p>
               <p className="title">{item.title}</p>
-              <p className="right">{item.authorId?.fullName}</p>
+              <p className="right">{item?.authorId?.fullName}</p>
               <p className="actives">
                 {item.isChecked ? "Phát hành" : "Bản nháp"}
               </p>
