@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { marked } from "marked";
 import { ShowNew } from "../../../services/NewsAdminServer";
 import moment from "moment";
+import "./News.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
