@@ -6,6 +6,8 @@ import Infor from "../components/Admin/Infor/Infor";
 import Ssl from "../components/Admin/Ssl/Ssl";
 import Themes from "../components/Admin/Themes/Themes";
 import News from "../components/Admin/News/News";
+import Blog from "../components/Admin/Blog/Blog";
+import ShowBlog from "../components/Admin/Blog/Show";
 import CreateNews from "../components/Admin/News/Create";
 import EditNews from "../components/Admin/News/Edit";
 import ShowNews from "../components/Admin/News/Show";
@@ -39,6 +41,23 @@ const ProtectedRoute = ({ children }) => {
 const AdminRoutes = (props) => {
   return (
     <Routes>
+      <Route
+        path="/admin/blog"
+        element={
+          <ProtectedRoute>
+            <Blog />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/blog/show/:id"
+        element={
+          <ProtectedRoute>
+            <ShowBlog />
+          </ProtectedRoute>
+        }
+      ></Route>
+
       <Route
         path="/admin/dashboard"
         element={

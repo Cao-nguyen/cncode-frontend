@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DeleteNew, ShowNew } from "../../../services/NewsAdminServer";
 import { toast } from "react-toastify";
-import "./News.scss";
+import "../News/News.scss";
 import BootstrapPagination from "../../Service/Pagination";
 import logo from "../../../assets/logo.png";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { BlogDelete, BlogRead } from "../../../services/BlogAdminServer";
 
 function News(props) {
   const navigate = useNavigate();
@@ -19,29 +19,29 @@ function News(props) {
   };
 
   const handleCreate = () => {
-    navigate("/admin/news/create");
+    navigate("/admin/blog/create");
   };
 
-  const [news, setNews] = useState([]);
+  const [blog, setBlog] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
   const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
-    const newsData = async () => {
-      const data = await ShowNew();
+    const blogData = async () => {
+      const data = await BlogRead();
       if (data && data.EC === 0) {
-        setNews(data.DT);
+        setBlog(data.DT);
         setTotalItems(data.DT.length);
       }
     };
-    newsData();
+    blogData();
   }, []);
 
   const handleRefresh = async () => {
-    const data = await ShowNew();
+    const data = await BlogRead();
     if (data && data.EC === 0) {
-      setNews(data.DT);
+      setBlog(data.DT);
       setTotalItems(data.DT.length);
     }
   };
@@ -53,19 +53,17 @@ function News(props) {
   };
 
   const handleEdit = (id) => {
-    navigate(`/admin/news/edit/${id}`);
+    navigate(`/admin/blog/edit/${id}`);
   };
 
   const handleShow = (id) => {
-    navigate(`/admin/news/show/${id}`);
+    navigate(`/admin/blog/show/${id}`);
   };
 
   const handleDelete = async (id) => {
-    const isCheck = window.confirm(
-      "Bạn có chắc chắn muốn xoá tin tức này không?"
-    );
+    const isCheck = window.confirm("Bạn có chắc chắn muốn xoá blog này không?");
     if (isCheck) {
-      const data = await DeleteNew(id);
+      const data = await BlogDelete(id);
       if (data && data.EC === 0) {
         handleRefresh();
         toast.success(data.EM);
@@ -77,8 +75,10 @@ function News(props) {
     }
   };
 
+  const handleDuyet = () => {};
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentNews = news.slice(startIndex, startIndex + itemsPerPage);
+  const currentBlog = blog.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -122,8 +122,8 @@ function News(props) {
           <p className="show">Hiển thị</p>
           <p className="action"></p>
         </div>
-        {currentNews && currentNews.length > 0 ? (
-          currentNews.map((item) => (
+        {currentBlog && currentBlog.length > 0 ? (
+          currentBlog.map((item) => (
             <div className="admin-content-item" key={item._id}>
               <p className="id">{item._id}</p>
               <p className="title">{item.title}</p>
@@ -162,6 +162,19 @@ function News(props) {
                       <i className="fa-solid fa-delete-left"></i>
                       <div className="text">Xoá</div>
                     </div>
+                    {item.active === false && (
+                      <div
+                        className="dropdown-links"
+                        style={{ color: "var(--xanh-login)" }}
+                        onClick={() => handleDuyet(item._id)}
+                      >
+                        <i
+                          className="fa-solid fa-circle-check"
+                          style={{ color: "var(--xanh-login)" }}
+                        ></i>
+                        <div className="text">Trạng thái</div>
+                      </div>
+                    )}
                   </div>
                 )}
               </p>
