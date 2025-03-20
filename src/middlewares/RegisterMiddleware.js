@@ -27,6 +27,7 @@ const RegisterMiddleware = (toggleRegister) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [code, setCode] = useState("");
+  const [whereNow, setWhereNow] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // Ẩn hiện mật khẩu
@@ -85,10 +86,18 @@ const RegisterMiddleware = (toggleRegister) => {
       username,
       password,
       confirmPassword,
-      code
+      code,
+      whereNow
     );
     if (check === true) {
-      let data = await registerUser(fullName, email, username, password, code);
+      let data = await registerUser(
+        fullName,
+        email,
+        username,
+        password,
+        code,
+        whereNow
+      );
       if (data.EC === 0) {
         dispatch(Login(data));
         toast.success(data.EM);
@@ -125,6 +134,8 @@ const RegisterMiddleware = (toggleRegister) => {
     password,
     confirmPassword,
     code,
+    whereNow,
+    setWhereNow,
     setShowPassword,
     togglePasswordVisibility,
     setFullName,

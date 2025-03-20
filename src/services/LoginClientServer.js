@@ -24,7 +24,8 @@ export const registerUser = async (
   email,
   username,
   password,
-  code
+  code,
+  whereNow
 ) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/dangky`,
@@ -34,6 +35,7 @@ export const registerUser = async (
       username,
       password,
       code,
+      whereNow,
     }
   );
   return response.data;

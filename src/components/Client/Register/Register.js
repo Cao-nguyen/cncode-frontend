@@ -26,6 +26,8 @@ function Register({ toggleRegister }) {
     handleRegister,
     handleSendCode,
     isLoading,
+    whereNow,
+    setWhereNow,
   } = RegisterMiddleware(toggleRegister);
 
   return (
@@ -37,6 +39,21 @@ function Register({ toggleRegister }) {
           <Link to="/use">điều khoản</Link>
         </p>
         <div className="form-content">
+          <InputGroup className="form-input">
+            <Form.Select
+              value={whereNow}
+              onChange={(e) => setWhereNow(e.target.value)}
+            >
+              <option value="" disabled style={{ color: "#999" }}>
+                Bạn biết chúng tôi qua đâu?
+              </option>
+              <option value="Facebook">Facebook</option>
+              <option value="Google">Google</option>
+              <option value="Youtube">Youtube</option>
+              <option value="Zalo">Zalo</option>
+              <option value="info">Bạn bè giới thiệu</option>
+            </Form.Select>
+          </InputGroup>
           <InputGroup className="form-input">
             <Form.Control
               placeholder="Họ và tên*"
