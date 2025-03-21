@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
-import { BlogClientRead } from "../../../services/BlogClientServer";
+import { MeblogClientRead } from "../../../services/BlogClientServer";
 import "./Blog.scss";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function MeBlog(props) {
 
   useEffect(() => {
     const getBlog = async () => {
-      const data = await BlogClientRead(id);
+      const data = await MeblogClientRead(id);
 
       if (data && data.EC === 0) {
         setBlog(data.DT);
