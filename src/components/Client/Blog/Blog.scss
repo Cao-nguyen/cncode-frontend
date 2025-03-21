@@ -363,6 +363,16 @@
       }
     }
   }
+
+  .blog {
+    .blog-item {
+      background-color: var(--dark-mode-ba);
+
+      &:hover {
+        box-shadow: var(--box-shadow-dark);
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1190px) {
@@ -372,5 +382,12 @@
         display: block;
       }
     }
+  }
+
+  .blog {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: space-between;
   }
 }
