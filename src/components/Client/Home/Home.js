@@ -71,13 +71,6 @@ function Home(props) {
       </HelmetProvider>
 
       <div className="container">
-        <h1 className="text-center mt-5 text-primary">
-          Số lượt truy cập website là: {totalAccess}
-        </h1>
-        <h1 className="text-center mt-5 text-primary">
-          Hiện tại có người đang dùng website là: {online}
-        </h1>
-
         <div className="HomeBlog">
           <div className="HomeBlog-Title">
             <div className="Title-Border"></div>
@@ -187,6 +180,13 @@ function Home(props) {
             </div>
           </div>
         </div>
+
+        <h1 className="text-center mt-5 text-primary">
+          Số lượt truy cập website là: {totalAccess}
+        </h1>
+        <h1 className="text-center mt-5 text-primary">
+          Hiện tại có người đang dùng website là: {online}
+        </h1>
       </div>
     </>
   );
