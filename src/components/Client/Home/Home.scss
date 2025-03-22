@@ -1,0 +1,138 @@
+.HomeBlog {
+  margin-top: 20px;
+
+  .HomeBlog-Title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .Title-Border {
+      width: 35%;
+      height: 2px;
+      border-radius: 10px;
+      background-color: var(--xam-nhat-ba);
+    }
+
+    .text-primary {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .HomeBlog-Body {
+    .blog {
+      margin-top: -20px;
+    }
+  }
+}
+
+.HomeNews {
+  margin-top: 40px;
+
+  .HomeNews-Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .Title-Border {
+      width: 35%;
+      height: 2px;
+      border-radius: 10px;
+      background-color: var(--xam-nhat-ba);
+    }
+
+    .text-primary {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .HomeNews-Body {
+    .blog {
+      margin-top: -20px;
+    }
+  }
+}
+
+.HomeWhy {
+  margin-top: 40px;
+
+  .HomeWhy-Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .Title-Border {
+      width: 35%;
+      height: 2px;
+      border-radius: 10px;
+      background-color: var(--xam-nhat-ba);
+    }
+
+    .text-primary {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .HomeWhy-Body {
+    margin-top: 20px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 24% 24% 24% 24%;
+
+    .homewhy-item {
+      background-color: var(--xam-nhat-nhat);
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        box-shadow: var(--box-shadow);
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 50px;
+      }
+
+      p {
+        text-align: justify;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1190px) {
+  .HomeBlog {
+    .HomeBlog-Title {
+      .Title-Border {
+        width: 0%;
+      }
+    }
+  }
+
+  .HomeNews {
+    .HomeNews-Title {
+      .Title-Border {
+        width: 0%;
+      }
+    }
+  }
+
+  .HomeWhy {
+    .HomeWhy-Title {
+      .Title-Border {
+        width: 0%;
+      }
+    }
+
+    .HomeWhy-Body {
+      grid-template-columns: 100%;
+
+      .homewhy-item {
+        margin-top: 20px;
+      }
+    }
+  }
+}

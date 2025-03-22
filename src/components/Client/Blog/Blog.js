@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { BlogClientRead } from "../../../services/BlogClientServer";
 import moment from "moment/moment";
+import "./Blog.scss";
 
 function Blog(props) {
   const [blog, setBlog] = useState();
@@ -19,8 +19,6 @@ function Blog(props) {
   useEffect(() => {
     BlogReadData();
   }, []);
-
-  console.log(blog);
 
   return (
     <>
