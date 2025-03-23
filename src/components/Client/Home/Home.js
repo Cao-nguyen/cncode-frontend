@@ -70,8 +70,22 @@ function Home(props) {
         </Helmet>
       </HelmetProvider>
 
+      <div className="container-img">
+        <img
+          src="https://cao-nguyen.github.io/CNliterature.edu.vn/trangchubg.png"
+          alt=""
+        ></img>
+      </div>
+
       <div className="container">
-        <div className="HomeBlog">
+        <h1 className="text-center mt-5 text-primary">
+          Số lượt truy cập website là: {totalAccess}
+        </h1>
+        <h1 className="text-center mt-5 text-primary">
+          Hiện tại có người đang dùng website là: {online}
+        </h1>
+
+        <div className="HomeBlog" data-aos="flip-right">
           <div className="HomeBlog-Title">
             <div className="Title-Border"></div>
             <h3 className="text-primary">Blog mới nhất</h3>
@@ -125,7 +139,7 @@ function Home(props) {
           </div>
         </div>
 
-        <div className="HomeWhy">
+        <div className="HomeWhy" data-aos="zoom-in">
           <div className="HomeWhy-Title">
             <div className="Title-Border"></div>
             <h3 className="text-primary">Tại sao chọn CNcode?</h3>
@@ -156,7 +170,7 @@ function Home(props) {
           </div>
         </div>
 
-        <div className="HomeNews">
+        <div className="HomeNews" data-aos="zoom-in">
           <div className="HomeNews-Title">
             <div className="Title-Border"></div>
             <h3 className="text-primary">Tin tức mới nhất</h3>
@@ -180,13 +194,6 @@ function Home(props) {
             </div>
           </div>
         </div>
-
-        <h1 className="text-center mt-5 text-primary">
-          Số lượt truy cập website là: {totalAccess}
-        </h1>
-        <h1 className="text-center mt-5 text-primary">
-          Hiện tại có người đang dùng website là: {online}
-        </h1>
       </div>
     </>
   );

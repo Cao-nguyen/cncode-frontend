@@ -15,6 +15,7 @@ import tintucRead from "../components/Client/Tintuc/Show";
 import Profile from "../components/Client/Profile/Profile";
 import PostBlog from "../components/Client/Blog/Post";
 import MeBlog from "../components/Client/Blog/MeBlog";
+import Ask from "../components/Client/Ask/Ask";
 
 export const validateRoutes = ["/me/post"];
 
@@ -31,6 +32,7 @@ export const clientRoutes = [
   "/member",
   "/use",
   "/me/blog",
+  "/hoidap",
 ];
 
 const AppRoutes = () => {
@@ -38,6 +40,9 @@ const AppRoutes = () => {
     <Routes>
       {/* Trang chủ */}
       <Route path="/" element={<Home />} />
+
+      {/* Hỏi đáp */}
+      <Route path="/hoidap" element={<Ask />} />
 
       {/* Giới thiệu */}
       <Route path="/gioithieu" element={<Gioithieu />} />

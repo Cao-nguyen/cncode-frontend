@@ -12,15 +12,19 @@ function MeBlog(props) {
   const [blog, setBlog] = useState([]);
 
   useEffect(() => {
-    const getBlog = async () => {
-      const data = await MeblogClientRead(id);
+    if (id) {
+      const getBlog = async () => {
+        const data = await MeblogClientRead(id);
 
-      if (data && data.EC === 0) {
-        setBlog(data.DT);
-      }
-    };
+        if (data && data.EC === 0) {
+          setBlog(data.DT);
+        }
+      };
 
-    getBlog();
+      getBlog();
+    } else {
+      setBlog([]);
+    }
   }, [id]);
 
   const handleEdit = () => {};

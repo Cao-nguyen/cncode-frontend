@@ -33,8 +33,6 @@ function Gioithieu() {
 
       let imageUrl = typeof href === "string" ? href : href?.href || "";
 
-      console.log(imageUrl);
-
       return `<div class="img-wrapper" onClick="window.openImage('${imageUrl}')">
         <img src="${imageUrl}" alt="${text}" class="img${imgIndex}" />
       </div>`;

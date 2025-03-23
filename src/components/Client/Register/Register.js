@@ -54,7 +54,7 @@ function Register({ toggleRegister }) {
               <option value="info">Bạn bè giới thiệu</option>
             </Form.Select>
           </InputGroup>
-          <InputGroup className="form-input">
+          <InputGroup className="form-input mt-2">
             <Form.Control
               placeholder="Họ và tên*"
               aria-label="fullName"

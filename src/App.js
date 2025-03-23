@@ -3,6 +3,7 @@ import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import Aos from "aos";
 // Thêm các trang hỗ trợ giao diện
 import Header from "./components/Client/Header/Header";
 import HeaderAdmin from "./components/Admin/Header/HeaderAdmin";
@@ -22,6 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "aos/dist/aos.css";
 import "./App.scss";
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
   const hideHeader =
     validateRoutes.includes(location.pathname) || isClientRoutes;
   const isAdmin = isAdminRoute(location.pathname);
+
+  // Khởi tạo aos
+  Aos.init();
 
   // Hiện thị đăng nhập - đăng ký - quên mật khẩu khi click
   const [login, setLogin] = useState(false);
