@@ -16,8 +16,9 @@ import Profile from "../components/Client/Profile/Profile";
 import PostBlog from "../components/Client/Blog/Post";
 import MeBlog from "../components/Client/Blog/MeBlog";
 import Ask from "../components/Client/Ask/Ask";
+import Settings from "../components/Client/Settings/Settings";
 
-export const validateRoutes = ["/me/post"];
+export const validateRoutes = ["/me/post", "/me/settings"];
 
 export const clientRoutes = [
   "/gioithieu",
@@ -60,6 +61,7 @@ const AppRoutes = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/me/post" element={<PostBlog />} />
       <Route path="/me/blog" element={<MeBlog />} />
+      <Route path="/me/settings" element={<Settings />} />
 
       {/* Sự kiện */}
       <Route path="/sukien" element={<Sukien />} />

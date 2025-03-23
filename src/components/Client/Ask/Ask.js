@@ -80,11 +80,6 @@ function Ask(props) {
   }, [currentAnswer]);
 
   const [send, setSend] = useState();
-  const [show, setShow] = useState();
-
-  const handleShow = (id) => {
-    setShow((prev) => (prev === id ? null : id));
-  };
 
   const handleSend = (id) => {
     setSend((prev) => (prev === id ? null : id));
