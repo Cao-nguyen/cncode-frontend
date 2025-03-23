@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { marked } from "marked";
 import Prism from "prismjs";
 
-import axios from "axios";
 import "./Editor.scss";
 
-function Editor({ value, onChange }) {
+function AskEditor({ value, onChange }) {
   const [markdown, setMarkdown] = useState(value || "");
   const [isPreview, setIsPreview] = useState(false);
 
@@ -85,34 +84,6 @@ function Editor({ value, onChange }) {
     onChange(newMarkdown);
   };
 
-  const handleImageUpload = async (event) => {
-    const file = event.target.files[0];
-    const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
-    const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_PRESET;
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
-
-      const today = new Date();
-      const day = String(today.getDate()).padStart(2, "0");
-      const month = String(today.getMonth() + 1).padStart(2, "0");
-      const year = today.getFullYear();
-      const folder = `uploads/img/${day}-${month}-${year}`;
-      formData.append("folder", folder);
-
-      try {
-        const response = await axios.post(
-          `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-          formData
-        );
-        insertMarkdown(`![Image](${response.data.secure_url})`);
-      } catch (error) {
-        console.error("Error uploading image:", error);
-      }
-    }
-  };
-
   useEffect(() => {
     Prism.highlightAll();
   }, [markdown]);
@@ -168,16 +139,6 @@ function Editor({ value, onChange }) {
             )
           }
         />
-        <label htmlFor="image-upload" className="image-upload-label">
-          <i className="fa-solid fa-image" title="Upload Image" />
-        </label>
-        <input
-          id="image-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="image-upload-input"
-        />
         <i
           className="fa-solid fa-code"
           title="Ctrl+Shift+C"
@@ -232,4 +193,4 @@ function Editor({ value, onChange }) {
   );
 }
 
-export default Editor;
+export default AskEditor;

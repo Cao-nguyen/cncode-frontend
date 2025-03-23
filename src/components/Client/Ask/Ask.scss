@@ -9,4 +9,61 @@
     font-size: 20px;
     text-align: center;
   }
+
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+}
+
+.answer {
+  margin-top: 20px;
+
+  .answer-item {
+    background-color: var(--xam-nhat-nhat);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+
+    .item-info {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 50px;
+      }
+
+      p {
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+
+      p.role {
+        background-color: var(--xam-nhat-ba);
+        padding: 2px 10px;
+        border-radius: 5px;
+        color: var(--mau-do);
+      }
+    }
+
+    .reply {
+      margin-top: 20px;
+      margin-left: 50px;
+      border-left: solid 1px var(--mau-den);
+
+      .item-info,
+      .border,
+      .preview {
+        margin-left: 20px;
+      }
+    }
+
+    .action {
+      display: flex;
+      justify-content: right;
+    }
+  }
 }

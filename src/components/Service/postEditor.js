@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { marked } from "marked";
 import Prism from "prismjs";
-import "prismjs/themes/prism-twilight.css";
-import "prismjs/components/prism-python.min.js";
-import "prismjs/components/prism-javascript.min.js";
-import "prismjs/components/prism-cshtml.min.js";
-import "prismjs/components/prism-css.min.js";
+
 import axios from "axios";
 import "./PostEditor.scss";
 
