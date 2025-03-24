@@ -8,41 +8,20 @@ export const UserClientRead = async (id) => {
   return response.data;
 };
 
-// [GET] Người dùng
-export const UserClientEdit = async (
-  id,
-  fullName,
-  username,
-  info,
-  birthday,
-  tinh,
-  school,
-  avatar,
-  web,
-  git,
-  zalo,
-  facebook,
-  tiktok,
-  youtube
-) => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/`,
-    {
-      id,
-      fullName,
-      username,
-      info,
-      birthday,
-      tinh,
-      school,
-      avatar,
-      web,
-      git,
-      zalo,
-      facebook,
-      tiktok,
-      youtube,
-    }
+// [PATCH] Người dùng
+export const UserClientEditFullName = async (id, fullName) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/fullName`,
+    { id, fullName }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditUsername = async (id, username) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/username`,
+    { id, username }
   );
   return response.data;
 };

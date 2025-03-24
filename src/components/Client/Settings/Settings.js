@@ -1,112 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logo from "../../../assets/logo.png";
 import "./Settings.scss";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import {
-  UserClientEdit,
-  UserClientRead,
-} from "../../../services/SettingsClientServer";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import moment from "moment/moment";
-import { toast } from "react-toastify";
-require("moment/locale/vi");
+import SettingsClientMiddleware from "../../../middlewares/SettingsClientMiddleware";
 
 function Settings() {
-  const navigate = useNavigate();
-  moment.locale("vi");
-
-  const [active, setActive] = useState("top");
-
-  const handleTop = () => {
-    setActive("top");
-  };
-
-  const handleBot = () => {
-    setActive("bot");
-  };
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
-  const id = useSelector((state) => state.user.account.id);
-
-  const [userData, setUserData] = useState({
-    fullName: "",
-    username: "",
-    info: "",
-    birthday: "",
-    tinh: "",
-    school: "",
-    avatar: "",
-    web: "",
-    git: "",
-    zalo: "",
-    facebook: "",
-    tiktok: "",
-    youtube: "",
-    createdAt: "",
-    updatedAt: "",
-  });
-
-  useEffect(() => {
-    const getUser = async () => {
-      const data = await UserClientRead(id);
-      if (data) {
-        setUserData({
-          fullName: data.DT.fullName || "",
-          username: data.DT.username || "",
-          info: data.DT.info || "",
-          birthday: data.DT.birthday || "",
-          tinh: data.DT.tinh || "",
-          school: data.DT.school || "",
-          avatar: data.DT.avatar || "",
-          web: data.DT.web || "",
-          git: data.DT.git || "",
-          zalo: data.DT.zalo || "",
-          facebook: data.DT.facebook || "",
-          tiktok: data.DT.tiktok || "",
-          youtube: data.DT.youtube || "",
-          createdAt: moment(data.DT.createdAt),
-          updatedAt: moment(data.DT.updatedAt),
-        });
-      }
-    };
-
-    getUser();
-  }, [id]);
-
-  const [show, setShow] = useState();
-
-  const handleShow = (key) => {
-    setShow(key);
-  };
-
-  const handlePush = async () => {
-    const data = await UserClientEdit(
-      id,
-      userData.fullName,
-      userData.username,
-      userData.info,
-      userData.birthday,
-      userData.tinh,
-      userData.school,
-      userData.avatar,
-      userData.web,
-      userData.git,
-      userData.zalo,
-      userData.facebook,
-      userData.tiktok,
-      userData.youtube
-    );
-
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-    } else {
-      toast.error(data.EM);
-    }
-  };
+  const {
+    active,
+    handleBack,
+    handleTop,
+    handleBot,
+    fullName,
+    setFullName,
+    username,
+    setUsername,
+    info,
+    setInfo,
+    birthday,
+    setBirthday,
+    tinh,
+    setTinh,
+    school,
+    setSchool,
+    avatar,
+    setAvatar,
+    web,
+    setWeb,
+    git,
+    setGit,
+    zalo,
+    setZalo,
+    facebook,
+    setFacebook,
+    tiktok,
+    setTiktok,
+    youtube,
+    setYoutube,
+    show,
+    handleShowFullName,
+    handleFullName,
+    handleShowUsername,
+    handleUsername,
+    handleBackOver,
+  } = SettingsClientMiddleware();
 
   return (
     <>
@@ -160,33 +96,70 @@ function Settings() {
               <h4>Thông tin cơ bản</h4>
               <p>Quản lí tên hiển thị, tên đăng nhập, bio và avatar của bạn.</p>
               <div className="table">
-                {[
-                  { key: "fullName", label: "Họ và tên" },
-                  { key: "username", label: "Tên người dùng" },
-                  { key: "info", label: "Giới thiệu" },
-                  { key: "birthday", label: "Ngày tháng năm sinh" },
-                  { key: "tinh", label: "Tỉnh thành" },
-                  { key: "school", label: "Đơn vị học tập & làm việc" },
-                ].map(({ key, label }) => (
-                  <div
-                    key={key}
-                    className="table-item"
-                    onClick={() => handleShow(key, label)}
-                  >
-                    <div className="table-item-left">
-                      <h5>{label}</h5>
-                      <p>{userData[key] || "Chưa cập nhật"}</p>
-                    </div>
-                    <div className="table-item-right">
-                      <i className="fa-solid fa-chevron-right"></i>
-                    </div>
+                <div className="table-item" onClick={handleShowFullName}>
+                  <div className="table-item-left">
+                    <h5>Họ và tên</h5>
+                    <p>{fullName ? fullName : "Chưa cập nhật"}</p>
                   </div>
-                ))}
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item" onClick={handleShowUsername}>
+                  <div className="table-item-left">
+                    <h5>Tên đăng nhập</h5>
+                    <p>{username ? username : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Giới thiệu</h5>
+                    <p>{info ? info : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Ngày, tháng, năm sinh</h5>
+                    <p>{birthday ? birthday : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Tỉnh thành</h5>
+                    <p>{tinh ? tinh : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Đơn vị học tập & làm việc</h5>
+                    <p>{school ? school : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
 
                 <div className="table-item">
                   <div className="table-item-left">
                     <h5>Ảnh đại diện</h5>
-                    <img src={userData.avatar} alt="Avatar" />
+                    <img src={avatar ? avatar : logo} alt="Avatar" />
                   </div>
                   <div className="table-item-right">
                     <i className="fa-solid fa-chevron-right"></i>
@@ -200,24 +173,65 @@ function Settings() {
               </p>
 
               <div className="table">
-                {[
-                  { key: "web", label: "Trang web cá nhân" },
-                  { key: "git", label: "Gihub" },
-                  { key: "zalo", label: "Zalo" },
-                  { key: "facebook", label: "Facebook" },
-                  { key: "tiktok", label: "Tiktok" },
-                  { key: "youtube", label: "Youtube" },
-                ].map(({ key, label }) => (
-                  <div key={key} className="table-item">
-                    <div className="table-item-left">
-                      <h5>{label}</h5>
-                      <p>{userData[key] || "Chưa cập nhật"}</p>
-                    </div>
-                    <div className="table-item-right">
-                      <i className="fa-solid fa-chevron-right"></i>
-                    </div>
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Trang web cá nhân</h5>
+                    <p>{web ? web : "Chưa cập nhật"}</p>
                   </div>
-                ))}
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Github</h5>
+                    <p>{git ? git : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Zalo</h5>
+                    <p>{zalo ? zalo : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Facebook</h5>
+                    <p>{facebook ? facebook : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Tiktok</h5>
+                    <p>{tiktok ? tiktok : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <div className="table-item">
+                  <div className="table-item-left">
+                    <h5>Youtube</h5>
+                    <p>{youtube ? youtube : "Chưa cập nhật"}</p>
+                  </div>
+                  <div className="table-item-right">
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
@@ -233,12 +247,7 @@ function Settings() {
                   <div className="table-item">
                     <div className="table-item-left">
                       <h5>Thay đổi mật khẩu</h5>
-                      <p>
-                        Lần đổi gần nhất:
-                        {`${" "} ${userData?.createdAt.from(
-                          userData?.updatedAt
-                        )}`}
-                      </p>
+                      <p>Lần đổi gần nhất:</p>
                     </div>
                     <div className="table-item-right">
                       <i class="fa-solid fa-chevron-right"></i>
@@ -263,7 +272,7 @@ function Settings() {
         {show === "fullName" && (
           <div className="overplay">
             <div className="form-group overplay-item">
-              <div className="button-back" onClick={() => handleShow("")}>
+              <div className="button-back" onClick={handleBackOver}>
                 <i className="fa-solid fa-xmark"></i>
               </div>
               <h3>Cập nhật tên của bạn</h3>
@@ -274,14 +283,44 @@ function Settings() {
               <input
                 className="form-control"
                 placeholder="Nhập họ và tên của bạn"
-                value={userData.fullName}
-                onChange={(e) =>
-                  setUserData((prev) => ({ ...prev, fullName: e.target.value }))
-                }
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
               />
-              <div className="btn" onClick={handlePush}>
+              <div className="btn" onClick={handleFullName}>
                 Lưu lại
               </div>
+            </div>
+          </div>
+        )}
+
+        {show === "username" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật tên đăng nhập của bạn</h3>
+              <p>
+                Tên đăng nhập dùng để bạn đăng nhập vào hệ thống và xem trang cá
+                nhân.
+              </p>
+              <input
+                className="form-control"
+                placeholder="Nhập tên đăng nhập của bạn"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <div className="btn" onClick={handleUsername}>
+                Lưu lại
+              </div>
+              <p
+                className="mt-2"
+                style={{ fontSize: "14px", textAlign: "left" }}
+              >
+                Bạn sẽ không thể truy cập vào link cũ nếu thay đổi tên đăng nhập
+                và bạn sẽ truy cập bằng link mới: https://cncode.vercel.app/
+                {username}
+              </p>
             </div>
           </div>
         )}
