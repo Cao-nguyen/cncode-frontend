@@ -17,7 +17,12 @@ function Settings() {
     info,
     setInfo,
     birthday,
-    setBirthday,
+    day,
+    setDay,
+    month,
+    setMonth,
+    year,
+    setYear,
     tinh,
     setTinh,
     school,
@@ -41,6 +46,16 @@ function Settings() {
     handleFullName,
     handleShowUsername,
     handleUsername,
+    handleShowInfo,
+    handleInfo,
+    handleShowBirthday,
+    handleBirthday,
+    handleShowTinh,
+    handleTinh,
+    handleShowSchool,
+    handleSchool,
+    handleShowAvatar,
+    handleAvatar,
     handleBackOver,
   } = SettingsClientMiddleware();
 
@@ -116,7 +131,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowInfo}>
                   <div className="table-item-left">
                     <h5>Giới thiệu</h5>
                     <p>{info ? info : "Chưa cập nhật"}</p>
@@ -126,7 +141,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowBirthday}>
                   <div className="table-item-left">
                     <h5>Ngày, tháng, năm sinh</h5>
                     <p>{birthday ? birthday : "Chưa cập nhật"}</p>
@@ -136,7 +151,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowTinh}>
                   <div className="table-item-left">
                     <h5>Tỉnh thành</h5>
                     <p>{tinh ? tinh : "Chưa cập nhật"}</p>
@@ -146,7 +161,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowSchool}>
                   <div className="table-item-left">
                     <h5>Đơn vị học tập & làm việc</h5>
                     <p>{school ? school : "Chưa cập nhật"}</p>
@@ -156,7 +171,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowAvatar}>
                   <div className="table-item-left">
                     <h5>Ảnh đại diện</h5>
                     <img src={avatar ? avatar : logo} alt="Avatar" />
@@ -321,6 +336,143 @@ function Settings() {
                 và bạn sẽ truy cập bằng link mới: https://cncode.vercel.app/
                 {username}
               </p>
+            </div>
+          </div>
+        )}
+
+        {show === "info" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật giới thiệu của bạn</h3>
+              <p>
+                Phần giới thiệu sẽ được hiển thị trên cá nhân, giúp người khác
+                hiểu bạn hơn.
+              </p>
+              <textarea
+                className="form-control"
+                placeholder="Nhập phần giới thiệu"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+              />
+              <div className="btn" onClick={handleInfo}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "birthday" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật ngày tháng năm sinh của bạn</h3>
+              <p>
+                Vui lòng cập nhật chính sát để chúng tôi có thể thống kê độ tuổi
+                và cung cấp khoá học phù hợp nhất.
+              </p>
+              <div className="row">
+                <div className="col-4">
+                  <input
+                    className="form-control"
+                    placeholder="Ngày sinh*"
+                    value={day}
+                    onChange={(e) => setDay(e.target.value)}
+                  />
+                </div>
+                <div className="col-4">
+                  <input
+                    className="form-control"
+                    placeholder="Tháng sinh*"
+                    value={month}
+                    onChange={(e) => setMonth(e.target.value)}
+                  />
+                </div>
+                <div className="col-4">
+                  <input
+                    className="form-control"
+                    placeholder="Năm sinh*"
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="btn" onClick={handleBirthday}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "tinh" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật tỉnh của bạn</h3>
+              <p>Chúng ta sẽ biết bạn ở đâu và cung cấp dịch vụ cho bạn.</p>
+              <input
+                className="form-control"
+                placeholder="Tỉnh thành*"
+                value={tinh}
+                onChange={(e) => setTinh(e.target.value)}
+              />
+              <div className="btn" onClick={handleTinh}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "school" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật nơi học tập hoặc làm việc của bạn</h3>
+              <p>
+                Hãy chia sẽ với chúng tôi nơi bạn đang học tập hoặc làm việc
+                nhé!.
+              </p>
+              <input
+                className="form-control"
+                placeholder="Đơn vị công tác*"
+                value={school}
+                onChange={(e) => setSchool(e.target.value)}
+              />
+              <div className="btn" onClick={handleSchool}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "avatar" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật giới thiệu của bạn</h3>
+              <p>
+                Phần giới thiệu sẽ được hiển thị trên cá nhân, giúp người khác
+                hiểu bạn hơn.
+              </p>
+              <textarea
+                className="form-control"
+                placeholder="Nhập phần giới thiệu"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+              />
+              <div className="btn" onClick={handleInfo}>
+                Lưu lại
+              </div>
             </div>
           </div>
         )}

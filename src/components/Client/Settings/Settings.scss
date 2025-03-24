@@ -184,6 +184,11 @@
         border-radius: 50px;
       }
 
+      textarea {
+        height: 150px;
+        resize: none;
+      }
+
       .btn {
         width: 100%;
         margin-top: 10px;
