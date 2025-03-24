@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BootstrapPagination from "../../Service/Pagination";
 import "./Ask.scss";
 import { useSelector } from "react-redux";
-import errorImg from "../../../assets/Khac/errorImg.avif";
+import errorImg from "../../../assets/Khac/errorImg.gif";
 import {
   AskCreate,
   AskRead,
