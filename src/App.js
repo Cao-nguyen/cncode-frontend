@@ -15,6 +15,7 @@ import Register from "./components/Client/Register/Register";
 import AppRoutes, { validateRoutes, clientRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
 import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
+import Nguyen from "./assets/Khac/Nguyen.png";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -118,14 +119,34 @@ function App() {
           )}
 
           <div className="icon-link">
+            {location.pathname !== "/chatwithnguyen" && (
+              <Link to="/chatwithnguyen">
+                <div className="icon-link-item">
+                  <label>Chat với Nguyên</label>
+                  <p>
+                    <img src={Nguyen} alt="" />
+                  </p>
+                </div>
+              </Link>
+            )}
             {location.pathname !== "/hoidap" && (
               <Link to="/hoidap">
-                <i class="fa-solid fa-comment"></i>
+                <div className="icon-link-item">
+                  <label>Hỏi đáp</label>
+                  <p>
+                    <i class="fa-solid fa-comment"></i>
+                  </p>
+                </div>
               </Link>
             )}
             {location.pathname !== "/shop" && (
               <Link to="/shop">
-                <i class="fa-solid fa-store"></i>
+                <div className="icon-link-item">
+                  <label>Bách hoá vật phẩm</label>
+                  <p>
+                    <i class="fa-solid fa-store"></i>
+                  </p>
+                </div>
               </Link>
             )}
           </div>

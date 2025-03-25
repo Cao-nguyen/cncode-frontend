@@ -304,18 +304,56 @@ body {
     text-align: center;
     z-index: 100;
 
-    i {
-      border-radius: 50px;
-      padding: 10px;
-      background-color: var(--mau-trang);
-      box-shadow: var(--box-shadow);
-      font-size: 25px;
-      margin-top: 10px;
-      color: var(--mau-den);
-      transition: 0.2s ease-in-out;
+    .icon-link-item {
+      p {
+        border-radius: 50px;
+        padding: 5px;
+        background-color: var(--mau-trang);
+        box-shadow: var(--box-shadow);
+        transition: 0.2s ease-in-out;
+        margin-bottom: 0px;
+        margin-top: 10px;
+
+        img {
+          width: 35px;
+          height: 35px;
+          object-fit: cover;
+        }
+
+        i {
+          padding: 5px;
+          font-size: 25px;
+          color: var(--mau-den);
+          transition: 0.2s ease-in-out;
+        }
+      }
+
+      label {
+        background-color: var(--mau-den);
+        padding: 10px;
+        color: var(--mau-trang);
+        font-weight: bold;
+        border-radius: 10px;
+        position: fixed;
+        right: 80px;
+        transition: 0.2s ease-in-out;
+        display: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          background-color: var(--mau-den);
+          transform: translateY(40%) rotate(45deg);
+          z-index: -1;
+        }
+      }
 
       &:hover {
-        transform: translateY(-5px);
+        label {
+          display: block;
+        }
       }
     }
   }
