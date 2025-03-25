@@ -56,6 +56,18 @@ function Settings() {
     handleSchool,
     handleShowAvatar,
     handleAvatar,
+    handleShowWeb,
+    handleWeb,
+    handleShowGit,
+    handleGit,
+    handleShowZalo,
+    handleZalo,
+    handleShowFacebook,
+    handleFacebook,
+    handleShowTiktok,
+    handleTiktok,
+    handleShowYoutube,
+    handleYoutube,
     handleBackOver,
   } = SettingsClientMiddleware();
 
@@ -188,7 +200,7 @@ function Settings() {
               </p>
 
               <div className="table">
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowWeb}>
                   <div className="table-item-left">
                     <h5>Trang web cá nhân</h5>
                     <p>{web ? web : "Chưa cập nhật"}</p>
@@ -198,7 +210,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowGit}>
                   <div className="table-item-left">
                     <h5>Github</h5>
                     <p>{git ? git : "Chưa cập nhật"}</p>
@@ -208,7 +220,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowZalo}>
                   <div className="table-item-left">
                     <h5>Zalo</h5>
                     <p>{zalo ? zalo : "Chưa cập nhật"}</p>
@@ -218,7 +230,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowFacebook}>
                   <div className="table-item-left">
                     <h5>Facebook</h5>
                     <p>{facebook ? facebook : "Chưa cập nhật"}</p>
@@ -228,7 +240,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowTiktok}>
                   <div className="table-item-left">
                     <h5>Tiktok</h5>
                     <p>{tiktok ? tiktok : "Chưa cập nhật"}</p>
@@ -238,7 +250,7 @@ function Settings() {
                   </div>
                 </div>
 
-                <div className="table-item">
+                <div className="table-item" onClick={handleShowYoutube}>
                   <div className="table-item-left">
                     <h5>Youtube</h5>
                     <p>{youtube ? youtube : "Chưa cập nhật"}</p>
@@ -471,6 +483,54 @@ function Settings() {
                 onChange={(e) => setInfo(e.target.value)}
               />
               <div className="btn" onClick={handleInfo}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "web" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link web cá nhân của bạn</h3>
+              <p>
+                Để quảng bá web cá nhân của mình, bạn có thể dán link vào đây,
+                mọi người sẽ nhìn thấy khi vào trang cá nhân của bạn.
+              </p>
+              <input
+                className="form-control"
+                placeholder="Nhập link web cá nhân"
+                value={web}
+                onChange={(e) => setWeb(e.target.value)}
+              />
+              <div className="btn" onClick={handleWeb}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "git" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link github của bạn</h3>
+              <p>
+                Bạn có thể dán link github vào đây để chia sẻ code với mọi người
+                trên hệ thống.
+              </p>
+              <input
+                className="form-control"
+                placeholder="Nhập link github"
+                value={git}
+                onChange={(e) => setGit(e.target.value)}
+              />
+              <div className="btn" onClick={handleGit}>
                 Lưu lại
               </div>
             </div>

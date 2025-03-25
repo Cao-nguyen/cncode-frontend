@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   UserClientEditBirthday,
+  UserClientEditFacebook,
   UserClientEditFullName,
+  UserClientEditGit,
   UserClientEditInfo,
   UserClientEditSchool,
+  UserClientEditTiktok,
   UserClientEditTinh,
   UserClientEditUsername,
+  UserClientEditWeb,
+  UserClientEditYoutube,
+  UserClientEditZalo,
   UserClientRead,
 } from "../services/SettingsClientServer";
 import { useSelector } from "react-redux";
@@ -53,6 +59,16 @@ const SettingsClientMiddleware = () => {
         setTinh(data?.DT?.tinh);
         setSchool(data?.DT?.school);
         setAvatar(data?.DT?.avatar);
+        setWeb(data?.DT?.mxh?.find((item) => item.name === "web")?.link);
+        setGit(data?.DT?.mxh?.find((item) => item.name === "git")?.link);
+        setZalo(data?.DT?.mxh?.find((item) => item.name === "zalo")?.link);
+        setFacebook(
+          data?.DT?.mxh?.find((item) => item.name === "facebook")?.link
+        );
+        setTiktok(data?.DT?.mxh?.find((item) => item.name === "tiktok")?.link);
+        setYoutube(
+          data?.DT?.mxh?.find((item) => item.name === "youtube")?.link
+        );
       }
     };
 
@@ -188,6 +204,84 @@ const SettingsClientMiddleware = () => {
     }
   };
 
+  // web
+  const handleShowWeb = () => setShow("web");
+  const handleWeb = async () => {
+    const data = await UserClientEditWeb(id, web);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // git
+  const handleShowGit = () => setShow("git");
+  const handleGit = async () => {
+    const data = await UserClientEditGit(id, git);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // zalo
+  const handleShowZalo = () => setShow("zalo");
+  const handleZalo = async () => {
+    const data = await UserClientEditZalo(id, zalo);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // facebook
+  const handleShowFacebook = () => setShow("facebook");
+  const handleFacebook = async () => {
+    const data = await UserClientEditFacebook(id, facebook);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // tiktok
+  const handleShowTiktok = () => setShow("tiktok");
+  const handleTiktok = async () => {
+    const data = await UserClientEditTiktok(id, tiktok);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  // youtube
+  const handleShowYoutube = () => setShow("youtube");
+  const handleYoutube = async () => {
+    const data = await UserClientEditYoutube(id, youtube);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShow("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
   const handleBackOver = () => {
     setShow("");
   };
@@ -243,6 +337,18 @@ const SettingsClientMiddleware = () => {
     handleSchool,
     handleShowAvatar,
     handleAvatar,
+    handleShowWeb,
+    handleWeb,
+    handleShowGit,
+    handleGit,
+    handleShowZalo,
+    handleZalo,
+    handleShowFacebook,
+    handleFacebook,
+    handleShowTiktok,
+    handleTiktok,
+    handleShowYoutube,
+    handleYoutube,
     handleBackOver,
   };
 };

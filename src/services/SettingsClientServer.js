@@ -61,3 +61,57 @@ export const UserClientEditSchool = async (id, school) => {
   );
   return response.data;
 };
+
+// [PATCH] Người dùng
+export const UserClientEditWeb = async (id, web) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/web`,
+    { id, web }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditGit = async (id, git) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/git`,
+    { id, git }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditZalo = async (id, zalo) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/zalo`,
+    { id, zalo }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditFacebook = async (id, facebook) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/facebook`,
+    { id, facebook }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditTiktok = async (id, tiktok) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/tiktok`,
+    { id, tiktok }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
+export const UserClientEditYoutube = async (id, youtube) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/youtube`,
+    { id, youtube }
+  );
+  return response.data;
+};
