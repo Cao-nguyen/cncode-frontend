@@ -127,6 +127,7 @@
               height: 100px;
               border-radius: 50px;
               background: none;
+              object-fit: cover;
             }
           }
 
@@ -214,6 +215,44 @@
           padding: 10px 12px;
           font-size: 20px;
           background-color: var(--xam-nhat-ba);
+        }
+      }
+
+      label.upload-image-label {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: var(--mau-trang);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+
+        i {
+          text-align: center;
+          font-size: 30px;
+        }
+
+        p {
+          margin-top: 5px;
+          text-align: center;
+          font-weight: bold;
+        }
+      }
+
+      .upload-image-input {
+        display: none;
+      }
+
+      .image-view {
+        display: flex;
+        justify-content: center;
+
+        img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 50%;
         }
       }
     }

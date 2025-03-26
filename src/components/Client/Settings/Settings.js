@@ -69,6 +69,7 @@ function Settings() {
     handleShowYoutube,
     handleYoutube,
     handleBackOver,
+    handleImageUpload,
   } = SettingsClientMiddleware();
 
   return (
@@ -471,18 +472,24 @@ function Settings() {
               <div className="button-back" onClick={handleBackOver}>
                 <i className="fa-solid fa-xmark"></i>
               </div>
-              <h3>Cập nhật giới thiệu của bạn</h3>
-              <p>
-                Phần giới thiệu sẽ được hiển thị trên cá nhân, giúp người khác
-                hiểu bạn hơn.
-              </p>
-              <textarea
-                className="form-control"
-                placeholder="Nhập phần giới thiệu"
-                value={info}
-                onChange={(e) => setInfo(e.target.value)}
+              <h3>Cập nhật avatar của bạn</h3>
+              <label htmlFor="upload-input" className="upload-image-label">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Tải lên ảnh đại diện của bạn</p>
+              </label>
+              <input
+                id="upload-input"
+                className="form-control upload-image-input"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
               />
-              <div className="btn" onClick={handleInfo}>
+              {avatar && (
+                <div className="image-view">
+                  <img src={avatar} alt="" />
+                </div>
+              )}
+              <div className="btn" onClick={handleAvatar}>
                 Lưu lại
               </div>
             </div>

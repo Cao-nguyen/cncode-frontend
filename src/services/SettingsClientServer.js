@@ -63,6 +63,15 @@ export const UserClientEditSchool = async (id, school) => {
 };
 
 // [PATCH] Người dùng
+export const UserClientEditAvatar = async (id, avatar) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/avatar`,
+    { id, avatar }
+  );
+  return response.data;
+};
+
+// [PATCH] Người dùng
 export const UserClientEditWeb = async (id, web) => {
   const response = await axios.patch(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/web`,

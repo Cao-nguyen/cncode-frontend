@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  UserClientEditAvatar,
   UserClientEditBirthday,
   UserClientEditFacebook,
   UserClientEditFullName,
@@ -18,6 +19,7 @@ import {
 import { useSelector } from "react-redux";
 import socket from "../components/Service/socket";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SettingsClientMiddleware = () => {
   const navigate = useNavigate();
@@ -82,6 +84,75 @@ const SettingsClientMiddleware = () => {
       socket.off("changeBirthday");
     };
   }, [id]);
+
+  // Xử lí ảnh
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
+    const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_PRESET;
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("folder", "uploads/avatar");
+
+    try {
+      if (avatar) {
+        const getPublicIdFromUrl = (imageUrl) => {
+          try {
+            const urlParts = imageUrl.split("/");
+            const uploadIndex = urlParts.indexOf("upload");
+
+            if (uploadIndex === -1) return null;
+
+            let publicIdParts = urlParts.slice(uploadIndex + 1);
+
+            if (
+              publicIdParts[0].startsWith("v") &&
+              !isNaN(publicIdParts[0].substring(1))
+            ) {
+              publicIdParts.shift();
+            }
+
+            return publicIdParts.join("/").split(".")[0];
+          } catch (error) {
+            console.error("Lỗi khi lấy Public ID:", error);
+            return null;
+          }
+        };
+
+        const publicId = getPublicIdFromUrl(avatar);
+        toast.success("Đang tải ảnh, vui lòng đợi...");
+
+        const deleteResponse = await axios.post(
+          `${process.env.REACT_APP_BACKEND}/api/v1/client/deletedImg`,
+          { publicId }
+        );
+
+        if (deleteResponse.data.success) {
+          toast.success("Hãy kiên nhẫn, sắp xong rồi!");
+        } else {
+          console.log("Ảnh không tồn tại hoặc không thể xoá!");
+        }
+      }
+
+      // Upload ảnh mới
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        formData
+      );
+
+      if (response.data.secure_url) {
+        setAvatar(response.data.secure_url);
+        toast.success("Tải ảnh lên thành công!");
+      }
+    } catch (error) {
+      toast.error("Lỗi khi xử lý ảnh!");
+      console.error("Lỗi upload ảnh:", error);
+    }
+  };
 
   const [show, setShow] = useState();
 
@@ -194,7 +265,7 @@ const SettingsClientMiddleware = () => {
       toast.error("Không được bỏ trống!");
     }
 
-    const data = await UserClientEditSchool(id, avatar);
+    const data = await UserClientEditAvatar(id, avatar);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -350,6 +421,7 @@ const SettingsClientMiddleware = () => {
     handleShowYoutube,
     handleYoutube,
     handleBackOver,
+    handleImageUpload,
   };
 };
 
