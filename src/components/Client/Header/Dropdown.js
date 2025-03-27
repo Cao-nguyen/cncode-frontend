@@ -20,7 +20,7 @@ function UseDropdown() {
 
       <Dropdown.Menu>
         <Dropdown.Item>
-          <NavLink className="dropdown-link" to={`/${username}`}>
+          <NavLink className="dropdown-link" to={`/p/${username}`}>
             Trang cá nhân
           </NavLink>
         </Dropdown.Item>

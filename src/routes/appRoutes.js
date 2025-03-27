@@ -18,7 +18,7 @@ import MeBlog from "../components/Client/Blog/MeBlog";
 import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
 
-export const validateRoutes = ["/me/post", "/me/settings"];
+export const validateRoutes = ["/me/post", "/me/settings", "/p/caonguyen2009"];
 
 export const clientRoutes = [
   "/gioithieu",
@@ -71,7 +71,7 @@ const AppRoutes = () => {
       <Route path="/tintuc/:slug" Component={tintucRead} />
 
       {/* Khác */}
-      <Route path="/:username" element={<Profile />} />
+      <Route path="/p/:username" element={<Profile />} />
       <Route path="/me/khuvuon" element={<Khuvuon />} />
       <Route path="/ssl" element={<Ssl />} />
       <Route path="/use" element={<Use />} />

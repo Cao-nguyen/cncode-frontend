@@ -124,3 +124,12 @@ export const UserClientEditYoutube = async (id, youtube) => {
   );
   return response.data;
 };
+
+// [PATCH] Người dùng
+export const UserClientEditPassword = async (id, oldPassword, password) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user/edit/password`,
+    { id, oldPassword, password }
+  );
+  return response.data;
+};

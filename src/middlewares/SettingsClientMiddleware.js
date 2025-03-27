@@ -7,6 +7,7 @@ import {
   UserClientEditFullName,
   UserClientEditGit,
   UserClientEditInfo,
+  UserClientEditPassword,
   UserClientEditSchool,
   UserClientEditTiktok,
   UserClientEditTinh,
@@ -20,9 +21,13 @@ import { useSelector } from "react-redux";
 import socket from "../components/Service/socket";
 import { toast } from "react-toastify";
 import axios from "axios";
+import moment from "moment/moment";
+import "moment/locale/vi";
 
 const SettingsClientMiddleware = () => {
   const navigate = useNavigate();
+  moment.locale("vi");
+
   const [active, setActive] = useState("top");
 
   const id = useSelector((state) => state.user.account.id);
@@ -49,6 +54,27 @@ const SettingsClientMiddleware = () => {
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
 
+  const [createdAt, setCreatedAt] = useState();
+
+  const [oldPassword, setOldPassword] = useState();
+  const [newPassword, setNewPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+
+  const updatedAt = new Date();
+  const newCreatedAt = new Date(createdAt);
+  const timeShow = updatedAt - newCreatedAt;
+  const oneDay = 24 * 60 * 60 * 1000;
+
+  const passwordDate =
+    timeShow > oneDay
+      ? moment(createdAt).format("DD / MM / YYYY")
+      : moment(createdAt).from(updatedAt);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   useEffect(() => {
     const getUser = async () => {
       const data = await UserClientRead(id);
@@ -71,6 +97,7 @@ const SettingsClientMiddleware = () => {
         setYoutube(
           data?.DT?.mxh?.find((item) => item.name === "youtube")?.link
         );
+        setCreatedAt(data?.DT?.createdAt);
       }
     };
 
@@ -358,6 +385,31 @@ const SettingsClientMiddleware = () => {
     }
   };
 
+  const handleShowNewPassword = () => setShow("newPassword");
+  const handlePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      toast.error("Mật khẩu xác nhận không chính xác");
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\W)[^\s]{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      toast.error(
+        "Mật khẩu phải có ít nhất 8 ký tự, không chứa khoảng trắng, có ít nhất 1 chữ in hoa và 1 ký tự đặc biệt."
+      );
+      return;
+    }
+
+    const data = await UserClientEditPassword(id, oldPassword, newPassword);
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handleShowResetPassword = () => setShow("resetPassword");
+
   const handleBackOver = () => {
     setShow("");
   };
@@ -427,6 +479,18 @@ const SettingsClientMiddleware = () => {
     handleYoutube,
     handleBackOver,
     handleImageUpload,
+    passwordDate,
+    handleShowNewPassword,
+    handlePassword,
+    newPassword,
+    setNewPassword,
+    confirmPassword,
+    setConfirmPassword,
+    oldPassword,
+    setOldPassword,
+    showPassword,
+    handleShowPassword,
+    handleShowResetPassword,
   };
 };
 

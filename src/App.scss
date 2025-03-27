@@ -76,7 +76,7 @@ body {
   margin: auto;
 
   .logo-load {
-    animation: load-logo 60s linear infinite;
+    animation: load-logo 20s linear infinite;
 
     img {
       width: 200px;
@@ -99,7 +99,7 @@ body {
       position: absolute;
       height: 10px;
       background-color: var(--xanh-login);
-      animation: load-bar-animate 60s linear infinite;
+      animation: load-bar-animate 20s linear infinite;
     }
   }
 

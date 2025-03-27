@@ -28,7 +28,6 @@ function Settings() {
     school,
     setSchool,
     avatar,
-    setAvatar,
     web,
     setWeb,
     git,
@@ -70,6 +69,18 @@ function Settings() {
     handleYoutube,
     handleBackOver,
     handleImageUpload,
+    passwordDate,
+    handleShowNewPassword,
+    handlePassword,
+    newPassword,
+    setNewPassword,
+    confirmPassword,
+    setConfirmPassword,
+    oldPassword,
+    setOldPassword,
+    showPassword,
+    handleShowPassword,
+    handleShowResetPassword,
   } = SettingsClientMiddleware();
 
   const newZalo = zalo?.replace("https://zalo.me/", "");
@@ -274,17 +285,17 @@ function Settings() {
                 <p>Thay đổi mật khẩu và khôi phục mật khẩu của bạn.</p>
 
                 <div className="table">
-                  <div className="table-item">
+                  <div className="table-item" onClick={handleShowNewPassword}>
                     <div className="table-item-left">
                       <h5>Thay đổi mật khẩu</h5>
-                      <p>Lần đổi gần nhất:</p>
+                      <p>Lần đổi gần nhất: {passwordDate}</p>
                     </div>
                     <div className="table-item-right">
                       <i class="fa-solid fa-chevron-right"></i>
                     </div>
                   </div>
 
-                  <div className="table-item">
+                  <div className="table-item" onClick={handleShowResetPassword}>
                     <div className="table-item-left">
                       <h5>Lấy lại mật khẩu</h5>
                       <p>Bạn quên mật khẩu đúng không?</p>
@@ -637,6 +648,95 @@ function Settings() {
               />
               <div className="btn" onClick={handleYoutube}>
                 Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "newPassword" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật mật khẩu mới</h3>
+              <p>Thay đổi mật khẩu mới của bạn.</p>
+              <div className="form-group d-flex">
+                <div className="col-10">
+                  <input
+                    className="form-control"
+                    placeholder="Nhập mật khẩu hiện tại*"
+                    type={showPassword ? "text" : "password"}
+                    value={oldPassword}
+                    onChange={(e) => {
+                      setOldPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="col-2">
+                  <div className="btn mt-0" onClick={handleShowPassword}>
+                    <i className="fa-solid fa-eye"></i>
+                  </div>
+                </div>
+              </div>
+              <div className="form-group d-flex mt-2">
+                <div className="col-10">
+                  <input
+                    className="form-control"
+                    placeholder="Nhập mật khẩu mới*"
+                    type={showPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="col-2">
+                  <div className="btn mt-0" onClick={handleShowPassword}>
+                    <i className="fa-solid fa-eye"></i>
+                  </div>
+                </div>
+              </div>
+              <div className="form-group d-flex mt-2">
+                <div className="col-10">
+                  <input
+                    className="form-control"
+                    placeholder="Xác nhận mật khẩu mới*"
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="col-2">
+                  <div className="btn mt-0" onClick={handleShowPassword}>
+                    <i className="fa-solid fa-eye"></i>
+                  </div>
+                </div>
+              </div>
+              <div className="btn" onClick={handlePassword}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "resetPassword" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Bạn quên mật khẩu?</h3>
+              <p>Bước 1: Chuyển về trang chủ của nền tảng.</p>
+              <p>
+                Bước 2: Chọn đăng xuất (nếu chưa đăng xuất). Chọn đăng nhập rồi
+                chọn quên mật khẩu.
+              </p>
+              <p>Bước 3: Nhập thông tin để lấy lại mật khẩu.</p>
+              <div className="btn" onClick={handleBackOver}>
+                Đã hiểu
               </div>
             </div>
           </div>
