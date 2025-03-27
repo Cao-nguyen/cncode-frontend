@@ -66,6 +66,89 @@ body {
   }
 }
 
+.container-load {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  .logo-load {
+    animation: load-logo 60s linear infinite;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  .load-bar {
+    margin-top: 10px;
+    width: 30%;
+    height: 10px;
+    background-color: var(--xam-nhat-ba);
+    border-radius: 50px;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      border-radius: 50px;
+      position: absolute;
+      height: 10px;
+      background-color: var(--xanh-login);
+      animation: load-bar-animate 60s linear infinite;
+    }
+  }
+
+  @keyframes load-logo {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes load-bar-animate {
+    0% {
+      width: 0%;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
+
 /* Định nghĩa hiệu ứng fade-in */
 .fade-in {
   opacity: 0;

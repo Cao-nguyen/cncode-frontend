@@ -1,6 +1,6 @@
 // Các thư viện sử dụng
 import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import Aos from "aos";
@@ -16,6 +16,7 @@ import AppRoutes, { validateRoutes, clientRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
 import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 import Nguyen from "./assets/Khac/Nguyen.png";
+import logo from "./assets/logo.png";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -27,6 +28,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "aos/dist/aos.css";
 import "./App.scss";
+import { WebAdminRead } from "./services/WebAdminServer";
 
 function App() {
   // Xử lí route bên admin và client
@@ -79,117 +81,141 @@ function App() {
   useApi(["Infor"], getInforApi);
   useApi(["news"], ShowNewClient);
 
+  const [isCheck, setIsCheck] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await WebAdminRead();
+      if (data && data.EC === 0) {
+        setIsCheck(false);
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
-    <div className={isDarkMode ? "dark-mode" : ""}>
-      {isAdmin ? (
-        <div className={open ? "admin-layout-open" : "admin-layout"}>
-          <div className="phoneAdmin">
-            <h1>
-              Trang Admin không thể sử dụng trên điện thoại. Vui lòng chuyển
-              sang thiết bị khác.
-            </h1>
-            <Link className="btn btn-primary" to="/">
-              Trở về
-            </Link>
+    <div>
+      {isCheck ? (
+        <div className="container-load">
+          <div className="logo-load">
+            <img src={logo} alt="" />
           </div>
-          <div className="sidebar">
-            <Tab />
-          </div>
-          <div className="body">
-            <div className="headerAdmin">
-              <HeaderAdmin
-                isDarkMode={isDarkMode}
-                toggleTheme={toggleTheme}
-                toggleOpen={toggleOpen}
-              />
-            </div>
-            <div className="bodyAdmin">
-              <AdminRoutes />
-            </div>
-          </div>
+          <div className="load-bar"></div>
         </div>
       ) : (
-        <div className="client-layout">
-          {!hideHeader && (
-            <Header
-              toggleLogin={toggleLogin}
-              isDarkMode={isDarkMode}
-              toggleTheme={toggleTheme}
-            />
-          )}
-
-          <div className="icon-link">
-            {location.pathname !== "/chatwithnguyen" && (
-              <Link to="/chatwithnguyen">
-                <div className="icon-link-item">
-                  <label>Chat với Nguyên</label>
-                  <p>
-                    <img src={Nguyen} alt="" />
-                  </p>
+        <div className={isDarkMode ? "dark-mode" : ""}>
+          {isAdmin ? (
+            <div className={open ? "admin-layout-open" : "admin-layout"}>
+              <div className="phoneAdmin">
+                <h1>
+                  Trang Admin không thể sử dụng trên điện thoại. Vui lòng chuyển
+                  sang thiết bị khác.
+                </h1>
+                <Link className="btn btn-primary" to="/">
+                  Trở về
+                </Link>
+              </div>
+              <div className="sidebar">
+                <Tab />
+              </div>
+              <div className="body">
+                <div className="headerAdmin">
+                  <HeaderAdmin
+                    isDarkMode={isDarkMode}
+                    toggleTheme={toggleTheme}
+                    toggleOpen={toggleOpen}
+                  />
                 </div>
-              </Link>
-            )}
-            {location.pathname !== "/hoidap" && (
-              <Link to="/hoidap">
-                <div className="icon-link-item">
-                  <label>Hỏi đáp</label>
-                  <p>
-                    <i class="fa-solid fa-comment"></i>
-                  </p>
+                <div className="bodyAdmin">
+                  <AdminRoutes />
                 </div>
-              </Link>
-            )}
-            {location.pathname !== "/shop" && (
-              <Link to="/shop">
-                <div className="icon-link-item">
-                  <label>Bách hoá vật phẩm</label>
-                  <p>
-                    <i class="fa-solid fa-store"></i>
-                  </p>
-                </div>
-              </Link>
-            )}
-          </div>
-
-          <ThemeClientApp />
-
-          {login && (
-            <div className="bg-fixed">
-              <div className="fixed">
-                <i className="fa-solid fa-x" onClick={toggleLogin} />
-                <Login
-                  toggleForgot={toggleForgot}
+              </div>
+            </div>
+          ) : (
+            <div className="client-layout">
+              {!hideHeader && (
+                <Header
                   toggleLogin={toggleLogin}
-                  toggleRegister={toggleRegister}
+                  isDarkMode={isDarkMode}
+                  toggleTheme={toggleTheme}
                 />
+              )}
+
+              <div className="icon-link">
+                {location.pathname !== "/chatwithnguyen" && (
+                  <Link to="/chatwithnguyen">
+                    <div className="icon-link-item">
+                      <label>Chat với Nguyên</label>
+                      <p>
+                        <img src={Nguyen} alt="" />
+                      </p>
+                    </div>
+                  </Link>
+                )}
+                {location.pathname !== "/hoidap" && (
+                  <Link to="/hoidap">
+                    <div className="icon-link-item">
+                      <label>Hỏi đáp</label>
+                      <p>
+                        <i class="fa-solid fa-comment"></i>
+                      </p>
+                    </div>
+                  </Link>
+                )}
+                {location.pathname !== "/shop" && (
+                  <Link to="/shop">
+                    <div className="icon-link-item">
+                      <label>Bách hoá vật phẩm</label>
+                      <p>
+                        <i class="fa-solid fa-store"></i>
+                      </p>
+                    </div>
+                  </Link>
+                )}
               </div>
+
+              <ThemeClientApp />
+
+              {login && (
+                <div className="bg-fixed">
+                  <div className="fixed">
+                    <i className="fa-solid fa-x" onClick={toggleLogin} />
+                    <Login
+                      toggleForgot={toggleForgot}
+                      toggleLogin={toggleLogin}
+                      toggleRegister={toggleRegister}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {forgotPassword && (
+                <div className="bg-fixed">
+                  <div className="fixed">
+                    <i className="fa-solid fa-x" onClick={toggleForgot} />
+                    <Forgot />
+                  </div>
+                </div>
+              )}
+
+              {register && (
+                <div className="bg-fix">
+                  <div className="fixed">
+                    <i className="fa-solid fa-x" onClick={toggleRegister} />
+                    <Register toggleRegister={toggleRegister} />
+                  </div>
+                </div>
+              )}
+
+              {/* App content */}
+              <div className="app-container">
+                <AppRoutes />
+              </div>
+
+              {!hideHeader && <Footer />}
             </div>
           )}
-
-          {forgotPassword && (
-            <div className="bg-fixed">
-              <div className="fixed">
-                <i className="fa-solid fa-x" onClick={toggleForgot} />
-                <Forgot />
-              </div>
-            </div>
-          )}
-
-          {register && (
-            <div className="bg-fix">
-              <div className="fixed">
-                <i className="fa-solid fa-x" onClick={toggleRegister} />
-                <Register toggleRegister={toggleRegister} />
-              </div>
-            </div>
-          )}
-
-          {/* App content */}
-          <div className="app-container">
-            <AppRoutes />
-          </div>
-
-          {!hideHeader && <Footer />}
         </div>
       )}
     </div>
