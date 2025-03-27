@@ -78,10 +78,15 @@ const SettingsClientMiddleware = () => {
       setBirthday(data.birthday);
     });
 
+    socket.on("changeZalo", (data) => {
+      setZalo(data?.mxh?.find((item) => item.name === "zalo")?.link);
+    });
+
     getUser();
 
     return () => {
       socket.off("changeBirthday");
+      socket.off("changeZalo");
     };
   }, [id]);
 

@@ -72,6 +72,8 @@ function Settings() {
     handleImageUpload,
   } = SettingsClientMiddleware();
 
+  const newZalo = zalo?.replace("https://zalo.me/", "");
+
   return (
     <>
       <HelmetProvider>
@@ -538,6 +540,102 @@ function Settings() {
                 onChange={(e) => setGit(e.target.value)}
               />
               <div className="btn" onClick={handleGit}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "zalo" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link zalo của bạn</h3>
+              <p>Nhập số điện thoại bạn đã dùng để đăng ký Zalo vào đây.</p>
+              <input
+                className="form-control"
+                placeholder="Số điện thoại"
+                value={newZalo}
+                onChange={(e) => {
+                  let inputValue = e.target.value;
+                  if (inputValue.startsWith("https://zalo.me/")) {
+                    inputValue = inputValue.replace("https://zalo.me/", "");
+                  }
+                  setZalo(inputValue);
+                }}
+              />
+              <div className="btn" onClick={handleZalo}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "facebook" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link facebook của bạn</h3>
+              <p>Dán link facebook của bạn vào đây.</p>
+              <input
+                className="form-control"
+                placeholder="Nhập link facebook*"
+                value={facebook}
+                onChange={(e) => {
+                  setFacebook(e.target.value);
+                }}
+              />
+              <div className="btn" onClick={handleFacebook}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "tiktok" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link tiktok của bạn</h3>
+              <p>Dán link tiktok của bạn vào đây.</p>
+              <input
+                className="form-control"
+                placeholder="Nhập link tiktok*"
+                value={tiktok}
+                onChange={(e) => {
+                  setTiktok(e.target.value);
+                }}
+              />
+              <div className="btn" onClick={handleTiktok}>
+                Lưu lại
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "youtube" && (
+          <div className="overplay">
+            <div className="form-group overplay-item">
+              <div className="button-back" onClick={handleBackOver}>
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <h3>Cập nhật link youtube của bạn</h3>
+              <p>Dán link youtube của bạn vào đây.</p>
+              <input
+                className="form-control"
+                placeholder="Nhập link youtube*"
+                value={youtube}
+                onChange={(e) => {
+                  setYoutube(e.target.value);
+                }}
+              />
+              <div className="btn" onClick={handleYoutube}>
                 Lưu lại
               </div>
             </div>
