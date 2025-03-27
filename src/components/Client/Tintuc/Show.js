@@ -16,6 +16,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
 import socket from "../../Service/socket";
 import { toast } from "react-toastify";
+import { CommentsClientNewsCreate } from "../../../services/CommentClientServer";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -80,6 +81,10 @@ function TintucRead(props) {
       setLiked(data?.like?.some((like) => like?.userLike?._id === id));
     });
 
+    socket.on("pushComment", (data) => {
+      setCurrentNews(data);
+    });
+
     return () => {
       socket.off("pushLike");
       socket.off("pushUnlike");
@@ -97,6 +102,18 @@ function TintucRead(props) {
 
   const handleUnLike = async () => {
     await NewsUnlike(id, idPost);
+  };
+
+  const [content, setContent] = useState();
+
+  const handleComment = async () => {
+    const data = await CommentsClientNewsCreate(id, idPost, content);
+    if (data && data.EC === 0) {
+      setContent("");
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
   };
 
   return (
@@ -152,7 +169,48 @@ function TintucRead(props) {
                   dangerouslySetInnerHTML={{ __html: inforHtml }}
                 ></div>
                 <h3>Bình luận</h3>
-                <div className="comment" ref={divRef}></div>
+                <div className="comment" ref={divRef}>
+                  <div className="form-group">
+                    <textarea
+                      className="form-control"
+                      placeholder="Viết bình luận của bạn*"
+                      style={{ height: "80px", resize: "none" }}
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                    />
+
+                    <div
+                      className="btn btn-primary mt-2"
+                      style={{ color: "var(--mau-trang)" }}
+                      onClick={handleComment}
+                    >
+                      <i className="fa-solid fa-paper-plane"></i> Gửi bình luận
+                    </div>
+                  </div>
+                  {currentNews?.comments?.map((item, index) => (
+                    <div className="comment-item" key={index}>
+                      <div className="info">
+                        <img src={item?.userComment?.avatar} alt=""></img>
+                        <div className="content">
+                          <p>{item?.userComment?.fullName}</p>
+                          <span>{item?.comment}</span>
+                          <div className="action">
+                            <span>
+                              {moment(item?.commentedAt).format(
+                                "DD - MM - YYYY"
+                              )}
+                            </span>
+                            <span className="action-item">
+                              <i className="fa-regular fa-heart"></i>
+                              <span>0</span>
+                            </span>
+                            <span className="action-item">Trả lời</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
