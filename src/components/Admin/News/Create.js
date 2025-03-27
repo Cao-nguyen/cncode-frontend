@@ -17,9 +17,9 @@ function Create(props) {
   const [show, setShow] = useState("");
   const [description, setDescription] = useState();
   const [content, setContent] = useState();
-  const authorId = useSelector((state) => state.user.account.id);
   const [isLoading, setIsLoading] = useState();
   const [isModified, setIsModified] = useState(false);
+  const authorId = useSelector((state) => state.user.account.id);
 
   const handleBack = () => {
     if (isModified) {

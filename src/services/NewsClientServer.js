@@ -1,24 +1,24 @@
 import axios from "axios";
 
 // [POST] Unlike Tin tức
-export const NewsUnlike = async (fullName, slug) => {
+export const NewsUnlike = async (id, idPost) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/news/client/news/unlike`,
     {
-      fullName,
-      slug,
+      id,
+      idPost,
     }
   );
   return response.data;
 };
 
 // [POST] Like Tin tức
-export const NewsLike = async (fullName, slug) => {
+export const NewsLike = async (id, idPost) => {
   const response = await axios.patch(
     `${process.env.REACT_APP_BACKEND}/api/v1/news/client/news/like`,
     {
-      fullName,
-      slug,
+      id,
+      idPost,
     }
   );
   return response.data;

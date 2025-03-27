@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import {
   ShowNewClient,
   NewsLike,
@@ -14,14 +14,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Tintuc.scss";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
-import {
-  CommentsClientCreate,
-  CommentsClientDelete,
-  CommentsClientDeleteReply,
-  CommentsClientLove,
-  CommentsClientRead,
-  CommentsClientUnlove,
-} from "../../../services/CommentClientServer";
 import socket from "../../Service/socket";
 import { toast } from "react-toastify";
 
@@ -30,8 +22,7 @@ function TintucRead(props) {
   const [currentNews, setCurrentNews] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const fullName = useSelector((state) => state.user.account.fullName);
-  const userId = useSelector((state) => state.user.account.id);
+  const id = useSelector((state) => state.user.account.id);
 
   const { data: news, refetch } = useQuery({
     queryKey: ["news"],
@@ -57,8 +48,6 @@ function TintucRead(props) {
 
       let imageUrl = typeof href === "string" ? href : href?.href || "";
 
-      console.log(imageUrl);
-
       return `<div class="img-wrapper" onClick="window.openImage('${imageUrl}')">
           <img src="${imageUrl}" alt="${text}" class="img${imgIndex}" />
         </div>`;
@@ -73,157 +62,41 @@ function TintucRead(props) {
     window.openImage = (src) => setSelectedImage(src);
   }, []);
 
-  const handleLove = async () => {
-    if (fullName === "") {
-      window.alert("Vui lòng đăng nhập để thả tim cho tin tức");
-      return;
-    }
-
-    setCurrentNews((prev) => ({
-      ...prev,
-      emotion: [...prev.emotion, { name: fullName }],
-    }));
-
-    const data = await NewsLike(fullName, slug);
-    if (data && data.EC === 0) {
-      refetch();
-    }
+  const divRef = useRef(null);
+  const handleScroll = () => {
+    divRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleUnlove = async () => {
-    setCurrentNews((prev) => ({
-      ...prev,
-      emotion: prev.emotion.filter((e) => e.name !== fullName),
-    }));
-
-    const data = await NewsUnlike(fullName, slug);
-    if (data && data.EC === 0) {
-      refetch();
-    }
-  };
-
-  const [chat, setChat] = useState();
-  const [report, setReport] = useState(false);
-  const [comment, setComment] = useState([]);
-  const [tagName, setTagName] = useState(null);
-  const [idChat, setIdChat] = useState();
-  const inputRef = useRef(null);
-
-  const handleToggle = (id) => {
-    setReport((prev) => (prev === id ? null : id));
-  };
-
-  const handleTagName = (name, id) => {
-    setTagName(name);
-    setChat(`@${name}: `);
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    setIdChat(id);
-  };
-
-  const handlePushComment = async () => {
-    await CommentsClientCreate(userId, chat, slug, tagName, idChat);
-    setChat("");
-  };
-
-  const handleUnLogin = async () => {
-    window.alert("Bạn cần đăng nhập để bình luận");
-    setChat("");
-  };
-
-  const handleUnLoginLove = async () => {
-    window.alert("Bạn cần đăng nhập để thả tim bình luận");
-  };
+  const [liked, setLiked] = useState();
 
   useEffect(() => {
-    const getdata = async () => {
-      const data = await CommentsClientRead(slug);
-
-      if (data && data.EC === 0) {
-        setComment(data.DT);
-      }
-    };
-
-    getdata();
-
-    socket.on("pushComment", () => {
-      getdata();
+    socket.on("pushLike", (data) => {
+      refetch();
+      setLiked(data?.like?.some((like) => like.userLike._id === id));
     });
 
-    socket.on("pushCommentReply", () => {
-      getdata();
-    });
-
-    socket.on("chatDelete", () => {
-      getdata();
-    });
-
-    socket.on("chatDeleteReply", () => {
-      getdata();
-    });
-
-    socket.on("like", () => {
-      getdata();
-    });
-
-    socket.on("unlike", () => {
-      getdata();
+    socket.on("pushUnlike", (data) => {
+      refetch();
+      setLiked(data?.like?.some((like) => like.userLike._id === id));
     });
 
     return () => {
-      socket.off("pushComment");
-      socket.off("pushCommentReply");
-      socket.off("chatDelete");
-      socket.off("chatDeleteReply");
-      socket.off("like");
-      socket.off("unlike");
+      socket.off("pushLike");
+      socket.off("pushUnlike");
     };
-  }, [slug]);
+  }, [id]);
 
   useEffect(() => {
-    const closeMenu = () => setReport(!report);
-    document.addEventListener("click", closeMenu);
-    return () => document.removeEventListener("click", closeMenu);
-  }, [report]);
+    setLiked(currentNews?.like?.some((like) => like.userLike._id === id));
+  }, [currentNews, id]);
 
-  const handleDelete = async (id) => {
-    const data = await CommentsClientDelete(id);
-
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-    } else {
-      toast.error(data.EM);
-    }
+  const idPost = currentNews?._id;
+  const handleLike = async () => {
+    await NewsLike(id, idPost);
   };
 
-  const handleDeleteReply = async (idMain, id) => {
-    const data = await CommentsClientDeleteReply(idMain, id);
-
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-    } else {
-      toast.error(data.EM);
-    }
-  };
-
-  const handleLoveComment = async (idMain, id) => {
-    await CommentsClientLove(idMain, id, fullName);
-  };
-
-  const handleUnloveComment = async (idMain, id) => {
-    await CommentsClientUnlove(idMain, id, fullName);
-  };
-
-  const countTotalComments = () => {
-    let totalComments = comment.length;
-
-    // Đếm tổng số trả lời trong mỗi bình luận
-    comment.forEach((comment) => {
-      totalComments += comment.replies ? comment.replies.length : 0;
-    });
-
-    return totalComments;
+  const handleUnLike = async () => {
+    await NewsUnlike(id, idPost);
   };
 
   return (
@@ -247,25 +120,19 @@ function TintucRead(props) {
               <p className="description">{currentNews.description}</p>
               <div className="tintuc_grid">
                 <div className="tintuc_grid_2">
-                  {currentNews.emotion.some(
-                    (emotion) => emotion.name === fullName
-                  ) ? (
-                    <p onClick={handleUnlove}>
-                      <i className="fa-solid fa-heart"></i>
-                      {currentNews.emotion.length}
+                  {!liked ? (
+                    <p onClick={handleLike}>
+                      <i className="fa-regular fa-heart"></i>
+                      {currentNews?.like?.length}
                     </p>
                   ) : (
-                    <p onClick={handleLove}>
-                      <i className="fa-regular fa-heart"></i>
-                      {currentNews.emotion.length}
+                    <p onClick={handleUnLike}>
+                      <i className="fa-solid fa-heart"></i>
+                      {currentNews?.like?.length}
                     </p>
                   )}
-                  <p
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#commentOffcanvas"
-                  >
+                  <p onClick={handleScroll}>
                     <i className="fa-regular fa-comment comments"></i>
-                    {countTotalComments()}
                   </p>
                 </div>
                 <p>Người đăng: {currentNews?.authorId?.fullName}</p>
@@ -284,6 +151,8 @@ function TintucRead(props) {
                   className={`preview fade-in ${isVisible ? "visible" : ""}`}
                   dangerouslySetInnerHTML={{ __html: inforHtml }}
                 ></div>
+                <h3>Bình luận</h3>
+                <div className="comment" ref={divRef}></div>
               </div>
             </div>
 
@@ -300,211 +169,6 @@ function TintucRead(props) {
           </div>
         </>
       )}
-
-      <div
-        className="offcanvas offcanvas-end"
-        id="commentOffcanvas"
-        tabIndex="-1"
-        aria-labelledby="offcanvasRightLabel"
-        style={{ width: "500px" }}
-      >
-        <div className="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Bình luận</h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          <div className="commentMain">
-            {comment &&
-              comment.map((item, index) => (
-                <>
-                  <div className="chat-main" key={index}>
-                    <img src={logo} alt=""></img>
-                    <div className="comment-info">
-                      <div className="info">
-                        <p>{item?.userId?.fullName}</p>
-                        <i
-                          className="fa-solid fa-ellipsis"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleToggle(item._id);
-                          }}
-                        ></i>
-                        {report === item._id && (
-                          <div className="report">
-                            {(currentNews?.authorId?.fullName === fullName ||
-                              item?.userId?.fullName === fullName) && (
-                              <div
-                                className="report-item"
-                                onClick={() => handleDelete(item._id)}
-                              >
-                                <i className="fa-solid fa-trash"></i>
-                                <p className="delete">Xoá bình luận</p>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                      <p className="info-chat">{item.comment}</p>
-                      <div className="action">
-                        <p className="time">
-                          {moment(item.createdAt).format("DD - MM - YYYY")}
-                        </p>
-                        <div className="action-likes">
-                          {item.likes.some(
-                            (like) => like?.userId?.fullName === fullName
-                          ) ? (
-                            <i
-                              className="fa-solid fa-heart"
-                              onClick={() => handleUnloveComment(item._id)}
-                            ></i>
-                          ) : (
-                            <i
-                              className="fa-regular fa-heart"
-                              onClick={
-                                !fullName
-                                  ? handleUnLoginLove
-                                  : () => handleLoveComment(item._id)
-                              }
-                            ></i>
-                          )}
-                          <p>{item.likes.length}</p>
-                        </div>
-                        <p
-                          className="reply"
-                          onClick={() =>
-                            handleTagName(item?.userId?.fullName, item._id)
-                          }
-                        >
-                          Trả lời
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="commentMainReply">
-                    {item.replies &&
-                      item.replies.map((item_child, index_child) => (
-                        <div className="chat-main" key={index_child}>
-                          <img src={logo} alt=""></img>
-                          <div className="comment-info">
-                            <div className="info">
-                              <p>{item_child?.userId?.fullName}</p>
-                              <i
-                                className="fa-solid fa-ellipsis"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleToggle(item_child._id);
-                                }}
-                              ></i>
-                              {report === item_child._id && (
-                                <div className="report">
-                                  {(currentNews?.authorId?.fullName ===
-                                    fullName ||
-                                    item_child?.userId?.fullName ===
-                                      fullName) && (
-                                    <div
-                                      className="report-item"
-                                      onClick={() =>
-                                        handleDeleteReply(
-                                          item._id,
-                                          item_child._id
-                                        )
-                                      }
-                                    >
-                                      <i className="fa-solid fa-trash"></i>
-                                      <p className="delete">Xoá bình luận</p>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                            <p className="info-chat">{item_child.comment}</p>
-                            <div className="action">
-                              <p className="time">
-                                {moment(item_child.createdAt).format(
-                                  "DD - MM - YYYY"
-                                )}
-                              </p>
-                              <div className="action-likes">
-                                {item_child.likes.some(
-                                  (like) => like?.userId?.fullName === fullName
-                                ) ? (
-                                  <i
-                                    className="fa-solid fa-heart"
-                                    onClick={() =>
-                                      handleUnloveComment(
-                                        item._id,
-                                        item_child._id
-                                      )
-                                    }
-                                  ></i>
-                                ) : (
-                                  <i
-                                    className="fa-regular fa-heart"
-                                    onClick={
-                                      !fullName
-                                        ? handleUnLoginLove
-                                        : () =>
-                                            handleLoveComment(
-                                              item._id,
-                                              item_child._id
-                                            )
-                                    }
-                                  ></i>
-                                )}
-                                <p>{item_child.likes.length}</p>
-                              </div>
-                              <p
-                                className="reply"
-                                onClick={() =>
-                                  handleTagName(
-                                    item_child.userId.fullName,
-                                    item._id
-                                  )
-                                }
-                              >
-                                Trả lời
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </>
-              ))}
-          </div>
-          <div className="commentBot">
-            <div className="grid2 form-group">
-              <input
-                ref={inputRef}
-                className="form-control"
-                placeholder="Thêm bình luận..."
-                value={chat}
-                onChange={(e) => setChat(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handlePushComment();
-                  }
-                }}
-              ></input>
-              {chat ? (
-                <h6
-                  className="active"
-                  onClick={!fullName ? handleUnLogin : handlePushComment}
-                >
-                  Đăng
-                </h6>
-              ) : (
-                <h6 className="">Đăng</h6>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
