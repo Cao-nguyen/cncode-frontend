@@ -271,6 +271,33 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: rgba(141, 141, 141, 0.35) 0px 5px 15px;
+
+        .comment {
+          .comment-item {
+            display: flex;
+
+            .info {
+              img {
+                margin-top: 0px;
+              }
+            }
+          }
+
+          .comment-reply {
+            margin-left: 50px;
+            border-left: none;
+            border-left: solid 1px var(--mau-trang);
+
+            .comment-reply-item {
+              display: flex;
+              .info {
+                img {
+                  margin-top: 0px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

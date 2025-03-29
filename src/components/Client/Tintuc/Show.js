@@ -16,7 +16,10 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
 import socket from "../../Service/socket";
 import { toast } from "react-toastify";
-import { CommentsClientNewsCreate } from "../../../services/CommentClientServer";
+import {
+  CommentsClientNewsCreate,
+  CommentsClientNewsDelete,
+} from "../../../services/CommentClientServer";
 
 function TintucRead(props) {
   const { slug } = useParams();
@@ -87,9 +90,14 @@ function TintucRead(props) {
       setCurrentNews(data);
     });
 
+    socket.on("deleteComment", (data) => {
+      setCurrentNews(data);
+    });
+
     return () => {
       socket.off("pushLike");
       socket.off("pushUnlike");
+      socket.off("deleteComment");
     };
   }, [id, refetch]);
 
@@ -165,6 +173,16 @@ function TintucRead(props) {
     }
 
     setShowReply(!showReply);
+  };
+
+  const handleDelete = async (idPostDelete, parrentId) => {
+    const check = window.confirm("Bạn có chắc chắn muốn xoá bình luận");
+
+    if (check) {
+      await CommentsClientNewsDelete(idPost, idPostDelete, parrentId);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -247,7 +265,23 @@ function TintucRead(props) {
                           <div className="info">
                             <img src={item?.userComment?.avatar} alt=""></img>
                             <div className="content">
-                              <p>{item?.userComment?.fullName}</p>
+                              <div className="d-flex">
+                                <p>{item?.userComment?.fullName}</p>
+                                {id === item?.userComment?._id && (
+                                  <i
+                                    className="fa-solid fa-ellipsis"
+                                    style={{
+                                      marginLeft: "30px",
+                                      marginTop: "7px",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                      handleDelete(item?._id, item?.parrentId)
+                                    }
+                                    title="Xoá bình luận"
+                                  ></i>
+                                )}
+                              </div>
                               <span
                                 style={{
                                   whiteSpace: "pre-line",
@@ -319,7 +353,26 @@ function TintucRead(props) {
                                     alt=""
                                   ></img>
                                   <div className="content">
-                                    <p>{reply?.userComment?.fullName}</p>
+                                    <div className="d-flex">
+                                      <p>{reply?.userComment?.fullName}</p>
+                                      {id === reply?.userComment?._id && (
+                                        <i
+                                          className="fa-solid fa-ellipsis"
+                                          style={{
+                                            marginLeft: "30px",
+                                            marginTop: "7px",
+                                            cursor: "pointer",
+                                          }}
+                                          onClick={() =>
+                                            handleDelete(
+                                              reply?._id,
+                                              reply?.parrentId
+                                            )
+                                          }
+                                          title="Xoá bình luận"
+                                        ></i>
+                                      )}
+                                    </div>
                                     <span
                                       style={{
                                         whiteSpace: "pre-line",
