@@ -64,6 +64,8 @@ function TintucRead(props) {
   }, []);
 
   const divRef = useRef(null);
+  const inputRef = useRef(null);
+
   const handleScroll = () => {
     divRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -105,15 +107,57 @@ function TintucRead(props) {
   };
 
   const [content, setContent] = useState();
+  const [replyContent, setReplyContent] = useState();
+
+  const [currentId, setCurrentId] = useState();
+  const [showReply, setShowReply] = useState(false);
 
   const handleComment = async () => {
-    const data = await CommentsClientNewsCreate(id, idPost, content);
+    if (!currentId) {
+      if (!content) {
+        toast.error("Bạn chưa nhập bình luận!");
+        return;
+      }
+    } else {
+      if (!replyContent) {
+        toast.error("Bạn chưa nhập bình luận!");
+        return;
+      }
+    }
+
+    const data = await CommentsClientNewsCreate(
+      id,
+      currentId,
+      idPost,
+      content,
+      replyContent
+    );
     if (data && data.EC === 0) {
       setContent("");
-      toast.success(data.EM);
+      setShowReply(false);
     } else {
       toast.error(data.EM);
     }
+  };
+
+  const handleShowReply = (f, idComment) => {
+    if (f) {
+      const mention = `@${f}: `;
+      setReplyContent(mention);
+
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          inputRef.current.setSelectionRange(mention.length, mention.length);
+        }
+      }, 0);
+    }
+
+    if (idComment) {
+      setCurrentId(idComment);
+    }
+
+    setShowReply(!showReply);
   };
 
   return (
@@ -150,6 +194,7 @@ function TintucRead(props) {
                   )}
                   <p onClick={handleScroll}>
                     <i className="fa-regular fa-comment comments"></i>
+                    {currentNews?.comments.length}
                   </p>
                 </div>
                 <p>Người đăng: {currentNews?.authorId?.fullName}</p>
@@ -169,7 +214,7 @@ function TintucRead(props) {
                   dangerouslySetInnerHTML={{ __html: inforHtml }}
                 ></div>
                 <h3>Bình luận</h3>
-                <div className="comment" ref={divRef}>
+                <div className="comment mt-2" ref={divRef}>
                   <div className="form-group">
                     <textarea
                       className="form-control"
@@ -187,29 +232,117 @@ function TintucRead(props) {
                       <i className="fa-solid fa-paper-plane"></i> Gửi bình luận
                     </div>
                   </div>
-                  {currentNews?.comments?.map((item, index) => (
-                    <div className="comment-item" key={index}>
-                      <div className="info">
-                        <img src={item?.userComment?.avatar} alt=""></img>
-                        <div className="content">
-                          <p>{item?.userComment?.fullName}</p>
-                          <span>{item?.comment}</span>
-                          <div className="action">
-                            <span>
-                              {moment(item?.commentedAt).format(
-                                "DD - MM - YYYY"
-                              )}
-                            </span>
-                            <span className="action-item">
-                              <i className="fa-regular fa-heart"></i>
-                              <span>0</span>
-                            </span>
-                            <span className="action-item">Trả lời</span>
+                  {currentNews?.comments
+                    ?.filter((comment) => comment.parrentId === null)
+                    .map((item, index) => (
+                      <>
+                        <div className="comment-item" key={index}>
+                          <div className="info">
+                            <img src={item?.userComment?.avatar} alt=""></img>
+                            <div className="content">
+                              <p>{item?.userComment?.fullName}</p>
+                              <span
+                                style={{
+                                  whiteSpace: "pre-line",
+                                  textAlign: "justify",
+                                }}
+                              >
+                                {item?.comment}
+                              </span>
+                              <div className="action">
+                                <span>
+                                  {moment(item?.commentedAt).format(
+                                    "DD - MM - YYYY"
+                                  )}
+                                </span>
+                                <span className="action-item">
+                                  <i className="fa-regular fa-heart"></i>
+                                  <span>0</span>
+                                </span>
+                                <span
+                                  className="action-item"
+                                  style={{ fontWeight: "bold" }}
+                                  onClick={() =>
+                                    handleShowReply(
+                                      item?.userComment?.fullName,
+                                      item?._id
+                                    )
+                                  }
+                                >
+                                  Trả lời
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+
+                        <div className="comment-reply">
+                          {showReply && (
+                            <div className="form-group mx-2 mt-2">
+                              <textarea
+                                className="form-control"
+                                placeholder="Viết bình luận của bạn*"
+                                style={{ height: "80px", resize: "none" }}
+                                value={replyContent}
+                                onChange={(e) =>
+                                  setReplyContent(e.target.value)
+                                }
+                                ref={inputRef}
+                              />
+
+                              <div
+                                className="btn btn-primary mt-2"
+                                style={{ color: "var(--mau-trang)" }}
+                                onClick={() => handleComment()}
+                              >
+                                <i className="fa-solid fa-paper-plane"></i> Gửi
+                                bình luận
+                              </div>
+                            </div>
+                          )}
+
+                          {currentNews?.comments
+                            ?.filter(
+                              (comment) => comment.parrentId === item._id
+                            )
+                            .map((reply) => (
+                              <div
+                                className="comment-reply-item"
+                                key={reply._id}
+                              >
+                                <div className="info">
+                                  <img
+                                    src={reply?.userComment?.avatar}
+                                    alt=""
+                                  ></img>
+                                  <div className="content">
+                                    <p>{reply?.userComment?.fullName}</p>
+                                    <span
+                                      style={{
+                                        whiteSpace: "pre-line",
+                                        textAlign: "justify",
+                                      }}
+                                    >
+                                      {reply?.comment}
+                                    </span>
+                                    <div className="action">
+                                      <span>
+                                        {moment(reply?.commentedAt).format(
+                                          "DD - MM - YYYY"
+                                        )}
+                                      </span>
+                                      <span className="action-item">
+                                        <i className="fa-regular fa-heart"></i>
+                                        <span>0</span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </>
+                    ))}
                 </div>
               </div>
             </div>
