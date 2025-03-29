@@ -113,6 +113,13 @@ function TintucRead(props) {
   const [showReply, setShowReply] = useState(false);
 
   const handleComment = async () => {
+    if (!id) {
+      toast.error("Bạn cần đăng nhập để có thể bình luận!");
+      setContent("");
+      setReplyContent("");
+      return;
+    }
+
     if (!currentId) {
       if (!content) {
         toast.error("Bạn chưa nhập bình luận!");
@@ -255,10 +262,6 @@ function TintucRead(props) {
                                     "DD - MM - YYYY"
                                   )}
                                 </span>
-                                <span className="action-item">
-                                  <i className="fa-regular fa-heart"></i>
-                                  <span>0</span>
-                                </span>
                                 <span
                                   className="action-item"
                                   style={{ fontWeight: "bold" }}
@@ -331,9 +334,17 @@ function TintucRead(props) {
                                           "DD - MM - YYYY"
                                         )}
                                       </span>
-                                      <span className="action-item">
-                                        <i className="fa-regular fa-heart"></i>
-                                        <span>0</span>
+                                      <span
+                                        className="action-item"
+                                        style={{ fontWeight: "bold" }}
+                                        onClick={() =>
+                                          handleShowReply(
+                                            reply?.userComment?.fullName,
+                                            item?._id
+                                          )
+                                        }
+                                      >
+                                        Trả lời
                                       </span>
                                     </div>
                                   </div>
