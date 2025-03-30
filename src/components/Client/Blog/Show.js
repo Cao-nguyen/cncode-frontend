@@ -31,13 +31,8 @@ function Show() {
   }, []);
 
   const handleShareFacebook = () => {
-    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=https://cncode.vercel.app/blog/${slug}`;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/blog/${slug}`;
     window.open(facebookShareUrl, "_blank");
-  };
-
-  const handleShareZalo = () => {
-    const zaloShareUrl = `https://zalo.me/share?url=https://cncode.vercel.app/blog/${slug}`;
-    window.open(zaloShareUrl, "_blank");
   };
 
   const handleCoppy = () => {
@@ -115,10 +110,6 @@ function Show() {
                       <span onClick={handleShareFacebook}>
                         <i className="fa-brands fa-facebook"></i>
                         Chia sẻ lên facebook
-                      </span>
-                      <span onClick={handleShareZalo}>
-                        <i className="fa-solid fa-laptop"></i>
-                        Chia sẻ qua zalo
                       </span>
                       <span onClick={handleCoppy}>
                         <i className="fa-solid fa-link"></i>
