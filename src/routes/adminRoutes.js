@@ -1,20 +1,32 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+// Dashboard
 import Dashboard from "../components/Admin/Dashboard/Dashboard";
+
+// Cài đặt
 import Settings from "../components/Admin/Settings/Settings";
 import Infor from "../components/Admin/Infor/Infor";
 import Ssl from "../components/Admin/Ssl/Ssl";
 import Themes from "../components/Admin/Themes/Themes";
-import News from "../components/Admin/News/News";
-import Blog from "../components/Admin/Blog/Blog";
-import ShowBlog from "../components/Admin/Blog/Show";
-import CreateNews from "../components/Admin/News/Create";
-import EditNews from "../components/Admin/News/Edit";
-import ShowNews from "../components/Admin/News/Show";
-import Bins from "../components/Admin/Bins/Bins";
 import Use from "../components/Admin/Use/Use";
 import Member from "../components/Admin/Member/Member";
 import Web from "../components/Admin/Web/Web";
+
+// Tin tức
+import News from "../components/Admin/News/News";
+import CreateNews from "../components/Admin/News/Create";
+import ShowNews from "../components/Admin/News/Show";
+import EditNews from "../components/Admin/News/Edit";
+
+// Blog
+import Blog from "../components/Admin/Blog/Blog";
+import ShowBlog from "../components/Admin/Blog/Show";
+import CreateBlog from "../components/Admin/Blog/Create";
+import EditBlog from "../components/Admin/Blog/Edit";
+
+// Khác
+import Bins from "../components/Admin/Bins/Bins";
 
 export const adminRoutesValidate = ["/admin/*"];
 
@@ -54,6 +66,22 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <ShowBlog />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/blog/create"
+        element={
+          <ProtectedRoute>
+            <CreateBlog />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/blog/edit/:id"
+        element={
+          <ProtectedRoute>
+            <EditBlog />
           </ProtectedRoute>
         }
       ></Route>

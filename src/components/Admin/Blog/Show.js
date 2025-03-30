@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
 import { BlogRead } from "../../../services/BlogAdminServer";
+import "../News/News.scss";
 
 function Show(props) {
   const { id } = useParams();

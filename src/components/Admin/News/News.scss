@@ -1,3 +1,29 @@
+.model {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
+
+  .model-item {
+    transform: translate(80%, 50%);
+    width: 40%;
+    background-color: var(--mau-trang);
+    padding: 30px;
+    border-radius: 10px;
+
+    .row {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: 49% 49%;
+    }
+  }
+}
+
 .admin {
   .admin-news {
     margin: 20px 0px;

@@ -25,8 +25,6 @@ function Tintuc(props) {
     }
   }, [news]);
 
-  console.log(news);
-
   return (
     <>
       <HelmetProvider>

@@ -1,30 +1,32 @@
 import axios from "axios";
 
-// [POST] CreateNew
-export const CreateNew = async (
+// [POST] CreateBlog
+export const CreateBlog = async (
   title,
   isChecked,
   show,
   description,
   content,
+  img,
   authorId
 ) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_BACKEND}/api/v1/admin/news/create`,
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/blog/create`,
     {
       title,
       isChecked,
       show,
       description,
       content,
+      img,
       authorId,
     }
   );
   return response.data;
 };
 
-// [PACTH] EditNew
-export const EditNew = async (
+// [PACTH] EditBlog
+export const BlogEdit = async (
   id,
   title,
   description,
@@ -33,7 +35,7 @@ export const EditNew = async (
   content
 ) => {
   const response = await axios.patch(
-    `${process.env.REACT_APP_BACKEND}/api/v1/admin/news/edit/${id}`,
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/blog/edit/${id}`,
     {
       id,
       title,
@@ -61,6 +63,28 @@ export const BlogDelete = async (id) => {
 export const BlogRead = async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_BACKEND}/api/v1/admin/blog/read`
+  );
+  return response.data;
+};
+
+// [PATCH] Blog
+export const BlogDuyet = async (idDuyet) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/blog/duyet`,
+    {
+      idDuyet,
+    }
+  );
+  return response.data;
+};
+
+// [PATCH] Blog
+export const BlogTuchoi = async (idDuyet) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/blog/tuchoi`,
+    {
+      idDuyet,
+    }
   );
   return response.data;
 };

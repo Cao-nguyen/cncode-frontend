@@ -11,7 +11,8 @@ import Khuvuon from "../components/Client/Khuvuon/Khuvuon";
 import Ssl from "../components/Client/Ssl/Ssl";
 import Use from "../components/Client/Use/Use";
 import Member from "../components/Client/Member/Member";
-import tintucRead from "../components/Client/Tintuc/Show";
+import ShowNews from "../components/Client/Tintuc/Show";
+import ShowBlog from "../components/Client/Blog/Show";
 import Profile from "../components/Client/Profile/Profile";
 import PostBlog from "../components/Client/Blog/Post";
 import MeBlog from "../components/Client/Blog/MeBlog";
@@ -26,6 +27,7 @@ export const clientRoutes = [
   "/luyentap",
   "/diendan",
   "/blog",
+  "/blog/:slug",
   "/sukien",
   "/tintuc",
   "/tintuc/:slug",
@@ -62,13 +64,14 @@ const AppRoutes = () => {
       <Route path="/me/post" element={<PostBlog />} />
       <Route path="/me/blog" element={<MeBlog />} />
       <Route path="/me/settings" element={<Settings />} />
+      <Route path="/blog/:slug" element={<ShowBlog />} />
 
       {/* Sự kiện */}
       <Route path="/sukien" element={<Sukien />} />
 
       {/* Tin tức */}
       <Route path="/tintuc" element={<Tintuc />} />
-      <Route path="/tintuc/:slug" Component={tintucRead} />
+      <Route path="/tintuc/:slug" element={<ShowNews />} />
 
       {/* Khác */}
       <Route path="/p/:username" element={<Profile />} />

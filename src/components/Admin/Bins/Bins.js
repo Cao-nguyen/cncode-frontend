@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../../assets/logo.png";
 import {
+  BinsBlog,
   BinsNews,
+  DeleteBinsBlog,
   DeleteBinsNews,
+  PatchBinsBlog,
   PatchBinsNews,
 } from "../../../services/BinsAdminServer";
 import moment from "moment/moment";
@@ -12,6 +15,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Bins(props) {
   const [news, setNews] = useState([]);
+  const [blog, setBlog] = useState([]);
 
   const getData = async () => {
     const data = await BinsNews();
@@ -19,11 +23,18 @@ function Bins(props) {
     setNews(data.DT);
   };
 
+  const getBlog = async () => {
+    const data = await BinsBlog();
+
+    setBlog(data.DT);
+  };
+
   useEffect(() => {
     getData();
+    getBlog();
   }, []);
 
-  const handlePatch = async (id) => {
+  const handlePatchNews = async (id) => {
     const data = await PatchBinsNews(id);
 
     if (data && data.EC === 0) {
@@ -34,13 +45,38 @@ function Bins(props) {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handlePatchBlog = async (id) => {
+    const data = await PatchBinsBlog(id);
+
+    if (data && data.EC === 0) {
+      getBlog();
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handleDeleteNews = async (id) => {
     const check = window.confirm("Bạn có chắc chắn muốn xoá vĩnh viễn");
     if (check === true) {
       const data = await DeleteBinsNews(id);
 
       if (data && data.EC === 0) {
         getData();
+        toast.success(data.EM);
+      } else {
+        toast.error(data.EM);
+      }
+    }
+  };
+
+  const handleDeleteBlog = async (id) => {
+    const check = window.confirm("Bạn có chắc chắn muốn xoá vĩnh viễn");
+    if (check === true) {
+      const data = await DeleteBinsBlog(id);
+
+      if (data && data.EC === 0) {
+        getBlog();
         toast.success(data.EM);
       } else {
         toast.error(data.EM);
@@ -62,10 +98,12 @@ function Bins(props) {
         </Helmet>
       </HelmetProvider>
       <div className="admin">
-        {news.length === 0 && (
-          <p className="text-center">Không có mục nào bị xoá</p>
+        {news.length === 0 ? (
+          <p className="text-center">Chưa có tin tức bị xoá </p>
+        ) : (
+          <h2>Tin tức đã bị xoá</h2>
         )}
-        {news.length > 0 && <h2>Tin tức đã bị xoá</h2>}
+
         {news.map((item) => (
           <div className="bins_news">
             <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
@@ -73,13 +111,40 @@ function Bins(props) {
               <h4>{item.title}</h4>
               <div
                 className="btn btn-primary"
-                onClick={() => handlePatch(item._id)}
+                onClick={() => handlePatchNews(item._id)}
               >
                 Khôi phục
               </div>
               <div
                 className="btn btn-danger"
-                onClick={() => handleDelete(item._id)}
+                onClick={() => handleDeleteNews(item._id)}
+              >
+                Xoá vĩnh viễn
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {blog.length === 0 ? (
+          <p className="text-center">Chưa có blog bị xoá </p>
+        ) : (
+          <h2>Blog đã bị xoá</h2>
+        )}
+
+        {blog.map((item) => (
+          <div className="bins_news">
+            <p>{moment(item.createdAt).format("DD/MM/YYYY - HH:mm:ss")}</p>
+            <div className="bins_news_item">
+              <h4>{item.title}</h4>
+              <div
+                className="btn btn-primary"
+                onClick={() => handlePatchBlog(item._id)}
+              >
+                Khôi phục
+              </div>
+              <div
+                className="btn btn-danger"
+                onClick={() => handleDeleteBlog(item._id)}
               >
                 Xoá vĩnh viễn
               </div>
