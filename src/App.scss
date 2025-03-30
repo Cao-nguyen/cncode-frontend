@@ -86,7 +86,7 @@ body {
 
   .load-bar {
     margin-top: 10px;
-    width: 30%;
+    width: 80%;
     height: 10px;
     background-color: var(--xam-nhat-ba);
     border-radius: 50px;
@@ -591,6 +591,10 @@ body {
       }
     }
   }
+}
+
+// Giao diện cho Teacher
+.teacher-layout {
 }
 
 // Giao diện tối

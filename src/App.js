@@ -29,6 +29,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "aos/dist/aos.css";
 import "./App.scss";
 import { WebAdminRead } from "./services/WebAdminServer";
+import TeacherRoutes, { isTeacherRoute } from "./routes/teacherRoutes";
 
 function App() {
   // Xử lí route bên admin và client
@@ -39,6 +40,7 @@ function App() {
   const hideHeader =
     validateRoutes.includes(location.pathname) || isClientRoutes;
   const isAdmin = isAdminRoute(location.pathname);
+  const isTeacher = isTeacherRoute(location.pathname);
 
   // Khởi tạo aos
   Aos.init();
@@ -105,7 +107,7 @@ function App() {
         </div>
       ) : (
         <div className={isDarkMode ? "dark-mode" : ""}>
-          {isAdmin ? (
+          {isAdmin && (
             <div className={open ? "admin-layout-open" : "admin-layout"}>
               <div className="phoneAdmin">
                 <h1>
@@ -132,7 +134,9 @@ function App() {
                 </div>
               </div>
             </div>
-          ) : (
+          )}
+
+          {!isAdmin && (
             <div className="client-layout">
               {!hideHeader && (
                 <Header
@@ -214,6 +218,14 @@ function App() {
               </div>
 
               {!hideHeader && <Footer />}
+            </div>
+          )}
+
+          {isTeacher && (
+            <div className="teacher-layout">
+              <div className="teacher-container">
+                <TeacherRoutes />
+              </div>
             </div>
           )}
         </div>
