@@ -43,7 +43,9 @@ function App() {
   const isTeacher = isTeacherRoute(location.pathname);
 
   // Khởi tạo aos
-  Aos.init();
+  useEffect(() => {
+    Aos.init({ duration: 3000, offset: 200, once: false });
+  }, []);
 
   // Hiện thị đăng nhập - đăng ký - quên mật khẩu khi click
   const [login, setLogin] = useState(false);
