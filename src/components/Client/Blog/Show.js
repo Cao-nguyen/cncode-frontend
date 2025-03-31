@@ -8,17 +8,18 @@ import {
   BlogClientUnf,
   BlogClientUnlike,
 } from "../../../services/BlogClientServer";
-import "./Blog.scss";
 import moment from "moment/moment";
 import { toast } from "react-toastify";
 import { marked } from "marked";
 import Prism from "prismjs";
 import { useSelector } from "react-redux";
 import socket from "../../Service/socket";
-import { refresh } from "aos";
-import { color } from "framer-motion";
+import { CommentsClientBlogCreate } from "../../../services/CommentClientServer";
+import "./Blog.scss";
 
 function Show() {
+  const divRef = useRef(null);
+
   const { slug } = useParams();
   const id = useSelector((state) => state.user.account.id);
 
@@ -27,6 +28,13 @@ function Show() {
   const [liked, setLiked] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [content, setContent] = useState();
+  const [replyContent, setReplyContent] = useState();
+  const [currentId, setCurrentId] = useState();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Gọi api
   const blogData = async () => {
@@ -65,6 +73,7 @@ function Show() {
   // Lấy content bằng marked
   const currentBlog = blog?.filter((blog) => blog.slug === slug)[0]?.content;
   const idPost = blog?.filter((blog) => blog.slug === slug)[0]?._id;
+  const rawBlog = blog?.filter((blog) => blog?.slug === slug)[0];
 
   const inforHtml = useMemo(() => {
     if (!currentBlog) return "";
@@ -120,22 +129,56 @@ function Show() {
     await BlogClientUnf(id, idPost);
   };
 
+  const handleComment = () =>
+    divRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  const handlePushComment = async () => {
+    if (currentId) {
+      if (!replyContent) {
+        toast.error("Bạn chưa nhập bình luận");
+        return;
+      }
+    } else {
+      if (!content) {
+        toast.error("Bạn chưa nhập bình luận");
+        return;
+      }
+    }
+
+    const data = await CommentsClientBlogCreate(
+      id,
+      currentId,
+      idPost,
+      content,
+      replyContent
+    );
+
+    if (data && data.EC === 0) {
+      setContent("");
+      setReplyContent("");
+    }
+  };
+
   // Sử lí socket
   useEffect(() => {
     socket.on("pushLike", () => {
-      refresh();
+      blogData();
     });
 
     socket.on("pushUnlike", () => {
-      refresh();
+      blogData();
     });
 
     socket.on("pushF", () => {
-      refresh();
+      blogData();
     });
 
     socket.on("pushUnf", () => {
-      refresh();
+      blogData();
+    });
+
+    socket.on("pushComment", () => {
+      blogData();
     });
 
     return () => {
@@ -143,8 +186,11 @@ function Show() {
       socket.off("pushUnlike");
       socket.off("pushF");
       socket.off("pushUnf");
+      socket.off("pushComment");
     };
   }, []);
+
+  console.log(rawBlog);
 
   return (
     <>
@@ -186,9 +232,9 @@ function Show() {
                       ></i>
                       <p>{item?.like?.length}</p>
                     </div>
-                    <div className="action-item">
+                    <div className="action-item" onClick={handleComment}>
                       <i className="fa-regular fa-comment"></i>
-                      <p>0</p>
+                      <p>{rawBlog?.comments?.length || 0}</p>
                     </div>
                   </div>
                 </div>
@@ -207,9 +253,9 @@ function Show() {
                       ></i>
                       <p>{item?.like?.length}</p>
                     </div>
-                    <div className="action-item">
+                    <div className="action-item" onClick={handleComment}>
                       <i className="fa-regular fa-comment"></i>
-                      <p>0</p>
+                      <p>{rawBlog?.comments?.length || 0}</p>
                     </div>
                   </div>
                   <div className="info">
@@ -239,6 +285,7 @@ function Show() {
                       ></i>
                     </div>
                   </div>
+
                   {show && (
                     <div className="menu">
                       <span onClick={handleShareFacebook}>
@@ -256,6 +303,168 @@ function Show() {
                     className="preview"
                     dangerouslySetInnerHTML={{ __html: inforHtml }}
                   ></div>
+
+                  <h3>Bình luận</h3>
+                  <div className="blog-comment mt-2" ref={divRef}>
+                    <div className="form-group">
+                      <textarea
+                        className="form-control"
+                        placeholder="Viết bình luận của bạn*"
+                        style={{ height: "80px", resize: "none" }}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                      />
+
+                      <div
+                        className="btn btn-primary mt-2"
+                        style={{ color: "var(--mau-trang)" }}
+                        onClick={handlePushComment}
+                      >
+                        <i className="fa-solid fa-paper-plane"></i> Gửi bình
+                        luận
+                      </div>
+                    </div>
+                    {rawBlog?.comments
+                      ?.filter((comment) => comment.parrentId === null)
+                      .map((item, index) => (
+                        <>
+                          <div className="blog-comment-item" key={index}>
+                            <div className="blog-info">
+                              <img
+                                className="avatar"
+                                src={item?.userComment?.avatar}
+                                alt=""
+                              ></img>
+                              <div className="content">
+                                <div className="d-flex">
+                                  <p>{item?.userComment?.fullName}</p>
+                                  {id === item?.userComment?._id && (
+                                    <i
+                                      className="fa-solid fa-ellipsis"
+                                      style={{
+                                        marginLeft: "30px",
+                                        marginTop: "7px",
+                                        cursor: "pointer",
+                                      }}
+                                      // onClick={() =>
+                                      //   handleDelete(item?._id, item?.parrentId)
+                                      // }
+                                      title="Xoá bình luận"
+                                    ></i>
+                                  )}
+                                </div>
+                                <span
+                                  style={{
+                                    whiteSpace: "pre-line",
+                                    textAlign: "justify",
+                                  }}
+                                >
+                                  {item?.comment}
+                                </span>
+                                <div className="action">
+                                  <span>
+                                    {moment(item?.commentedAt).format(
+                                      "DD - MM - YYYY"
+                                    )}
+                                  </span>
+                                  <span
+                                    className="action-item"
+                                    style={{ fontWeight: "bold" }}
+                                    // onClick={() =>
+                                    //   handleShowReply(
+                                    //     item?.userComment?.fullName,
+                                    //     item?._id
+                                    //   )
+                                    // }
+                                  >
+                                    Trả lời
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* <div className="comment-reply"> */}
+                          {/* {showReply && ( */}
+                          <div className="form-group mx-2 mt-2">
+                            <textarea
+                              className="form-control"
+                              placeholder="Viết bình luận của bạn*"
+                              style={{ height: "80px", resize: "none" }}
+                              // value={replyContent}
+                              // onChange={(e) => setReplyContent(e.target.value)}
+                              // ref={inputRef}
+                            />
+
+                            <div
+                              className="btn btn-primary mt-2"
+                              style={{ color: "var(--mau-trang)" }}
+                              onClick={() => handleComment()}
+                            >
+                              <i className="fa-solid fa-paper-plane"></i> Gửi
+                              bình luận
+                            </div>
+                          </div>
+                          {/* )} */}
+                          {/* {currentNews?.comments
+                          ?.filter((comment) => comment.parrentId === item._id)
+                          .map((reply) => ( */}
+                          {/* <div className="comment-reply-item">
+                          <div className="info">
+                            <img src={reply?.userComment?.avatar} alt=""></img>
+                            <div className="content">
+                              <div className="d-flex">
+                                <p>{reply?.userComment?.fullName}</p>
+                                {id === reply?.userComment?._id && (
+                                  <i
+                                    className="fa-solid fa-ellipsis"
+                                    style={{
+                                      marginLeft: "30px",
+                                      marginTop: "7px",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                      handleDelete(reply?._id, reply?.parrentId)
+                                    }
+                                    title="Xoá bình luận"
+                                  ></i>
+                                )}
+                              </div>
+                              <span
+                                style={{
+                                  whiteSpace: "pre-line",
+                                  textAlign: "justify",
+                                }}
+                              >
+                                {reply?.comment}
+                              </span>
+                              <div className="action">
+                                <span>
+                                  {moment(reply?.commentedAt).format(
+                                    "DD - MM - YYYY"
+                                  )}
+                                </span>
+                                <span
+                                  className="action-item"
+                                  style={{ fontWeight: "bold" }}
+                                  onClick={() =>
+                                    handleShowReply(
+                                      reply?.userComment?.fullName,
+                                      item?._id
+                                    )
+                                  }
+                                >
+                                  Trả lời
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div> */}
+                          {/* ))} */}
+                          {/* </div> */}
+                        </>
+                      ))}
+                  </div>
 
                   {selectedImage && (
                     <div

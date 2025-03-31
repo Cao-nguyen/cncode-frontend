@@ -539,6 +539,13 @@
           }
         }
       }
+      .blog-comment {
+        .blog-comment-item {
+          .blog-info {
+            background-color: var(--xanh-login) !important;
+          }
+        }
+      }
     }
   }
 }

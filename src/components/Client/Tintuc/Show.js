@@ -76,27 +76,28 @@ function TintucRead(props) {
   const [liked, setLiked] = useState();
 
   useEffect(() => {
-    socket.on("pushLike", (data) => {
+    window.scrollTo(0, 0);
+
+    socket.on("pushLike", () => {
       refetch();
-      setLiked(data?.like?.some((like) => like?.userLike?._id === id));
     });
 
-    socket.on("pushUnlike", (data) => {
+    socket.on("pushUnlike", () => {
       refetch();
-      setLiked(data?.like?.some((like) => like?.userLike?._id === id));
     });
 
-    socket.on("pushComment", (data) => {
-      setCurrentNews(data);
+    socket.on("pushComment", () => {
+      refetch();
     });
 
-    socket.on("deleteComment", (data) => {
-      setCurrentNews(data);
+    socket.on("deleteComment", () => {
+      refetch();
     });
 
     return () => {
       socket.off("pushLike");
       socket.off("pushUnlike");
+      socket.off("pushComment");
       socket.off("deleteComment");
     };
   }, [id, refetch]);
