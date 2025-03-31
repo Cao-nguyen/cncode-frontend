@@ -14,7 +14,10 @@ import { marked } from "marked";
 import Prism from "prismjs";
 import { useSelector } from "react-redux";
 import socket from "../../Service/socket";
-import { CommentsClientBlogCreate } from "../../../services/CommentClientServer";
+import {
+  CommentsClientBlogCreate,
+  CommentsClientBlogDelete,
+} from "../../../services/CommentClientServer";
 import "./Blog.scss";
 
 function Show() {
@@ -159,6 +162,16 @@ function Show() {
     }
   };
 
+  const handleDelete = async (idPostDelete, parrentId) => {
+    const check = window.confirm("Bạn có chắc chắn muốn xoá bình luận");
+
+    if (check) {
+      await CommentsClientBlogDelete(idPost, idPostDelete, parrentId);
+    } else {
+      return;
+    }
+  };
+
   // Sử lí socket
   useEffect(() => {
     socket.on("pushLike", () => {
@@ -181,16 +194,19 @@ function Show() {
       blogData();
     });
 
+    socket.on("deleteComment", () => {
+      blogData();
+    });
+
     return () => {
       socket.off("pushLike");
       socket.off("pushUnlike");
       socket.off("pushF");
       socket.off("pushUnf");
       socket.off("pushComment");
+      socket.off("deleteComment");
     };
   }, []);
-
-  console.log(rawBlog);
 
   return (
     <>
@@ -305,7 +321,7 @@ function Show() {
                   ></div>
 
                   <h3>Bình luận</h3>
-                  <div className="blog-comment mt-2" ref={divRef}>
+                  <div className="comment mt-2" ref={divRef}>
                     <div className="form-group">
                       <textarea
                         className="form-control"
@@ -328,13 +344,9 @@ function Show() {
                       ?.filter((comment) => comment.parrentId === null)
                       .map((item, index) => (
                         <>
-                          <div className="blog-comment-item" key={index}>
-                            <div className="blog-info">
-                              <img
-                                className="avatar"
-                                src={item?.userComment?.avatar}
-                                alt=""
-                              ></img>
+                          <div className="comment-item" key={index}>
+                            <div className="comment-info">
+                              <img src={item?.userComment?.avatar} alt=""></img>
                               <div className="content">
                                 <div className="d-flex">
                                   <p>{item?.userComment?.fullName}</p>
@@ -346,9 +358,9 @@ function Show() {
                                         marginTop: "7px",
                                         cursor: "pointer",
                                       }}
-                                      // onClick={() =>
-                                      //   handleDelete(item?._id, item?.parrentId)
-                                      // }
+                                      onClick={() =>
+                                        handleDelete(item?._id, item?.parrentId)
+                                      }
                                       title="Xoá bình luận"
                                     ></i>
                                   )}
@@ -364,7 +376,7 @@ function Show() {
                                 <div className="action">
                                   <span>
                                     {moment(item?.commentedAt).format(
-                                      "DD - MM - YYYY"
+                                      "HH:mm | DD - MM - YYYY"
                                     )}
                                   </span>
                                   <span
@@ -383,85 +395,6 @@ function Show() {
                               </div>
                             </div>
                           </div>
-
-                          {/* <div className="comment-reply"> */}
-                          {/* {showReply && ( */}
-                          <div className="form-group mx-2 mt-2">
-                            <textarea
-                              className="form-control"
-                              placeholder="Viết bình luận của bạn*"
-                              style={{ height: "80px", resize: "none" }}
-                              // value={replyContent}
-                              // onChange={(e) => setReplyContent(e.target.value)}
-                              // ref={inputRef}
-                            />
-
-                            <div
-                              className="btn btn-primary mt-2"
-                              style={{ color: "var(--mau-trang)" }}
-                              onClick={() => handleComment()}
-                            >
-                              <i className="fa-solid fa-paper-plane"></i> Gửi
-                              bình luận
-                            </div>
-                          </div>
-                          {/* )} */}
-                          {/* {currentNews?.comments
-                          ?.filter((comment) => comment.parrentId === item._id)
-                          .map((reply) => ( */}
-                          {/* <div className="comment-reply-item">
-                          <div className="info">
-                            <img src={reply?.userComment?.avatar} alt=""></img>
-                            <div className="content">
-                              <div className="d-flex">
-                                <p>{reply?.userComment?.fullName}</p>
-                                {id === reply?.userComment?._id && (
-                                  <i
-                                    className="fa-solid fa-ellipsis"
-                                    style={{
-                                      marginLeft: "30px",
-                                      marginTop: "7px",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={() =>
-                                      handleDelete(reply?._id, reply?.parrentId)
-                                    }
-                                    title="Xoá bình luận"
-                                  ></i>
-                                )}
-                              </div>
-                              <span
-                                style={{
-                                  whiteSpace: "pre-line",
-                                  textAlign: "justify",
-                                }}
-                              >
-                                {reply?.comment}
-                              </span>
-                              <div className="action">
-                                <span>
-                                  {moment(reply?.commentedAt).format(
-                                    "DD - MM - YYYY"
-                                  )}
-                                </span>
-                                <span
-                                  className="action-item"
-                                  style={{ fontWeight: "bold" }}
-                                  onClick={() =>
-                                    handleShowReply(
-                                      reply?.userComment?.fullName,
-                                      item?._id
-                                    )
-                                  }
-                                >
-                                  Trả lời
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
-                          {/* ))} */}
-                          {/* </div> */}
                         </>
                       ))}
                   </div>

@@ -294,7 +294,7 @@ function TintucRead(props) {
                               <div className="action">
                                 <span>
                                   {moment(item?.commentedAt).format(
-                                    "DD - MM - YYYY"
+                                    "HH:mm | DD - MM - YYYY"
                                   )}
                                 </span>
                                 <span
@@ -385,7 +385,7 @@ function TintucRead(props) {
                                     <div className="action">
                                       <span>
                                         {moment(reply?.commentedAt).format(
-                                          "DD - MM - YYYY"
+                                          "HH:mm | DD - MM - YYYY"
                                         )}
                                       </span>
                                       <span
