@@ -203,7 +203,7 @@ function Show() {
                 <title>{`CNcode | ${item?.title}`}</title>
                 <meta property="og:title" content={item?.title} />
                 <meta property="og:description" content={item?.description} />
-                <meta property="og:image" content={item?.img} />
+                <meta property="og:image" content={`${item?.img}?v=2`} />
                 <meta
                   property="og:url"
                   content={`https://cncode.vercel.app/blog/${slug}`}
