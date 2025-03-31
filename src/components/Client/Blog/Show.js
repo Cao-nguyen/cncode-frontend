@@ -157,7 +157,7 @@ function Show() {
                 <title>{`CNcode | ${item?.title}`}</title>
                 <meta property="og:title" content={item?.title} />
                 <meta property="og:description" content={item?.description} />
-                <meta property="og:image" content={item?.img} />
+                <meta property="og:image" content={item?.img ? item?.img : "https://res.cloudinary.com/dckuqnehz/image/upload/v1741609673/uploads/img/10-03-2025/sref6xahxlxm2pphmonf.jpg"} />
                 <meta
                   property="og:url"
                   content={`https://cncode.vercel.app/blog/${slug}`}
