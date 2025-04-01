@@ -69,9 +69,23 @@ const Tab = () => {
         </div>
       </NavLink>
 
+      <NavLink className="tab-item" to="/admin/transaction">
+        <div className="tab-icon">
+          <i className="fa-solid fa-coins"></i>
+          <div className="tab-link">Giao dịch</div>
+        </div>
+      </NavLink>
+
+      <NavLink className="tab-item" to="/admin/account">
+        <div className="tab-icon">
+          <i className="fa-solid fa-user"></i>
+          <div className="tab-link">Tài khoản</div>
+        </div>
+      </NavLink>
+
       <NavLink className="tab-item" to="/admin/bins">
         <div className="tab-icon">
-          <i class="fa-solid fa-trash"></i>
+          <i className="fa-solid fa-trash"></i>
           <div className="tab-link">Thùng rác</div>
         </div>
       </NavLink>

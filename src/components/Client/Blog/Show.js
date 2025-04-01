@@ -19,9 +19,11 @@ import {
   CommentsClientBlogDelete,
 } from "../../../services/CommentClientServer";
 import "./Blog.scss";
+import { sectionSlugToName } from "@charkour/react-reactions";
 
 function Show() {
   const divRef = useRef(null);
+  const inputRef = useRef(null);
 
   const { slug } = useParams();
   const id = useSelector((state) => state.user.account.id);
@@ -34,6 +36,7 @@ function Show() {
   const [content, setContent] = useState();
   const [replyContent, setReplyContent] = useState();
   const [currentId, setCurrentId] = useState();
+  const [showReply, setShowReply] = useState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,6 +139,13 @@ function Show() {
     divRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const handlePushComment = async () => {
+    if (!id) {
+      toast.error("Bạn cần đăng nhập để có thể bình luận!");
+      setContent("");
+      setReplyContent("");
+      return;
+    }
+
     if (currentId) {
       if (!replyContent) {
         toast.error("Bạn chưa nhập bình luận");
@@ -159,6 +169,7 @@ function Show() {
     if (data && data.EC === 0) {
       setContent("");
       setReplyContent("");
+      setShowReply(false);
     }
   };
 
@@ -170,6 +181,26 @@ function Show() {
     } else {
       return;
     }
+  };
+
+  const handleShowReply = (f, idComment) => {
+    if (f) {
+      const mention = `@${f}: `;
+      setReplyContent(mention);
+
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          inputRef.current.setSelectionRange(mention.length, mention.length);
+        }
+      }, 0);
+    }
+
+    if (idComment) {
+      setCurrentId(idComment);
+    }
+
+    setShowReply(!showReply);
   };
 
   // Sử lí socket
@@ -382,18 +413,111 @@ function Show() {
                                   <span
                                     className="action-item"
                                     style={{ fontWeight: "bold" }}
-                                    // onClick={() =>
-                                    //   handleShowReply(
-                                    //     item?.userComment?.fullName,
-                                    //     item?._id
-                                    //   )
-                                    // }
+                                    onClick={() =>
+                                      handleShowReply(
+                                        item?.userComment?.fullName,
+                                        item?._id
+                                      )
+                                    }
                                   >
                                     Trả lời
                                   </span>
                                 </div>
                               </div>
                             </div>
+                          </div>
+
+                          <div className="comment-reply">
+                            {showReply && (
+                              <div className="form-group mx-2 mt-2">
+                                <textarea
+                                  className="form-control"
+                                  placeholder="Viết bình luận của bạn*"
+                                  style={{ height: "80px", resize: "none" }}
+                                  value={replyContent}
+                                  onChange={(e) =>
+                                    setReplyContent(e.target.value)
+                                  }
+                                  ref={inputRef}
+                                />
+
+                                <div
+                                  className="btn btn-primary mt-2"
+                                  style={{ color: "var(--mau-trang)" }}
+                                  onClick={() => handlePushComment()}
+                                >
+                                  <i className="fa-solid fa-paper-plane"></i>{" "}
+                                  Gửi bình luận
+                                </div>
+                              </div>
+                            )}
+
+                            {rawBlog?.comments
+                              ?.filter(
+                                (comment) => comment.parrentId === item._id
+                              )
+                              .map((reply) => (
+                                <div
+                                  className="comment-reply-item"
+                                  key={reply._id}
+                                >
+                                  <div className="comment-reply-info">
+                                    <img
+                                      src={reply?.userComment?.avatar}
+                                      alt=""
+                                    ></img>
+                                    <div className="content">
+                                      <div className="d-flex">
+                                        <p>{reply?.userComment?.fullName}</p>
+                                        {id === reply?.userComment?._id && (
+                                          <i
+                                            className="fa-solid fa-ellipsis"
+                                            style={{
+                                              marginLeft: "30px",
+                                              marginTop: "7px",
+                                              cursor: "pointer",
+                                            }}
+                                            onClick={() =>
+                                              handleDelete(
+                                                reply?._id,
+                                                reply?.parrentId
+                                              )
+                                            }
+                                            title="Xoá bình luận"
+                                          ></i>
+                                        )}
+                                      </div>
+                                      <span
+                                        style={{
+                                          whiteSpace: "pre-line",
+                                          textAlign: "justify",
+                                        }}
+                                      >
+                                        {reply?.comment}
+                                      </span>
+                                      <div className="action">
+                                        <span>
+                                          {moment(reply?.commentedAt).format(
+                                            "HH:mm | DD - MM - YYYY"
+                                          )}
+                                        </span>
+                                        <span
+                                          className="action-item"
+                                          style={{ fontWeight: "bold" }}
+                                          onClick={() =>
+                                            handleShowReply(
+                                              reply?.userComment?.fullName,
+                                              item?._id
+                                            )
+                                          }
+                                        >
+                                          Trả lời
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
                           </div>
                         </>
                       ))}

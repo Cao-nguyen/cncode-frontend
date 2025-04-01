@@ -178,15 +178,6 @@ function Home(props) {
                       </div>
                       <div className="blogUser-fullName">
                         <p>{item?.authorId?.fullName}</p>
-                        {item?.authorId?.role === "admin" && (
-                          <p className="blogUser-role">Quản trị viên</p>
-                        )}
-                        {item?.authorId?.role === "user" && (
-                          <p className="blogUser-role">Người dùng</p>
-                        )}
-                        {item?.authorId?.role === "teacher" && (
-                          <p className="blogUser-role">Giáo viên</p>
-                        )}
                       </div>
                     </div>
                   </div>
