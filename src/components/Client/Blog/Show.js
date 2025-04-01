@@ -19,7 +19,6 @@ import {
   CommentsClientBlogDelete,
 } from "../../../services/CommentClientServer";
 import "./Blog.scss";
-import { sectionSlugToName } from "@charkour/react-reactions";
 
 function Show() {
   const divRef = useRef(null);

@@ -32,6 +32,55 @@ function Settings(props) {
         </div>
 
         <div className="tab">
+          <h3>Phân quyền quản trị</h3>
+          <NavLink to="/admin/settings/role">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Bách hoá vật phẩm</h3>
+          <NavLink to="/admin/settings/shop">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Hỏi đáp với admin</h3>
+          <NavLink to="/admin/settings/ask">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Khu vườn trên mây</h3>
+          <NavLink to="/admin/settings/opinion">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Góp ý của người dùng</h3>
+          <NavLink to="/admin/settings/opinion">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Tặng quà người dùng</h3>
+          <NavLink to="/admin/settings/gift">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
+          <h3>Chat with Nguyên</h3>
+          <NavLink to="/admin/settings/chat">
+            <i className="fa-solid fa-list-check"></i>
+          </NavLink>
+        </div>
+
+        <div className="tab">
           <h3>Chính sách bảo mật</h3>
           <NavLink to="/admin/settings/ssl">
             <i className="fa-solid fa-list-check"></i>
