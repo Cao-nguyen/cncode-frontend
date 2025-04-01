@@ -46,6 +46,11 @@ function UseDropdown() {
         </Dropdown.Item>
         <Dropdown.Item>
           <NavLink className="dropdown-link" to="/me/khuvuon">
+            Quản lí giao dịch
+          </NavLink>
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <NavLink className="dropdown-link" to="/me/khuvuon">
             Khu vườn trên mây
           </NavLink>
         </Dropdown.Item>
