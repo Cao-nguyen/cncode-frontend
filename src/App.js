@@ -38,7 +38,9 @@ function App() {
     /^\/[^/]+$/.test(location.pathname) &&
     !clientRoutes.includes(location.pathname);
   const hideHeader =
-    validateRoutes.includes(location.pathname) || isClientRoutes;
+    validateRoutes.some((route) =>
+      location.pathname.startsWith(route.replace(":username", ""))
+    ) || isClientRoutes;
   const isAdmin = isAdminRoute(location.pathname);
   const isTeacher = isTeacherRoute(location.pathname);
 

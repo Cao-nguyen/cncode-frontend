@@ -152,7 +152,6 @@ function Ask(props) {
                       )}
                     </div>
                   </div>
-                  <div className="border mt-2 mb-2"></div>
                   <div
                     className="preview"
                     dangerouslySetInnerHTML={{
@@ -182,7 +181,6 @@ function Ask(props) {
                           )}
                         </div>
                       </div>
-                      <div className="border mt-2 mb-2"></div>
                       <div
                         className="preview"
                         dangerouslySetInnerHTML={{
@@ -194,7 +192,6 @@ function Ask(props) {
                     </div>
                   ))}
 
-                  <div className="border mt-4 mb-2"></div>
                   <div className="action">
                     {id !== item?.authorId?._id && (
                       <div
@@ -238,7 +235,7 @@ function Ask(props) {
         ) : (
           <h1 className="text-center mt-5">
             Bạn cần đăng nhập để có thể hỏi đáp
-            <img src={errorImg} alt="" />
+            <img src={errorImg} alt="" style={{ width: "100%" }} />
           </h1>
         )}
       </div>

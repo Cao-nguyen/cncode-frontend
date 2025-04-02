@@ -18,8 +18,14 @@ import PostBlog from "../components/Client/Blog/Post";
 import MeBlog from "../components/Client/Blog/MeBlog";
 import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
+import Shop from "../components/Client/Shop/Shop";
 
-export const validateRoutes = ["/me/post", "/me/settings", "/p/caonguyen2009"];
+export const validateRoutes = [
+  "/me/post",
+  "/me/settings",
+  "/p/:username",
+  "/shop",
+];
 
 export const clientRoutes = [
   "/gioithieu",
@@ -75,7 +81,10 @@ const AppRoutes = () => {
 
       {/* Khác */}
       <Route path="/p/:username" element={<Profile />} />
+      <Route path="/shop" element={<Shop />} />
       <Route path="/me/khuvuon" element={<Khuvuon />} />
+
+      {/* Footer */}
       <Route path="/ssl" element={<Ssl />} />
       <Route path="/use" element={<Use />} />
       <Route path="/member" element={<Member />} />
