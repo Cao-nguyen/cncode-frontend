@@ -1,45 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { AccessRead } from "../../../services/AccessClientServer";
-import socket from "../../Service/socket";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { BlogReadHome, NewsReadHome } from "../../../services/HomeClientServer";
+import web1 from "../../../assets/Khac/giftwo.gif";
+import web2 from "../../../assets/Khac/gifthree.gif";
+import web3 from "../../../assets/Khac/gifone.gif";
 
 function Home(props) {
-  const [totalAccess, setTotalAccess] = useState(0);
-  const [online, setOnline] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const getData = await AccessRead();
-        if (getData) {
-          setTotalAccess(getData.DT.totalAccess);
-          setOnline(getData.DT.online);
-        }
-      } catch (error) {
-        console.error("Error fetching access data:", error);
-      }
-    };
-
-    fetchData();
-
-    socket.on("updateData", (data) => {
-      setOnline(data.online);
-    });
-
-    socket.on("updateTotalAccess", (data) => {
-      setTotalAccess(data.totalAccess);
-    });
-
-    return () => {
-      socket.off("updateData");
-      socket.off("updateTotalAccess");
-    };
-  }, []);
-
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
 
@@ -84,13 +53,240 @@ function Home(props) {
         ></img>
       </div>
 
-      <div className="container">
-        <h1 className="text-center mt-5 text-primary">
-          Số lượt truy cập website là: {totalAccess}
-        </h1>
-        <h1 className="text-center mt-5 text-primary">
-          Hiện tại có người đang dùng website là: {online}
-        </h1>
+      <div className="container" data-aos="zoom-in">
+        <div className="info1">
+          <img src={web2} alt="" />
+          <div className="content">
+            <h5>
+              CNcode – Học tập công nghệ thông tin miễn phí, tương tác như trên
+              lớp
+            </h5>
+            <p>
+              CNcode là một nền tảng giáo dục công nghệ thông tin miễn phí, phù
+              hợp với nhiều đối tượng từ học sinh, sinh viên, giáo viên đến
+              người đi làm. Với sứ mệnh mang đến môi trường học tập chất lượng,
+              CNcode cung cấp các khoá học phong phú về lập trình, tin học văn
+              phòng, và tin học theo chương trình SGK của THCS, THPT – tất cả
+              đều miễn phí ngoại trừ các khoá học pro!
+            </p>
+            <h5>Học chủ động, tương tác cao như trên lớp</h5>
+            <p>
+              Dù học thông qua video, tài liệu, nhưng bạn sẽ không cảm thấy đơn
+              độc nhờ vào hệ thống hỏi đáp với độ tương tác cao. Tại CNcode, bạn
+              có thể đặt câu hỏi, thảo luận, nhận giải đáp nhanh chóng như đang
+              học trực tiếp với giáo viên. Ngoài ra, hệ thống bài tập đa dạng từ
+              trắc nghiệm, điền khuyết đến bài tập thực hành sẽ giúp bạn không
+              chỉ hiểu lý thuyết mà còn ứng dụng thành thạo.
+            </p>
+            <h5>Vừa học vừa chơi - Giữ lửa đam mê</h5>
+            <p>
+              Học tập không còn khô khan khi bạn tham gia CNcode! Chúng tôi tích
+              hợp nhiều tính năng giúp bạn duy trì động lực như: Khu vườn trên
+              mây, Giữ chuỗi học tập, thử thách lập trình, cuộc thi tin học giúp
+              bạn kiểm tra kiến thức và nhận phần thưởng giá trị.
+            </p>
+            <h5>Hỗ trợ đặc biệt dành cho Giáo viên</h5>
+            <p>
+              Không chỉ dành cho học viên, CNcode còn là công cụ đắc lực cho
+              giáo viên. Khi đăng ký quyền "Giáo viên", bạn sẽ có một trang quản
+              trị riêng, nơi có thể: Tạo khoá học, bài tập cho học sinh. Theo
+              dõi tiến độ học tập và quản lý điểm số. Xây dựng lớp học online
+              với độ tương tác cao.
+            </p>
+            <p>
+              Hãy tham gia ngay để trải nghiệm một phương pháp học tập mới mẻ,
+              hiệu quả và đầy cảm hứng! 🚀
+            </p>
+          </div>
+        </div>
+
+        <div className="info2" data-aos="zoom-in">
+          <div className="info2-item">
+            <img src={web3} alt=""></img>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Học tại trung tâm thường có học phí cao, dao động từ vài trăm
+                nghìn đến vài triệu đồng mỗi tháng.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Học tại trung tâm có lịch học cố định, nếu học viên bận hoặc có
+                việc đột xuất sẽ dễ bị mất bài.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Tài liệu học tại trung tâm phụ thuộc vào giáo trình của từng
+                giáo viên, có thể không được cập nhật.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Học tại trung tâm giúp học viên có thể trao đổi trực tiếp với
+                giáo viên, nhưng thời gian bị giới hạn.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Phần lớn bài tập tại trung tâm vẫn theo kiểu truyền thống: làm
+                trên giấy, chép bài giảng từ giáo viên.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Nhiều học viên cảm thấy bị ép buộc khi học tại trung tâm, dẫn
+                đến tình trạng chán nản.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Tại trung tâm, giáo trình được thiết kế chung cho tất cả học
+                viên, ít có sự điều chỉnh theo nhu cầu riêng.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Giáo viên khó có thể biết được điểm yếu của từng người để đưa ra
+                phương pháp cải thiện phù hợp.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Học tại trung tâm thường thiên về lý thuyết, ít có cơ hội thực
+                hành thực tế.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+              <div>
+                Học tại trung tâm yêu cầu học viên phải di chuyển đến lớp học,
+                tốn thời gian và chi phí đi lại.
+              </div>
+            </div>
+          </div>
+          <div className="info2-item">
+            <img src={web1} alt=""></img>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode cung cấp khoá học miễn phí hoặc giá rẻ, giúp học viên
+                không cần lo lắng về chi phí.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                Học online trên CNcode cho phép học viên tự quyết định thời gian
+                học tập.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode sử dụng giáo trình, đưa ra lộ trình hợp lí để giúp cải
+                thiện khả năng tiếp thu kiến thức.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                Học trên CNcode vẫn có độ tương tác giữa học viên và bài giảng,
+                giúp hiểu bài và không nhàm chán.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode cung cấp các bài tập thực hành trực tiếp trên trình
+                duyệt, có tính năng chấm điểm tự động.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode có hệ thống "Khu vườn trên mây" – nơi học viên chăm sóc
+                cây bằng cách hoàn thành bài tập.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode tự đưa ra lộ trình học tập phù hợp cho toàn bộ học viên.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode có hệ thống báo cáo chi tiết, giúp học viên theo dõi tiến
+                độ học tập của mình.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                CNcode tích hợp sẵn môi trường thực hành, học viên chỉ chọn bài
+                tập và bắt đầu.
+              </div>
+            </div>
+            <div className="content">
+              <div>
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                Học online trên CNcode giúp học viên tiết kiệm thời gian và công
+                sức.
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="HomeNews" data-aos="flip-right">
           <div className="HomeNews-Title">

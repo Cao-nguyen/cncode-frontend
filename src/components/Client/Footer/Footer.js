@@ -3,6 +3,8 @@ import "./Footer.scss";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { WebAdminRead } from "../../../services/WebAdminServer";
+import { AccessRead } from "../../../services/AccessClientServer";
+import socket from "../../Service/socket";
 
 function Footer(props) {
   const [products, setProducts] = useState([{ name: "", link: "" }]);
@@ -28,6 +30,38 @@ function Footer(props) {
 
   useEffect(() => {
     getDataFooter();
+  }, []);
+
+  const [totalAccess, setTotalAccess] = useState(0);
+  const [online, setOnline] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getData = await AccessRead();
+        if (getData) {
+          setTotalAccess(getData.DT.totalAccess);
+          setOnline(getData.DT.online);
+        }
+      } catch (error) {
+        console.error("Error fetching access data:", error);
+      }
+    };
+
+    fetchData();
+
+    socket.on("updateData", (data) => {
+      setOnline(data.online);
+    });
+
+    socket.on("updateTotalAccess", (data) => {
+      setTotalAccess(data.totalAccess);
+    });
+
+    return () => {
+      socket.off("updateData");
+      socket.off("updateTotalAccess");
+    };
   }, []);
 
   return (
@@ -95,6 +129,10 @@ function Footer(props) {
               cao343451@gmail.com
             </a>
           )}
+          <div className="d-flex" style={{ justifyContent: "space-between" }}>
+            <p style={{ fontSize: "16px" }}>Truy cập: {totalAccess}</p>
+            <p style={{ fontSize: "16px" }}>Đang online: {online}</p>
+          </div>
           {/* <div className="user">
             <img
               width="100"
@@ -459,6 +497,9 @@ function Footer(props) {
           <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
         </div>
       </div>
+      <p className="text-center" style={{ fontSize: "16px" }}>
+        Copyright 2025 © Bản quyền thuộc về CNcode - Lý Cao Nguyên
+      </p>
     </footer>
   );
 }
