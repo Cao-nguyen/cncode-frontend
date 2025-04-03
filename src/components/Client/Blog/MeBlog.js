@@ -2,14 +2,23 @@ import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
 import { MeblogClientRead } from "../../../services/BlogClientServer";
+import BootstrapPagination from "../../Service/Pagination";
 import "./Blog.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MeBlog(props) {
+  const navigate = useNavigate();
   const fullName = useSelector((state) => state.user.account.fullName);
   const id = useSelector((state) => state.user.account.id);
 
   const [blog, setBlog] = useState([]);
+  const [itemsPerPage] = useState(20);
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleShow = (slug) => {
+    navigate(`/blog/${slug}`);
+  };
 
   useEffect(() => {
     if (id) {
@@ -18,6 +27,7 @@ function MeBlog(props) {
 
         if (data && data.EC === 0) {
           setBlog(data.DT);
+          setTotalItems(data.DT.length);
         }
       };
 
@@ -27,8 +37,13 @@ function MeBlog(props) {
     }
   }, [id]);
 
-  const handleEdit = () => {};
-  const handleDelete = () => {};
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentBlog = blog.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -45,40 +60,47 @@ function MeBlog(props) {
       <div className="container">
         {blog.length > 0 ? (
           <div className="MeBlog-Container">
-            {blog.map((item, index) => (
-              <div className="MeBlog" key={index}>
-                <div className="MeBlog-Left">
-                  <Link to={`/blog/${item.slug}`}>
-                    <img src={item.img} alt=""></img>
-                  </Link>
-                </div>
-                <div className="MeBlog-Right">
-                  <Link to={`/blog/${item.slug}`}>
-                    <h3>{item.title}</h3>
-                  </Link>
-                  <p>{item.description}</p>
-                  {item.active ? (
-                    <p className="activeTrue">Đã duyệt</p>
-                  ) : (
-                    <p className="activeFalse">Chờ duyệt</p>
-                  )}
-                  <div className="action">
-                    <Link className="edit" to={`/blog/${item.slug}`}>
-                      Xem chi tiết
-                    </Link>
-                    <Link className="edit" onClick={() => handleEdit(item._id)}>
-                      Chỉnh sửa
-                    </Link>
-                    <Link
-                      className="edit"
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Xoá bài viết
-                    </Link>
-                  </div>
-                </div>
+            <div className="admin-content">
+              <div className="admin-content-item">
+                <p className="id">Id</p>
+                <p className="title">Tiêu đề</p>
+                <p className="right">Tác giả</p>
+                <p className="actives">Trạng thái</p>
+                <p className="show">Hiển thị</p>
+                <p className="action"></p>
               </div>
-            ))}
+              {currentBlog && currentBlog?.length > 0 ? (
+                currentBlog?.map((item) => (
+                  <div className="admin-content-item" key={item._id}>
+                    <p className="id">{item._id}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="right">{item?.authorId?.fullName}</p>
+                    <p className="actives">
+                      {item.isChecked ? "Phát hành" : "Bản nháp"}
+                    </p>
+                    <p className="show">
+                      {item.show ? "Công khai" : "Không công khai"}
+                    </p>
+                    <p className="action">
+                      <i
+                        className="btn btn-primary fa-solid fa-ellipsis-vertical"
+                        onClick={() => handleShow(item.slug)}
+                      ></i>
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div>Không có bài viết nào!</div>
+              )}
+            </div>
+            <div className="paginate mt-3">
+              <BootstrapPagination
+                totalItems={totalItems}
+                itemsPerPage={itemsPerPage}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            </div>
           </div>
         ) : (
           <div className="container" style={{ marginBottom: "350px" }}>

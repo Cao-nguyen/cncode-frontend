@@ -529,6 +529,87 @@
   }
 }
 
+.admin-content {
+  margin-top: 20px;
+  .admin-content-item {
+    display: grid;
+    grid-template-columns: 10% 40% 20% 10% 10% 5%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--xam-nhat-nhat);
+    border-bottom: var(--xam-nhat-ba) solid 1px;
+    width: 100%;
+
+    &:first-child {
+      border-radius: 10px 10px 0px 0px;
+
+      p {
+        font-weight: bold;
+      }
+    }
+
+    &:last-child {
+      border-radius: 0px 0px 10px 10px;
+      border: none;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .id {
+      text-align: center;
+      text-transform: uppercase;
+      padding-left: 10px;
+    }
+
+    .action {
+      position: relative;
+
+      .btn {
+        border-radius: 50%;
+
+        &:first-child {
+          align-items: right;
+        }
+      }
+
+      .dropdown {
+        background-color: var(--xam-nhat-ba);
+        position: absolute;
+        z-index: 100;
+        margin-left: -120px;
+        margin-top: 5px;
+        width: 150px;
+        border-radius: 5px;
+
+        .dropdown-links {
+          padding: 5px 10px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          .fa-solid {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .id,
+    .title,
+    .right,
+    .actives,
+    .show {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
 .dark-mode {
   .postBlog {
     .headerPostBlog {
@@ -658,6 +739,23 @@
       }
     }
   }
+
+  .admin-content {
+    .admin-content-item {
+      background-color: var(--dark-mode-nam);
+      border-bottom: var(--dark-mode-chin) solid 1px;
+
+      &:last-child {
+        border: none;
+      }
+
+      .action {
+        .dropdown {
+          background-color: var(--dark-mode-muoi);
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1190px) {
@@ -782,6 +880,89 @@
             font-size: 20px;
           }
         }
+      }
+    }
+  }
+
+  .admin-content {
+    overflow: auto;
+    margin-top: 20px;
+
+    .admin-content-item {
+      width: 300%;
+      display: grid;
+      grid-template-columns: 10% 50% 10% 10% 10% 5%;
+      background-color: var(--xam-nhat-nhat);
+      border-bottom: var(--xam-nhat-ba) solid 1px;
+      justify-content: space-between;
+      align-items: center;
+
+      &:first-child {
+        border-radius: 10px 10px 0px 0px;
+
+        p {
+          font-weight: bold;
+        }
+      }
+
+      &:last-child {
+        border-radius: 0px 0px 10px 10px;
+        border: none;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      .id {
+        text-align: center;
+        text-transform: uppercase;
+        padding-left: 10px;
+      }
+
+      .action {
+        position: relative;
+
+        .btn {
+          border-radius: 50%;
+
+          &:first-child {
+            align-items: right;
+          }
+        }
+
+        .dropdown {
+          background-color: var(--xam-nhat-ba);
+          position: absolute;
+          z-index: 100;
+          margin-left: -120px;
+          margin-top: 5px;
+          width: 150px;
+          border-radius: 5px;
+
+          .dropdown-links {
+            padding: 5px 10px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .fa-solid {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+
+      .id,
+      .title,
+      .right,
+      .actives,
+      .show {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
