@@ -14,7 +14,10 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
       <div className="laptop">
         <Nav className="nav" variant="pills">
           <div className="nav-logo">
-            <Link style={{ cursor: "default" }} to="https://cncode.vercel.app/">
+            <Link
+              style={{ cursor: "default" }}
+              to={process.env.REACT_APP_FRONTEND}
+            >
               <img className="logo" src={logo} alt="" />
             </Link>
           </div>
@@ -129,7 +132,12 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
       <div className="mobile">
         <div className="d-flex nav-mb">
           <div className="nav-logo">
-            <img className="logo" src={logo} alt=""></img>
+            <Link
+              style={{ cursor: "default" }}
+              to={process.env.REACT_APP_FRONTEND}
+            >
+              <img className="logo" src={logo} alt="" />
+            </Link>
           </div>
           <div className="d-flex nav-item">
             <i
