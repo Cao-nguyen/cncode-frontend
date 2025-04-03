@@ -12,24 +12,32 @@ function Home(props) {
   const [online, setOnline] = useState(0);
 
   useEffect(() => {
-    const data = async () => {
-      const getData = await AccessRead();
-
-      if (getData) {
-        setTotalAccess(getData.DT.totalAccess);
-        setOnline(getData.DT.online);
-
-        socket.on("updateData", (data) => {
-          setOnline(data.online);
-        });
+    const fetchData = async () => {
+      try {
+        const getData = await AccessRead();
+        if (getData) {
+          setTotalAccess(getData.DT.totalAccess);
+          setOnline(getData.DT.online);
+        }
+      } catch (error) {
+        console.error("Error fetching access data:", error);
       }
-
-      return () => {
-        socket.off("updateData");
-      };
     };
 
-    data();
+    fetchData();
+
+    socket.on("updateData", (data) => {
+      setOnline(data.online);
+    });
+
+    socket.on("updateTotalAccess", (data) => {
+      setTotalAccess(data.totalAccess);
+    });
+
+    return () => {
+      socket.off("updateData");
+      socket.off("updateTotalAccess");
+    };
   }, []);
 
   const [blog, setBlog] = useState();
