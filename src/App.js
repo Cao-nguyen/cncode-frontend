@@ -151,36 +151,38 @@ function App() {
               )}
 
               <div className="icon-link">
-                {location.pathname !== "/chatwithnguyen" && (
-                  <Link to="/chatwithnguyen">
-                    <div className="icon-link-item">
-                      <label>Chat với Nguyên</label>
-                      <p>
-                        <img src={Nguyen} alt="" />
-                      </p>
-                    </div>
-                  </Link>
-                )}
-                {location.pathname !== "/hoidap" && (
-                  <Link to="/hoidap">
-                    <div className="icon-link-item">
-                      <label>Hỏi đáp</label>
-                      <p>
-                        <i class="fa-solid fa-comment"></i>
-                      </p>
-                    </div>
-                  </Link>
-                )}
-                {location.pathname !== "/shop" && (
-                  <Link to="/shop">
-                    <div className="icon-link-item">
-                      <label>Bách hoá vật phẩm</label>
-                      <p>
-                        <i class="fa-solid fa-store"></i>
-                      </p>
-                    </div>
-                  </Link>
-                )}
+                {location.pathname !== "/chatwithnguyen" &&
+                  location.pathname !== "/hoidap" &&
+                  location.pathname !== "/shop" && (
+                    <>
+                      <Link to="/chatwithnguyen">
+                        <div className="icon-link-item">
+                          <label>Chat với Nguyên</label>
+                          <p>
+                            <img src={Nguyen} alt="" />
+                          </p>
+                        </div>
+                      </Link>
+
+                      <Link to="/hoidap">
+                        <div className="icon-link-item">
+                          <label>Hỏi đáp</label>
+                          <p>
+                            <i class="fa-solid fa-comment"></i>
+                          </p>
+                        </div>
+                      </Link>
+
+                      <Link to="/shop">
+                        <div className="icon-link-item">
+                          <label>Bách hoá vật phẩm</label>
+                          <p>
+                            <i class="fa-solid fa-store"></i>
+                          </p>
+                        </div>
+                      </Link>
+                    </>
+                  )}
               </div>
 
               <ThemeClientApp />

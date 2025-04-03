@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Chat() {
   const navigate = useNavigate();
+  const id = useSelector((state) => state.user.account.id);
+  const [chat, setChat] = useState();
+
+  const handlePushChat = () => {};
 
   return (
     <div className="chatNguyen">
@@ -52,8 +57,10 @@ function Chat() {
             <input
               className="form-control"
               placeholder="Nhập tin nhắn của bạn..."
+              value={chat}
+              onChange={(e) => setChat(e.target.value)}
             />
-            <button className="send-btn">
+            <button className="send-btn" onClick={handlePushChat}>
               <i class="fa-solid fa-paper-plane"></i>
             </button>
           </div>
