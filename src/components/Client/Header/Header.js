@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import logo from "../../../assets/logo.png";
 import UseDropdown from "./Dropdown";
@@ -14,7 +14,9 @@ function Header({ toggleLogin, isDarkMode, toggleTheme }) {
       <div className="laptop">
         <Nav className="nav" variant="pills">
           <div className="nav-logo">
-            <img className="logo" src={logo} alt="" />
+            <Link style={{ cursor: "default" }} to="https://cncode.vercel.app/">
+              <img className="logo" src={logo} alt="" />
+            </Link>
           </div>
           <div className="d-flex nav-item">
             <Nav.Item className="nav-links">

@@ -18,63 +18,116 @@
 
 .answer {
   margin-top: 20px;
-
   .answer-item {
-    background-color: var(--xam-nhat-nhat);
+    margin-top: 20px;
+    background-color: var(--mau-trang);
     box-shadow: var(--box-shadow);
-    padding: 20px;
     border-radius: 10px;
-    margin-top: 30px;
 
-    .item-info {
+    .answer-main {
       display: flex;
-      align-items: center;
+      padding: 20px;
 
-      img {
-        width: 40px;
+      .avatar {
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50px;
+          object-fit: cover;
+        }
       }
 
-      p {
-        margin-left: 10px;
-        font-weight: bold;
-        font-size: 20px;
-        margin-top: 10px;
-      }
+      .ask-content {
+        .fullName {
+          display: flex;
 
-      p.role {
-        background-color: var(--xam-nhat-ba);
-        padding: 2px 10px;
-        border-radius: 5px;
-        color: var(--mau-do);
-        font-size: 14px;
+          p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+
+          p.role {
+            background-color: var(--xanh-login);
+            padding: 0px 10px;
+            border-radius: 5px;
+            color: var(--mau-trang);
+          }
+
+          .delete {
+            color: var(--mau-do);
+            cursor: pointer;
+          }
+
+          .reply {
+            color: var(--xanh-login);
+            cursor: pointer;
+          }
+        }
+
+        .preview {
+          margin-top: -10px;
+          margin-left: 10px;
+        }
       }
     }
 
-    .preview {
-      margin-top: -10px;
-      margin-left: 50px;
-    }
+    .reply-item {
+      margin: 0px 45px;
 
-    .reply {
-      margin-top: 20px;
-      margin-left: 50px;
-      border-left: solid 1px var(--mau-den);
-
-      .item-info,
-      .border,
-      .preview {
-        margin-left: 20px;
+      .form-chat {
+        margin-top: -20px;
+        margin-left: 25px;
+        margin-bottom: 20px;
       }
 
-      .preview {
-        margin-top: -10px;
-        margin-left: 70px;
-      }
-    }
+      .answer-main {
+        margin-top: -30px;
+        display: flex;
 
-    .action {
-      display: flex;
-      justify-content: right;
+        .avatar {
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            object-fit: cover;
+          }
+        }
+
+        .ask-content {
+          .fullName {
+            display: flex;
+
+            p {
+              font-size: 18px;
+              font-weight: bold;
+              margin-left: 10px;
+            }
+
+            p.role {
+              background-color: var(--xanh-login);
+              padding: 0px 10px;
+              border-radius: 5px;
+              color: var(--mau-trang);
+            }
+
+            .delete {
+              color: var(--mau-do);
+              cursor: pointer;
+            }
+
+            .reply {
+              color: var(--xanh-login);
+              cursor: pointer;
+            }
+          }
+
+          .preview {
+            margin-top: -10px;
+            margin-left: 10px;
+          }
+        }
+      }
     }
   }
 }

@@ -18,12 +18,11 @@ function Home(props) {
       if (getData) {
         setTotalAccess(getData.DT.totalAccess);
         setOnline(getData.DT.online);
-      }
 
-      socket.on("updateData", (data) => {
-        console.log(data);
-        setOnline(data.online);
-      });
+        socket.on("updateData", (data) => {
+          setOnline(data.online);
+        });
+      }
 
       return () => {
         socket.off("updateData");

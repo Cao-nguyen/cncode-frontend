@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import errorImg from "../../../assets/Khac/errorImg.gif";
 import {
   AskCreate,
+  AskDelete,
   AskRead,
   AskReplyCreate,
 } from "../../../services/AskClientServer";
@@ -61,10 +62,15 @@ function Ask(props) {
       setTotalItems(data.length);
     });
 
+    socket.on("deleteAsk", () => {
+      ans();
+    });
+
     ans();
 
     return () => {
       socket.off("pushQuestion");
+      socket.off("deleteAsk");
     };
   }, []);
 
@@ -78,6 +84,8 @@ function Ask(props) {
   useEffect(() => {
     Prism.highlightAll();
   }, [currentAnswer]);
+
+  console.log(currentAnswer);
 
   const [send, setSend] = useState();
 
@@ -97,6 +105,16 @@ function Ask(props) {
       toast.success(data.EM);
       setReply("");
       setSend(null);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const data = await AskDelete(id);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
     } else {
       toast.error(data.EM);
     }
@@ -131,97 +149,99 @@ function Ask(props) {
               </div>
             </div>
             <div className="answer">
-              {currentAnswer.map((item, index) => (
-                <div className="answer-item" key={index}>
-                  <div className="item-info">
-                    <div>
+              {answer.map((item, index) => (
+                <div className="answer-item">
+                  <div className="answer-main" key={index}>
+                    <div className="avatar">
                       <img src={item?.authorId?.avatar} alt=""></img>
                     </div>
-                    <div>
-                      <p>{item?.authorId?.fullName}</p>
-                    </div>
-                    <div>
-                      {item?.authorId?.role === "admin" && (
-                        <p className="role">Quản trị viên</p>
-                      )}
-                      {item?.authorId?.role === "user" && (
-                        <p className="role">Người dùng</p>
-                      )}
-                      {item?.authorId?.role === "teacher" && (
-                        <p className="role">Giáo viên</p>
-                      )}
-                    </div>
-                  </div>
-                  <div
-                    className="preview"
-                    dangerouslySetInnerHTML={{
-                      __html: marked(
-                        item.question?.replace(/\n/g, "  \n") || ""
-                      ),
-                    }}
-                  ></div>
-                  {item?.answer?.map((item, index) => (
-                    <div className="reply" key={index}>
-                      <div className="item-info">
-                        <div>
-                          <img src={item?.authorId?.avatar} alt=""></img>
-                        </div>
-                        <div>
-                          <p>{item?.authorId?.fullName}</p>
-                        </div>
-                        <div>
-                          {item?.authorId?.role === "admin" && (
-                            <p className="role">Quản trị viên</p>
-                          )}
-                          {item?.authorId?.role === "user" && (
-                            <p className="role">Người dùng</p>
-                          )}
-                          {item?.authorId?.role === "teacher" && (
-                            <p className="role">Giáo viên</p>
-                          )}
-                        </div>
+                    <div className="ask-content">
+                      <div className="fullName">
+                        <p>{item?.authorId?.fullName}</p>
+                        <p className="role">
+                          {(item?.authorId?.role === "user" && "Người dùng") ||
+                            (item?.authorId?.role === "admin" &&
+                              "Quản trị viên") ||
+                            "Giáo viên"}
+                        </p>
+                        {item?.authorId?._id === id ? (
+                          <p
+                            className="delete"
+                            onClick={() => handleDelete(item?._id)}
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </p>
+                        ) : (
+                          <p
+                            className="reply"
+                            onClick={() => handleSend(item?._id)}
+                          >
+                            <i class="fa-solid fa-paper-plane"></i>
+                          </p>
+                        )}
                       </div>
                       <div
                         className="preview"
                         dangerouslySetInnerHTML={{
                           __html: marked(
-                            item.answer?.replace(/\n/g, "  \n") || ""
+                            item?.question?.replace(/\n/g, "  \n") || ""
                           ),
                         }}
                       ></div>
                     </div>
-                  ))}
-
-                  <div className="action">
-                    {id !== item?.authorId?._id && (
-                      <div
-                        className="btn btn-primary"
-                        onClick={() => handleSend(item._id)}
-                      >
-                        <i class="fa-solid fa-paper-plane"></i> Trả lời
-                      </div>
-                    )}
-                    {id === item?.authorId?._id && (
-                      <div className="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i> Xoá câu hỏi
-                      </div>
-                    )}
                   </div>
-                  {send === item._id && (
-                    <>
-                      <div
-                        className="btn btn-primary mb-2"
-                        onClick={() => handlePush(item._id)}
-                      >
-                        <i class="fa-solid fa-paper-plane"></i> Gửi phản hồi
-                      </div>
-                      <div className="form-group">
+                  <div className="reply-item">
+                    {send === item._id && (
+                      <div className="form-chat">
+                        <div
+                          className="btn btn-primary mb-2"
+                          onClick={() => handlePush(item?._id)}
+                        >
+                          <i class="fa-solid fa-paper-plane"></i> Gửi câu hỏi
+                        </div>
                         <AskEditor value={reply} onChange={setReply} />
                       </div>
-                    </>
-                  )}
+                    )}
+
+                    {item?.answer.map((item_ch, index) => (
+                      <div className="answer-main" key={index}>
+                        <div className="avatar">
+                          <img src={item_ch?.authorId?.avatar} alt=""></img>
+                        </div>
+                        <div className="ask-content">
+                          <div className="fullName">
+                            <p>{item_ch?.authorId?.fullName}</p>
+                            <p className="role">
+                              {(item_ch?.authorId?.role === "user" &&
+                                "Người dùng") ||
+                                (item_ch?.authorId?.role === "admin" &&
+                                  "Quản trị viên") ||
+                                "Giáo viên"}
+                            </p>
+                            {item_ch?.authorId?._id === id && (
+                              <p
+                                className="delete"
+                                onClick={() => handleDelete(item_ch?._id)}
+                              >
+                                <i class="fa-solid fa-trash"></i>
+                              </p>
+                            )}
+                          </div>
+                          <div
+                            className="preview"
+                            dangerouslySetInnerHTML={{
+                              __html: marked(
+                                item_ch?.answer?.replace(/\n/g, "  \n") || ""
+                              ),
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
+
               <div className="paginate mt-3">
                 <BootstrapPagination
                   totalItems={totalItems}
@@ -233,9 +253,13 @@ function Ask(props) {
             </div>
           </>
         ) : (
-          <h1 className="text-center mt-5">
-            Bạn cần đăng nhập để có thể hỏi đáp
-            <img src={errorImg} alt="" style={{ width: "100%" }} />
+          <h1 className="text-center">
+            <img
+              src={errorImg}
+              alt=""
+              className="errorImg"
+              style={{ width: "100%" }}
+            />
           </h1>
         )}
       </div>

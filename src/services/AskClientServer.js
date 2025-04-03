@@ -25,3 +25,12 @@ export const AskCreate = async (id, question) => {
   );
   return response.data;
 };
+
+// [POST] Câu hỏi
+export const AskDelete = async (id) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/ask/delete`,
+    { id }
+  );
+  return response.data;
+};

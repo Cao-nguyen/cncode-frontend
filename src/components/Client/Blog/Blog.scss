@@ -223,7 +223,7 @@
         width: 80px;
         position: absolute;
         transform: translateY(-70px);
-        background-color: var(--mau-trang);
+        background-color: var(--xam-nhat-nhat);
         text-align: center;
         border-radius: 0px 10px 0px 0px;
         padding: 5px;
@@ -601,6 +601,15 @@
 
       &:hover {
         box-shadow: var(--box-shadow-dark);
+      }
+
+      a {
+        .date {
+          background-color: var(--dark-mode-ba);
+          p {
+            color: var(--mau-trang);
+          }
+        }
       }
     }
   }
