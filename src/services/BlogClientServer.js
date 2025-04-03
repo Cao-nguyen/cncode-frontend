@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // [GET] Blog
-export const BlogClientRead = async (id) => {
+export const BlogClientRead = async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/blog/read`
   );

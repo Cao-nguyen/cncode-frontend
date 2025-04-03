@@ -15,6 +15,7 @@ import ShowNews from "../components/Client/Tintuc/Show";
 import ShowBlog from "../components/Client/Blog/Show";
 import Profile from "../components/Client/Profile/Profile";
 import PostBlog from "../components/Client/Blog/Post";
+import LoveBlog from "../components/Client/Blog/LoveBlog";
 import MeBlog from "../components/Client/Blog/MeBlog";
 import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
@@ -42,6 +43,7 @@ export const clientRoutes = [
   "/use",
   "/me/blog",
   "/hoidap",
+  "/me/loveblog",
 ];
 
 const AppRoutes = () => {
@@ -71,6 +73,7 @@ const AppRoutes = () => {
       <Route path="/me/blog" element={<MeBlog />} />
       <Route path="/me/settings" element={<Settings />} />
       <Route path="/blog/:slug" element={<ShowBlog />} />
+      <Route path="/me/loveblog" element={<LoveBlog />} />
 
       {/* Sự kiện */}
       <Route path="/sukien" element={<Sukien />} />
