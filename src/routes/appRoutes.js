@@ -20,12 +20,14 @@ import MeBlog from "../components/Client/Blog/MeBlog";
 import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
 import Shop from "../components/Client/Shop/Shop";
+import Chat from "../components/Client/Chat/Chat";
 
 export const validateRoutes = [
   "/me/post",
   "/me/settings",
   "/p/:username",
   "/shop",
+  "/chatwithnguyen",
 ];
 
 export const clientRoutes = [
@@ -86,6 +88,7 @@ const AppRoutes = () => {
       <Route path="/p/:username" element={<Profile />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/me/khuvuon" element={<Khuvuon />} />
+      <Route path="/chatwithnguyen" element={<Chat />} />
 
       {/* Footer */}
       <Route path="/ssl" element={<Ssl />} />
