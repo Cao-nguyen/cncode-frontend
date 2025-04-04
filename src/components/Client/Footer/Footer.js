@@ -33,7 +33,7 @@ function Footer(props) {
   }, []);
 
   const [totalAccess, setTotalAccess] = useState(0);
-  const [online, setOnline] = useState(0);
+  const [online, setOnline] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {

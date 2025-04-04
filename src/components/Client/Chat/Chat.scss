@@ -62,6 +62,13 @@
               color: var(--mau-trang);
               margin-bottom: -5px;
             }
+
+            .time {
+              font-weight: bold;
+              font-size: 0.9rem;
+              color: var(--mau-trang);
+              margin-bottom: 0px;
+            }
           }
 
           &.received {
@@ -74,6 +81,13 @@
               font-size: 0.9rem;
               color: var(--mau-den);
               margin-bottom: -5px;
+            }
+
+            .time {
+              font-weight: bold;
+              font-size: 0.9rem;
+              color: var(--mau-trang);
+              margin-bottom: 0px;
             }
           }
 

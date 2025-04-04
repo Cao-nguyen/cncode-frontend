@@ -1,14 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  ChatClientCreate,
+  ChatClientRead,
+} from "../../../services/ChatClientServer";
+import { toast } from "react-toastify";
+import moment from "moment/moment";
+import socket from "../../Service/socket";
 
 function Chat() {
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.account.id);
   const [chat, setChat] = useState();
+  const [message, setMessage] = useState();
 
-  const handlePushChat = () => {};
+  const chatRef = useRef(null);
+
+  const handlePushChat = async () => {
+    const data = await ChatClientCreate(id, chat);
+
+    if (data && data.EC === 0) {
+      setChat("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const getData = async () => {
+    const data = await ChatClientRead();
+
+    if (data && data.EC === 0) {
+      setMessage(data.DT);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+
+    socket.on("pushChat", () => {
+      getData();
+    });
+
+    return () => {
+      socket.off("pushChat");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [message]);
 
   return (
     <div className="chatNguyen">
@@ -27,31 +71,27 @@ function Chat() {
           </p>
         </div>
         <div className="body-chat">
-          <div className="chat-messages">
-            {/* Tin nhắn người gửi */}
-            <div className="message sent">
-              <p className="sender">Bạn:</p>
-              <p className="content">
-                Chào bạn, có thể giúp tôi được không? Chào bạn, có thể giúp tôi
-                được không? Chào bạn, có thể giúp tôi được không? Chào bạn, có
-                thể giúp tôi được không? Chào bạn, có thể giúp tôi được không?
-                Chào bạn, có thể giúp tôi được không? Chào bạn, có thể giúp tôi
-                được không? Chào bạn, có thể giúp tôi được không? Chào bạn, có
-                thể giúp tôi được không?
-              </p>
-            </div>
-            {/* Tin nhắn người nhận */}
-            <div className="message received">
-              <p className="sender">Người nhận:</p>
-              <p className="content">
-                Chào bạn, có thể giúp tôi được không?Chào bạn, có thể giúp tôi
-                được không? Chào bạn, có thể giúp tôi được không? Chào bạn, có
-                thể giúp tôi được không? Chào bạn, có thể giúp tôi được không?
-                Chào bạn, có thể giúp tôi được không? Chào bạn, có thể giúp tôi
-                được không? Chào bạn, có thể giúp tôi được không? Chào bạn, có
-                thể giúp tôi được không? Chào bạn, có thể giúp tôi được không?
-              </p>
-            </div>
+          <div className="chat-messages" ref={chatRef}>
+            {message?.map((item) => (
+              <>
+                {item?.sendId?._id === id && (
+                  <div className="message sent">
+                    <p className="sender">{item?.sendId?.fullName}</p>
+                    <p className="content">{item?.chat}</p>
+                    <p className="time">
+                      {moment(item?.createdAt).format("HH:mm DD/MM/YYYY")}
+                    </p>
+                  </div>
+                )}
+
+                {item?.receivedId?._id === id && (
+                  <div className={"message received"}>
+                    <p className="sender">{item?.receivedId?.fullName}</p>
+                    <p className="content">{item?.chat}</p>
+                  </div>
+                )}
+              </>
+            ))}
           </div>
           <div className="form-group">
             <input
@@ -59,6 +99,11 @@ function Chat() {
               placeholder="Nhập tin nhắn của bạn..."
               value={chat}
               onChange={(e) => setChat(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handlePushChat();
+                }
+              }}
             />
             <button className="send-btn" onClick={handlePushChat}>
               <i class="fa-solid fa-paper-plane"></i>
