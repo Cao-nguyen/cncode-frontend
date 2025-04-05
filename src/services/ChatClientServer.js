@@ -1,6 +1,15 @@
 import axios from "axios";
 
 // [POST] Gửi tin nhắn
+export const ChatClientDelete = async (id) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/chat/win`,
+    { id }
+  );
+  return response.data;
+};
+
+// [POST] Gửi tin nhắn
 export const ChatClientCreate = async (id, receivedId, chat) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/chat/create`,
