@@ -92,6 +92,8 @@ function App() {
       const data = await WebAdminRead();
       if (data && data.EC === 0) {
         setIsCheck(false);
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
     };
 

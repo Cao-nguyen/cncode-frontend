@@ -7,6 +7,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .login-back {
+    position: fixed;
+    z-index: 200;
+    top: 5%;
+    right: 25%;
+    font-size: 30px;
+    color: var(--mau-trang);
+    cursor: pointer;
+  }
+
   .login-main {
     width: 40%;
     height: 85%;
@@ -132,6 +143,26 @@
             align-items: center;
             color: var(--mau-trang);
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1190px) {
+  .login {
+    .login-back {
+      top: 1%;
+      right: 1%;
+    }
+
+    .login-main {
+      width: 95%;
+
+      header {
+        grid-template-columns: 34% 32% 34%;
+        p {
+          font-size: 14px;
         }
       }
     }

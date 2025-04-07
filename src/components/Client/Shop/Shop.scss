@@ -3,6 +3,23 @@
   height: 100vh;
   overflow: auto;
 
+  .btn-back {
+    padding: 10px 10px;
+    font-size: 20px;
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 100;
+    border-radius: 10px;
+    cursor: pointer;
+    top: 10px;
+    font-weight: bold;
+    left: 20px;
+  }
+
   header {
     padding: 0px 10px;
     height: 50px;
@@ -37,82 +54,6 @@
     }
   }
 
-  h3.header-voucher {
-    margin: 0px 20px;
-    font-weight: bold;
-    color: var(--xanh-login);
-    text-transform: uppercase;
-  }
-
-  .voucher-all {
-    margin: 20px;
-    display: grid;
-    grid-template-columns: 32% 32% 32%;
-
-    .voucher-item {
-      padding: 20px;
-      width: 100%;
-      background-color: var(--mau-trang);
-      box-shadow: var(--box-shadow);
-      display: grid;
-      grid-template-columns: 25% 70%;
-      border-radius: 10px;
-      justify-content: space-between;
-
-      .voucher-left {
-        background-color: var(--xanh-login);
-        border-radius: 5px;
-        height: 130px;
-
-        p {
-          transform: translateY(30px);
-          color: var(--mau-trang);
-          text-transform: uppercase;
-          text-align: center;
-          font-weight: bold;
-        }
-
-        h4 {
-          transform: translateY(20px);
-          margin-top: -10px;
-          color: var(--mau-trang);
-          text-transform: uppercase;
-          text-align: center;
-          font-size: 40px;
-        }
-      }
-
-      .voucher-right {
-        height: 130px;
-
-        h3 {
-          color: var(--xanh-login);
-          text-transform: uppercase;
-          font-size: 18px;
-          font-weight: bold;
-        }
-
-        p {
-          font-size: 16px;
-        }
-
-        .button {
-          width: 120px;
-          background-color: var(--xanh-login);
-          text-align: center;
-          border-radius: 5px;
-          cursor: pointer;
-
-          p {
-            color: var(--mau-trang);
-            font-weight: bold;
-            padding: 5px;
-          }
-        }
-      }
-    }
-  }
-
   h3.product-text {
     margin: 40px 20px 0px 20px;
     font-weight: bold;
@@ -124,6 +65,7 @@
     margin: 20px 20px 100px 20px;
     display: grid;
     grid-template-columns: 24% 24% 24% 24%;
+    justify-content: space-between;
 
     .product-item {
       background-color: var(--mau-trang);
@@ -134,6 +76,11 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+
+      h3 {
+        font-size: 25px;
+        text-transform: capitalize;
+      }
 
       img {
         width: 90%;
@@ -171,6 +118,70 @@
 
           &:first-child {
             cursor: default;
+          }
+        }
+      }
+    }
+  }
+
+  .overplay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pay {
+      width: 30%;
+      height: 55%;
+      background-color: var(--mau-trang);
+      border-radius: 10px;
+      padding: 20px 40px;
+      position: relative;
+
+      i {
+        position: absolute;
+        cursor: pointer;
+        font-size: 30px;
+        right: 20px;
+        top: 10px;
+      }
+
+      h4 {
+        text-align: center;
+      }
+
+      .info {
+        margin-top: 20px;
+        display: flex;
+
+        img {
+          width: 50%;
+          margin-right: 20px;
+        }
+
+        .info-item {
+          h5 {
+            text-transform: capitalize;
+          }
+
+          div.p {
+            display: flex;
+            align-items: center;
+
+            div {
+              margin-right: 5px;
+              font-size: 20px;
+
+              img {
+                width: 25px;
+                height: 25px;
+              }
+            }
           }
         }
       }

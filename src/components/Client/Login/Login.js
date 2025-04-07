@@ -35,6 +35,9 @@ function Login({ toggleLogin }) {
 
   return (
     <div className="login">
+      <div className="login-back" onClick={toggleLogin}>
+        <i className="fa-solid fa-xmark"></i>
+      </div>
       <div className="login-main">
         <header>
           <p

@@ -135,20 +135,10 @@ const SettingsClientMiddleware = () => {
         const getPublicIdFromUrl = (imageUrl) => {
           try {
             const urlParts = imageUrl.split("/");
-            const uploadIndex = urlParts.indexOf("upload");
+            const urlImage = `${urlParts[7]}/${urlParts[8]}/${urlParts[9]}`;
+            const idMain = urlImage.split(".");
 
-            if (uploadIndex === -1) return null;
-
-            let publicIdParts = urlParts.slice(uploadIndex + 1);
-
-            if (
-              publicIdParts[0].startsWith("v") &&
-              !isNaN(publicIdParts[0].substring(1))
-            ) {
-              publicIdParts.shift();
-            }
-
-            return publicIdParts.join("/").split(".")[0];
+            return idMain[0];
           } catch (error) {
             console.error("Lỗi khi lấy Public ID:", error);
             return null;
