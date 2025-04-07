@@ -5,9 +5,10 @@ export const RegisterValidate = (
   email,
   username,
   password,
-  confirmPassword,
   code,
-  whereNow
+  whereNow,
+  tinh,
+  check
 ) => {
   if (!fullName) {
     toast.error("Vui lòng nhập họ và tên");
@@ -49,11 +50,6 @@ export const RegisterValidate = (
     return false;
   }
 
-  if (confirmPassword !== password) {
-    toast.error("Mật khẩu xác nhận không chính xác");
-    return false;
-  }
-
   if (!code) {
     toast.error("Mã xác thực không được bỏ trống");
     return false;
@@ -62,6 +58,16 @@ export const RegisterValidate = (
   if (!whereNow) {
     toast.error("Vui lòng cho chúng tôi biết bạn biết chúng tôi qua đâu?");
     return false;
+  }
+
+  if (!tinh) {
+    toast.error("Vui lòng nhập tỉnh bạn đang ở");
+    return;
+  }
+
+  if (!check) {
+    toast.error("Bạn vui lòng đồng ý với điều khoản sử dụng");
+    return;
   }
 
   return true;

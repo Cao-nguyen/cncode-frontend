@@ -12,6 +12,8 @@ function Login({ toggleLogin }) {
     password,
     code,
     countdown,
+    tinh,
+    setTinh,
     setFullName,
     setEmail,
     setWhereNow,
@@ -19,7 +21,6 @@ function Login({ toggleLogin }) {
     setUsername,
     setPassword,
     showPassword,
-    setShowPassword,
     togglePasswordVisibility,
     LoginMiddleware,
     handleRegister,
@@ -27,6 +28,9 @@ function Login({ toggleLogin }) {
     isLoading,
     show,
     setShow,
+    check,
+    setCheck,
+    handleForgot,
   } = HandleLogin(toggleLogin);
 
   return (
@@ -133,18 +137,33 @@ function Login({ toggleLogin }) {
                 placeholder="Họ và tên"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRegister();
+                  }
+                }}
               ></input>
               <input
                 className="form-input"
                 placeholder="Email của bạn"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRegister();
+                  }
+                }}
               ></input>
               <input
                 className="form-input"
                 placeholder="Tên đăng nhập"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRegister();
+                  }
+                }}
               ></input>
               <div className="form-input-password">
                 <input
@@ -156,7 +175,7 @@ function Login({ toggleLogin }) {
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      LoginMiddleware();
+                      handleRegister();
                     }
                   }}
                 ></input>
@@ -170,17 +189,32 @@ function Login({ toggleLogin }) {
                 </div>
               </div>
               <div className="form-input-code">
-                <input className="form-input" placeholder="Mã xác thực"></input>
-                <div className="form-button" style={{ fontSize: "15px" }}>
-                  Gửi mã
+                <input
+                  className="form-input"
+                  placeholder="Mã xác thực"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                ></input>
+                <div
+                  className="form-button"
+                  style={{ fontSize: "15px" }}
+                  onClick={handleSendCode}
+                >
+                  {countdown !== 0 ? `${countdown} giây...` : "Gửi mã"}
                 </div>
               </div>
               <input
                 className="form-input"
                 placeholder="Bạn đang ở tỉnh nào"
+                value={tinh}
+                onChange={(e) => setTinh(e.target.value)}
               ></input>
               <div className="form-input-check">
-                <input type="checkbox"></input>
+                <input
+                  checked={check}
+                  onChange={(e) => setCheck(e.target.checked)}
+                  type="checkbox"
+                ></input>
                 <span>
                   Tôi đồng ý với tất cả{" "}
                   <Link to="/use" onClick={toggleLogin}>
@@ -189,7 +223,7 @@ function Login({ toggleLogin }) {
                   của CNcode
                 </span>
               </div>
-              <div className="form-button-submit">
+              <div className="form-button-submit" onClick={handleRegister}>
                 {isLoading ? (
                   <span>
                     <i className="fa-solid fa-spinner fa-spin"></i> Đang xử
@@ -197,6 +231,84 @@ function Login({ toggleLogin }) {
                   </span>
                 ) : (
                   "Đăng ký"
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "forgot" && (
+          <div className="dangnhap">
+            <h5>Quên mật khẩu?</h5>
+            <div className="form-login">
+              <input
+                className="form-input"
+                placeholder="Email của bạn"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRegister();
+                  }
+                }}
+              ></input>
+              <input
+                className="form-input"
+                placeholder="Tên đăng nhập"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRegister();
+                  }
+                }}
+              ></input>
+              <div className="form-input-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-input"
+                  placeholder="Mật khẩu mới"
+                  autoComplete="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleRegister();
+                    }
+                  }}
+                ></input>
+                <div className="form-button">
+                  <i
+                    onClick={togglePasswordVisibility}
+                    className={`fa-solid ${
+                      showPassword ? "fa-eye" : "fa-eye-slash"
+                    }`}
+                  ></i>
+                </div>
+              </div>
+              <div className="form-input-code">
+                <input
+                  className="form-input"
+                  placeholder="Mã xác thực"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                ></input>
+                <div
+                  className="form-button"
+                  style={{ fontSize: "15px" }}
+                  onClick={handleSendCode}
+                >
+                  {countdown !== 0 ? `${countdown} giây...` : "Gửi mã"}
+                </div>
+              </div>
+              <div className="form-button-submit" onClick={handleForgot}>
+                {isLoading ? (
+                  <span>
+                    <i className="fa-solid fa-spinner fa-spin"></i> Đang xử
+                    lí...
+                  </span>
+                ) : (
+                  "Lấy lại mật khẩu"
                 )}
               </div>
             </div>

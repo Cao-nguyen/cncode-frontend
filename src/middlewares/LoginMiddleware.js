@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginValidate } from "../validates/LoginValidate";
 import {
   checkCode,
+  forgotCheck,
   LoginUser,
   registerUser,
 } from "../services/LoginClientServer";
@@ -10,6 +11,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { Login } from "../rudex/Actions/userAction";
 import { RegisterValidate } from "../validates/RegisterValidate";
+import { ForgotValidate } from "../validates/ForgotValidate";
 
 const HandleLogin = (toggleRegister) => {
   // Thư viện
@@ -31,14 +33,14 @@ const HandleLogin = (toggleRegister) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [code, setCode] = useState("");
   const [whereNow, setWhereNow] = useState("");
   const [tinh, setTinh] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [check, setCheck] = useState();
 
   // Check email
-  const check = (email) => {
+  const checkedEmail = (email) => {
     if (!email) {
       toast.error("Vui lòng nhập email");
       return false;
@@ -55,7 +57,7 @@ const HandleLogin = (toggleRegister) => {
 
   // Gửi mã xác thực
   const handleSendCode = async () => {
-    let checked = check(email);
+    let checked = checkedEmail(email);
 
     if (checked === true) {
       setCountdown(30);
@@ -82,23 +84,25 @@ const HandleLogin = (toggleRegister) => {
   // Xử lí đăng ký
   const handleRegister = async () => {
     setIsLoading(true);
-    let check = RegisterValidate(
+    let checked = RegisterValidate(
       fullName,
       email,
       username,
       password,
-      confirmPassword,
       code,
-      whereNow
+      whereNow,
+      tinh,
+      check
     );
-    if (check === true) {
+    if (checked === true) {
       let data = await registerUser(
         fullName,
         email,
         username,
         password,
         code,
-        whereNow
+        whereNow,
+        tinh
       );
       if (data.EC === 0) {
         dispatch(Login(data));
@@ -131,6 +135,22 @@ const HandleLogin = (toggleRegister) => {
     setIsLoading(false);
   };
 
+  // Quên mật khẩu
+  const handleForgot = async () => {
+    setIsLoading(true);
+    let check = ForgotValidate(email, code, password);
+    if (check === true) {
+      let data = await forgotCheck(email, code, password);
+      if (data.EC === 0) {
+        toast.success(data.EM);
+        setShow("login");
+      } else {
+        toast.error(data.EM);
+      }
+    }
+    setIsLoading(false);
+  };
+
   return {
     fullName,
     email,
@@ -139,6 +159,8 @@ const HandleLogin = (toggleRegister) => {
     password,
     code,
     countdown,
+    tinh,
+    setTinh,
     setFullName,
     setEmail,
     setWhereNow,
@@ -154,6 +176,9 @@ const HandleLogin = (toggleRegister) => {
     isLoading,
     show,
     setShow,
+    check,
+    setCheck,
+    handleForgot,
   };
 };
 
