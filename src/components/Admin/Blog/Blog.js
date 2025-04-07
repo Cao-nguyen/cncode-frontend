@@ -219,7 +219,7 @@ function News(props) {
                         <i className="fa-solid fa-delete-left"></i>
                         <div className="text">Xoá</div>
                       </div>
-                      {item.active === false && (
+                      {item.active === "" && (
                         <div
                           className="dropdown-links"
                           style={{ color: "var(--xanh-login)" }}

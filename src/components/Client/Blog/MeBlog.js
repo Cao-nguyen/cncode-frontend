@@ -76,7 +76,9 @@ function MeBlog(props) {
                     <p className="title">{item.title}</p>
                     <p className="right">{item?.authorId?.fullName}</p>
                     <p className="actives">
-                      {item.isChecked ? "Phát hành" : "Bản nháp"}
+                      {item.active === "" && "Chờ duyệt"}
+                      {item.active === "chapnhan" && "Đã duyệt"}
+                      {item.active === "tuchoi" && "Bị từ chối"}
                     </p>
                     <p className="show">
                       {item.show ? "Công khai" : "Không công khai"}
