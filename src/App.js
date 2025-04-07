@@ -1,6 +1,6 @@
 // Các thư viện sử dụng
 import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import Aos from "aos";
@@ -43,6 +43,8 @@ function App() {
   const isAdmin = isAdminRoute(location.pathname);
   const isTeacher = isTeacherRoute(location.pathname);
 
+  const audioRef = useRef(null);
+
   // Khởi tạo aos
   useEffect(() => {
     Aos.init({ duration: 3000, offset: 200, once: false });
@@ -79,6 +81,26 @@ function App() {
   const [isCheck, setIsCheck] = useState(true);
 
   useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(cozyMusic);
+    }
+
+    if (!audioRef.current.paused) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    // Phát nhạc
+    audioRef.current.play();
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const getData = async () => {
       const data = await WebAdminRead();
       if (data && data.EC === 0) {
@@ -97,9 +119,6 @@ function App() {
             <img src={logo} alt="" />
           </div>
           <div className="load-bar"></div>
-          <audio autoPlay>
-            <source src={cozyMusic} type="audio/mp3" />
-          </audio>
         </div>
       ) : (
         <div className={isDarkMode ? "dark-mode" : ""}>
