@@ -1,70 +1,195 @@
-import React from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { Link } from 'react-router-dom';
-import HandleLogin from '../../../middlewares/LoginMiddleware';
-import './Login.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import HandleLogin from "../../../middlewares/LoginMiddleware";
+import "./Login.scss";
 
-function Login({ toggleForgot, toggleLogin, toggleRegister }) {
-    const {
-        fullName,
-        username,
-        password,
-        setFullName,
-        setUsername,
-        setPassword,
-        showPassword,
-        togglePasswordVisibility,
-        LoginMiddleware,
-        isLoading
-    } = HandleLogin(toggleLogin)
+function Login({ toggleLogin }) {
+  const {
+    fullName,
+    email,
+    whereNow,
+    username,
+    password,
+    code,
+    countdown,
+    setFullName,
+    setEmail,
+    setWhereNow,
+    setCode,
+    setUsername,
+    setPassword,
+    showPassword,
+    setShowPassword,
+    togglePasswordVisibility,
+    LoginMiddleware,
+    handleRegister,
+    handleSendCode,
+    isLoading,
+    show,
+    setShow,
+  } = HandleLogin(toggleLogin);
 
-    return (
-        <div className="form">
-            <h1 className="text">ĐĂNG NHẬP</h1>
-            <div className="form-content">
-                <InputGroup className="form-input">
-                    <Form.Control placeholder="Họ và tên*" aria-label="fullName" value={fullName}
-                        onChange={(e) => setFullName(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }} />
-                </InputGroup>
-                <InputGroup className="form-input">
-                    <Form.Control placeholder="Username*" aria-label="username" value={username}
-                        onChange={(e) => setUsername(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }} />
-                </InputGroup>
-                <InputGroup className="form-input">
-                    <Form.Control
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Mật khẩu*"
-                        aria-label="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === "Enter") { LoginMiddleware() } }}
-                    />
-                    <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                        {showPassword ? (
-                            <i className="fa-solid fa-eye-slash"></i>
-                        ) : (
-                            <i className="fa-solid fa-eye"></i>
-                        )}
-                    </InputGroup.Text>
-                </InputGroup>
-                <div className="form-links">
-                    <Link onClick={toggleForgot}>Quên mật khẩu?</Link>
-                    <Link onClick={toggleRegister}>Đăng ký</Link>
+  return (
+    <div className="login">
+      <div className="login-main">
+        <header>
+          <p
+            className={show === "login" ? "active" : ""}
+            onClick={() => setShow("login")}
+          >
+            Đăng nhập
+          </p>
+          <p
+            className={show === "register" ? "active" : ""}
+            onClick={() => setShow("register")}
+          >
+            Đăng ký
+          </p>
+          <p
+            className={show === "forgot" ? "active" : ""}
+            onClick={() => setShow("forgot")}
+          >
+            Quên mật khẩu
+          </p>
+        </header>
+
+        {show === "login" && (
+          <div className="dangnhap">
+            <h5>Đăng nhập bằng tài khoản</h5>
+            <div className="form-login">
+              <input
+                className="form-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Tên đăng nhập"
+                autoComplete="username"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    LoginMiddleware();
+                  }
+                }}
+              ></input>
+              <div className="form-input-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-input"
+                  placeholder="Mật khẩu"
+                  autoComplete="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      LoginMiddleware();
+                    }
+                  }}
+                ></input>
+                <div className="form-button">
+                  <i
+                    onClick={togglePasswordVisibility}
+                    className={`fa-solid ${
+                      showPassword ? "fa-eye" : "fa-eye-slash"
+                    }`}
+                  ></i>
                 </div>
-                <Button className="form-button" type="submit" onClick={LoginMiddleware} disabled={isLoading}>
-                    {isLoading ? (
-                        <span>
-                            <i className="fa-solid fa-spinner fa-spin"></i> Đang xử lý...
-                        </span>
-                    ) : (
-                        "Đăng nhập"
-                    )}
-                </Button>
-            </div >
-        </div>
-    );
+              </div>
+              <div className="form-input-check">
+                <input type="checkbox"></input>
+                <span>Ghi nhớ tôi cho lần đăng nhập kế tiếp</span>
+              </div>
+              <div className="form-button-submit" onClick={LoginMiddleware}>
+                {isLoading ? (
+                  <span>
+                    <i className="fa-solid fa-spinner fa-spin"></i> Đang xử
+                    lí...
+                  </span>
+                ) : (
+                  "Đăng nhập"
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {show === "register" && (
+          <div className="dangnhap">
+            <h5>Đăng ký tài khoản mới</h5>
+            <div className="form-login">
+              <select
+                className="form-input-select"
+                value={whereNow}
+                onChange={(e) => setWhereNow(e.target.value)}
+              >
+                <option value="" disabled style={{ color: "#999" }}>
+                  Bạn biết chúng tôi qua đâu?
+                </option>
+                <option value="Facebook">Facebook</option>
+                <option value="Google">Google</option>
+                <option value="Youtube">Youtube</option>
+                <option value="Zalo">Zalo</option>
+                <option value="info">Bạn bè giới thiệu</option>
+              </select>
+              <input className="form-input" placeholder="Họ và tên"></input>
+              <input className="form-input" placeholder="Email của bạn"></input>
+              <input className="form-input" placeholder="Tên đăng nhập"></input>
+              <div className="form-input-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-input"
+                  placeholder="Mật khẩu"
+                  autoComplete="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      LoginMiddleware();
+                    }
+                  }}
+                ></input>
+                <div className="form-button">
+                  <i
+                    onClick={togglePasswordVisibility}
+                    className={`fa-solid ${
+                      showPassword ? "fa-eye" : "fa-eye-slash"
+                    }`}
+                  ></i>
+                </div>
+              </div>
+              <div className="form-input-code">
+                <input className="form-input" placeholder="Mã xác thực"></input>
+                <div className="form-button" style={{ fontSize: "15px" }}>
+                  Gửi mã
+                </div>
+              </div>
+              <input
+                className="form-input"
+                placeholder="Bạn đang ở tỉnh nào"
+              ></input>
+              <div className="form-input-check">
+                <input type="checkbox"></input>
+                <span>
+                  Tôi đồng ý với tất cả{" "}
+                  <Link to="/use" onClick={toggleLogin}>
+                    điều khoản
+                  </Link>{" "}
+                  của CNcode
+                </span>
+              </div>
+              <div className="form-button-submit">
+                {isLoading ? (
+                  <span>
+                    <i className="fa-solid fa-spinner fa-spin"></i> Đang xử
+                    lí...
+                  </span>
+                ) : (
+                  "Đăng ký"
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Login;

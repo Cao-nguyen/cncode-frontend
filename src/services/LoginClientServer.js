@@ -42,11 +42,10 @@ export const registerUser = async (
 };
 
 // [POST] Đăng nhập
-export const LoginUser = async (fullName, username, password) => {
+export const LoginUser = async (username, password) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/dangnhap`,
     {
-      fullName,
       username,
       password,
     }

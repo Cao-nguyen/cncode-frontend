@@ -10,13 +10,12 @@ import HeaderAdmin from "./components/Admin/Header/HeaderAdmin";
 import Tab from "./components/Admin/Tab/Tab";
 import Footer from "./components/Client/Footer/Footer";
 import Login from "./components/Client/Login/Login";
-import Forgot from "./components/Client/Forgot/Forgot";
-import Register from "./components/Client/Register/Register";
 import AppRoutes, { validateRoutes, clientRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
 import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 import Nguyen from "./assets/Khac/Nguyen.png";
 import logo from "./assets/logo.png";
+import cozyMusic from "./assets/nhaccho/cozycoffeehouse.mp3";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -53,16 +52,6 @@ function App() {
   const [login, setLogin] = useState(false);
   const toggleLogin = () => {
     setLogin(!login);
-  };
-
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const toggleForgot = () => {
-    setForgotPassword(!forgotPassword);
-  };
-
-  const [register, setRegister] = useState(false);
-  const toggleRegister = () => {
-    setRegister(!register);
   };
 
   // Thay đổi vào lưu giao diện sáng / tối
@@ -108,6 +97,9 @@ function App() {
             <img src={logo} alt="" />
           </div>
           <div className="load-bar"></div>
+          <audio autoPlay>
+            <source src={cozyMusic} type="audio/mp3" />
+          </audio>
         </div>
       ) : (
         <div className={isDarkMode ? "dark-mode" : ""}>
@@ -187,36 +179,7 @@ function App() {
 
               <ThemeClientApp />
 
-              {login && (
-                <div className="bg-fixed">
-                  <div className="fixed">
-                    <i className="fa-solid fa-x" onClick={toggleLogin} />
-                    <Login
-                      toggleForgot={toggleForgot}
-                      toggleLogin={toggleLogin}
-                      toggleRegister={toggleRegister}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {forgotPassword && (
-                <div className="bg-fixed">
-                  <div className="fixed">
-                    <i className="fa-solid fa-x" onClick={toggleForgot} />
-                    <Forgot />
-                  </div>
-                </div>
-              )}
-
-              {register && (
-                <div className="bg-fix">
-                  <div className="fixed">
-                    <i className="fa-solid fa-x" onClick={toggleRegister} />
-                    <Register toggleRegister={toggleRegister} />
-                  </div>
-                </div>
-              )}
+              {login && <Login toggleLogin={toggleLogin} />}
 
               {/* App content */}
               <div className="app-container">
