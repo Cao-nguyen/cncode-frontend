@@ -128,9 +128,24 @@ function Login({ toggleLogin }) {
                 <option value="Zalo">Zalo</option>
                 <option value="info">Bạn bè giới thiệu</option>
               </select>
-              <input className="form-input" placeholder="Họ và tên"></input>
-              <input className="form-input" placeholder="Email của bạn"></input>
-              <input className="form-input" placeholder="Tên đăng nhập"></input>
+              <input
+                className="form-input"
+                placeholder="Họ và tên"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              ></input>
+              <input
+                className="form-input"
+                placeholder="Email của bạn"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+              <input
+                className="form-input"
+                placeholder="Tên đăng nhập"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></input>
               <div className="form-input-password">
                 <input
                   type={showPassword ? "text" : "password"}

@@ -43,8 +43,6 @@ function App() {
   const isAdmin = isAdminRoute(location.pathname);
   const isTeacher = isTeacherRoute(location.pathname);
 
-  const audioRef = useRef(null);
-
   // Khởi tạo aos
   useEffect(() => {
     Aos.init({ duration: 3000, offset: 200, once: false });
@@ -80,25 +78,14 @@ function App() {
 
   const [isCheck, setIsCheck] = useState(true);
 
-  useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(cozyMusic);
-    }
+  const audioRef = useRef(new Audio(cozyMusic));
 
-    if (!audioRef.current.paused) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-
-    // Phát nhạc
+  const startMusic = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     audioRef.current.play();
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
-  }, []);
+    audioRef.current.loop = true;
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -119,6 +106,10 @@ function App() {
             <img src={logo} alt="" />
           </div>
           <div className="load-bar"></div>
+          <div className="btn btn-primary mt-5" onClick={startMusic}>
+            {" "}
+            Phát nhạc chờ
+          </div>
         </div>
       ) : (
         <div className={isDarkMode ? "dark-mode" : ""}>
