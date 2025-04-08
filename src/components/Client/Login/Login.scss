@@ -73,28 +73,6 @@
           }
         }
 
-        .form-input-password {
-          margin-top: 20px;
-          display: grid;
-          grid-template-columns: 90% 10%;
-
-          .form-input {
-            margin-top: 0px;
-            border-radius: 5px 0px 0px 5px;
-          }
-
-          .form-button {
-            background-color: var(--xanh-login);
-            border-radius: 0px 5px 5px 0px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--mau-trang);
-            font-size: 20px;
-          }
-        }
-
         .form-input-check {
           display: flex;
           margin-top: 20px;
@@ -122,6 +100,28 @@
           outline: solid 1px var(--xam-nhat-ba);
           border: none;
           appearance: none;
+        }
+
+        .form-input-password {
+          margin-top: 20px;
+          display: grid;
+          grid-template-columns: 90% 10%;
+
+          .form-input {
+            margin-top: 0px;
+            border-radius: 5px 0px 0px 5px;
+          }
+
+          .form-button {
+            background-color: var(--xanh-login);
+            border-radius: 0px 5px 5px 0px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--mau-trang);
+            font-size: 20px;
+          }
         }
 
         .form-input-code {
@@ -157,12 +157,27 @@
     }
 
     .login-main {
-      width: 95%;
+      width: 99%;
+      height: 80%;
 
       header {
         grid-template-columns: 34% 32% 34%;
         p {
-          font-size: 14px;
+          font-size: 13px;
+        }
+      }
+
+      .dangnhap {
+        .form-login {
+          padding: 0px 20px;
+
+          .form-input-password {
+            grid-template-columns: 80% 20%;
+          }
+
+          .form-input-code {
+            grid-template-columns: 70% 30%;
+          }
         }
       }
     }
