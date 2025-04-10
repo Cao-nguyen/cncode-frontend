@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 // Dashboard
 import Dashboard from "../components/Admin/Dashboard/Dashboard";
 
+// Khoá học
+import Course from "../components/Admin/Course/Course";
+
 // Cài đặt
 import Settings from "../components/Admin/Settings/Settings";
 import Infor from "../components/Admin/Infor/Infor";
@@ -54,6 +57,15 @@ const ProtectedRoute = ({ children }) => {
 const AdminRoutes = (props) => {
   return (
     <Routes>
+      <Route
+        path="/admin/course"
+        element={
+          <ProtectedRoute>
+            <Course />
+          </ProtectedRoute>
+        }
+      ></Route>
+
       <Route
         path="/admin/blog"
         element={

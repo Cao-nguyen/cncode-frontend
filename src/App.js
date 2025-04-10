@@ -157,7 +157,8 @@ function App() {
               <div className="icon-link">
                 {location.pathname !== "/chatwithnguyen" &&
                   location.pathname !== "/hoidap" &&
-                  location.pathname !== "/shop" && (
+                  location.pathname !== "/shop" &&
+                  location.pathname !== "/diendan" && (
                     <>
                       <Link to="/chatwithnguyen">
                         <div className="icon-link-item">
