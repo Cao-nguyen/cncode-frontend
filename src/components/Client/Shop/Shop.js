@@ -4,12 +4,14 @@ import banner from "../../../assets/Khac/banner.png";
 import xu from "../../../assets/Khac/xu.png";
 import "./Shop.scss";
 import {
+  ShopClientCreate,
   ShopClientRead,
   ShopUserClientRead,
 } from "../../../services/ShopClientServer";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import socket from "../../Service/socket";
 
 function Shop() {
   const id = useSelector((state) => state.user.account.id);
@@ -41,6 +43,15 @@ function Shop() {
     };
 
     getUser();
+
+    socket.on("buyPush", () => {
+      getUser();
+      setShow(false);
+    });
+
+    return () => {
+      socket.off("buyPush");
+    };
   }, [id]);
 
   const [show, setShow] = useState(false);
@@ -55,12 +66,29 @@ function Shop() {
     setTong(0);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (count === 0) {
+      toast.error("Bạn phải đặt số lượng ít nhất là 1");
+      return;
+    }
+
     if (tong > user.coins) {
       toast.error("Bạn không đủ tiền để mua");
       return;
     } else {
-      toast.success("");
+      const data = await ShopClientCreate(
+        choose._id,
+        count,
+        tong,
+        user._id,
+        user.coins
+      );
+
+      if (data && data.EC === 0) {
+        toast.success(data.EM);
+      } else {
+        toast.error(data.EM);
+      }
     }
   };
 
