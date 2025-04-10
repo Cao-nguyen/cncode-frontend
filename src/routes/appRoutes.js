@@ -21,6 +21,7 @@ import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
 import Shop from "../components/Client/Shop/Shop";
 import Chat from "../components/Client/Chat/Chat";
+import Transaction from "../components/Client/Transaction/Transaction";
 
 export const validateRoutes = [
   "/me/post",
@@ -28,6 +29,7 @@ export const validateRoutes = [
   "/p/:username",
   "/shop",
   "/chatwithnguyen",
+  "/me/transaction",
 ];
 
 export const clientRoutes = [
@@ -73,7 +75,6 @@ const AppRoutes = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/me/post" element={<PostBlog />} />
       <Route path="/me/blog" element={<MeBlog />} />
-      <Route path="/me/settings" element={<Settings />} />
       <Route path="/blog/:slug" element={<ShowBlog />} />
       <Route path="/me/loveblog" element={<LoveBlog />} />
 
@@ -89,6 +90,8 @@ const AppRoutes = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/me/khuvuon" element={<Khuvuon />} />
       <Route path="/chatwithnguyen" element={<Chat />} />
+      <Route path="/me/settings" element={<Settings />} />
+      <Route path="/me/transaction" element={<Transaction />} />
 
       {/* Footer */}
       <Route path="/ssl" element={<Ssl />} />

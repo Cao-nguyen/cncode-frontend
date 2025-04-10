@@ -188,3 +188,38 @@
     }
   }
 }
+
+@media screen and (max-width: 1190px) {
+  .shop {
+    width: 100%;
+    height: 100vh;
+
+    .shop-banner {
+      margin-top: 70px;
+      width: 100%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    h3.product-text {
+      margin-bottom: -30px;
+    }
+
+    .product {
+      grid-template-columns: 100%;
+
+      .product-item {
+        margin-top: 30px;
+      }
+    }
+
+    .overplay {
+      .pay {
+        width: 85%;
+        height: 55%;
+      }
+    }
+  }
+}

@@ -45,13 +45,13 @@ function UseDropdown() {
           </NavLink>
         </Dropdown.Item>
         <Dropdown.Item>
-          <NavLink className="dropdown-link" to="/me/khuvuon">
+          <NavLink className="dropdown-link" to="/me/transaction">
             Quản lí giao dịch
           </NavLink>
         </Dropdown.Item>
         <Dropdown.Item>
           <NavLink className="dropdown-link" to="/me/khuvuon">
-            Khu vườn trên mây
+            Khu vườn tin học
           </NavLink>
         </Dropdown.Item>
         <Dropdown.Divider />
