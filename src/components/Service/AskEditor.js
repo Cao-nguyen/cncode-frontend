@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { marked } from "marked";
 import Prism from "prismjs";
-
-import "./Editor.scss";
+import "./AskEditor.scss";
 
 function AskEditor({ value, onChange }) {
   const [markdown, setMarkdown] = useState(value || "");
@@ -93,7 +92,7 @@ function AskEditor({ value, onChange }) {
   };
 
   return (
-    <div className="editor-text">
+    <div className="editor-text-ask">
       <div className="toolbar">
         <i
           className="fa-solid fa-bold"
