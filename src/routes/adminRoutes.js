@@ -7,6 +7,9 @@ import Dashboard from "../components/Admin/Dashboard/Dashboard";
 // Khoá học
 import Course from "../components/Admin/Course/Course";
 
+// Diễn đàn
+import Forum from "../components/Admin/Forum/Forum";
+
 // Cài đặt
 import Settings from "../components/Admin/Settings/Settings";
 import Infor from "../components/Admin/Infor/Infor";
@@ -62,6 +65,15 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <Course />
+          </ProtectedRoute>
+        }
+      ></Route>
+
+      <Route
+        path="/admin/forum"
+        element={
+          <ProtectedRoute>
+            <Forum />
           </ProtectedRoute>
         }
       ></Route>

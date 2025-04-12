@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./Diendan.scss";
 import logo from "../../../assets/logo.png";
 
 function Diendan(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <HelmetProvider>
