@@ -85,8 +85,6 @@ function Ask(props) {
     Prism.highlightAll();
   }, [currentAnswer]);
 
-  console.log(currentAnswer);
-
   const [send, setSend] = useState();
 
   const handleSend = (id) => {

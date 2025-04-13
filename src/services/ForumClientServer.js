@@ -33,16 +33,28 @@ export const ForumClientOut = async (idGroup, userId) => {
 };
 
 // [POST] Gửi tin nhắn
-export const ForumClientChat = async (
-  tab,
-  userId,
-  reply,
-  replyContent,
-  chat
-) => {
+export const ForumClientChat = async (tab, userId, chat) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/forum/chat`,
-    { tab, userId, reply, replyContent, chat }
+    { tab, userId, chat }
+  );
+  return response.data;
+};
+
+// [POST] Thả tim
+export const ForumClientPushLove = async (tab, idChat, userId) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/forum/pushlove`,
+    { tab, idChat, userId }
+  );
+  return response.data;
+};
+
+// [POST] Huỷ tim
+export const ForumClientPullLove = async (tab, idChat, userId) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/forum/pulllove`,
+    { tab, idChat, userId }
   );
   return response.data;
 };

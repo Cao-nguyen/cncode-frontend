@@ -112,7 +112,7 @@ function Forum() {
   const handleDelete = async (id) => {
     const data = await ForumAdminDelete(id);
 
-    if (data && data.EC == 0) {
+    if (data && data.EC === 0) {
       toast.success(data.EM);
       setId("");
     } else {

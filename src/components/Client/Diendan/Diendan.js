@@ -6,6 +6,8 @@ import {
   ForumClientChat,
   ForumClientJoin,
   ForumClientOut,
+  ForumClientPullLove,
+  ForumClientPushLove,
   ForumClientRead,
 } from "../../../services/ForumClientServer";
 import { useSelector } from "react-redux";
@@ -28,8 +30,6 @@ function Diendan(props) {
   const [showOn, setShowOn] = useState("");
 
   const [forum, setForum] = useState();
-  const [reply, setReply] = useState();
-  const [replyContent, setReplyContent] = useState();
   const [chat, setChat] = useState();
 
   const getData = async () => {
@@ -69,11 +69,9 @@ function Diendan(props) {
   };
 
   const pushChat = async () => {
-    const data = await ForumClientChat(tab, userId, reply, replyContent, chat);
+    const data = await ForumClientChat(tab, userId, chat);
     if (data && data.EC === 0) {
-      setReply("");
       setChat("");
-      setReplyContent("");
     }
   };
 
@@ -91,6 +89,8 @@ function Diendan(props) {
     }
   };
 
+  const textareaRef = useRef(null);
+
   const change = forum?.filter((f) => f._id === tab)[0];
   const newChange = change?.chat;
 
@@ -99,6 +99,13 @@ function Diendan(props) {
       divRef.current.scrollTop = divRef.current.scrollHeight;
     }
   }, [newChange]);
+
+  const handlePushLove = async (idChat) => {
+    await ForumClientPushLove(tab, idChat, userId);
+  };
+  const handlePullLove = async (idChat) => {
+    await ForumClientPullLove(tab, idChat, userId);
+  };
 
   useEffect(() => {
     getData();
@@ -115,10 +122,20 @@ function Diendan(props) {
       getData();
     });
 
+    socket.on("pushLove", () => {
+      getData();
+    });
+
+    socket.on("pullLove", () => {
+      getData();
+    });
+
     return () => {
       socket.off("pushChat");
       socket.off("outGroup");
       socket.off("addGroup");
+      socket.off("pushLove");
+      socket.off("pullLove");
     };
   }, []);
 
@@ -222,7 +239,16 @@ function Diendan(props) {
                               <span>{item?.chat_content}</span>
                             </div>
                             <div className="message-action">
-                              <p className="action-love">
+                              <p
+                                className="action-love"
+                                onClick={() => {
+                                  !item?.chat_like?.some(
+                                    (l) => l.like === userId
+                                  )
+                                    ? handlePushLove(item._id)
+                                    : handlePullLove(item._id);
+                                }}
+                              >
                                 <i
                                   className={
                                     item?.chat_like?.some(
@@ -245,8 +271,7 @@ function Diendan(props) {
                               <p
                                 className="action-reply"
                                 onClick={() => {
-                                  setReply(item?._id);
-                                  setReplyContent(item?.chat_content);
+                                  setChat(`@${item?.chat_id?.fullName}: `);
                                 }}
                               >
                                 Trả lời
@@ -263,6 +288,7 @@ function Diendan(props) {
                       </div>
                       <div className="editor">
                         <textarea
+                          ref={textareaRef}
                           disabled={!item?.allow_chat}
                           placeholder={
                             item?.allow_chat
@@ -404,7 +430,16 @@ function Diendan(props) {
                               <span>{item?.chat_content}</span>
                             </div>
                             <div className="message-action">
-                              <p className="action-love">
+                              <p
+                                className="action-love"
+                                onClick={() => {
+                                  !item?.chat_like?.some(
+                                    (l) => l.like === userId
+                                  )
+                                    ? handlePushLove(item._id)
+                                    : handlePullLove(item._id);
+                                }}
+                              >
                                 <i
                                   className={
                                     item?.chat_like?.some(
@@ -427,8 +462,7 @@ function Diendan(props) {
                               <p
                                 className="action-reply"
                                 onClick={() => {
-                                  setReply(item?._id);
-                                  setReplyContent(item?.chat_content);
+                                  setChat(`@${item?.chat_id?.fullName}: `);
                                 }}
                               >
                                 Trả lời
@@ -445,6 +479,7 @@ function Diendan(props) {
                       </div>
                       <div className="editor">
                         <textarea
+                          ref={textareaRef}
                           disabled={!item?.allow_chat}
                           placeholder={
                             item?.allow_chat
