@@ -47,3 +47,12 @@ export const ForumAdminDelete = async (id) => {
   );
   return response.data;
 };
+
+// [POST] Forum
+export const ForumAdminUpload = async (id, avatar) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/forum/upload`,
+    { id, avatar }
+  );
+  return response.data;
+};

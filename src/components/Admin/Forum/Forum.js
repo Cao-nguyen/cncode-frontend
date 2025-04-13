@@ -7,13 +7,16 @@ import {
   ForumAdminDelete,
   ForumAdminEdit,
   ForumAdminRead,
+  ForumAdminUpload,
 } from "../../../services/ForumAdminServer";
 import socket from "../../Service/socket";
+import axios from "axios";
 
 function Forum() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -25,6 +28,7 @@ function Forum() {
   const [allowChat, setAllowChat] = useState("");
   const [allowVote, setAllowVote] = useState("");
   const [id, setId] = useState();
+  const [avatar, setAvatar] = useState();
   const [forum, setForum] = useState();
 
   const handlePush = async () => {
@@ -128,6 +132,85 @@ function Forum() {
     };
   }, []);
 
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
+    const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_PRESET;
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("folder", "uploads/avatar");
+
+    try {
+      if (avatar) {
+        const getPublicIdFromUrl = (imageUrl) => {
+          try {
+            const urlParts = imageUrl.split("/");
+            const urlImage = `${urlParts[7]}/${urlParts[8]}/${urlParts[9]}`;
+            const idMain = urlImage.split(".");
+
+            return idMain[0];
+          } catch (error) {
+            console.error("Lỗi khi lấy Public ID:", error);
+            return null;
+          }
+        };
+
+        const publicId = getPublicIdFromUrl(avatar);
+        toast.success("Đang tải ảnh, vui lòng đợi...");
+
+        const deleteResponse = await axios.post(
+          `${process.env.REACT_APP_BACKEND}/api/v1/client/deletedImg`,
+          { publicId }
+        );
+
+        if (deleteResponse.data.success) {
+          toast.success("Hãy kiên nhẫn, sắp xong rồi!");
+        } else {
+          console.log("Ảnh không tồn tại hoặc không thể xoá!");
+        }
+      }
+
+      // Upload ảnh mới
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        formData
+      );
+
+      if (response.data.secure_url) {
+        setAvatar(response.data.secure_url);
+        toast.success("Tải ảnh lên thành công!");
+      }
+    } catch (error) {
+      toast.error("Lỗi khi xử lý ảnh!");
+      console.error("Lỗi upload ảnh:", error);
+    }
+  };
+
+  const handleShowUpload = (id) => {
+    setId(id);
+    setShowUpload(!showUpload);
+
+    const d = forum.filter((f) => f._id === id)[0];
+    if (d) {
+      setAvatar(d.avatar);
+    }
+  };
+
+  const handlePushAvatar = async () => {
+    const data = await ForumAdminUpload(id, avatar);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShowUpload(!showUpload);
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
   return (
     <div className="admin">
       <h3 className="text-center">Diễn đàn học tập</h3>
@@ -143,7 +226,10 @@ function Forum() {
       <div className="admin_forum">
         {forum?.map((item) => (
           <div className="admin_forum_item" key={item?._id}>
-            <div className="admin_forum_item_info">
+            <div
+              className="admin_forum_item_info"
+              onClick={() => handleShowUpload(item?._id)}
+            >
               <img
                 src={
                   !item.avatar
@@ -291,6 +377,36 @@ function Forum() {
               >
                 Cập nhật diễn đàn
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showUpload && (
+        <div className="admin_overplay">
+          <i
+            className="fa-solid fa-xmark"
+            onClick={() => setShowUpload(!showUpload)}
+          ></i>
+          <div className="admin_form">
+            <label htmlFor="upload-input" className="upload-image-label">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <p>Tải lên ảnh đại diện của bạn</p>
+            </label>
+            <input
+              id="upload-input"
+              className="form-control upload-image-input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+            {avatar && (
+              <div className="image-view">
+                <img src={avatar} alt="" />
+              </div>
+            )}
+            <div className="btn btn-primary mt-3" onClick={handlePushAvatar}>
+              Lưu lại
             </div>
           </div>
         </div>

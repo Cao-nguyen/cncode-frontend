@@ -2,13 +2,28 @@ import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./Diendan.scss";
 import logo from "../../../assets/logo.png";
+import { ForumClientRead } from "../../../services/ForumClientServer";
 
 function Diendan(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [tab, setTab] = useState("");
+  const [forum, setForum] = useState();
   const [chat, setChat] = useState();
+
+  const getData = async () => {
+    const data = await ForumClientRead();
+
+    if (data && data.EC === 0) {
+      setForum(data.DT);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -27,30 +42,18 @@ function Diendan(props) {
           <div className="forum">
             <div className="forum-left">
               <h3>Diễn đàn hỗ trợ học tập</h3>
-              <div className="user active">
-                <div className="user-avatar">
-                  <img src={logo} alt="" />
+              {forum?.map((item) => (
+                <div className={`user ${tab === item._id ? "active" : ""}`}>
+                  <div className="user-avatar">
+                    <img src={item?.avatar} alt="" />
+                  </div>
+                  <div className="user-info">
+                    <p className="user-info-name">{item?.name}</p>
+                    <span className="user-info-chat">{item?.description}</span>
+                  </div>
+                  <i className="fa-solid fa-ellipsis"></i>
                 </div>
-                <div className="user-info">
-                  <p className="user-info-name">Lý Cao Nguyên</p>
-                  <span className="user-info-chat">
-                    Quốc Bảo: Bài này làm sao vậy mấy bạn?
-                  </span>
-                </div>
-                <i className="fa-solid fa-ellipsis"></i>
-              </div>
-              <div className="user">
-                <div className="user-avatar">
-                  <img src={logo} alt="" />
-                </div>
-                <div className="user-info">
-                  <p className="user-info-name">Lý Cao Nguyên</p>
-                  <span className="user-info-chat">
-                    Quốc Bảo: Bài này làm sao vậy mấy bạn?
-                  </span>
-                </div>
-                <i className="fa-solid fa-ellipsis"></i>
-              </div>
+              ))}
             </div>
             <div className="forum-right">
               <header>
