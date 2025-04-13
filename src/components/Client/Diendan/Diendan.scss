@@ -183,11 +183,10 @@
 
           textarea {
             padding: 10px 20px;
-            height: 85px;
             border: none;
             align-items: center;
-            overflow: hidden;
             resize: none;
+            height: 85px;
 
             &:focus {
               outline: none;

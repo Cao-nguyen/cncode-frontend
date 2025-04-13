@@ -8,6 +8,8 @@ function Diendan(props) {
     window.scrollTo(0, 0);
   }, []);
 
+  const [chat, setChat] = useState();
+
   return (
     <>
       <HelmetProvider>
@@ -140,7 +142,11 @@ function Diendan(props) {
                   <i className="fa-solid fa-square-poll-vertical"></i>
                 </div>
                 <div className="editor">
-                  <textarea placeholder="Nhập tin nhắn của bạn..."></textarea>
+                  <textarea
+                    placeholder="Nhập tin nhắn của bạn..."
+                    value={chat}
+                    onChange={(e) => setChat(e.target.value)}
+                  ></textarea>
                   <i class="fa-solid fa-paper-plane"></i>
                 </div>
               </div>
