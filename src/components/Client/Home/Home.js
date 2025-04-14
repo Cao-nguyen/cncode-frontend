@@ -52,15 +52,15 @@ function Home(props) {
       <div className="container-img">
         <div
           id="carouselExampleIndicators"
-          class="carousel slide"
+          className="carousel slide"
           data-bs-ride="carousel"
         >
-          <div class="carousel-indicators">
+          <div className="carousel-indicators">
             <button
               type="button"
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide-to="0"
-              class="active"
+              className="active"
               aria-current="true"
               aria-label="Slide 1"
             ></button>
@@ -71,35 +71,37 @@ function Home(props) {
               aria-label="Slide 2"
             ></button>
           </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <Link to="/luyentap">
-                <img src={banner1} class="d-block w-100" alt="" />
-              </Link>
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src={banner} className="d-block w-100" alt="" />
             </div>
-            <div class="carousel-item">
-              <Link to="/luyentap">
-                <img src={banner} class="d-block w-100" alt="" />
-              </Link>
+            <div className="carousel-item">
+              <img src={banner1} className="d-block w-100" alt="" />
             </div>
           </div>
           <button
-            class="carousel-control-prev"
+            className="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev"
           >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next"
+            className="carousel-control-next"
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide="next"
           >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
           </button>
         </div>
       </div>
@@ -156,7 +158,7 @@ function Home(props) {
             <img src={web3} alt=""></img>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Học tại trung tâm thường có học phí cao, dao động từ vài trăm
@@ -165,7 +167,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Học tại trung tâm có lịch học cố định, nếu học viên bận hoặc có
@@ -174,7 +176,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Tài liệu học tại trung tâm phụ thuộc vào giáo trình của từng
@@ -183,7 +185,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Học tại trung tâm giúp học viên có thể trao đổi trực tiếp với
@@ -192,7 +194,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Phần lớn bài tập tại trung tâm vẫn theo kiểu truyền thống: làm
@@ -201,7 +203,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Nhiều học viên cảm thấy bị ép buộc khi học tại trung tâm, dẫn
@@ -210,7 +212,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Tại trung tâm, giáo trình được thiết kế chung cho tất cả học
@@ -219,7 +221,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Giáo viên khó có thể biết được điểm yếu của từng người để đưa ra
@@ -228,7 +230,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Học tại trung tâm thường thiên về lý thuyết, ít có cơ hội thực
@@ -237,7 +239,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
               </div>
               <div>
                 Học tại trung tâm yêu cầu học viên phải di chuyển đến lớp học,
@@ -249,7 +251,7 @@ function Home(props) {
             <img src={web1} alt=""></img>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode cung cấp khoá học miễn phí hoặc giá rẻ, giúp học viên
@@ -258,7 +260,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 Học online trên CNcode cho phép học viên tự quyết định thời gian
@@ -267,7 +269,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode sử dụng giáo trình, đưa ra lộ trình hợp lí để giúp cải
@@ -276,7 +278,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 Học trên CNcode vẫn có độ tương tác giữa học viên và bài giảng,
@@ -285,7 +287,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode cung cấp các bài tập thực hành trực tiếp trên trình
@@ -294,7 +296,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode có hệ thống "Khu vườn trên mây" – nơi học viên chăm sóc
@@ -303,7 +305,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode tự đưa ra lộ trình học tập phù hợp cho toàn bộ học viên.
@@ -311,7 +313,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode có hệ thống báo cáo chi tiết, giúp học viên theo dõi tiến
@@ -320,7 +322,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 CNcode tích hợp sẵn môi trường thực hành, học viên chỉ chọn bài
@@ -329,7 +331,7 @@ function Home(props) {
             </div>
             <div className="content">
               <div>
-                <i class="fa-solid fa-circle-check"></i>
+                <i className="fa-solid fa-circle-check"></i>
               </div>
               <div>
                 Học online trên CNcode giúp học viên tiết kiệm thời gian và công
