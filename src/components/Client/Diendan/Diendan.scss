@@ -352,8 +352,8 @@
 
   .over-form {
     background-color: var(--mau-trang);
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 60%;
     border-radius: 10px;
     padding: 20px;
 
@@ -369,6 +369,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      white-space: pre-wrap;
+
+      &:last-child {
+        margin-top: 10px;
+      }
     }
   }
 }
@@ -721,6 +726,41 @@
             }
           }
         }
+      }
+    }
+  }
+
+  .forum-over {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .over-form {
+      background-color: var(--mau-trang);
+      width: 90%;
+      height: 60%;
+      border-radius: 10px;
+      padding: 20px;
+
+      h3 {
+        text-align: center;
+      }
+
+      p {
+        text-align: justify;
+      }
+
+      span {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }

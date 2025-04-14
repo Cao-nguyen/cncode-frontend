@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./Diendan.scss";
-import logo from "../../../assets/logo.png";
 import {
   ForumClientChat,
   ForumClientJoin,
@@ -28,6 +27,7 @@ function Diendan(props) {
 
   const [tab, setTab] = useState("");
   const [showOn, setShowOn] = useState("");
+  const [newData, setNewData] = useState("");
 
   const [forum, setForum] = useState();
   const [chat, setChat] = useState();
@@ -43,6 +43,8 @@ function Diendan(props) {
   const handleShow = (id) => {
     const newForum = forum?.filter((f) => f._id === id)[0];
     const members = newForum?.member?.some((m) => m.member_id === userId);
+
+    setNewData(id);
 
     if (members) {
       setShowOn("");
@@ -324,28 +326,34 @@ function Diendan(props) {
 
         {showOn && (
           <div className="forum-over">
-            <div className="over-form">
-              <h3>Bạn muốn tham gia nhóm?</h3>
-              <p>
-                Sau khi tham gia nhóm chat, bạn vui lòng đọc nội dung và quy
-                định của nhóm để không bị vi phạm nhé!
-              </p>
-              <span>
-                <span className="btn btn-danger" onClick={handleExit}>
-                  Từ chối
-                </span>
-                <span>hoặc</span>
-                <span className="btn btn-primary" onClick={handleJoin}>
-                  Tham gia
-                </span>
-              </span>
-            </div>
+            {forum
+              ?.filter((f) => f._id === newData)
+              .map((item) => (
+                <>
+                  <div className="over-form">
+                    <h3>Bạn muốn tham gia nhóm?</h3>
+                    <h5>Giới thiệu</h5>
+                    <span>{item?.description}</span>
+                    <h5>Luật nhóm</h5>
+                    <span>{item?.forum_law}</span>
+                    <span>
+                      <span className="btn btn-danger" onClick={handleExit}>
+                        Từ chối
+                      </span>
+                      <span>hoặc</span>
+                      <span className="btn btn-primary" onClick={handleJoin}>
+                        Tham gia
+                      </span>
+                    </span>
+                  </div>
+                </>
+              ))}
           </div>
         )}
 
         <div className="phone">
           <div className="forum">
-            <div className="forum-left" style={{ display: tab ? "none" : "" }}>
+            <div className="forum-left">
               <h3>Diễn đàn hỗ trợ học tập</h3>
               {forum?.map((item) => (
                 <div
@@ -359,7 +367,10 @@ function Diendan(props) {
                     <p className="user-info-name">{item?.name}</p>
                     <span className="user-info-chat">{item?.description}</span>
                   </div>
-                  <i className="fa-solid fa-ellipsis" onClick={handleOut}></i>
+                  <i
+                    className="fa-solid fa-ellipsis"
+                    onClick={() => handleOut(item._id)}
+                  ></i>
                 </div>
               ))}
             </div>
