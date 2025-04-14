@@ -8,6 +8,9 @@ import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
 
+import banner1 from "../../../assets/Banner/banner1.png";
+import banner from "../../../assets/Banner/banner.png";
+
 function Home(props) {
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
@@ -47,10 +50,58 @@ function Home(props) {
       </HelmetProvider>
 
       <div className="container-img">
-        <img
-          src="https://cao-nguyen.github.io/CNliterature.edu.vn/trangchubg.png"
-          alt=""
-        ></img>
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <Link to="/luyentap">
+                <img src={banner1} class="d-block w-100" alt="" />
+              </Link>
+            </div>
+            <div class="carousel-item">
+              <Link to="/luyentap">
+                <img src={banner} class="d-block w-100" alt="" />
+              </Link>
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
 
       <div className="container" data-aos="zoom-in">

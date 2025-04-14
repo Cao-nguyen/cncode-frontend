@@ -19,6 +19,7 @@ import Use from "../components/Admin/Use/Use";
 import Member from "../components/Admin/Member/Member";
 import Web from "../components/Admin/Web/Web";
 import AdminShop from "../components/Admin/Shop/Shop";
+import Banner from "../components/Admin/Banner/Banner";
 
 // Tin tức
 import News from "../components/Admin/News/News";
@@ -166,6 +167,14 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <Infor />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/settings/banner"
+        element={
+          <ProtectedRoute>
+            <Banner />
           </ProtectedRoute>
         }
       ></Route>

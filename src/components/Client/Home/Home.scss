@@ -2,9 +2,33 @@
   padding-top: 70px;
   width: 100%;
 
-  img {
-    width: 100%;
-    height: 700px;
+  .carousel {
+    .carousel-indicators {
+      button {
+        background-color: var(--xanh-login);
+        height: 5px;
+        width: 30px;
+        border-radius: 5px;
+      }
+    }
+
+    .carousel-inner {
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        cursor: pointer;
+      }
+    }
+
+    .carousel-control-prev {
+      transform: translateX(-50px);
+    }
+
+    .carousel-control-next {
+      transform: translateX(50px);
+    }
   }
 }
 
@@ -215,6 +239,21 @@
 }
 
 @media screen and (max-width: 1190px) {
+  .container-img {
+    padding-top: 50px;
+    width: 100%;
+
+    .carousel {
+      .carousel-control-prev {
+        transform: translateX(0px);
+      }
+
+      .carousel-control-next {
+        transform: translateX(0px);
+      }
+    }
+  }
+
   .info1 {
     display: grid;
     grid-template-columns: 100%;
