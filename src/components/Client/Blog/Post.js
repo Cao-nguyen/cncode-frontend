@@ -43,10 +43,6 @@ function PostBlog() {
     setIsModified(true);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleBack = () => {
     if (isModified) {
       const data = window.confirm(

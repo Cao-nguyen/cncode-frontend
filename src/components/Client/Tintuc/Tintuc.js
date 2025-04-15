@@ -8,10 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Tintuc(props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const [isVisible, setIsVisible] = useState(false);
 
   const { data: news } = useQuery({

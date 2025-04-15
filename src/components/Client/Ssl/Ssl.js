@@ -11,10 +11,6 @@ import { SslAdminRead } from "../../../services/SslAdminServer";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Ssl() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { data: content } = useQuery({
     queryKey: ["content"],
     queryFn: SslAdminRead,

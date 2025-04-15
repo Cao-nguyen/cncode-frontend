@@ -5,10 +5,6 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import logo from "../../../assets/logo.png";
 
 function Settings(props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="admin">
       <HelmetProvider>

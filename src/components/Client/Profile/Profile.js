@@ -21,10 +21,6 @@ function Profile() {
     navigate(-1);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const [user, setUser] = useState();
   // const [course, setCourse] = useState();
   // const [follow, setFollow] = useState([]);

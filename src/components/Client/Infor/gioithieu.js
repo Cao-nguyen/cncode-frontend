@@ -13,10 +13,6 @@ function Gioithieu() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { data: Infor } = useQuery({
     queryKey: ["Infor"],
     queryFn: getInforApi,

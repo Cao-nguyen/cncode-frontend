@@ -76,8 +76,6 @@ function TintucRead(props) {
   const [liked, setLiked] = useState();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     socket.on("pushLike", () => {
       refetch();
     });

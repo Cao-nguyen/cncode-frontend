@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "../components/Client/Home/Home";
 import Gioithieu from "../components/Client/Infor/gioithieu";
 import Khoahoc from "../components/Client/Khoahoc/Khoahoc";
@@ -22,6 +22,8 @@ import Settings from "../components/Client/Settings/Settings";
 import Shop from "../components/Client/Shop/Shop";
 import Chat from "../components/Client/Chat/Chat";
 import Transaction from "../components/Client/Transaction/Transaction";
+import { AnimatePresence } from "framer-motion";
+import PageTransitionWrapper from "../components/Service/Common";
 
 export const validateRoutes = [
   "/me/post",
@@ -51,53 +53,218 @@ export const clientRoutes = [
 ];
 
 const AppRoutes = () => {
+  const location = useLocation();
+
   return (
-    <Routes>
-      {/* Trang chủ */}
-      <Route path="/" element={<Home />} />
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        {/* Trang chủ */}
+        <Route
+          path="/"
+          element={
+            <PageTransitionWrapper>
+              <Home />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Hỏi đáp */}
-      <Route path="/hoidap" element={<Ask />} />
+        {/* Hỏi đáp */}
+        <Route
+          path="/hoidap"
+          element={
+            <PageTransitionWrapper>
+              <Ask />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Giới thiệu */}
-      <Route path="/gioithieu" element={<Gioithieu />} />
+        {/* Giới thiệu */}
+        <Route
+          path="/gioithieu"
+          element={
+            <PageTransitionWrapper>
+              <Gioithieu />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Khoá học */}
-      <Route path="/khoahoc" element={<Khoahoc />} />
+        {/* Khoá học */}
+        <Route
+          path="/khoahoc"
+          element={
+            <PageTransitionWrapper>
+              <Khoahoc />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Luyện tập */}
-      <Route path="/luyentap" element={<Luyentap />} />
+        {/* Luyện tập */}
+        <Route
+          path="/luyentap"
+          element={
+            <PageTransitionWrapper>
+              <Luyentap />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Diễn đàn */}
-      <Route path="/diendan" element={<Diendan />} />
+        {/* Diễn đàn */}
+        <Route
+          path="/diendan"
+          element={
+            <PageTransitionWrapper>
+              <Diendan />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Blog */}
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/me/post" element={<PostBlog />} />
-      <Route path="/me/blog" element={<MeBlog />} />
-      <Route path="/blog/:slug" element={<ShowBlog />} />
-      <Route path="/me/loveblog" element={<LoveBlog />} />
+        {/* Blog */}
+        <Route
+          path="/blog"
+          element={
+            <PageTransitionWrapper>
+              <Blog />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/post"
+          element={
+            <PageTransitionWrapper>
+              <PostBlog />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/blog"
+          element={
+            <PageTransitionWrapper>
+              <MeBlog />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <PageTransitionWrapper>
+              <ShowBlog />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/loveblog"
+          element={
+            <PageTransitionWrapper>
+              <LoveBlog />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Sự kiện */}
-      <Route path="/sukien" element={<Sukien />} />
+        {/* Sự kiện */}
+        <Route
+          path="/sukien"
+          element={
+            <PageTransitionWrapper>
+              <Sukien />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Tin tức */}
-      <Route path="/tintuc" element={<Tintuc />} />
-      <Route path="/tintuc/:slug" element={<ShowNews />} />
+        {/* Tin tức */}
+        <Route
+          path="/tintuc"
+          element={
+            <PageTransitionWrapper>
+              <Tintuc />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/tintuc/:slug"
+          element={
+            <PageTransitionWrapper>
+              <ShowNews />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Khác */}
-      <Route path="/p/:username" element={<Profile />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="/me/khuvuon" element={<Khuvuon />} />
-      <Route path="/chatwithnguyen" element={<Chat />} />
-      <Route path="/me/settings" element={<Settings />} />
-      <Route path="/me/transaction" element={<Transaction />} />
+        {/* Khác */}
+        <Route
+          path="/p/:username"
+          element={
+            <PageTransitionWrapper>
+              <Profile />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/shop"
+          element={
+            <PageTransitionWrapper>
+              <Shop />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/khuvuon"
+          element={
+            <PageTransitionWrapper>
+              <Khuvuon />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/chatwithnguyen"
+          element={
+            <PageTransitionWrapper>
+              <Chat />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/settings"
+          element={
+            <PageTransitionWrapper>
+              <Settings />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/me/transaction"
+          element={
+            <PageTransitionWrapper>
+              <Transaction />
+            </PageTransitionWrapper>
+          }
+        />
 
-      {/* Footer */}
-      <Route path="/ssl" element={<Ssl />} />
-      <Route path="/use" element={<Use />} />
-      <Route path="/member" element={<Member />} />
-    </Routes>
+        {/* Footer */}
+        <Route
+          path="/ssl"
+          element={
+            <PageTransitionWrapper>
+              <Ssl />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/use"
+          element={
+            <PageTransitionWrapper>
+              <Use />
+            </PageTransitionWrapper>
+          }
+        />
+        <Route
+          path="/member"
+          element={
+            <PageTransitionWrapper>
+              <Member />
+            </PageTransitionWrapper>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
   );
 };
 

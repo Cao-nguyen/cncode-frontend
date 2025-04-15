@@ -11,10 +11,6 @@ import { MemberAdminRead } from "../../../services/MemberAdminServer";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Member() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { data: content } = useQuery({
     queryKey: ["content"],
     queryFn: MemberAdminRead,

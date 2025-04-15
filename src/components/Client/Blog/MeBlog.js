@@ -42,7 +42,6 @@ function MeBlog(props) {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   };
 
   return (

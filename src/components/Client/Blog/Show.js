@@ -37,10 +37,6 @@ function Show() {
   const [currentId, setCurrentId] = useState();
   const [showReply, setShowReply] = useState();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // Gọi api
   const blogData = async () => {
     const data = await BlogClientRead();

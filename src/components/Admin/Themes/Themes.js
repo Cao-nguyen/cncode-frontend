@@ -12,10 +12,6 @@ function Themes(props) {
   const [theme, setTheme] = useState();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const ThemeRead = async () => {
       const data = await ThemeAdminRead();
 

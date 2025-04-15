@@ -17,10 +17,6 @@ import Prism from "prismjs";
 import socket from "../../Service/socket";
 
 function Ask(props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const id = useSelector((state) => state.user.account.id);
 
   const [currentPage, setCurrentPage] = useState(1);

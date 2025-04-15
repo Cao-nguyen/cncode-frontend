@@ -10,10 +10,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 function News(props) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleBack = () => {
     navigate(-1);
   };
@@ -82,7 +78,6 @@ function News(props) {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   };
 
   return (

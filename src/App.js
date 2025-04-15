@@ -1,6 +1,6 @@
 // Các thư viện sử dụng
 import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import Aos from "aos";
@@ -16,6 +16,7 @@ import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 import Nguyen from "./assets/Khac/Nguyen.png";
 import logo from "./assets/logo.png";
 import cozyMusic from "./assets/nhaccho/cozycoffeehouse.mp3";
+import PageTransitionWrapper from "./components/Service/Common";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";

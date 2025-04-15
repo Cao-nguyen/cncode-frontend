@@ -21,10 +21,6 @@ function Diendan(props) {
 
   const divRef = useRef(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const [tab, setTab] = useState("");
   const [showOn, setShowOn] = useState("");
   const [newData, setNewData] = useState("");

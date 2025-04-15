@@ -6,10 +6,6 @@ import logo from "../../../assets/logo.png";
 function Dashboard() {
   const fullName = useSelector((state) => state.user.account.fullName);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
       <HelmetProvider>
