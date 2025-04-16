@@ -260,9 +260,9 @@ function Forum() {
       {show && (
         <div className="admin_overplay">
           <i className="fa-solid fa-xmark" onClick={() => setShow(!show)}></i>
-          <div className="admin_form">
+          <div className="admin_forum">
             <h3>Tạo diễn đàn mới</h3>
-            <div className="form-group">
+            <div className="form-admin">
               <input
                 className="form-control"
                 value={name}
@@ -324,9 +324,9 @@ function Forum() {
             className="fa-solid fa-xmark"
             onClick={() => setShowEdit(!showEdit)}
           ></i>
-          <div className="admin_form">
+          <div className="admin_forum">
             <h3>Chỉnh sửa diễn đàn</h3>
-            <div className="form-group">
+            <div className="form-admin">
               <input
                 className="form-control"
                 value={name}
@@ -388,7 +388,7 @@ function Forum() {
             className="fa-solid fa-xmark"
             onClick={() => setShowUpload(!showUpload)}
           ></i>
-          <div className="admin_form">
+          <div className="admin_forum">
             <label htmlFor="upload-input" className="upload-image-label">
               <i class="fa-solid fa-cloud-arrow-up"></i>
               <p>Tải lên ảnh đại diện của bạn</p>

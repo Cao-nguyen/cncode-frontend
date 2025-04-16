@@ -3,6 +3,7 @@ import "./Banner.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
+  SettingsAdminBannerDelete,
   SettingsAdminBannerRead,
   SettingsAdminBannerUpload,
 } from "../../../services/SettingsAdminServer";
@@ -72,9 +73,21 @@ function Banner() {
     }
   };
 
-  const handleEdit = (idPost) => {};
+  const handleDelete = async (idPost) => {
+    const newAvatar = banner.filter((b) => b._id === idPost)[0].avatar;
+    const urlParts = newAvatar.split("/");
+    const urlImage = `${urlParts[7]}/${urlParts[8]}/${urlParts[9]}`;
+    const idMain = urlImage.split(".");
+    const publicId = idMain[0];
 
-  const handleDelete = (idPost) => {};
+    const data = await SettingsAdminBannerDelete(publicId, idPost);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+    } else {
+      toast.error(data.EM);
+    }
+  };
 
   useEffect(() => {
     getData();
@@ -124,10 +137,6 @@ function Banner() {
             <img src={item?.avatar} alt=""></img>
             <span>{item?.link}</span>
             <div className="action">
-              <i
-                className="fa-solid fa-edit"
-                onClick={() => handleEdit(item?._id)}
-              ></i>
               <i
                 className="fa-solid fa-trash"
                 onClick={() => handleDelete(item?._id)}

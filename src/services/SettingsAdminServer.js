@@ -16,3 +16,15 @@ export const SettingsAdminBannerRead = async () => {
   );
   return response.data;
 };
+
+// [GET] Lấy  ảnh
+export const SettingsAdminBannerDelete = async (publicId, idPost) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/settings/banner/delete`,
+    {
+      publicId,
+      idPost,
+    }
+  );
+  return response.data;
+};
