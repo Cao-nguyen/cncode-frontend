@@ -1,0 +1,53 @@
+h3.text-grate {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.admin-grate {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: space-between;
+
+  .admin-grate-item {
+    display: flex;
+    margin-top: 20px;
+    background-color: var(--mau-trang);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+    }
+
+    .rating {
+      .info {
+        display: flex;
+
+        h5 {
+          font-size: 20px;
+        }
+
+        i {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          cursor: pointer;
+        }
+      }
+
+      i {
+        font-size: 20px;
+      }
+
+      p {
+        margin-top: 5px;
+        font-size: 18px;
+      }
+    }
+  }
+}

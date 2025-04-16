@@ -25,6 +25,15 @@ export const GrateCreateHome = async (id, rating, comment) => {
   return response.data;
 };
 
+// [POST] Xoá
+export const GrateDeleteHome = async (id) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/grateHome/delete`,
+    { id }
+  );
+  return response.data;
+};
+
 // [GET] Comment
 export const GrateReadHome = async () => {
   const response = await axios.get(

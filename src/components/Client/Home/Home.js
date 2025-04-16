@@ -139,12 +139,7 @@ function Home(props) {
             {banner?.map((item, index) => (
               <div key={index} className="carousel-item active">
                 <Link to={item?.link}>
-                  <img
-                    loading="lazy"
-                    src={item?.avatar}
-                    className="d-block w-100"
-                    alt=""
-                  />
+                  <img src={item?.avatar} className="d-block w-100" alt="" />
                 </Link>
               </div>
             ))}
