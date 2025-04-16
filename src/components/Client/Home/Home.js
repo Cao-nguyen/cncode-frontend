@@ -7,19 +7,18 @@ import { BlogReadHome, NewsReadHome } from "../../../services/HomeClientServer";
 import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
-
-import banner1 from "../../../assets/Banner/banner1.png";
-import banner from "../../../assets/Banner/banner.png";
+import { SettingsAdminBannerRead } from "../../../services/SettingsAdminServer";
 
 function Home(props) {
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
+  const [banner, setBanner] = useState();
 
   useEffect(() => {
     const BlogReadData = async () => {
       const data = await BlogReadHome();
 
-      if (data) {
+      if (data && data.EC === 0) {
         setBlog(data.DT);
       }
     };
@@ -27,13 +26,22 @@ function Home(props) {
     const NewsReadData = async () => {
       const data = await NewsReadHome();
 
-      if (data) {
+      if (data && data.EC === 0) {
         setNews(data.DT);
+      }
+    };
+
+    const BannerReadData = async () => {
+      const data = await SettingsAdminBannerRead();
+
+      if (data && data.EC === 0) {
+        setBanner(data.DT);
       }
     };
 
     BlogReadData();
     NewsReadData();
+    BannerReadData();
   }, []);
 
   return (
@@ -56,28 +64,29 @@ function Home(props) {
           data-bs-ride="carousel"
         >
           <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              className="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
+            {banner?.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to={index}
+                className="active"
+                aria-current="true"
+                aria-label={`Slide ${index + 1}`}
+              ></button>
+            ))}
           </div>
           <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img src={banner} className="d-block w-100" alt="" />
-            </div>
-            <div className="carousel-item">
-              <img src={banner1} className="d-block w-100" alt="" />
-            </div>
+            {banner?.map((item, index) => (
+              <div key={index} className="carousel-item active">
+                <img
+                  loading="lazy"
+                  src={item?.avatar}
+                  className="d-block w-100"
+                  alt=""
+                />
+              </div>
+            ))}
           </div>
           <button
             className="carousel-control-prev"

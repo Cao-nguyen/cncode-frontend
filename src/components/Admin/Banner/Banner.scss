@@ -18,4 +18,46 @@
       border-radius: 10px;
     }
   }
+
+  .show-banner {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    justify-content: space-between;
+
+    .show-banner-item {
+      background-color: var(--mau-trang);
+      box-shadow: var(--box-shadow);
+      border-radius: 10px;
+      padding: 10px;
+
+      img {
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      span {
+        font-size: 18px;
+      }
+
+      .action {
+        margin-top: 10px;
+
+        i {
+          font-size: 20px;
+          margin-right: 20px;
+          cursor: pointer;
+
+          &.fa-trash {
+            color: var(--mau-do);
+          }
+
+          &.fa-edit {
+            color: var(--xanh-login);
+          }
+        }
+      }
+    }
+  }
 }

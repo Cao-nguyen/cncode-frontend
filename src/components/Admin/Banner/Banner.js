@@ -1,12 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Banner.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { SettingsAdminUpload } from "../../../services/SettingsAdminServer";
+import {
+  SettingsAdminBannerRead,
+  SettingsAdminBannerUpload,
+} from "../../../services/SettingsAdminServer";
+import socket from "../../Service/socket";
 
 function Banner() {
   const [avatar, setAvatar] = useState();
   const [link, setLink] = useState();
+  const [banner, setBanner] = useState();
 
   const inputRef = useRef(null);
 
@@ -23,7 +28,7 @@ function Banner() {
     formData.append("folder", "uploads/avatar");
 
     try {
-      toast.success("Đang trong quá trình tải ảnh...");
+      toast.info("Đang trong quá trình tải ảnh...");
 
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
@@ -46,7 +51,7 @@ function Banner() {
       return;
     }
 
-    const data = await SettingsAdminUpload(avatar, link);
+    const data = await SettingsAdminBannerUpload(avatar, link);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -59,6 +64,29 @@ function Banner() {
       toast.error(data.EM);
     }
   };
+
+  const getData = async () => {
+    const data = await SettingsAdminBannerRead();
+    if (data && data.EC === 0) {
+      setBanner(data.DT);
+    }
+  };
+
+  const handleEdit = (idPost) => {};
+
+  const handleDelete = (idPost) => {};
+
+  useEffect(() => {
+    getData();
+
+    socket.on("pushBanner", () => {
+      getData();
+    });
+
+    return () => {
+      socket.off("pushBanner");
+    };
+  }, []);
 
   return (
     <div className="admin">
@@ -89,6 +117,25 @@ function Banner() {
           <img src={avatar} alt="" />
         </div>
       )}
+
+      <div className="show-banner">
+        {banner?.map((item) => (
+          <div className="show-banner-item">
+            <img src={item?.avatar} alt=""></img>
+            <span>{item?.link}</span>
+            <div className="action">
+              <i
+                className="fa-solid fa-edit"
+                onClick={() => handleEdit(item?._id)}
+              ></i>
+              <i
+                className="fa-solid fa-trash"
+                onClick={() => handleDelete(item?._id)}
+              ></i>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
