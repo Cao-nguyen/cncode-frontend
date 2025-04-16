@@ -8,11 +8,14 @@ import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
 import { SettingsAdminBannerRead } from "../../../services/SettingsAdminServer";
+import { Blurhash } from "react-blurhash";
 
 function Home(props) {
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
   const [banner, setBanner] = useState();
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const BlogReadData = async () => {
@@ -77,16 +80,29 @@ function Home(props) {
             ))}
           </div>
           <div className="carousel-inner">
-            {banner?.map((item, index) => (
-              <div key={index} className="carousel-item active">
-                <img
-                  loading="lazy"
-                  src={item?.avatar}
-                  className="d-block w-100"
-                  alt=""
-                />
-              </div>
-            ))}
+            {banner?.map((item, index) => {
+              return (
+                <div key={index} className={`carousel-item active`}>
+                  {!imageLoaded && item.blurHash && (
+                    <Blurhash
+                      hash={item.blurHash}
+                      width="100%"
+                      resolutionX={32}
+                      resolutionY={32}
+                      punch={1}
+                    />
+                  )}
+                  <img
+                    loading="lazy"
+                    src={item?.avatar}
+                    className="d-block w-100"
+                    alt={`Slide ${index + 1}`}
+                    onLoad={() => setImageLoaded(true)}
+                    style={{ display: imageLoaded ? "block" : "none" }}
+                  />
+                </div>
+              );
+            })}
           </div>
           <button
             className="carousel-control-prev"
