@@ -3,16 +3,37 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { BlogReadHome, NewsReadHome } from "../../../services/HomeClientServer";
+import {
+  BlogReadHome,
+  GrateCreateHome,
+  GrateReadHome,
+  NewsReadHome,
+} from "../../../services/HomeClientServer";
 import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
 import { SettingsAdminBannerRead } from "../../../services/SettingsAdminServer";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Slider from "react-slick";
+import socket from "../../Service/socket";
 
 function Home(props) {
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
   const [banner, setBanner] = useState();
+  const [currentGrate, setCurrentGrate] = useState();
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    arrows: false,
+  };
 
   useEffect(() => {
     const BlogReadData = async () => {
@@ -39,10 +60,48 @@ function Home(props) {
       }
     };
 
+    const GrateReadData = async () => {
+      const data = await GrateReadHome();
+
+      if (data && data.EC === 0) {
+        setCurrentGrate(data.DT);
+      }
+    };
+
+    GrateReadData();
     BlogReadData();
     NewsReadData();
     BannerReadData();
+
+    socket.on("pushGrate", () => {
+      GrateReadData();
+    });
+
+    return () => {
+      socket.off("pushGrate");
+    };
   }, []);
+
+  const id = useSelector((state) => state.user.account.id);
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [comment, setComment] = useState();
+
+  const handlePush = async () => {
+    if (!rating || !comment) {
+      toast.error("Bạn chưa nhập đầy đủ thông tin!");
+    } else {
+      const data = await GrateCreateHome(id, rating, comment);
+
+      if (data && data.EC === 0) {
+        toast.success(data.EM);
+        setComment("");
+        setRating(0);
+      } else {
+        toast.error(data.EM);
+      }
+    }
+  };
 
   return (
     <>
@@ -79,12 +138,14 @@ function Home(props) {
           <div className="carousel-inner">
             {banner?.map((item, index) => (
               <div key={index} className="carousel-item active">
-                <img
-                  loading="lazy"
-                  src={item?.avatar}
-                  className="d-block w-100"
-                  alt=""
-                />
+                <Link to={item?.link}>
+                  <img
+                    loading="lazy"
+                    src={item?.avatar}
+                    className="d-block w-100"
+                    alt=""
+                  />
+                </Link>
               </div>
             ))}
           </div>
@@ -448,6 +509,78 @@ function Home(props) {
                   </div>
                 ))}
             </div>
+          </div>
+        </div>
+
+        <div className="HomeGrate" data-aos="zoom-in">
+          <div className="HomeGrate-Title">
+            <div className="Title-Border"></div>
+            <h3 className="text-primary">ĐÁNH GIÁ WEBSITE</h3>
+            <div className="Title-Border"></div>
+          </div>
+          <div className="grate">
+            <div className="grate-form form-group">
+              <div className="grate-star">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <i
+                    className="fa-solid fa-star"
+                    style={{
+                      color: s <= (hover || rating) ? "#ffc107" : "#e4e5e9",
+                    }}
+                    onClick={() => setRating(s)}
+                    onMouseEnter={() => setHover(s)}
+                    onMouseLeave={() => setHover(0)}
+                  ></i>
+                ))}
+              </div>
+              <textarea
+                disabled={id ? false : true}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="form-control"
+                placeholder="Đánh giá của bạn về website..."
+              />
+              <div
+                className={id ? "btn btn-primary" : "btn btn-secondary"}
+                onClick={id ? handlePush : null}
+              >
+                Gửi đánh giá
+              </div>
+            </div>
+            <Slider {...settings}>
+              {currentGrate?.map((item, index) => (
+                <div key={index}>
+                  <div className="d-flex align-items-start p-4 bg-white rounded">
+                    <div className="me-4">
+                      <img
+                        src={item?.authorId?.avatar}
+                        alt={item?.authorId?.fullName}
+                        className="rounded-circle"
+                        style={{ width: 80, height: 80, objectFit: "cover" }}
+                      />
+                    </div>
+
+                    <div>
+                      <h5 className="mb-1">{item?.authorId?.fullName}</h5>
+                      <div className="mb-2">
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <i
+                            key={s}
+                            className="fa-solid fa-star"
+                            style={{
+                              color: s <= item?.rating ? "#ffc107" : "#e4e5e9",
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-muted fst-italic mb-0">
+                        "{item?.comment}"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>

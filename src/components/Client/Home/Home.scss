@@ -200,6 +200,55 @@
   }
 }
 
+.HomeGrate {
+  margin: 100px 0px;
+
+  .HomeGrate-Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .Title-Border {
+      width: 35%;
+      height: 2px;
+      border-radius: 10px;
+      background-color: var(--xam-nhat-ba);
+    }
+
+    .text-primary {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .grate {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+
+    .grate-form {
+      .grate-star {
+        i {
+          font-size: 25px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+
+      textarea {
+        margin-top: 10px;
+        height: 100px;
+        resize: none;
+      }
+
+      .btn {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
 .dark-mode {
   .info1 {
     display: grid;
@@ -297,6 +346,18 @@
       .homewhy-item {
         margin-top: 20px;
       }
+    }
+  }
+
+  .HomeGrate {
+    .HomeGrate-Title {
+      .Title-Border {
+        width: 0%;
+      }
+    }
+
+    .grate {
+      grid-template-columns: 100%;
     }
   }
 }
