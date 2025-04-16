@@ -1,6 +1,6 @@
 // Các thư viện sử dụng
 import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import Aos from "aos";
@@ -12,11 +12,13 @@ import Footer from "./components/Client/Footer/Footer";
 import Login from "./components/Client/Login/Login";
 import AppRoutes, { validateRoutes, clientRoutes } from "./routes/appRoutes";
 import AdminRoutes, { isAdminRoute } from "./routes/adminRoutes";
+import TeacherRoutes, { isTeacherRoute } from "./routes/teacherRoutes";
 import ThemeClientApp from "./middlewares/ThemeClientMiddleware";
 import Nguyen from "./assets/Khac/Nguyen.png";
 import logo from "./assets/logo.png";
 import cozyMusic from "./assets/nhaccho/cozycoffeehouse.mp3";
-import PageTransitionWrapper from "./components/Service/Common";
+import ScrollToTop from "./components/Service/ScrollToTop";
+import { WebAdminRead } from "./services/WebAdminServer";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -25,11 +27,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import "aos/dist/aos.css";
 import "./App.scss";
-import { WebAdminRead } from "./services/WebAdminServer";
-import TeacherRoutes, { isTeacherRoute } from "./routes/teacherRoutes";
 
 function App() {
   // Xử lí route bên admin và client
@@ -220,6 +219,7 @@ function App() {
 function AppWithRouter() {
   return (
     <Router>
+      <ScrollToTop />
       <App />
       <ToastContainer
         position="top-right"

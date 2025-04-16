@@ -5,21 +5,28 @@ import "prismjs/themes/prism-twilight.css";
 import "prismjs/components/prism-python.min.js";
 import "prismjs/components/prism-javascript.min.js";
 import "prismjs/components/prism-css.min.js";
-import { useQuery } from "@tanstack/react-query";
 import { getInforApi } from "../../../services/InforAdminServer";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 function Gioithieu() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [Infor, setInfor] = useState();
 
-  const { data: Infor } = useQuery({
-    queryKey: ["Infor"],
-    queryFn: getInforApi,
-  });
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getInforApi();
+
+      if (data && data.EC === 0) {
+        setInfor(data.DT);
+      }
+    };
+
+    getData();
+  }, []);
 
   const inforHtml = useMemo(() => {
-    if (!Infor?.DT) return "";
+    if (!Infor) return "";
 
     let imgIndex = 0;
     const renderer = new marked.Renderer();
@@ -34,7 +41,7 @@ function Gioithieu() {
       </div>`;
     };
 
-    const html = marked(Infor.DT, { renderer });
+    const html = marked(Infor, { renderer });
 
     return html;
   }, [Infor]);

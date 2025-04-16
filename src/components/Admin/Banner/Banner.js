@@ -62,7 +62,7 @@ function Banner() {
 
   return (
     <div className="admin">
-      <h3>Quản lý banner</h3>
+      <h3 className="banner-text">Quản lý banner</h3>
 
       <div className="form-group">
         <input

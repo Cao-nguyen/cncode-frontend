@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../components/Client/Home/Home";
 import Gioithieu from "../components/Client/Infor/gioithieu";
 import Khoahoc from "../components/Client/Khoahoc/Khoahoc";
@@ -53,11 +53,9 @@ export const clientRoutes = [
 ];
 
 const AppRoutes = () => {
-  const location = useLocation();
-
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+      <Routes>
         {/* Trang chủ */}
         <Route
           path="/"
