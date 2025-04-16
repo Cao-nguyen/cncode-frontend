@@ -81,11 +81,7 @@ function Home(props) {
               <div key={index} className="carousel-item active">
                 <img
                   loading="lazy"
-                  src={
-                    !item.avatar
-                      ? "https://didongviet.vn/dchannel/wp-content/uploads/2023/02/mau-hong-didongviet-14.jpg"
-                      : item?.avatar
-                  }
+                  src={item?.avatar}
                   className="d-block w-100"
                   alt=""
                 />
