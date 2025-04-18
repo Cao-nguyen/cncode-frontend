@@ -130,7 +130,7 @@ function AdminShop() {
       </HelmetProvider>
 
       <h4>Đăng sản phẩm mới</h4>
-      <div className="form-group grid4">
+      <div className="form-group-shop grid4">
         <input
           ref={inputRef}
           type="file"

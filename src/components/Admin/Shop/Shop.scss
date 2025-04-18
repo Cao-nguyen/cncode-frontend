@@ -17,10 +17,6 @@
     justify-content: space-between;
 
     .product-item {
-      &:first-child {
-        margin-top: 0px;
-      }
-
       margin-top: 20px;
       background-color: var(--mau-trang);
       box-shadow: var(--box-shadow);
@@ -98,6 +94,25 @@
         width: 200px;
         height: 200px;
         object-fit: cover;
+      }
+    }
+  }
+}
+
+.dark-mode {
+  .admin {
+    height: 100vh;
+    .products {
+      .product-item {
+        background-color: var(--dark-mode-ba);
+        box-shadow: var(--box-shadow-dark);
+      }
+    }
+
+    .form-group-shop .show-img {
+      .show-img-item {
+        background-color: var(--dark-mode-ba);
+        box-shadow: var(--box-shadow-dark);
       }
     }
   }

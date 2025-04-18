@@ -49,13 +49,6 @@ function Settings(props) {
         </div>
 
         <div className="tab">
-          <h3>Khu vườn trên mây</h3>
-          <NavLink to="/admin/settings/opinion">
-            <i className="fa-solid fa-list-check"></i>
-          </NavLink>
-        </div>
-
-        <div className="tab">
           <h3>Góp ý của người dùng</h3>
           <NavLink to="/admin/settings/opinion">
             <i className="fa-solid fa-list-check"></i>

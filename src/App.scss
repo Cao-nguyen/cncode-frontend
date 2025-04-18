@@ -602,6 +602,12 @@ body {
         background-color: var(--dark-mode-nen);
         transition: width 0.4s ease-in-out;
       }
+
+      .bodyAdmin {
+        height: 100vh;
+        background-color: var(--dark-mode-nen);
+        padding-bottom: 100px;
+      }
     }
   }
 
@@ -619,6 +625,12 @@ body {
         border-bottom: var(--dark-mode-ba) solid 1px;
         width: calc(100% - 20%);
         transition: width 0.4s ease-in-out;
+      }
+
+      .bodyAdmin {
+        height: 100vh;
+        background-color: var(--dark-mode-nen);
+        padding-bottom: 100px;
       }
     }
   }

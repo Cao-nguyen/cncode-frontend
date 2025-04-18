@@ -78,9 +78,9 @@ const Web = () => {
 
   return (
     <>
-      <div className="admin">
-        <h1 className="text-center">Cài đặt website</h1>
+      <h1 className="text-center">Cài đặt website</h1>
 
+      <div className="admin">
         <div className="form-group-web mt-3">
           <h5>Thông tin chung về website</h5>
           <textarea
