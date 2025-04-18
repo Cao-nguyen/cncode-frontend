@@ -51,3 +51,12 @@ h3.text-grate {
     }
   }
 }
+
+.dark-mode {
+  .admin-grate {
+    .admin-grate-item {
+      background-color: var(--dark-mode-ba);
+      box-shadow: var(--box-shadow-dark);
+    }
+  }
+}

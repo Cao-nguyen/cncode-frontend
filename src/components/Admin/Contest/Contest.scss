@@ -1,0 +1,193 @@
+.contest {
+  margin-top: 10px;
+
+  .contest-btn {
+    .btn {
+      margin-right: 10px;
+    }
+  }
+
+  .contest-show {
+    margin-top: 20px;
+
+    .contest-show-item {
+      background-color: var(--xam-nhat-nhat);
+      display: grid;
+      grid-template-columns: 3% 15% 7% 15% 15% 15% 10% 10%;
+      border-bottom: solid 1px var(--xam-nhat-ba);
+      justify-content: space-between;
+      padding: 10px;
+
+      p {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p.id,
+      p.level,
+      p.timeOpen,
+      p.timeClose,
+      p.time,
+      p.status {
+        text-align: center;
+      }
+
+      p.action {
+        text-align: center;
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 15px;
+          cursor: pointer;
+
+          &.fa-trash {
+            color: var(--mau-do);
+          }
+
+          &.fa-edit,
+          &.fa-plus-circle {
+            color: var(--xanh-login);
+          }
+        }
+      }
+
+      &:first-child {
+        font-weight: bold;
+        border-radius: 10px 10px 0px 0px;
+
+        p.name {
+          text-align: center;
+        }
+      }
+
+      &:last-child {
+        border-radius: 0px 0px 10px 10px;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .show-form {
+    position: fixed;
+    background-color: var(--mau-trang);
+    z-index: 100;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+
+    i.fa-xmark {
+      position: absolute;
+      background-color: var(--mau-trang);
+      font-size: 25px;
+      padding: 4px 7px;
+      box-shadow: var(--box-shadow);
+      border-radius: 50px;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+    }
+
+    .contest-form {
+      padding: 20px 40px;
+
+      h3 {
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--xanh-login);
+      }
+
+      .form-group {
+        margin-top: 20px;
+
+        label {
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .form-control {
+          margin-top: 5px;
+        }
+
+        textarea {
+          height: 100px;
+        }
+      }
+
+      .grid2 {
+        display: grid;
+        grid-template-columns: 49% 49%;
+        justify-content: space-between;
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+        justify-content: space-between;
+      }
+
+      .btn {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .show-form-other {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i.fa-xmark {
+      position: absolute;
+      background-color: var(--mau-trang);
+      font-size: 25px;
+      padding: 4px 7px;
+      box-shadow: var(--box-shadow);
+      border-radius: 50px;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+    }
+
+    .contest-form {
+      width: 65%;
+      background-color: var(--mau-trang);
+      padding: 20px;
+      border-radius: 10px;
+
+      h3 {
+        color: var(--xanh-login);
+      }
+
+      .grid4 {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+        justify-content: space-between;
+
+        .item {
+          margin-top: 20px;
+          background-color: var(--xam-nhat-nhat);
+          border-radius: 10px;
+          padding: 20px;
+
+          i {
+            background-color: var(--xam-nhat-ba);
+            border-radius: 50px;
+            padding: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,6 +37,9 @@ import EditBlog from "../components/Admin/Blog/Edit";
 // Khác
 import Bins from "../components/Admin/Bins/Bins";
 
+// Luyện tập
+import Contest from "../components/Admin/Contest/Contest";
+
 export const adminRoutesValidate = ["/admin/*"];
 
 export const isAdminRoute = (pathname) => {
@@ -76,6 +79,15 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <Forum />
+          </ProtectedRoute>
+        }
+      ></Route>
+
+      <Route
+        path="/admin/try"
+        element={
+          <ProtectedRoute>
+            <Contest />
           </ProtectedRoute>
         }
       ></Route>

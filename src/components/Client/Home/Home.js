@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Slider from "react-slick";
 import socket from "../../Service/socket";
+import { color } from "framer-motion";
 
 function Home(props) {
   const [blog, setBlog] = useState();
@@ -545,7 +546,7 @@ function Home(props) {
             <Slider {...settings}>
               {currentGrate?.map((item, index) => (
                 <div key={index}>
-                  <div className="d-flex align-items-start p-4 bg-white rounded">
+                  <div className="d-flex align-items-start p-4 rounded">
                     <div className="me-4">
                       <img
                         src={item?.authorId?.avatar}
@@ -568,9 +569,7 @@ function Home(props) {
                           />
                         ))}
                       </div>
-                      <p className="text-muted fst-italic mb-0">
-                        "{item?.comment}"
-                      </p>
+                      <p className="comment-text">"{item?.comment}"</p>
                     </div>
                   </div>
                 </div>

@@ -227,6 +227,12 @@
     grid-template-columns: 49% 49%;
     justify-content: space-between;
 
+    .comment-text {
+      color: #6c757d;
+      font-style: italic;
+      margin-bottom: 0;
+    }
+
     .grate-form {
       .grate-star {
         i {
@@ -282,6 +288,14 @@
         &:hover {
           box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
         }
+      }
+    }
+  }
+
+  .HomeGrate {
+    .grate {
+      .comment-text {
+        color: var(--mau-trang);
       }
     }
   }

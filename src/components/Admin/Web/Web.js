@@ -81,7 +81,7 @@ const Web = () => {
       <div className="admin">
         <h1 className="text-center">Cài đặt website</h1>
 
-        <div className="form-group mt-3">
+        <div className="form-group-web mt-3">
           <h5>Thông tin chung về website</h5>
           <textarea
             className="form-control"
@@ -90,7 +90,7 @@ const Web = () => {
           ></textarea>
         </div>
 
-        <div className="form-group mt-3">
+        <div className="form-group-web mt-3">
           <h5>Sản phẩm</h5>
           {products.map((product, index) => (
             <div className="grid-2" key={index}>
@@ -117,7 +117,7 @@ const Web = () => {
           </div>
         </div>
 
-        <div className="form-group mt-3">
+        <div className="form-group-web mt-3">
           <h5>Liên kết nhanh</h5>
           {quickLinks.map((link, index) => (
             <div className="grid-2" key={index}>
@@ -144,7 +144,7 @@ const Web = () => {
           </div>
         </div>
 
-        <div className="form-group mt-3">
+        <div className="form-group-web mt-3">
           <h5>Mạng xã hội</h5>
           <input
             className="form-control"
