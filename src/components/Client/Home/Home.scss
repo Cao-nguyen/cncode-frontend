@@ -32,6 +32,71 @@
   }
 }
 
+.HomeEvent {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 49% 49%;
+  margin-bottom: 30px;
+
+  .streak {
+    border: solid 5px var(--xanh-login);
+    border-radius: 10px;
+    padding: 20px;
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      progress {
+        width: 70%;
+        height: 20px;
+      }
+
+      .content-item {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin-top: 20px;
+          margin-right: 10px;
+        }
+
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+
+  .coins {
+    height: 300px;
+    border-radius: 10px;
+    border: solid 5px var(--xanh-login);
+    padding: 20px;
+
+    .content {
+      height: 200px;
+      overflow: auto;
+    }
+
+    .action {
+      margin-top: 20px;
+      text-align: center;
+
+      .btn {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 .info1 {
   display: grid;
   grid-template-columns: 49% 49%;

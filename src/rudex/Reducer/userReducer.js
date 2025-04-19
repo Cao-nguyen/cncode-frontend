@@ -7,6 +7,8 @@ const INITIAL_STATE = {
     username: "",
     role: "",
     id: "",
+    coins: "",
+    streak: "",
   },
 };
 
@@ -21,6 +23,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
           username: action?.payload?.DT?.username,
           role: action?.payload?.DT?.role,
           id: action?.payload?.DT?.id,
+          coins: action?.payload?.DT?.coins,
+          streak: action?.payload?.DT?.streak,
         },
       };
 

@@ -34,6 +34,23 @@ export const GrateDeleteHome = async (id) => {
   return response.data;
 };
 
+// [POST] Xoá
+export const UserPointHome = async (id) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user-point/create`,
+    { id }
+  );
+  return response.data;
+};
+
+// [POST] Xoá
+export const UserPointRead = async () => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/user-point/read`
+  );
+  return response.data;
+};
+
 // [GET] Comment
 export const GrateReadHome = async () => {
   const response = await axios.get(

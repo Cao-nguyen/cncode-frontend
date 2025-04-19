@@ -8,22 +8,27 @@ import {
   GrateCreateHome,
   GrateReadHome,
   NewsReadHome,
+  UserPointHome,
+  UserPointRead,
 } from "../../../services/HomeClientServer";
 import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
 import { SettingsAdminBannerRead } from "../../../services/SettingsAdminServer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Slider from "react-slick";
 import socket from "../../Service/socket";
-import { color } from "framer-motion";
+import streakImg from "../../../assets/Khac/streak.png";
 
 function Home(props) {
   const [blog, setBlog] = useState();
   const [news, setNews] = useState();
   const [banner, setBanner] = useState();
   const [currentGrate, setCurrentGrate] = useState();
+  const [currentPoint, setCurrentPoint] = useState();
+
+  const [countT, setCountT] = useState();
 
   const settings = {
     dots: true,
@@ -69,21 +74,38 @@ function Home(props) {
       }
     };
 
+    const UserPointReadData = async () => {
+      const data = await UserPointRead();
+
+      if (data && data.EC === 0) {
+        setCurrentPoint(data.DT.data);
+        setCountT(data.DT.user);
+      }
+    };
+
     GrateReadData();
     BlogReadData();
     NewsReadData();
     BannerReadData();
+    UserPointReadData();
 
     socket.on("pushGrate", () => {
       GrateReadData();
     });
 
+    socket.on("pushUserPoint", () => {
+      UserPointReadData();
+    });
+
     return () => {
       socket.off("pushGrate");
+      socket.off("pushUserPoint");
     };
   }, []);
 
   const id = useSelector((state) => state.user.account.id);
+  const streak = useSelector((state) => state.user.account.streak);
+
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState();
@@ -103,6 +125,12 @@ function Home(props) {
       }
     }
   };
+
+  const handleUserPoint = async () => {
+    await UserPointHome(id);
+  };
+
+  const checkUserId = currentPoint?.some((p) => p?.authorId?._id === id);
 
   return (
     <>
@@ -173,6 +201,51 @@ function Home(props) {
       </div>
 
       <div className="container" data-aos="zoom-in">
+        <div className="HomeEvent">
+          <div className="streak">
+            <p>Chuỗi học tập</p>
+            <div className="content">
+              <div className="content-item">
+                <p>{countT?.filter((b) => b._id === id)[0].streak}</p>
+                <img
+                  src={streakImg}
+                  alt=""
+                  style={
+                    checkUserId ? undefined : { filter: "grayscale(100%)" }
+                  }
+                />
+              </div>
+              <progress value={streak} max="360"></progress>
+              <div className="content-item">
+                <p>360</p>
+                <img src={streakImg} alt="" />
+              </div>
+            </div>
+            <p style={{ fontWeight: "normal", marginTop: "20px" }}>
+              Khi đạt đến cột mốc 360 chuỗi bạn sẽ nhận được 1.000 xu
+            </p>
+            <p style={{ fontWeight: "normal" }}>
+              Chuỗi của bạn sẽ trở về 0 nếu bạn quên điểm danh một ngày
+            </p>
+          </div>
+          <div className="coins">
+            <div className="content">
+              {currentPoint?.map((item) => (
+                <p>{`Chúc mừng ${item?.authorId?.fullName} đã nhận được ${item.coins} xu trong hôm nay`}</p>
+              ))}
+            </div>
+            <div className="action">
+              {checkUserId ? (
+                <p>Bạn đã điểm danh trong ngày hôm nay rồi!</p>
+              ) : (
+                <div className="btn btn-primary" onClick={handleUserPoint}>
+                  Điểm danh
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
         <div className="info1">
           <img src={web2} alt="" />
           <div className="content">
