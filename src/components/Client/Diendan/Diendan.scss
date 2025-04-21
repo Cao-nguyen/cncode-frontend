@@ -378,6 +378,145 @@
   }
 }
 
+.dark-mode {
+  .laptop {
+    .forum {
+      .forum-left {
+        height: 700px;
+        border-right: solid 1px var(--xam-nhat-ba);
+
+        .user {
+          &:not(.active):hover {
+            background-color: var(--dark-mode-ba);
+          }
+
+          .user-avatar {
+            background-color: var(--mau-trang);
+          }
+
+          .user-info {
+            .user-info-name {
+              color: var(--mau-trang);
+            }
+
+            .user-info-chat {
+              color: var(--xam-nhat-ba);
+            }
+          }
+
+          i.fa-ellipsis {
+            &:hover {
+              background-color: var(--dark-mode-nen);
+            }
+          }
+        }
+
+        .active {
+          background-color: var(--dark-mode-bon);
+        }
+      }
+
+      .forum-right {
+        header {
+          background-color: var(--dark-mode-nen);
+          border-bottom: solid 1px var(--xam-nhat-ba);
+
+          .user {
+            .user-avatar {
+              background-color: var(--mau-trang);
+            }
+
+            .user-info {
+              .user-info-name {
+                color: var(--mau-trang);
+              }
+
+              .user-info-chat {
+                color: var(--xam-nhat-ba);
+              }
+            }
+          }
+        }
+
+        .forum-body {
+          background-color: var(--dark-mode-bon);
+
+          .forum-body-item {
+            .forum-body-item-content {
+              .message-info {
+                display: flex;
+
+                p.time {
+                  color: var(--xam-nhat-ba);
+                }
+
+                .add-action {
+                  .action-dropdown {
+                    background-color: var(--dark-mode-nen);
+                    box-shadow: var(--box-shadow-dark);
+
+                    .dropdown-item {
+                      &:hover {
+                        border-radius: 10px;
+                        background-color: var(--dark-mode-ba);
+                      }
+
+                      i {
+                        margin-right: 10px;
+                      }
+
+                      span {
+                        color: var(--mau-trang);
+                      }
+                    }
+                  }
+
+                  &:hover {
+                    .action-dropdown {
+                      display: block;
+                    }
+                  }
+                }
+              }
+
+              .message-chat {
+                span {
+                  color: var(--mau-trang);
+                }
+              }
+            }
+          }
+        }
+
+        .forum-bottom {
+          .editor {
+            textarea {
+              background-color: var(--dark-mode-nen);
+              color: var(--mau-trang);
+
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .forum-over {
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .over-form {
+      background-color: var(--dark-mode-nen);
+
+      span {
+        color: var(--mau-trang);
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1190px) {
   .laptop {
     display: none;
@@ -761,6 +900,139 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+    }
+  }
+
+  .dark-mode {
+    .laptop {
+      display: none;
+    }
+
+    .phone {
+      display: block;
+
+      .forum {
+        .forum-left {
+          border-right: solid 1px var(--xam-nhat-ba);
+          overflow: auto;
+
+          .user {
+            &:not(.active):hover {
+              background-color: var(--dark-mode-ba);
+            }
+
+            .user-avatar {
+              background-color: var(--mau-trang);
+            }
+
+            .user-info {
+              .user-info-name {
+                color: var(--mau-trang);
+              }
+
+              .user-info-chat {
+                color: var(--xam-nhat-ba);
+              }
+            }
+
+            i.fa-ellipsis {
+              &:hover {
+                background-color: var(--dark-mode-nen);
+              }
+            }
+          }
+
+          .active {
+            background-color: var(--dark-mode-bon);
+          }
+        }
+
+        .forum-right {
+          header {
+            background-color: var(--dark-mode-nen);
+            border-bottom: solid 1px var(--xam-nhat-ba);
+
+            .user {
+              .user-avatar {
+                background-color: var(--mau-trang);
+              }
+
+              .user-info {
+                .user-info-name {
+                  color: var(--mau-trang);
+                }
+
+                .user-info-chat {
+                  color: var(--xam-nhat-ba);
+                }
+              }
+            }
+          }
+
+          .forum-body {
+            background-color: var(--dark-mode-bon);
+
+            .forum-body-item {
+              .forum-body-item-content {
+                .message-info {
+                  display: flex;
+
+                  p.time {
+                    color: var(--xam-nhat-ba);
+                  }
+
+                  .add-action {
+                    .action-dropdown {
+                      background-color: var(--dark-mode-nen);
+                      box-shadow: var(--box-shadow-dark);
+
+                      .dropdown-item {
+                        &:hover {
+                          border-radius: 10px;
+                          background-color: var(--dark-mode-ba);
+                        }
+
+                        i {
+                          margin-right: 10px;
+                        }
+
+                        span {
+                          color: var(--mau-trang);
+                        }
+                      }
+                    }
+
+                    &:hover {
+                      .action-dropdown {
+                        display: block;
+                      }
+                    }
+                  }
+                }
+
+                .message-chat {
+                  span {
+                    color: var(--mau-trang);
+                  }
+                }
+              }
+            }
+          }
+
+          .forum-bottom {
+            .editor {
+              textarea {
+                background-color: var(--dark-mode-nen);
+                color: var(--mau-trang);
+
+                &:focus {
+                  outline: none;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
