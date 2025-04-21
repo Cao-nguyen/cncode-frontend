@@ -175,9 +175,9 @@ function Diendan(props) {
               ))}
             </div>
             {forum?.map((item) => (
-              <div className="forum-right">
+              <>
                 {tab === item?._id && (
-                  <>
+                  <div className="forum-right">
                     <header>
                       <div className="user">
                         <div className="user-avatar">
@@ -313,9 +313,9 @@ function Diendan(props) {
                         ></i>
                       </div>
                     </div>
-                  </>
+                  </div>
                 )}
-              </div>
+              </>
             ))}
           </div>
         </div>
