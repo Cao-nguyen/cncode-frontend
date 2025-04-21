@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { BlogClientRead } from "../../../services/BlogClientServer";
 import moment from "moment/moment";
 import "./Blog.scss";
+import { EyeBlogCreate } from "../../../services/EyeClientServer";
 
 function Blog(props) {
   const [blog, setBlog] = useState();
@@ -14,6 +15,10 @@ function Blog(props) {
     if (data) {
       setBlog(data.DT);
     }
+  };
+
+  const handleInc = async (idBlog) => {
+    await EyeBlogCreate(idBlog);
   };
 
   useEffect(() => {
@@ -36,7 +41,11 @@ function Blog(props) {
         <div className="blog">
           {blog &&
             blog.map((item, index) => (
-              <div className="blog-item" key={index}>
+              <div
+                className="blog-item"
+                key={index}
+                onClick={() => handleInc(item._id)}
+              >
                 <Link to={item.slug}>
                   <img src={item.img} alt={item.title} />
                   <div className="date">

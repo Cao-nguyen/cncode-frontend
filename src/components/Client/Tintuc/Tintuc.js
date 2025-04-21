@@ -6,6 +6,7 @@ import "./Tintuc.scss";
 import GoogleAd from "../GoogleAds/GoogleAds";
 import { useQuery } from "@tanstack/react-query";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { EyeNewCreate } from "../../../services/EyeClientServer";
 
 function Tintuc(props) {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,6 +21,10 @@ function Tintuc(props) {
       setIsVisible(true);
     }
   }, [news]);
+
+  const handleInc = async (idNew) => {
+    await EyeNewCreate(idNew);
+  };
 
   return (
     <>
@@ -44,7 +49,10 @@ function Tintuc(props) {
                 <p>{item?.authorId?.fullName}</p>
                 <p>{moment(item.createdAt).format("DD/MM/YYYY")}</p>
               </div>
-              <div className="btn btn-primary">
+              <div
+                className="btn btn-primary"
+                onClick={() => handleInc(item._id)}
+              >
                 <Link to={`/tintuc/${item.slug}`}>Xem thêm</Link>
               </div>
             </div>

@@ -229,6 +229,7 @@ function TintucRead(props) {
                     "DD/MM/YYYY - HH:mm:ss"
                   )}
                 </p>
+                <p>Đã xem: {currentNews?.eye_watch}</p>
               </div>
             </div>
             <div className="show_content">

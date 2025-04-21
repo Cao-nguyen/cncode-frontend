@@ -306,7 +306,10 @@ function Show() {
                       <div className="info-item-bot">
                         <h3>{item?.authorId?.fullName}</h3>
                         <p>
-                          {moment(item?.createdAt).format("DD/MM/YYY - HH:mm")}
+                          {moment(item?.createdAt).format("DD/MM/YYYY - HH:mm")}
+                          <span className="mx-3">
+                            Đã xem: {item?.eye_watch}
+                          </span>
                         </p>
                       </div>
                     </div>
