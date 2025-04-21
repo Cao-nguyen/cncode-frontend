@@ -215,7 +215,10 @@ function Home(props) {
                   }
                 />
               </div>
-              <progress value={streak} max="360"></progress>
+              <progress
+                value={countT?.filter((b) => b._id === id)[0].streak}
+                max="360"
+              ></progress>
               <div className="content-item">
                 <p>360</p>
                 <img src={streakImg} alt="" />
