@@ -15,7 +15,7 @@ import web1 from "../../../assets/Khac/giftwo.gif";
 import web2 from "../../../assets/Khac/gifthree.gif";
 import web3 from "../../../assets/Khac/gifone.gif";
 import { SettingsAdminBannerRead } from "../../../services/SettingsAdminServer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Slider from "react-slick";
 import socket from "../../Service/socket";
@@ -104,7 +104,6 @@ function Home(props) {
   }, []);
 
   const id = useSelector((state) => state.user.account.id);
-  const streak = useSelector((state) => state.user.account.streak);
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -206,7 +205,7 @@ function Home(props) {
             <p>Chuỗi học tập</p>
             <div className="content">
               <div className="content-item">
-                <p>{countT?.filter((b) => b._id === id)[0].streak}</p>
+                <p>{countT?.filter((b) => b._id === id)[0]?.streak}</p>
                 <img
                   src={streakImg}
                   alt=""
@@ -216,7 +215,7 @@ function Home(props) {
                 />
               </div>
               <progress
-                value={countT?.filter((b) => b._id === id)[0].streak}
+                value={countT?.filter((b) => b._id === id)[0]?.streak}
                 max="360"
               ></progress>
               <div className="content-item">
