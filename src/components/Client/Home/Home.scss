@@ -439,4 +439,12 @@
       grid-template-columns: 100%;
     }
   }
+
+  .HomeEvent {
+    grid-template-columns: 100%;
+
+    .streak {
+      margin-bottom: 20px;
+    }
+  }
 }

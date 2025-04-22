@@ -201,35 +201,42 @@ function Home(props) {
 
       <div className="container" data-aos="zoom-in">
         <div className="HomeEvent">
-          <div className="streak">
-            <p>Chuỗi học tập</p>
-            <div className="content">
-              <div className="content-item">
-                <p>{countT?.filter((b) => b._id === id)[0]?.streak}</p>
-                <img
-                  src={streakImg}
-                  alt=""
-                  style={
-                    checkUserId ? undefined : { filter: "grayscale(100%)" }
-                  }
-                />
+          {id ? (
+            <div className="streak">
+              <p>Chuỗi học tập</p>
+              <div className="content">
+                <div className="content-item">
+                  <p>{countT?.filter((b) => b._id === id)[0]?.streak}</p>
+                  <img
+                    src={streakImg}
+                    alt=""
+                    style={
+                      checkUserId ? undefined : { filter: "grayscale(100%)" }
+                    }
+                  />
+                </div>
+                <progress
+                  value={countT?.filter((b) => b._id === id)[0]?.streak}
+                  max="360"
+                ></progress>
+                <div className="content-item">
+                  <p>360</p>
+                  <img src={streakImg} alt="" />
+                </div>
               </div>
-              <progress
-                value={countT?.filter((b) => b._id === id)[0]?.streak}
-                max="360"
-              ></progress>
-              <div className="content-item">
-                <p>360</p>
-                <img src={streakImg} alt="" />
-              </div>
+              <p style={{ fontWeight: "normal", marginTop: "20px" }}>
+                Khi đạt đến cột mốc 360 chuỗi bạn sẽ nhận được 1.000 xu
+              </p>
+              <p style={{ fontWeight: "normal" }}>
+                Chuỗi của bạn sẽ trở về 0 nếu bạn quên điểm danh một ngày
+              </p>
             </div>
-            <p style={{ fontWeight: "normal", marginTop: "20px" }}>
-              Khi đạt đến cột mốc 360 chuỗi bạn sẽ nhận được 1.000 xu
-            </p>
-            <p style={{ fontWeight: "normal" }}>
-              Chuỗi của bạn sẽ trở về 0 nếu bạn quên điểm danh một ngày
-            </p>
-          </div>
+          ) : (
+            <div className="streak">
+              <p>Chuỗi học tập</p>
+              <p>Bạn cần đăng nhập để có thể sử dụng tính năng</p>
+            </div>
+          )}
           <div className="coins">
             <div className="content">
               {currentPoint?.map((item) => (
@@ -240,8 +247,14 @@ function Home(props) {
               {checkUserId ? (
                 <p>Bạn đã điểm danh trong ngày hôm nay rồi!</p>
               ) : (
-                <div className="btn btn-primary" onClick={handleUserPoint}>
-                  Điểm danh
+                <div>
+                  {id ? (
+                    <div className="btn btn-primary" onClick={handleUserPoint}>
+                      Điểm danh
+                    </div>
+                  ) : (
+                    <div className="btn btn-secondary">Điểm danh</div>
+                  )}
                 </div>
               )}
             </div>
