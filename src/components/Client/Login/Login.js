@@ -56,7 +56,7 @@ function Login({ toggleLogin }) {
             className={show === "forgot" ? "active" : ""}
             onClick={() => setShow("forgot")}
           >
-            Quên mật khẩu
+            Mật khẩu
           </p>
         </header>
 
