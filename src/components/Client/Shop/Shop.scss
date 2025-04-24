@@ -189,6 +189,33 @@
   }
 }
 
+.dark-mode {
+  .shop {
+    .product {
+      .product-item {
+        background-color: var(--dark-mode-ba);
+        box-shadow: var(--box-shadow-dark);
+      }
+    }
+
+    .overplay {
+      .pay {
+        background-color: var(--dark-mode-ba);
+
+        .info {
+          .info-item {
+            div.p {
+              div {
+                color: var(--mau-trang);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1190px) {
   .shop {
     width: 100%;
