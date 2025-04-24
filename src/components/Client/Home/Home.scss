@@ -449,6 +449,11 @@
 
     .streak {
       margin-bottom: 20px;
+
+      progress {
+        width: 65%;
+        height: 20px;
+      }
     }
   }
 }
