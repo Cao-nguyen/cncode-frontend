@@ -1,167 +1,87 @@
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+.profile {
+  padding: 100px 60px;
+  display: grid;
+  grid-template-columns: 30% 69%;
+  justify-content: space-between;
 
-.html-profile {
-  background-color: var(--xam-nhat-ba);
-  width: 100%;
-  height: 100%;
-
-  .background-profile {
-    display: flex;
-    justify-content: center;
+  .profile-left {
     width: 100%;
-    padding-top: 1%;
+    border-radius: 10px;
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
 
-    img {
-      width: 98%;
-      height: 500px;
-      border-radius: 10px;
-    }
+    .avatar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
 
-    p {
-      position: fixed;
-      z-index: 10;
-      top: 30px;
-      left: 30px;
-      font-size: 20px;
-      cursor: pointer;
-
-      i {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  .profile {
-    display: flex;
-    justify-content: center;
-    transform: translateY(-100px);
-
-    .profile-main {
-      padding: 10px 100px;
-      width: 100%;
-      box-shadow: var(--box-shadow);
-      background-color: var(--mau-trang);
-
-      .infor-profile {
-        display: flex;
-        img {
-          padding: 5px;
-          background-color: var(--mau-trang);
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          margin-top: -50px;
-        }
-
-        .infor-item {
-          width: 100%;
-          h4 {
-            margin: 20px 0px 0px 50px;
-            font-size: 30px;
-          }
-
-          .infor-item-action {
-            margin: 10px 50px;
-            display: flex;
-            justify-content: space-between;
-
-            .btn {
-              height: 45px;
-
-              i {
-                margin-right: 10px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .body-profile {
-    display: flex;
-    justify-content: space-between;
-    margin: -70px 100px 0px 100px;
-
-    .body-profile-right {
-      width: 30%;
-      background-color: var(--mau-trang);
-      border-radius: 10px;
-      box-shadow: var(--box-shadow);
-      margin-bottom: 100px;
-      padding: 20px;
-
-      p {
-        img {
-          margin-left: 5px;
-          width: 25px;
-          height: 25px;
-        }
-      }
-    }
-
-    .body-profile-left {
-      width: 68%;
-      margin-bottom: 100px;
-
-      .body-profile-left-top {
-        padding: 20px;
-        background-color: var(--mau-trang);
-        border-radius: 10px;
-        box-shadow: var(--box-shadow);
-
-        .post {
-          display: grid;
-          justify-content: space-between;
-          grid-template-columns: 24% 24% 24% 24%;
-
-          .post-item {
-            margin-top: 10px;
-
-            img {
-              width: 100%;
-              height: 100%;
-            }
-          }
-        }
+      img {
+        width: 180px;
+        border: solid 5px var(--xanh-login);
+        border-radius: 50%;
       }
 
-      .body-profile-left-bot {
+      h3 {
         margin-top: 20px;
-        padding: 20px;
-        background-color: var(--mau-trang);
-        border-radius: 10px;
-        box-shadow: var(--box-shadow);
+      }
+    }
 
-        h4 {
-          margin-bottom: 20px;
+    .thongtin {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .streak {
+        display: flex;
+        margin-right: 30%;
+
+        img {
+          width: 30px;
+          height: 30px;
         }
 
-        .newspost {
-          margin-bottom: 30px;
-          p.time {
-            background-color: var(--xam-nhat-ba);
-            width: 200px;
-            border-radius: 5px;
-            text-align: center;
-            padding: 5px;
-          }
+        p {
+          font-weight: bold;
+          padding-right: 5%;
+          margin-top: 2px;
+        }
+      }
 
-          a {
-            text-decoration: none;
-            h5 {
-              font-size: 20px;
-            }
+      .coins {
+        display: flex;
 
-            p {
-              color: var(--mau-den);
-              text-align: justify;
-            }
-          }
+        img {
+          width: 30px;
+          height: 30px;
+        }
+
+        p {
+          font-weight: bold;
+          padding-right: 5%;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .infor {
+      h5 {
+        margin-top: 10px;
+        text-transform: uppercase;
+      }
+
+      .infor-item {
+        display: flex;
+
+        i {
+          font-size: 20px;
+          margin-right: 10px;
+        }
+
+        p {
+          font-size: 18px;
+          transform: translateY(-2px);
         }
       }
     }

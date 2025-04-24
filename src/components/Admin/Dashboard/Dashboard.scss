@@ -1,0 +1,25 @@
+.box {
+  margin-top: 20px;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 32% 32% 32%;
+
+  .box-item {
+    margin-bottom: 30px;
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    border-radius: 10px;
+
+    h3 {
+      font-size: 25px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 50px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}

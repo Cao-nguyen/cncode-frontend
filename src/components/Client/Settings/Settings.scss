@@ -1,6 +1,7 @@
 .settings {
   width: 100%;
   height: 100vh;
+  overflow: hidden;
   background: linear-gradient(
     135deg,
     #fde7e3,
@@ -253,6 +254,29 @@
           height: 200px;
           object-fit: cover;
           border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: "1190px") {
+  .settings {
+    height: 100%;
+    grid-template-columns: 100%;
+
+    .settings-right {
+      height: 100%;
+      overflow: hidden;
+      margin-bottom: 40px;
+
+      .infor {
+        .table {
+          .table-item {
+            &:hover {
+              background-color: var(--xam-nhat-nhat);
+            }
+          }
         }
       }
     }

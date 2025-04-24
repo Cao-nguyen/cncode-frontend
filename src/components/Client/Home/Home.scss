@@ -56,7 +56,21 @@
 
       progress {
         width: 65%;
-        height: 20px;
+        height: 15px;
+        border-radius: 10px;
+        background-color: #eee;
+        overflow: hidden;
+        appearance: none;
+
+        &::-webkit-progress-bar {
+          background-color: #eee;
+          border-radius: 10px;
+        }
+
+        &::-webkit-progress-value {
+          background-color: var(--xanh-login);
+          border-radius: 10px;
+        }
       }
 
       .content-item {
@@ -453,7 +467,7 @@
       .content {
         progress {
           width: 50%;
-          height: 20px;
+          height: 15px;
         }
       }
     }

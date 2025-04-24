@@ -28,7 +28,6 @@ import PageTransitionWrapper from "../components/Service/Common";
 export const validateRoutes = [
   "/me/post",
   "/me/settings",
-  "/p/:username",
   "/shop",
   "/chatwithnguyen",
   "/me/transaction",
@@ -50,6 +49,7 @@ export const clientRoutes = [
   "/me/blog",
   "/hoidap",
   "/me/loveblog",
+  "/p/:username",
 ];
 
 const AppRoutes = () => {
