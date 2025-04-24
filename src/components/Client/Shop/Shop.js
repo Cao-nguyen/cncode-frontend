@@ -12,9 +12,11 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import socket from "../../Service/socket";
+import errorImg from "../../../assets/Khac/errorImg.gif";
 
 function Shop() {
   const id = useSelector((state) => state.user.account.id);
+
   const navigate = useNavigate();
 
   const [shop, setShop] = useState();
@@ -36,6 +38,10 @@ function Shop() {
     getData();
 
     const getUser = async () => {
+      if (!id) {
+        return;
+      }
+
       const dataUser = await ShopUserClientRead(id);
       if (dataUser && dataUser.EC === 0) {
         setUser(dataUser.DT);
@@ -105,82 +111,91 @@ function Shop() {
         </Helmet>
       </HelmetProvider>
 
-      <div className="shop">
-        <div
-          className="btn-back"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          Trở về
-        </div>
-        <header>
-          <div className="p">{user?.coins}</div>
-          <img src={xu} alt=""></img>
-        </header>
+      {id ? (
+        <div className="shop">
+          <div
+            className="btn-back"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Trở về
+          </div>
+          <header>
+            <div className="p">{user?.coins}</div>
+            <img src={xu} alt=""></img>
+          </header>
 
-        <div className="shop-banner">
-          <img src={banner} alt=""></img>
-        </div>
+          <div className="shop-banner">
+            <img src={banner} alt=""></img>
+          </div>
 
-        <h3 className="product-text">SẢN PHẨM TRƯNG BÀY</h3>
-        <div className="product">
-          {shop?.map((item) => (
-            <div className="product-item" key={item._id}>
-              <img src={item.img} alt="" />
-              <h3>{item.name}</h3>
-              <div className="action">
-                <div className="button">
-                  <div className="p">{formatNumber(item.price)}</div>
-                  <img src={xu} alt="" />
-                </div>
-                <div className="button" onClick={() => handlePay(item._id)}>
-                  Mua ngay
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        {show === true && (
-          <div className="overplay">
-            <div className="pay">
-              <i className="fa-solid fa-xmark" onClick={handlePay}></i>
-              <h4>Mua vật phẩm</h4>
-              <div className="info">
-                <img src={choose.img} alt="" />
-                <div className="info-item">
-                  <h5>{choose.name}</h5>
-                  <div className="p">
-                    <div>{formatNumber(choose.price)}</div>
-                    <div>
-                      <img src={xu} alt="" />
-                    </div>
+          <h3 className="product-text">SẢN PHẨM TRƯNG BÀY</h3>
+          <div className="product">
+            {shop?.map((item) => (
+              <div className="product-item" key={item._id}>
+                <img src={item.img} alt="" />
+                <h3>{item.name}</h3>
+                <div className="action">
+                  <div className="button">
+                    <div className="p">{formatNumber(item.price)}</div>
+                    <img src={xu} alt="" />
+                  </div>
+                  <div className="button" onClick={() => handlePay(item._id)}>
+                    Mua ngay
                   </div>
                 </div>
               </div>
-              <input
-                className="form-control"
-                placeholder="Số lượng"
-                type="number"
-                value={count}
-                onChange={(e) => {
-                  const newCount = Number(e.target.value);
-                  setCount(newCount);
-                  setTong(newCount * choose.price);
-                }}
-              ></input>
-              <input
-                className="form-control mt-3"
-                disabled
-                value={formatNumber(tong)}
-              ></input>
-              <div className="btn btn-primary mt-3" onClick={handleSubmit}>
-                Thanh toán
+            ))}
+          </div>
+          {show === true && (
+            <div className="overplay">
+              <div className="pay">
+                <i className="fa-solid fa-xmark" onClick={handlePay}></i>
+                <h4>Mua vật phẩm</h4>
+                <div className="info">
+                  <img src={choose.img} alt="" />
+                  <div className="info-item">
+                    <h5>{choose.name}</h5>
+                    <div className="p">
+                      <div>{formatNumber(choose.price)}</div>
+                      <div>
+                        <img src={xu} alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  className="form-control"
+                  placeholder="Số lượng"
+                  type="number"
+                  value={count}
+                  onChange={(e) => {
+                    const newCount = Number(e.target.value);
+                    setCount(newCount);
+                    setTong(newCount * choose.price);
+                  }}
+                ></input>
+                <input
+                  className="form-control mt-3"
+                  disabled
+                  value={formatNumber(tong)}
+                ></input>
+                <div className="btn btn-primary mt-3" onClick={handleSubmit}>
+                  Thanh toán
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      ) : (
+        <>
+          <h3 className="text-center mt-5">
+            <h1>Bạn cần đăng nhập để có thể mua sắm</h1>
+            <img style={{ width: "70%" }} src={errorImg} alt=""></img>
+          </h3>
+        </>
+      )}
     </>
   );
 }

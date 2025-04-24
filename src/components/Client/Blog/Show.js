@@ -117,11 +117,21 @@ function Show() {
 
   // Thả like
   const handleLike = async () => {
+    if (!id) {
+      toast.error("Bạn cần đăng nhập để thả tim!");
+      return;
+    }
+
     await BlogClientLike(id, idPost);
   };
 
   // Yêu thích
   const handleF = async () => {
+    if (!id) {
+      toast.error("Bạn cần đăng nhập để thêm blog vào yêu thích!");
+      return;
+    }
+
     await BlogClientF(id, idPost);
   };
 

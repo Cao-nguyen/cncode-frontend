@@ -106,6 +106,11 @@ function TintucRead(props) {
 
   const idPost = currentNews?._id;
   const handleLike = async () => {
+    if (!id) {
+      toast.error("Bạn cần đăng nhập để thả tim!");
+      return;
+    }
+
     await NewsLike(id, idPost);
   };
 
