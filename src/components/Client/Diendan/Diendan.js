@@ -20,6 +20,7 @@ function Diendan(props) {
   const userId = useSelector((state) => state.user.account.id);
 
   const divRef = useRef(null);
+  const laptopRef = useRef(null);
 
   const [tab, setTab] = useState("");
   const [showOn, setShowOn] = useState("");
@@ -95,6 +96,12 @@ function Diendan(props) {
   useEffect(() => {
     if (divRef.current) {
       divRef.current.scrollTop = divRef.current.scrollHeight;
+    }
+  }, [newChange]);
+
+  useEffect(() => {
+    if (laptopRef.current) {
+      laptopRef.current.scrollTop = laptopRef.current.scrollHeight;
     }
   }, [newChange]);
 
@@ -198,7 +205,7 @@ function Diendan(props) {
                         </div>
                       </div>
                     </header>
-                    <div className="forum-body" ref={divRef}>
+                    <div className="forum-body" ref={laptopRef}>
                       {item?.chat?.map((item) => (
                         <div className="forum-body-item">
                           <div className="forum-body-item-info">
