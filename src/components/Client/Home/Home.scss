@@ -55,7 +55,7 @@
       justify-content: space-between;
 
       progress {
-        width: 70%;
+        width: 65%;
         height: 20px;
       }
 
@@ -89,6 +89,10 @@
     .action {
       margin-top: 20px;
       text-align: center;
+
+      p {
+        font-size: 16px;
+      }
 
       .btn {
         font-weight: bold;
