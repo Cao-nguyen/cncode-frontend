@@ -35,13 +35,6 @@ function Settings(props) {
         </div>
 
         <div className="tab">
-          <h3>Phân quyền quản trị</h3>
-          <NavLink to="/admin/settings/role">
-            <i className="fa-solid fa-list-check"></i>
-          </NavLink>
-        </div>
-
-        <div className="tab">
           <h3>Bách hoá vật phẩm</h3>
           <NavLink to="/admin/settings/shop">
             <i className="fa-solid fa-list-check"></i>
