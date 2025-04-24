@@ -2,7 +2,7 @@
 import { Link, BrowserRouter as Router, useLocation } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Aos from "aos";
 // Thêm các trang hỗ trợ giao diện
 import Header from "./components/Client/Header/Header";
@@ -23,6 +23,7 @@ import { WebAdminRead } from "./services/WebAdminServer";
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
 // Các file css
+import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +34,8 @@ import "aos/dist/aos.css";
 import "./App.scss";
 
 function App() {
-  // Xử lí route bên admin và client
+  const userId = useSelector((state) => state.user.account.id);
+
   const location = useLocation();
   const isClientRoutes =
     /^\/[^/]+$/.test(location.pathname) &&
@@ -71,6 +73,16 @@ function App() {
   const [open, setOpen] = useState(true);
   const toggleOpen = () => {
     setOpen(!open);
+  };
+
+  const [tb, setTb] = useState(false);
+  const toggleTb = () => {
+    if (!userId) {
+      toast.error("Bạn chưa có thể nhận thông báo, đăng nhập ngay!");
+      return;
+    }
+
+    setTb(!tb);
   };
 
   // Gọi các API cần sử dụng khi mở Home
@@ -153,6 +165,7 @@ function App() {
                   toggleLogin={toggleLogin}
                   isDarkMode={isDarkMode}
                   toggleTheme={toggleTheme}
+                  toggleTb={toggleTb}
                 />
               )}
 
@@ -198,6 +211,73 @@ function App() {
 
               {/* App content */}
               <div className="app-container">
+                {tb && (
+                  <div className="thongbao">
+                    <div className="thongbaotop">
+                      <h4>Thông báo</h4>
+                      <p>Đánh dấu đã đọc</p>
+                    </div>
+                    <div className="thongbaobot">
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                      <p>Chưa có thông báo nào hết</p>
+                    </div>
+                  </div>
+                )}
+
                 <AppRoutes />
               </div>
 

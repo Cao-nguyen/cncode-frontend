@@ -29,6 +29,22 @@
           font-size: 17px;
           font-weight: bold;
           color: var(--mau-den);
+
+          i.fa-solid.fa-bell {
+            position: relative;
+          }
+
+          .bell {
+            position: absolute;
+            z-index: 1000;
+            font-size: 10px;
+            background-color: var(--mau-do);
+            color: var(--mau-trang);
+            border-radius: 50px;
+            padding: 0px 5px;
+            top: 15px;
+            right: 160px;
+          }
         }
 
         .active {
@@ -129,6 +145,23 @@
           margin-right: 20px;
           font-size: 18px;
           cursor: pointer;
+        }
+
+        i.fa-solid.fa-bell {
+          position: relative;
+        }
+
+        .bell {
+          position: absolute;
+          z-index: 1000;
+          font-size: 10px;
+          background-color: var(--mau-do);
+          color: var(--mau-trang);
+          border-radius: 50px;
+          padding: 0px 5px;
+          top: 5px;
+          right: 150px;
+          font-weight: bold;
         }
 
         a {

@@ -379,6 +379,44 @@ body {
 .client-layout {
   height: 100%;
 
+  .app-container {
+    .thongbao {
+      position: fixed;
+      z-index: 1000;
+      background-color: var(--mau-trang);
+      box-shadow: var(--box-shadow);
+      border-radius: 10px;
+      top: 7%;
+      padding: 15px;
+      right: 10%;
+      width: 350px;
+      max-height: 500px;
+
+      .thongbaotop {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+          cursor: pointer;
+          font-size: 16px;
+          padding: 5px 10px;
+
+          &:hover {
+            background-color: var(--xanh-login);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--mau-trang);
+          }
+        }
+      }
+
+      .thongbaobot {
+        max-height: 420px;
+        overflow: auto;
+      }
+    }
+  }
+
   .icon-link {
     position: fixed;
     right: 20px;
