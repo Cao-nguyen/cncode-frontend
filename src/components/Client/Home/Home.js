@@ -108,6 +108,7 @@ function Home(props) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState();
+  const [prevent, setPrevent] = useState();
 
   const handlePush = async () => {
     if (!rating || !comment) {
@@ -126,6 +127,7 @@ function Home(props) {
   };
 
   const handleUserPoint = async () => {
+    setPrevent(true);
     await UserPointHome(id);
   };
 
@@ -249,7 +251,10 @@ function Home(props) {
               ) : (
                 <div>
                   {id ? (
-                    <div className="btn btn-primary" onClick={handleUserPoint}>
+                    <div
+                      className="btn btn-primary"
+                      onClick={!prevent ? handleUserPoint : undefined}
+                    >
                       Điểm danh
                     </div>
                   ) : (
