@@ -38,6 +38,11 @@ function Diendan(props) {
   };
 
   const handleShow = (id) => {
+    if (!userId) {
+      toast.error("Bạn cần đăng nhập để có thể tham gia vào diễn đàn!");
+      return;
+    }
+
     const newForum = forum?.filter((f) => f._id === id)[0];
     const members = newForum?.member?.some((m) => m.member_id === userId);
 
