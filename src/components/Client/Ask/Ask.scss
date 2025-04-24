@@ -131,3 +131,54 @@
     }
   }
 }
+
+.dark-mode {
+  .answer {
+    .answer-item {
+      background-color: var(--dark-mode-nen);
+      box-shadow: var(--box-shadow-dark);
+    }
+  }
+}
+
+@media screen and (max-width: "1190px") {
+  .answer {
+    .answer-item {
+      .answer-main {
+        .ask-content {
+          .fullName {
+            display: flex;
+
+            p {
+              font-size: 16px;
+              font-weight: bold;
+              margin-left: 10px;
+            }
+
+            p.role {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .reply-item {
+        .answer-main {
+          .ask-content {
+            .fullName {
+              display: flex;
+
+              p {
+                font-size: 16px;
+              }
+
+              p.role {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

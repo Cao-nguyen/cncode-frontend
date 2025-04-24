@@ -306,6 +306,47 @@
   }
 }
 
+.dark-mode {
+  .chatNguyen {
+    .chat-item {
+      .body-admin-chat {
+        .body-admin-left {
+          border-right: solid 1px var(--mau-trang);
+          background-color: var(--dark-mode-nen);
+
+          .avatar {
+            &:not(.active):hover {
+              background-color: var(--dark-mode-ba);
+            }
+          }
+
+          .active {
+            background-color: var(--dark-mode-hai);
+          }
+        }
+
+        .body-admin-right {
+          background-color: var(--dark-mode-nen);
+
+          .admin-info-right {
+            header {
+              background-color: var(--dark-mode-nen);
+            }
+
+            .body-chat {
+              background-color: var(--dark-mode-nen);
+
+              .form-group {
+                border-top: 1px solid var(--mau-trang);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1190px) {
   .chatNguyen {
     .chat-item {
