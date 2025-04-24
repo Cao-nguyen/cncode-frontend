@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Course.scss";
 
 function Course() {
+  const [showAdd, setShowAdd] = useState("");
+
   return (
     <div className="admin">
-      <h1>Cao Nguyên</h1>
+      <div className="action">
+        <div className="btn btn-primary" onClick={() => setShowAdd("create")}>
+          <i className="fa-solid fa-plus"></i> Thêm khoá học
+        </div>
+      </div>
+
+      {showAdd === "create" && (
+        <div className="form-choose">
+          <h3>Tạo khoá học</h3>
+        </div>
+      )}
     </div>
   );
 }
