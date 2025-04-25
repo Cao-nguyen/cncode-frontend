@@ -182,7 +182,16 @@ const SettingsClientMiddleware = () => {
   const handleShowFullName = () => setShow("fullName");
   const handleFullName = async () => {
     if (!fullName) {
-      toast.error("Không được bỏ trống!");
+      toast.error("Vui lòng nhập họ và tên");
+      return false;
+    }
+
+    let fullNameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/u;
+    if (!fullNameRegex.test(fullName) || !fullName.includes(" ")) {
+      toast.error(
+        "Họ và tên không được chứa ký tự đặc biệt và phải có khoảng trắng"
+      );
+      return false;
     }
 
     const data = await UserClientEditFullName(id, fullName);
@@ -199,7 +208,21 @@ const SettingsClientMiddleware = () => {
   const handleShowUsername = () => setShow("username");
   const handleUsername = async () => {
     if (!username) {
-      toast.error("Không được bỏ trống!");
+      toast.error("Vui lòng nhập tên người dùng");
+      return false;
+    }
+
+    let usernameRegex = /^[a-zA-Z0-9_]+$/;
+    if (
+      username.startsWith("/") ||
+      !usernameRegex.test(username) ||
+      /\s/.test(username) ||
+      /[À-ỹà-ỹ]/.test(username)
+    ) {
+      toast.error(
+        "Tên người dùng không hợp lệ: không được bắt đầu bằng '/', không chứa ký tự đặc biệt, khoảng trắng hoặc dấu tiếng Việt"
+      );
+      return false;
     }
 
     const data = await UserClientEditUsername(id, username);
@@ -217,6 +240,7 @@ const SettingsClientMiddleware = () => {
   const handleInfo = async () => {
     if (!info) {
       toast.error("Không được bỏ trống!");
+      return;
     }
 
     const data = await UserClientEditInfo(id, info);
@@ -234,6 +258,7 @@ const SettingsClientMiddleware = () => {
   const handleBirthday = async () => {
     if (!day || !month || !year) {
       toast.error("Không được bỏ trống!");
+      return;
     }
 
     const data = await UserClientEditBirthday(id, day, month, year);
@@ -251,6 +276,7 @@ const SettingsClientMiddleware = () => {
   const handleTinh = async () => {
     if (!tinh) {
       toast.error("Không được bỏ trống!");
+      return;
     }
 
     const data = await UserClientEditTinh(id, tinh);
@@ -268,6 +294,7 @@ const SettingsClientMiddleware = () => {
   const handleSchool = async () => {
     if (!school) {
       toast.error("Không được bỏ trống!");
+      return;
     }
 
     const data = await UserClientEditSchool(id, school);
@@ -285,6 +312,7 @@ const SettingsClientMiddleware = () => {
   const handleAvatar = async () => {
     if (!avatar) {
       toast.error("Không được bỏ trống!");
+      return;
     }
 
     const data = await UserClientEditAvatar(id, avatar);

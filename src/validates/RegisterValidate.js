@@ -15,6 +15,14 @@ export const RegisterValidate = (
     return false;
   }
 
+  let fullNameRegex = /^[a-zA-ZÀ-Ỹà-ỹ\s]+$/u;
+  if (!fullNameRegex.test(fullName) || !fullName.includes(" ")) {
+    toast.error(
+      "Họ và tên không được chứa ký tự đặc biệt và phải có khoảng trắng"
+    );
+    return false;
+  }
+
   if (!email) {
     toast.error("Vui lòng nhập email");
     return false;
@@ -28,6 +36,19 @@ export const RegisterValidate = (
 
   if (!username) {
     toast.error("Vui lòng nhập tên người dùng");
+    return false;
+  }
+
+  let usernameRegex = /^[a-zA-Z0-9_]+$/;
+  if (
+    username.startsWith("/") ||
+    !usernameRegex.test(username) ||
+    /\s/.test(username) ||
+    /[À-ỹà-ỹ]/.test(username)
+  ) {
+    toast.error(
+      "Tên người dùng không hợp lệ: không được bắt đầu bằng '/', không chứa ký tự đặc biệt, khoảng trắng hoặc dấu tiếng Việt"
+    );
     return false;
   }
 
