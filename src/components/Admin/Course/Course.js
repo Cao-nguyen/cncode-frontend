@@ -55,8 +55,8 @@ function Course() {
       .toLowerCase()
       .trim()
       .replace(/\s+/g, "-")
-      .replace(/[^\w\-]+/g, "")
-      .replace(/\-\-+/g, "-");
+      .replace(/[^\w-]+/g, "")
+      .replace(/--+/g, "-");
 
     setSlug(slug);
   }, [title]);
