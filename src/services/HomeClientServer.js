@@ -1,6 +1,14 @@
 import axios from "axios";
 
 // [GET] Blog
+export const ThongBaoHome = async () => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/tb/read`
+  );
+  return response.data;
+};
+
+// [GET] Blog
 export const BlogReadHome = async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_BACKEND}/api/v1/client/blogHome/read`

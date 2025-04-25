@@ -32,6 +32,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "aos/dist/aos.css";
 import "./App.scss";
+import { ThongBaoHome } from "./services/HomeClientServer";
+import socket from "./components/Service/socket";
 
 function App() {
   const userId = useSelector((state) => state.user.account.id);
@@ -114,6 +116,31 @@ function App() {
     getData();
   }, []);
 
+  // Thông báo
+  const [thongbaoData, setThongbaoData] = useState();
+  const getData = async () => {
+    const data = await ThongBaoHome();
+
+    if (data && data.EC === 0) {
+      setThongbaoData(data.DT);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+
+    socket.on("pushLike", () => {
+      getData();
+    });
+
+    return () => {
+      socket.off("pushLike");
+    };
+  }, []);
+
+  const newTb = thongbaoData?.filter((tb) => tb?.user_two?._id === userId);
+  console.log(newTb);
+
   return (
     <div>
       {isCheck ? (
@@ -166,6 +193,7 @@ function App() {
                   isDarkMode={isDarkMode}
                   toggleTheme={toggleTheme}
                   toggleTb={toggleTb}
+                  data={newTb}
                 />
               )}
 
@@ -218,62 +246,26 @@ function App() {
                       <p>Đánh dấu đã đọc</p>
                     </div>
                     <div className="thongbaobot">
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
-                      <p>Chưa có thông báo nào hết</p>
+                      {newTb?.map((item) => (
+                        <div
+                          className={
+                            item?.isRead
+                              ? "thongbaobot-item"
+                              : "thongbaobot-item active"
+                          }
+                        >
+                          <img src={item?.user_one?.avatar} alt="" />
+                          <div className="thongbao-main">
+                            <span>
+                              <span className="user">
+                                {item?.user_one?.fullName}
+                              </span>{" "}
+                              {item?.content}{" "}
+                              <span className="user">{item?.others}</span>
+                            </span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}

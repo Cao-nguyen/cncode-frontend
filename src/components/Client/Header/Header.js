@@ -6,7 +6,7 @@ import logo from "../../../assets/logo.png";
 import UseDropdown from "./Dropdown";
 import "./Header.scss";
 
-function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb }) {
+function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb, data }) {
   const tokenUser = useSelector((state) => state.user.account.tokenUser);
 
   return (
@@ -109,7 +109,11 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb }) {
             </Nav.Item>
             <Nav.Item className="nav-links">
               <Nav.Link>
-                <i className="fa-solid fa-bell" onClick={toggleTb}></i>
+                <i className="fa-solid fa-bell" onClick={toggleTb}>
+                  <p className="bell">
+                    {data?.filter((d) => d.isRead === false).length}
+                  </p>
+                </i>
               </Nav.Link>
             </Nav.Item>
             {tokenUser === "" ? (
@@ -144,7 +148,11 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb }) {
               className={`fa-solid ${isDarkMode ? "fa-sun" : "fa-moon"}`}
               onClick={toggleTheme}
             ></i>
-            <i className="fa-solid fa-bell" onClick={toggleTb}></i>
+            <i className="fa-solid fa-bell" onClick={toggleTb}>
+              <p className="bell">
+                {data?.filter((d) => d.isRead === false).length}
+              </p>
+            </i>
 
             {tokenUser === "" ? (
               <NavLink clasName="links" onClick={toggleLogin}>

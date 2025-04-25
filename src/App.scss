@@ -413,6 +413,44 @@ body {
       .thongbaobot {
         max-height: 420px;
         overflow: auto;
+
+        .thongbaobot-item {
+          display: flex;
+          flex-direction: row;
+          padding: 10px;
+          cursor: default;
+          margin-bottom: 10px;
+
+          &:not(.active):hover {
+            background-color: var(--xam-nhat-nam);
+            padding: 10px;
+            border-radius: 5px;
+          }
+
+          img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            margin-right: 10px;
+          }
+
+          span {
+            font-size: 16px;
+
+            &.user {
+              font-weight: bold;
+            }
+          }
+        }
+
+        .active {
+          background-color: var(--xanh-login);
+          border-radius: 5px;
+
+          span {
+            color: var(--mau-trang);
+          }
+        }
       }
     }
   }

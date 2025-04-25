@@ -37,9 +37,6 @@ function Show() {
   const [currentId, setCurrentId] = useState();
   const [showReply, setShowReply] = useState();
 
-  const [helpLike, setHelpLike] = useState();
-  const [helpLove, setHelpLove] = useState();
-
   // Gọi api
   const blogData = async () => {
     const data = await BlogClientRead();
@@ -125,8 +122,6 @@ function Show() {
       return;
     }
 
-    setHelpLike(true);
-
     await BlogClientLike(id, idPost);
   };
 
@@ -136,8 +131,6 @@ function Show() {
       toast.error("Bạn cần đăng nhập để thêm blog vào yêu thích!");
       return;
     }
-
-    setHelpLove(true);
 
     await BlogClientF(id, idPost);
   };
@@ -281,11 +274,11 @@ function Show() {
                   <div className="action">
                     <div
                       className="action-item"
-                      onClick={liked && helpLike ? handleUnlike : handleLike}
+                      onClick={liked ? handleUnlike : handleLike}
                     >
                       <i
                         className={`${
-                          liked && helpLike ? "fa-solid" : "fa-regular"
+                          liked ? "fa-solid" : "fa-regular"
                         } fa-heart`}
                         style={{ color: liked ? "var(--mau-do)" : "" }}
                       ></i>
@@ -302,14 +295,14 @@ function Show() {
                   <div className="action">
                     <div
                       className="action-item"
-                      onClick={liked && helpLike ? handleUnlike : handleLike}
+                      onClick={liked ? handleUnlike : handleLike}
                     >
                       <i
                         className={`${
                           liked ? "fa-solid" : "fa-regular"
                         } fa-heart`}
                         style={{
-                          color: liked && helpLike ? "var(--mau-do)" : "",
+                          color: liked ? "var(--mau-do)" : "",
                         }}
                       ></i>
                       <p>{item?.like?.length}</p>
@@ -337,10 +330,9 @@ function Show() {
                         className={`${
                           favorite ? "fa-solid" : "fa-regular"
                         } fa-bookmark`}
-                        onClick={favorite && helpLove ? handleUnf : handleF}
+                        onClick={favorite ? handleUnf : handleF}
                         style={{
-                          color:
-                            favorite && helpLove ? "var(--mau-bookmark)" : "",
+                          color: favorite ? "var(--mau-bookmark)" : "",
                         }}
                       ></i>
                       <i
