@@ -101,7 +101,7 @@ function TintucRead(props) {
   }, [id, refetch]);
 
   useEffect(() => {
-    setLiked(currentNews?.like?.some((like) => like?.userLike?._id === id));
+    setLiked(currentNews?.like?.some((like) => like?.userLike === id));
   }, [currentNews, id]);
 
   const idPost = currentNews?._id;
