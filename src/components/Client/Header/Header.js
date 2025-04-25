@@ -110,7 +110,6 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb }) {
             <Nav.Item className="nav-links">
               <Nav.Link>
                 <i className="fa-solid fa-bell" onClick={toggleTb}></i>
-                <p className="bell">1</p>
               </Nav.Link>
             </Nav.Item>
             {tokenUser === "" ? (
@@ -146,7 +145,7 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb }) {
               onClick={toggleTheme}
             ></i>
             <i className="fa-solid fa-bell" onClick={toggleTb}></i>
-            <p className="bell">0</p>
+
             {tokenUser === "" ? (
               <NavLink clasName="links" onClick={toggleLogin}>
                 Đăng nhập
