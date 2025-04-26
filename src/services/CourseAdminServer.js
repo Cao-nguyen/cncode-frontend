@@ -39,10 +39,19 @@ export const DmAdminCreate = async (dd, name) => {
 };
 
 // [POST] Khoá học
-export const LsAdminCreate = async (dd, name) => {
+export const LsAdminCreate = async (dd, ct, name) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/api/v1/admin/ls/create`,
-    { dd, name }
+    { dd, ct, name }
+  );
+  return response.data;
+};
+
+// [POST] Khoá học
+export const VideoAdminCreate = async (dd, ct, idLs, video, quizzes) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/video/create`,
+    { dd, ct, idLs, video, quizzes }
   );
   return response.data;
 };

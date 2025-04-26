@@ -7,11 +7,13 @@ import {
   CourseAdminRead,
   DmAdminCreate,
   LsAdminCreate,
+  VideoAdminCreate,
 } from "../../../services/CourseAdminServer";
 import socket from "../../Service/socket";
 
 function Course() {
   const [showAdd, setShowAdd] = useState("");
+  const [review, setReview] = useState();
   const [showMain, setShowMain] = useState("");
 
   const [image_url, setImage_url] = useState();
@@ -27,7 +29,20 @@ function Course() {
   const [course, setCourse] = useState();
 
   const [dinhdanh, setDinhdanh] = useState();
+  const [categoryMain, setCategoryMain] = useState();
   const [nameDm, setNameDm] = useState();
+
+  const [typeLs, setTypeLs] = useState("");
+
+  const [video, setVideo] = useState();
+
+  const [quizzes, setQuizzes] = useState([
+    {
+      time: "",
+      question: "",
+      options: ["", "", "", ""], // A, B, C, D
+    },
+  ]);
 
   const handleUpload = async (file) => {
     const formData = new FormData();
@@ -83,8 +98,18 @@ function Course() {
       getData();
     });
 
+    socket.on("pushDm", () => {
+      getData();
+    });
+
+    socket.on("pushLs", () => {
+      getData();
+    });
+
     return () => {
       socket.off("pushCourse");
+      socket.off("pushDm");
+      socket.off("pushLs");
     };
   }, []);
 
@@ -156,7 +181,7 @@ function Course() {
       return;
     }
 
-    const data = await LsAdminCreate(dinhdanh, nameDm);
+    const data = await LsAdminCreate(dinhdanh, categoryMain, nameDm);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -167,7 +192,61 @@ function Course() {
     }
   };
 
+  const convertYoutubeLink = (url) => {
+    if (!url) return "";
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/;
+    const match = url.match(regex);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+    return "";
+  };
+
+  const handleQuizChange = (index, field, value) => {
+    const updatedQuizzes = [...quizzes];
+    updatedQuizzes[index][field] = value;
+    setQuizzes(updatedQuizzes);
+  };
+
+  const handleOptionChange = (index, optionIndex, value) => {
+    const updatedQuizzes = [...quizzes];
+    updatedQuizzes[index].options[optionIndex] = value;
+    setQuizzes(updatedQuizzes);
+  };
+
+  const addQuiz = () => {
+    setQuizzes([
+      ...quizzes,
+      { time: "", question: "", options: ["", "", "", ""] },
+    ]);
+  };
+
   const newCourse = course?.filter((c) => c._id === dinhdanh)[0]?.categories;
+
+  const handlePushLesson = async (idLs) => {
+    if (!video) {
+      toast.error("Bắt buộc phải có một link video bài học!");
+      return;
+    }
+
+    const data = VideoAdminCreate(dinhdanh, categoryMain, idLs, video, quizzes);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setTypeLs("");
+      setVideo("");
+      setQuizzes([
+        {
+          time: "",
+          question: "",
+          options: ["", "", "", ""],
+        },
+      ]);
+    } else {
+      toast.error(data.EM);
+    }
+  };
 
   return (
     <div className="admin">
@@ -290,6 +369,7 @@ function Course() {
 
       {showAdd === "addLesson" && (
         <div className="addLesson">
+          <i className="fa-solid fa-xmark" onClick={() => setShowAdd("")}></i>
           <div className="addLesson-left">
             <div className="category-main">
               <div className="category">
@@ -303,28 +383,199 @@ function Course() {
             </div>
 
             {newCourse?.map((item) => (
-              <div className="category-remain">
-                <div className="category">
-                  <i className="fa-solid fa-book-open-reader"></i>
-                  <div className="p">{item?.title}</div>
+              <>
+                <div className="category-remain">
+                  <div className="category">
+                    <i className="fa-solid fa-book-open-reader"></i>
+                    <div className="p">{item?.title}</div>
+                  </div>
+                  <i
+                    className="fa-solid fa-circle-minus"
+                    // onClick={() => setShowMain("addCategory")}
+                  ></i>
+                  <i
+                    className="fa-solid fa-circle-plus"
+                    onClick={() => {
+                      setShowMain("addCourse");
+                      setCategoryMain(item?._id);
+                    }}
+                  ></i>
                 </div>
-                <i
-                  className="fa-solid fa-circle-minus"
-                  // onClick={() => setShowMain("addCategory")}
-                ></i>
-                <i
-                  className="fa-solid fa-circle-plus"
-                  onClick={() => setShowMain("addCourse")}
-                ></i>
-              </div>
+
+                {item?.lessons?.map((item) => (
+                  <div
+                    className="category-child"
+                    onClick={() => setReview(item?._id)}
+                  >
+                    <div className="category">
+                      <i className="fa-solid fa-book-open-reader"></i>
+                      <div className="p">{item?.title}</div>
+                    </div>
+                    <i
+                      className="fa-solid fa-circle-minus"
+                      // onClick={() => setShowMain("addCategory")}
+                    ></i>
+                  </div>
+                ))}
+              </>
             ))}
           </div>
-          <div className="addLesson-right"></div>
+          <div className="addLesson-right">
+            {newCourse?.map((item) => (
+              <>
+                {item?.lessons
+                  ?.filter((i) => i?._id === review)
+                  ?.map((i) => (
+                    <div className="review">
+                      <h3>{i.title}</h3>
+                      <select
+                        className="form-control"
+                        value={typeLs}
+                        onChange={(e) => setTypeLs(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          Chọn loại bài học
+                        </option>
+                        <option value="video">Dạng video</option>
+                        <option value="text">Dạng text</option>
+                        <option value="document">Dạng tài liệu</option>
+                        <option value="quiz">Dạng bài tập</option>
+                      </select>
+
+                      {typeLs === "video" && (
+                        <div className="update-video">
+                          <input
+                            value={video}
+                            onChange={(e) => setVideo(e.target.value)}
+                            className="form-control"
+                            placeholder="Link video*"
+                          />
+
+                          {video && (
+                            <>
+                              <div style={{ marginTop: "16px" }}>
+                                <iframe
+                                  src={convertYoutubeLink(video)}
+                                  title="YouTube video"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                ></iframe>
+                              </div>
+
+                              <div
+                                className="btn btn-success"
+                                onClick={() => addQuiz()}
+                              >
+                                <i className="fa-solid fa-plus"></i> Thêm câu
+                                hỏi
+                              </div>
+
+                              {quizzes.map((quiz, index) => (
+                                <div key={index} className="add-quiz mb-4">
+                                  <input
+                                    className="form-control mb-2"
+                                    placeholder="Thời gian hiển thị"
+                                    value={quiz.time}
+                                    onChange={(e) =>
+                                      handleQuizChange(
+                                        index,
+                                        "time",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                  <input
+                                    className="form-control mb-3"
+                                    placeholder="Câu hỏi"
+                                    value={quiz.question}
+                                    onChange={(e) =>
+                                      handleQuizChange(
+                                        index,
+                                        "question",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                  <div className="d-flex justify-content-between mb-2">
+                                    <input
+                                      style={{ width: "49%" }}
+                                      className="form-control"
+                                      placeholder="A"
+                                      value={quiz.options[0]}
+                                      onChange={(e) =>
+                                        handleOptionChange(
+                                          index,
+                                          0,
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                    <input
+                                      style={{ width: "49%" }}
+                                      className="form-control"
+                                      placeholder="B"
+                                      value={quiz.options[1]}
+                                      onChange={(e) =>
+                                        handleOptionChange(
+                                          index,
+                                          1,
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="d-flex justify-content-between">
+                                    <input
+                                      style={{ width: "49%" }}
+                                      className="form-control"
+                                      placeholder="C"
+                                      value={quiz.options[2]}
+                                      onChange={(e) =>
+                                        handleOptionChange(
+                                          index,
+                                          2,
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                    <input
+                                      style={{ width: "49%" }}
+                                      className="form-control"
+                                      placeholder="D"
+                                      value={quiz.options[3]}
+                                      onChange={(e) =>
+                                        handleOptionChange(
+                                          index,
+                                          3,
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                              ))}
+
+                              <div
+                                className="btn btn-primary"
+                                onClick={() => handlePushLesson(i?._id)}
+                              >
+                                Đăng bài học
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </>
+            ))}
+          </div>
         </div>
       )}
 
       {showMain === "addCategory" && (
         <div className="over-main">
+          <i className="fa-solid fa-xmark" onClick={() => setShowMain("")}></i>
           <div className="over-form">
             <h3>Tạo danh mục</h3>
             <input
@@ -342,6 +593,7 @@ function Course() {
 
       {showMain === "addCourse" && (
         <div className="over-main">
+          <i className="fa-solid fa-xmark" onClick={() => setShowMain("")}></i>
           <div className="over-form">
             <h3>Tạo bài học</h3>
             <input
