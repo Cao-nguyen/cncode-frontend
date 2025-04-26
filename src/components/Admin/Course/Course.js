@@ -5,11 +5,15 @@ import { toast } from "react-toastify";
 import {
   CourseAdminCreate,
   CourseAdminRead,
+  DmAdminCreate,
+  LsAdminCreate,
 } from "../../../services/CourseAdminServer";
 import socket from "../../Service/socket";
 
 function Course() {
   const [showAdd, setShowAdd] = useState("");
+  const [showMain, setShowMain] = useState("");
+
   const [image_url, setImage_url] = useState();
   const [title, setTitle] = useState();
   const [slug, setSlug] = useState();
@@ -21,6 +25,9 @@ function Course() {
   const [description, setDescription] = useState();
 
   const [course, setCourse] = useState();
+
+  const [dinhdanh, setDinhdanh] = useState();
+  const [nameDm, setNameDm] = useState();
 
   const handleUpload = async (file) => {
     const formData = new FormData();
@@ -126,6 +133,42 @@ function Course() {
     }
   };
 
+  const handlePushDm = async () => {
+    if (!nameDm) {
+      toast.success("Không được để trống!");
+      return;
+    }
+
+    const data = await DmAdminCreate(dinhdanh, nameDm);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShowMain("");
+      setNameDm("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const handlePushLs = async () => {
+    if (!nameDm) {
+      toast.success("Không được để trống!");
+      return;
+    }
+
+    const data = await LsAdminCreate(dinhdanh, nameDm);
+
+    if (data && data.EC === 0) {
+      toast.success(data.EM);
+      setShowMain("");
+      setNameDm("");
+    } else {
+      toast.error(data.EM);
+    }
+  };
+
+  const newCourse = course?.filter((c) => c._id === dinhdanh)[0]?.categories;
+
   return (
     <div className="admin">
       <div className="action">
@@ -140,7 +183,13 @@ function Course() {
             <img src={item?.image_url} alt=""></img>
             <p>{item?.title}</p>
             <div className="action">
-              <i className="fa-solid fa-circle-plus"></i>
+              <i
+                className="fa-solid fa-circle-plus"
+                onClick={() => {
+                  setShowAdd("addLesson");
+                  setDinhdanh(item?._id);
+                }}
+              ></i>
               <i className="fa-solid fa-edit"></i>
               <i className="fa-solid fa-trash"></i>
             </div>
@@ -234,6 +283,75 @@ function Course() {
           <div className="form-create-course">
             <div className="btn btn-primary mt-3" onClick={handlePushCourse}>
               Tạo khoá học
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showAdd === "addLesson" && (
+        <div className="addLesson">
+          <div className="addLesson-left">
+            <div className="category-main">
+              <div className="category">
+                <i className="fa-solid fa-book-open-reader"></i>
+                <div className="p">Thư mục</div>
+              </div>
+              <i
+                className="fa-solid fa-circle-plus"
+                onClick={() => setShowMain("addCategory")}
+              ></i>
+            </div>
+
+            {newCourse?.map((item) => (
+              <div className="category-remain">
+                <div className="category">
+                  <i className="fa-solid fa-book-open-reader"></i>
+                  <div className="p">{item?.title}</div>
+                </div>
+                <i
+                  className="fa-solid fa-circle-minus"
+                  // onClick={() => setShowMain("addCategory")}
+                ></i>
+                <i
+                  className="fa-solid fa-circle-plus"
+                  onClick={() => setShowMain("addCourse")}
+                ></i>
+              </div>
+            ))}
+          </div>
+          <div className="addLesson-right"></div>
+        </div>
+      )}
+
+      {showMain === "addCategory" && (
+        <div className="over-main">
+          <div className="over-form">
+            <h3>Tạo danh mục</h3>
+            <input
+              value={nameDm}
+              onChange={(e) => setNameDm(e.target.value)}
+              className="form-control"
+              placeholder="Tên danh mục*"
+            ></input>
+            <div className="btn btn-primary" onClick={handlePushDm}>
+              Tạo danh mục
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showMain === "addCourse" && (
+        <div className="over-main">
+          <div className="over-form">
+            <h3>Tạo bài học</h3>
+            <input
+              value={nameDm}
+              onChange={(e) => setNameDm(e.target.value)}
+              className="form-control"
+              placeholder="Tên bài học*"
+            ></input>
+            <div className="btn btn-primary" onClick={handlePushLs}>
+              Tạo bài học
             </div>
           </div>
         </div>

@@ -87,3 +87,140 @@
     }
   }
 }
+
+.addLesson {
+  background-color: var(--mau-trang);
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  display: grid;
+  grid-template-columns: 30% 69%;
+  justify-content: space-between;
+  padding: 20px;
+
+  .addLesson-left {
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    max-height: 100vh;
+    overflow: auto;
+
+    .category-main {
+      display: grid;
+      grid-template-columns: 90% 10%;
+      justify-content: space-between;
+      align-items: center;
+
+      .category {
+        margin: 20px;
+        display: flex;
+        background-color: var(--xanh-login);
+        align-items: center;
+        border-radius: 5px;
+
+        i {
+          font-size: 20px;
+          padding: 10px 10px 10px 20px;
+          color: var(--mau-trang);
+        }
+
+        .p {
+          font-size: 18px;
+          color: var(--mau-trang);
+          font-weight: bold;
+          padding: 10px 10px 10px 0px;
+        }
+      }
+
+      i.fa-circle-plus {
+        font-size: 25px;
+        color: var(--xanh-login);
+        cursor: pointer;
+      }
+    }
+
+    .category-remain {
+      display: grid;
+      grid-template-columns: 80% 10% 10%;
+      justify-content: space-between;
+      align-items: center;
+
+      .category {
+        margin: -5px 20px 0px 40px;
+        display: flex;
+        background-color: var(--xanh-login);
+        align-items: center;
+        border-radius: 5px;
+
+        i {
+          font-size: 20px;
+          padding: 10px 10px 10px 20px;
+          color: var(--mau-trang);
+        }
+
+        .p {
+          display: block;
+          text-overflow: ellipsis;
+          font-size: 16px;
+          color: var(--mau-trang);
+          font-weight: bold;
+          padding: 10px 10px 10px 0px;
+          white-space: nowrap;
+        }
+      }
+
+      i.fa-circle-plus {
+        font-size: 25px;
+        color: var(--xanh-login);
+        cursor: pointer;
+      }
+
+      i.fa-circle-minus {
+        font-size: 25px;
+        color: var(--mau-do);
+        cursor: pointer;
+      }
+    }
+  }
+  .addLesson-right {
+    background-color: var(--mau-trang);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+  }
+}
+
+.over-main {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 101;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .over-form {
+    width: 40%;
+    height: 30%;
+    background-color: var(--mau-trang);
+    padding: 20px;
+    border-radius: 10px;
+
+    h3 {
+      text-align: center;
+    }
+
+    .btn.btn-primary {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}

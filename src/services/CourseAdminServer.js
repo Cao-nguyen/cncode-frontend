@@ -29,6 +29,24 @@ export const CourseAdminCreate = async (
   return response.data;
 };
 
+// [POST] Khoá học
+export const DmAdminCreate = async (dd, name) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/dm/create`,
+    { dd, name }
+  );
+  return response.data;
+};
+
+// [POST] Khoá học
+export const LsAdminCreate = async (dd, name) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/admin/ls/create`,
+    { dd, name }
+  );
+  return response.data;
+};
+
 // [GET] Khoá học
 export const CourseAdminRead = async () => {
   const response = await axios.get(
