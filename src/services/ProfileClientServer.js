@@ -15,3 +15,17 @@ export const PostClientRead = async (username) => {
   );
   return response.data;
 };
+
+// [GET] Lấy post
+export const ChangeItemClientEdit = async (userId, id, count, money) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/change/edit`,
+    {
+      userId,
+      id,
+      count,
+      money,
+    }
+  );
+  return response.data;
+};

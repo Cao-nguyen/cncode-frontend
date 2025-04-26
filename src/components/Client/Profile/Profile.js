@@ -6,18 +6,21 @@ import chuoi from "../../../assets/Khac/streak.png";
 import "./Profile.scss";
 import { Link, useParams } from "react-router-dom";
 import {
+  ChangeItemClientEdit,
   PostClientRead,
   ProfileClientRead,
 } from "../../../services/ProfileClientServer";
 import moment from "moment/moment";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import socket from "../../Service/socket";
 
 function Profile() {
   const { username } = useParams();
+  const userId = useSelector((state) => state.user.account.id);
 
   const [user, setUser] = useState();
   const [blog, setBlog] = useState();
-
-  console.log(user);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,7 +41,51 @@ function Profile() {
 
     getData();
     getPost();
+
+    socket.on("changeItem", () => {
+      getData();
+    });
+
+    return () => {
+      socket.off("changeItem");
+    };
   }, [username]);
+
+  const [showTab, setShowTab] = useState("");
+
+  const handleChangeCoins = (idItem) => {
+    setShowTab(idItem);
+  };
+
+  const [countChange, setCountChange] = useState();
+
+  const dataItem = user?.gift?.find((d) => d?.giftId?._id === showTab);
+  const countItem = user?.gift?.filter(
+    (d) => d?.giftId?._id === showTab
+  )?.length;
+
+  const handleChangeMain = async (idItemChange, price) => {
+    if (countChange > countItem) {
+      toast.error("Bạn đã chọn vượt quá số lượng vật phẩm hiện có!");
+      return;
+    } else {
+      const money = countChange * price;
+
+      const data = await ChangeItemClientEdit(
+        userId,
+        idItemChange,
+        countChange,
+        money
+      );
+
+      if (data && data.EC === 0) {
+        toast.success(data.EM);
+        setShowTab("");
+      } else {
+        toast.error(data.EM);
+      }
+    }
+  };
 
   return (
     <>
@@ -133,28 +180,71 @@ function Profile() {
                 ).values(),
               ];
 
-              return uniqueGifts.map((item) => (
-                <div className="item-main" key={item?.giftId?._id}>
-                  <img src={item?.giftId?.img} alt="" />
-                  <p>số lượng: {countMap[item?.giftId?._id]}</p>
-                </div>
-              ));
+              if (uniqueGifts.length === 0) {
+                return <p>Bạn chưa có vật phẩm nào cả...</p>;
+              } else {
+                return uniqueGifts.map((item) => (
+                  <div className="item-main" key={item?.giftId?._id}>
+                    <img src={item?.giftId?.img} alt="" />
+                    <p>số lượng: {countMap[item?.giftId?._id]}</p>
+                    {user?._id === userId && (
+                      <div
+                        className="btn btn-primary"
+                        onClick={() => handleChangeCoins(item?.giftId?._id)}
+                      >
+                        Đổi sang xu
+                      </div>
+                    )}
+                  </div>
+                ));
+              }
             })()}
           </div>
           <div className="pBlog">
-            {blog?.map((item) => (
-              <div className="pBlog-item">
-                <Link to={`/blog/${item?.slug}`}>
-                  <img src={item?.img} alt="" />
-                  <h3>{item?.title}</h3>
-                  <p>{item?.description}</p>
-                </Link>
-                <span>{moment(item?.createdAt).format("DD/MM/YYYY")}</span>
-              </div>
-            ))}
+            {blog?.length > 0 ? (
+              blog?.map((item) => (
+                <div className="pBlog-item">
+                  <Link to={`/blog/${item?.slug}`}>
+                    <img src={item?.img} alt="" />
+                    <h3>{item?.title}</h3>
+                    <p>{item?.description}</p>
+                  </Link>
+                  <span>{moment(item?.createdAt).format("DD/MM/YYYY")}</span>
+                </div>
+              ))
+            ) : (
+              <p style={{ padding: "20px" }}>
+                Bạn chưa xuất bản blog nào cả...
+              </p>
+            )}
           </div>
         </div>
       </div>
+
+      {showTab !== "" && (
+        <div className="over-change">
+          <i className="fa-solid fa-xmark" onClick={() => setShowTab("")}></i>
+          <div className="change-item">
+            <h3>Đổi vật phẩm</h3>
+            <p>Bạn đang muốn đổi: {dataItem?.giftId?.name}</p>
+            <input
+              type="number"
+              value={countChange}
+              onChange={(e) => setCountChange(e.target.value)}
+              className="form-control"
+              placeholder="Số lượng muốn đổi"
+            ></input>
+            <div
+              className="btn btn-primary mt-3"
+              onClick={() =>
+                handleChangeMain(dataItem?.giftId?._id, dataItem?.giftId?.price)
+              }
+            >
+              Đổi ngay
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

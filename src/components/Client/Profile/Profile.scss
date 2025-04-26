@@ -165,3 +165,43 @@
     }
   }
 }
+
+.over-change {
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .fa-solid.fa-xmark {
+    font-size: 25px;
+    background-color: var(--mau-trang);
+    padding: 5px 7px;
+    border-radius: 50px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  .change-item {
+    background-color: var(--mau-trang);
+    width: 50%;
+    height: 60%;
+    border-radius: 10px;
+    padding: 40px;
+
+    h3 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}
