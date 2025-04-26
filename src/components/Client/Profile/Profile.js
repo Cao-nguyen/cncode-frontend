@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import bg from "../../../assets/bg.png";
 import logo from "../../../assets/logo.png";
 import xu from "../../../assets/Khac/xu.png";
 import chuoi from "../../../assets/Khac/streak.png";
 import "./Profile.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   PostClientRead,
   ProfileClientRead,
@@ -16,6 +15,9 @@ function Profile() {
   const { username } = useParams();
 
   const [user, setUser] = useState();
+  const [blog, setBlog] = useState();
+
+  console.log(user);
 
   useEffect(() => {
     const getData = async () => {
@@ -26,7 +28,16 @@ function Profile() {
       }
     };
 
+    const getPost = async () => {
+      const data = await PostClientRead(username);
+
+      if (data && data.EC === 0) {
+        setBlog(data.DT);
+      }
+    };
+
     getData();
+    getPost();
   }, [username]);
 
   return (
@@ -104,7 +115,45 @@ function Profile() {
             ))}
           </div>
         </div>
-        <div className="profile-right"></div>
+        <div className="profile-right">
+          <div className="item">
+            {(() => {
+              const countMap = {};
+
+              user?.gift?.forEach((item) => {
+                const id = item?.giftId?._id;
+                if (id) {
+                  countMap[id] = (countMap[id] || 0) + 1;
+                }
+              });
+
+              const uniqueGifts = [
+                ...new Map(
+                  user?.gift?.map((item) => [item?.giftId?._id, item])
+                ).values(),
+              ];
+
+              return uniqueGifts.map((item) => (
+                <div className="item-main" key={item?.giftId?._id}>
+                  <img src={item?.giftId?.img} alt="" />
+                  <p>số lượng: {countMap[item?.giftId?._id]}</p>
+                </div>
+              ));
+            })()}
+          </div>
+          <div className="pBlog">
+            {blog?.map((item) => (
+              <div className="pBlog-item">
+                <Link to={`/blog/${item?.slug}`}>
+                  <img src={item?.img} alt="" />
+                  <h3>{item?.title}</h3>
+                  <p>{item?.description}</p>
+                </Link>
+                <span>{moment(item?.createdAt).format("DD/MM/YYYY")}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
