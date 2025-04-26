@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import Slider from "react-slick";
 import socket from "../../Service/socket";
 import streakImg from "../../../assets/Khac/streak.png";
+import { EyeBlogCreate, EyeNewCreate } from "../../../services/EyeClientServer";
 
 function Home(props) {
   const [blog, setBlog] = useState();
@@ -129,6 +130,14 @@ function Home(props) {
   const handleUserPoint = async () => {
     setPrevent(true);
     await UserPointHome(id);
+  };
+
+  const handleBlogInc = async (idBlog) => {
+    await EyeBlogCreate(idBlog);
+  };
+
+  const handleNewInc = async (idNew) => {
+    await EyeNewCreate(idNew);
   };
 
   const checkUserId = currentPoint?.some((p) => p?.authorId?._id === id);
@@ -516,7 +525,10 @@ function Home(props) {
                     <p>{item?.authorId?.fullName}</p>
                     <p>{moment(item.createdAt).format("DD/MM/YYYY")}</p>
                   </div>
-                  <div className="btn btn-primary">
+                  <div
+                    className="btn btn-primary"
+                    onClick={() => handleNewInc(item?._id)}
+                  >
                     <Link to={`/tintuc/${item.slug}`}>Xem thêm</Link>
                   </div>
                 </div>
@@ -566,7 +578,11 @@ function Home(props) {
             <div className="blog">
               {blog &&
                 blog.map((item, index) => (
-                  <div className="blog-item" key={index}>
+                  <div
+                    className="blog-item"
+                    key={index}
+                    onClick={() => handleBlogInc(item?._id)}
+                  >
                     <Link to={`/blog/${item?.slug}`}>
                       <img src={item.img} alt={item.title} />
                       <div className="date">
