@@ -15,7 +15,9 @@ function Sukien(props) {
           <link rel="canonical" href="https://cncode.vercel.app" />
         </Helmet>
       </HelmetProvider>
-      <div className="container"></div>
+      <div className="container">
+        <p className="text-center">Tính năng đang được phát triển...</p>
+      </div>
     </>
   );
 }
