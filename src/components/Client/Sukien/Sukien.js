@@ -16,7 +16,7 @@ function Sukien(props) {
         </Helmet>
       </HelmetProvider>
       <div className="container">
-        <p className="text-center">Tính năng đang được phát triển...</p>
+        <p className="text-center mt-5">Tính năng đang được phát triển...</p>
       </div>
     </>
   );
