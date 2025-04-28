@@ -39,6 +39,7 @@ import Bins from "../components/Admin/Bins/Bins";
 
 // Luyện tập
 import Contest from "../components/Admin/Contest/Contest";
+import CreateContest from "../components/Admin/Contest/CreateContest";
 
 export const adminRoutesValidate = ["/admin/*"];
 
@@ -88,6 +89,14 @@ const AdminRoutes = (props) => {
         element={
           <ProtectedRoute>
             <Contest />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/admin/try/create"
+        element={
+          <ProtectedRoute>
+            <CreateContest />
           </ProtectedRoute>
         }
       ></Route>

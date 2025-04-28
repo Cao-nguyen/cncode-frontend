@@ -346,6 +346,30 @@
   }
   .showblog-right {
     position: relative;
+
+    .kho {
+      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 20px;
+
+      .kho-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 150px;
+        margin-right: 10px;
+
+        img {
+          width: 100%;
+        }
+
+        .btn-primary {
+          margin-top: 10px;
+        }
+      }
+    }
+
     h3 {
       font-size: 30px;
       font-weight: bold;

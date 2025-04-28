@@ -8,6 +8,14 @@ export const BlogClientRead = async () => {
   return response.data;
 };
 
+// [GET] Blog
+export const UserBlogClientRead = async (id) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACKEND}/api/v1/client/userblog/read/${id}`
+  );
+  return response.data;
+};
+
 // [GET] Me Blog
 export const MeblogClientRead = async (id) => {
   const response = await axios.get(

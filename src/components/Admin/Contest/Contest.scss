@@ -1,0 +1,47 @@
+.contest {
+  margin-top: 10px;
+}
+
+.create-contest {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 60% 39%;
+  justify-content: space-between;
+}
+
+.over-contest {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .over-contest-item {
+    width: 60%;
+    height: 60%;
+    background-color: var(--mau-trang);
+    border-radius: 10px;
+    overflow: auto;
+    position: relative;
+
+    .fa-xmark {
+      position: absolute;
+      font-size: 25px;
+      right: 20px;
+      top: 20px;
+      padding: 5px 8px;
+      border-radius: 50px;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+    }
+  }
+}

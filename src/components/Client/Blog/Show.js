@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   BlogClientF,
   BlogClientLike,
   BlogClientRead,
   BlogClientUnf,
   BlogClientUnlike,
+  UserBlogClientRead,
 } from "../../../services/BlogClientServer";
 import moment from "moment/moment";
 import { toast } from "react-toastify";
@@ -37,6 +38,8 @@ function Show() {
   const [currentId, setCurrentId] = useState();
   const [showReply, setShowReply] = useState();
 
+  const [user, setUser] = useState();
+
   // Gọi api
   const blogData = async () => {
     const data = await BlogClientRead();
@@ -47,6 +50,15 @@ function Show() {
 
   useEffect(() => {
     blogData();
+
+    const getData = async () => {
+      const user = await UserBlogClientRead(id);
+      if (user && user.EC === 0) {
+        setUser(user.DT);
+      }
+    };
+
+    getData();
 
     const isBlog = blog?.filter((b) => b?.slug === slug)[0];
     const isLike = isBlog?.like.some((like) => like?.userLike === id);
@@ -364,7 +376,62 @@ function Show() {
                   ></div>
 
                   <h3>Quà tặng</h3>
-                  <div className="kho"></div>
+                  {blog
+                    ?.filter((b) => b.slug === slug)
+                    ?.map((item) => (
+                      <>
+                        {item?.authorId?._id === id ? (
+                          <>
+                            <p>Bạn chưa được tặng vật phẩm nào cả...</p>
+                          </>
+                        ) : (
+                          <div className="kho">
+                            {user?.gift?.length === 0 ? (
+                              <p>
+                                Bạn chưa mua vật phẩm nào cả...{" "}
+                                <Link to="/shop">Đến shop ngay</Link>
+                              </p>
+                            ) : (
+                              <>
+                                {user?.gift &&
+                                  (() => {
+                                    const groupedGifts = {};
+
+                                    user.gift.forEach((item) => {
+                                      const id = item.giftId._id;
+                                      if (groupedGifts[id]) {
+                                        groupedGifts[id].count += 1;
+                                      } else {
+                                        groupedGifts[id] = {
+                                          ...item,
+                                          count: 1,
+                                        };
+                                      }
+                                    });
+
+                                    return Object.values(groupedGifts).map(
+                                      (item, index) => (
+                                        <div
+                                          className="kho-item"
+                                          key={item.giftId._id || index}
+                                        >
+                                          <img src={item.giftId.img} alt="" />
+                                          <div className="so-luong">
+                                            Số lượng: {item.count}
+                                          </div>
+                                          <div className="btn btn-primary">
+                                            Tặng
+                                          </div>
+                                        </div>
+                                      )
+                                    );
+                                  })()}
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </>
+                    ))}
 
                   <h3>Bình luận</h3>
                   <div className="comment mt-2" ref={divRef}>
