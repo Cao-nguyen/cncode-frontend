@@ -17,15 +17,18 @@ import {
   UserClientEditZalo,
   UserClientRead,
 } from "../services/SettingsClientServer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import socket from "../components/Service/socket";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Login } from "../rudex/Actions/userAction";
 import moment from "moment/moment";
 import "moment/locale/vi";
 
 const SettingsClientMiddleware = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   moment.locale("vi");
 
   const [active, setActive] = useState("top");
@@ -228,6 +231,7 @@ const SettingsClientMiddleware = () => {
     const data = await UserClientEditUsername(id, username);
 
     if (data && data.EC === 0) {
+      dispatch(Login(data));
       toast.success(data.EM);
       setShow("");
     } else {

@@ -40,13 +40,13 @@ function UseDropdown() {
         )}
         <Dropdown.Divider />
         <Dropdown.Item>
-          <NavLink className="dropdown-link" to="/me/khoahoc">
-            Khoá học của tôi
+          <NavLink className="dropdown-link" to="/me/minigame">
+            Minigame 30/4
           </NavLink>
         </Dropdown.Item>
         <Dropdown.Item>
-          <NavLink className="dropdown-link" to="/me/transaction">
-            Quản lí giao dịch
+          <NavLink className="dropdown-link" to="/me/khoahoc">
+            Khoá học của tôi
           </NavLink>
         </Dropdown.Item>
         <Dropdown.Item>

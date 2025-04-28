@@ -110,9 +110,11 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb, data }) {
             <Nav.Item className="nav-links">
               <Nav.Link>
                 <i className="fa-solid fa-bell" onClick={toggleTb}>
-                  <p className="bell">
-                    {data?.filter((d) => d.isRead === false).length}
-                  </p>
+                  {data?.filter((d) => d.isRead === false).length > 1 && (
+                    <p className="bell">
+                      {data?.filter((d) => d.isRead === false).length}
+                    </p>
+                  )}
                 </i>
               </Nav.Link>
             </Nav.Item>
@@ -149,9 +151,11 @@ function Header({ toggleLogin, isDarkMode, toggleTheme, toggleTb, data }) {
               onClick={toggleTheme}
             ></i>
             <i className="fa-solid fa-bell" onClick={toggleTb}>
-              <p className="bell">
-                {data?.filter((d) => d.isRead === false).length}
-              </p>
+              {data?.filter((d) => d.isRead === false).length > 1 && (
+                <p className="bell">
+                  {data?.filter((d) => d.isRead === false).length}
+                </p>
+              )}
             </i>
 
             {tokenUser === "" ? (

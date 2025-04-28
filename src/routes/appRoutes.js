@@ -21,7 +21,6 @@ import Ask from "../components/Client/Ask/Ask";
 import Settings from "../components/Client/Settings/Settings";
 import Shop from "../components/Client/Shop/Shop";
 import Chat from "../components/Client/Chat/Chat";
-import Transaction from "../components/Client/Transaction/Transaction";
 import { AnimatePresence } from "framer-motion";
 import PageTransitionWrapper from "../components/Service/Common";
 
@@ -224,14 +223,6 @@ const AppRoutes = () => {
           element={
             <PageTransitionWrapper>
               <Settings />
-            </PageTransitionWrapper>
-          }
-        />
-        <Route
-          path="/me/transaction"
-          element={
-            <PageTransitionWrapper>
-              <Transaction />
             </PageTransitionWrapper>
           }
         />
