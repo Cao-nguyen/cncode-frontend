@@ -363,6 +363,9 @@ function Show() {
                     dangerouslySetInnerHTML={{ __html: inforHtml }}
                   ></div>
 
+                  <h3>Quà tặng</h3>
+                  <div className="kho"></div>
+
                   <h3>Bình luận</h3>
                   <div className="comment mt-2" ref={divRef}>
                     <div className="form-group">
