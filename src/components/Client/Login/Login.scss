@@ -61,7 +61,7 @@
         padding: 10px 60px;
 
         .form-input {
-          margin-top: 20px;
+          margin-top: 10px;
           width: 100%;
           padding: 7px 15px;
           border-radius: 5px;
@@ -75,7 +75,7 @@
 
         .form-input-check {
           display: flex;
-          margin-top: 20px;
+          margin-top: 10px;
 
           input[type="checkbox"] {
             transform: scale(1.25);
@@ -84,7 +84,7 @@
         }
 
         .form-button-submit {
-          margin-top: 20px;
+          margin-top: 10px;
           background-color: var(--xanh-login);
           padding: 7px 15px;
           text-align: center;
@@ -103,7 +103,7 @@
         }
 
         .form-input-password {
-          margin-top: 20px;
+          margin-top: 10px;
           display: grid;
           grid-template-columns: 90% 10%;
 
@@ -125,7 +125,7 @@
         }
 
         .form-input-code {
-          margin-top: 20px;
+          margin-top: 10px;
           display: grid;
           grid-template-columns: 80% 20%;
 
