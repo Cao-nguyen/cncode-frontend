@@ -19,6 +19,7 @@ import logo from "./assets/logo.png";
 import cozyMusic from "./assets/nhaccho/cozycoffeehouse.mp3";
 import ScrollToTop from "./components/Service/ScrollToTop";
 import { WebAdminRead } from "./services/WebAdminServer";
+import errorImg from "./assets/Khac/errorImg.gif";
 // API để gọi dữ liệu
 import { getInforApi } from "./services/InforAdminServer";
 import { ShowNewClient } from "./services/NewsClientServer";
@@ -294,7 +295,14 @@ function AppWithRouter() {
   return (
     <Router>
       <ScrollToTop />
-      <App />
+      <div className="container">
+        <h1 className="text-center text-primary">
+          Hiện tại website đang được bảo hành bởi Lý Cao Nguyên, để chuẩn bị tốt
+          hơn cho cuộc thi cấp tỉnh. Xin lỗi vì sự bất tiện này!
+          <img style={{ width: "90%" }} src={errorImg} alt=""></img>
+        </h1>
+      </div>
+      {/* <App /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
