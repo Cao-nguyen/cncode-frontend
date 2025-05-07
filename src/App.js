@@ -295,14 +295,7 @@ function AppWithRouter() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="container">
-        <h1 className="text-center text-primary">
-          Hiện tại website đang được bảo hành bởi Lý Cao Nguyên, để chuẩn bị tốt
-          hơn cho cuộc thi cấp tỉnh. Xin lỗi vì sự bất tiện này!
-          <img style={{ width: "90%" }} src={errorImg} alt=""></img>
-        </h1>
-      </div>
-      {/* <App /> */}
+      <App />
       <ToastContainer
         position="top-right"
         autoClose={5000}
