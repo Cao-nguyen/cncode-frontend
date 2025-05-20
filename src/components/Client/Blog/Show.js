@@ -52,9 +52,11 @@ function Show() {
     blogData();
 
     const getData = async () => {
-      const user = await UserBlogClientRead(id);
-      if (user && user.EC === 0) {
-        setUser(user.DT);
+      if (id) {
+        const user = await UserBlogClientRead(id);
+        if (user && user.EC === 0) {
+          setUser(user.DT);
+        }
       }
     };
 
@@ -289,9 +291,8 @@ function Show() {
                       onClick={liked ? handleUnlike : handleLike}
                     >
                       <i
-                        className={`${
-                          liked ? "fa-solid" : "fa-regular"
-                        } fa-heart`}
+                        className={`${liked ? "fa-solid" : "fa-regular"
+                          } fa-heart`}
                         style={{ color: liked ? "var(--mau-do)" : "" }}
                       ></i>
                       <p>{item?.like?.length}</p>
@@ -310,9 +311,8 @@ function Show() {
                       onClick={liked ? handleUnlike : handleLike}
                     >
                       <i
-                        className={`${
-                          liked ? "fa-solid" : "fa-regular"
-                        } fa-heart`}
+                        className={`${liked ? "fa-solid" : "fa-regular"
+                          } fa-heart`}
                         style={{
                           color: liked ? "var(--mau-do)" : "",
                         }}
@@ -339,9 +339,8 @@ function Show() {
                     </div>
                     <div className="info-item">
                       <i
-                        className={`${
-                          favorite ? "fa-solid" : "fa-regular"
-                        } fa-bookmark`}
+                        className={`${favorite ? "fa-solid" : "fa-regular"
+                          } fa-bookmark`}
                         onClick={favorite ? handleUnf : handleF}
                         style={{
                           color: favorite ? "var(--mau-bookmark)" : "",
