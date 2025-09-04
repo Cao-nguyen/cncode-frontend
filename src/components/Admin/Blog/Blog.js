@@ -25,7 +25,7 @@ function News(props) {
 
   const [blog, setBlog] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(20);
+  const [itemsPerPage] = useState(8);
   const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
