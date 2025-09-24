@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/logo1.png";
 import UseDropdown from "./Dropdown";
 import "./Header.scss";
 
