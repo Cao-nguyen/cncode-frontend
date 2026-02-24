@@ -210,6 +210,8 @@ function Home(props) {
         </div>
       </div>
 
+      <h1>Đây chỉ là website Demo, website chính thức vẫn đang được Lý Cao Nguyên hoàn thiện và sẽ phát hành sau!</h1>
+
       <div className="container" data-aos="zoom-in">
         <div className="HomeEvent">
           {id ? (
